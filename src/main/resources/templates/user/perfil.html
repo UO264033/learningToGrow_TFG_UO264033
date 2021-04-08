@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Perfil de usuario</h2>
+		<div class="centerCard">
+			<div class="card" style="width: 18rem;">
+				<div class="center">
+					<img class="card-img-top" src="/img/perfil.png"
+						alt="Card image cap">
+					<div class="card-body">
+						<h4 class="card-title"
+							th:text="${user.name + ' ' + user.lastName}">Card title</h4>
+						<h5 class="card-text" th:text="${user.username}">Content.</h5>
+						<a href="#" class="btn btn-info">Go somewhere</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

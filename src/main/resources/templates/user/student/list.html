@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Listado de alumnos</h2>
+		<form class="navbar-form" action="/user/student/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Buscar por nombre o por apellido o por asignatura">
+			</div>
+			<button type="submit" class="btn btn-info">Buscar</button>
+		</form>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student : ${studentList}">
+						<td th:text="${student.name}"></td>
+						<td th:text="${student.lastName}"></td>
+					</tr>
+				</tbody>
+				</thead>
+			</table>
+
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

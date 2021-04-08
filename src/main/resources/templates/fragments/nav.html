@@ -1,0 +1,123 @@
+<!-- nav.html -->
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#myNavbar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a title="LearningToGrow" href="/"><img src="/img/logo.png"
+				alt="logo" /><img src="/img/name.png" alt="name"
+				sec:authorize="!isAuthenticated()" /></a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+				<li><a href="/home"> <span class="material-icons-round">
+							home </span> Home
+				</a></li>
+				<li id="exercises-menu" class="dropdown"
+					sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"> <span
+						class="material-icons-round"> add_to_photos </span> Nuevo
+						ejercicio<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/exercise/add"><span
+								class="material-icons-round"> checklist </span> Tipo test</a></li>
+						<li><a href="/exercise/upFile/add"><span
+								class="material-icons-round"> insert_drive_file </span> Subir
+								fichero</a></li>
+						<li><a href="/exercise/shortAnswer/add"><span
+								class="material-icons-round"> short_text </span> Completar con
+								texto</a></li>
+					</ul></li>
+
+				<li id="homerworks-menu" class="dropdown"
+					sec:authorize="!hasRole('ROLE_ADMIN')"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="material-icons-round"> menu_book </span> Deberes <span
+						class="caret"></span> </a>
+					<ul class="dropdown-menu">
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+							href="/exercise/list"><span class="material-icons-round">
+									list_alt </span> Ver ejercicios</a></li>
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+							href="/homework/correct"><span class="material-icons-round">
+									rule </span> Corregir tarea</a></li>
+						<li sec:authorize="hasRole('ROLE_STUDENT')"><a
+							href="/homework/exercise/list"><span
+								class="material-icons-round"> auto_stories </span> Ver tareas</a></li>
+					</ul></li>
+				<li id="users-menu" class="dropdown"
+					sec:authorize="!hasRole('ROLE_ADMIN')"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="material-icons-round"> group </span> Asignaturas <span
+						class="caret"></span> </a>
+					<ul class="dropdown-menu">
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+							href="/user/student/list"> <span class="material-icons-round">
+									groups </span> Ver alumnos
+						</a></li>
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+							href="/subject/add"><span class="material-icons-round">
+									group_add </span> Agregar asignatura</a></li>
+						<li><a href="/subject/list"> <span
+								class="material-icons-round"> format_list_bulleted </span> Ver
+								asignaturas
+						</a></li>
+					</ul></li>
+
+				<li id="users-menu" class="dropdown"
+					sec:authorize="hasRole('ROLE_ADMIN')"><a
+					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="material-icons-round"> people </span>   	Gestión de Usuarios <span
+						class="caret"></span> </a>
+					<ul class="dropdown-menu">
+						<li><a href="/user/list"><span
+								class="material-icons-round"> supervisor_account </span>   Ver
+								usuarios</a></li>
+						<li><a href="/user/add"><span
+								class="material-icons-round"> person_add </span>   Agregar usuario</a></li>
+					</ul></li>
+			</ul>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a id="btnLanguage" href=" #"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"><span
+						class="material-icons-round"> language </span> <span
+						th:text="#{language.change}"></span> <span class="caret"></span> </a>
+					<ul id="languageDropdownMenuButton" class="dropdown-menu">
+						<li><a id="btnEnglish" value="EN"> <img
+								th:src="@{/img/if_uk_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.en}">Inglés</span>
+						</a></li>
+						<li><a id="btnSpanish" value="ES"> <img
+								th:src="@{/img/if_spain_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.es}">Español</span>
+						</a></li>
+					</ul></li>
+				<li sec:authorize="!isAuthenticated()"><a href="/signup"><span
+						class="material-icons-round"> person </span> <span
+						th:text="#{signup.message}"> Regístrate <span class="caret"></span></a></li>
+				<li sec:authorize="!isAuthenticated()"><a href="/login"><span
+						class="material-icons-round"> login </span><span
+						th:text="#{login.message}"> Identifícate </span></a></li>
+				<li id="settings-menu" class="dropdown"
+					sec:authorize="isAuthenticated()"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"><span
+						class="material-icons-round"> settings </span> Ajustes <span
+						class="caret"></span> </a>
+					<ul class="dropdown-menu">
+						<li><a href="/user/perfil"><span
+								class="material-icons-round"> manage_accounts </span> Perfil</a></li>
+					</ul></li>
+				<li sec:authorize="isAuthenticated()"><a href="/logout"><span
+						class="material-icons-round"> logout </span> <span
+						class="font-effect-vintage" th:text="#{logout.message}"> </span></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>

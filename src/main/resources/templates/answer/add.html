@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container" th:object="${question}">
+		<h5 th:text="${question.statement}" name="question" />
+
+		<form class="form-horizontal" method="post" action="/answer/add"
+			th:object="${answer}">
+			<input name="idQuestion" th:value="${question.id}" type="number"
+				hidden />
+			<div class="input-group">
+				<span class="input-group-addon"> <input type="checkbox"
+					name="correct">
+				</span> <input type="text" class="form-control" name="texto"
+					placeholder="Verde" required="true" />
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" id="updateButton" class="btn btn-info">Añadir
+						respuesta</button>
+				</div>
+			</div>
+		</form>
+		<form class="form-horizontal" method="post" action="/question/show">
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input th:value="${question.exercise.id}" name="exerciseId" type="number" hidden />
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" id="showExercise" class="btn btn-info"
+						role="button">Ver respuestas</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

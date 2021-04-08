@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegaci�n superior -->
+	<nav th:replace="fragments/nav" />
+	<form class="form-horizontal" method="post"
+		action="/exercise/shortAnswer/q&a/add">
+		<h4>Estructura ejercicio</h4>
+		<div class="container" th:each="question : ${questionList}">
+			<input th:value="${question.exercise.id}" name="idExercise"
+				type="number" hidden />
+			<div class="panel panel-default">
+				<div class="panel-heading" th:text="${question.statement}">Pregunta</div>
+				<div class="panel-body" th:text="${question.answer}">Respuesta</div>
+			</div>
+			<a th:href="${'/exercise/shortAnswer/delete/' + question.id}"
+				class="glyphicon glyphicon-trash" role="button"></a>
+		</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+
+				<button type="submit" id="updateButton" class="btn btn-info">Añadir otra pregunta</button>
+			</div>
+		</div>
+	</form>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<a th:href="${'/home'}" class="btn btn-info" role="button">Finalizar ejercicio</a>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

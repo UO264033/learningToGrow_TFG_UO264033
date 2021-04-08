@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{user.details.h2}"/>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="${user.username}">Username</div>
+			<div class="panel-body" th:text="${user.name}">Sara</div>
+			<div class="panel-body" th:text="${user.lastName}">Diaz</div>
+			<div class="panel-body" th:text="${user.getRoleString()}">
+				Student</div>
+		</div>
+		<table class="table table-hover">
+			<thead><tr><th /><th /></tr></thead>
+			<tbody>
+				<td><a class="btn btn-info" th:href="${'/user/edit/' + user.id}" role="button" th:text="#{user.details.editButton}">
+						<span class="glyphicon glyphicon-pencil"></span> Editar usuario
+				</a></td>
+				<td><a class="btn btn-info" th:href="${'/user/delete/' + user.id}" role="button" th:text="#{user.details.deleteButton}">
+						<span class="glyphicon glyphicon-trash"></span> Eliminar usuario
+				</a></td>
+			</tbody>
+			</thead>
+		</table>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
