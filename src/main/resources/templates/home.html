@@ -51,7 +51,8 @@
 					th:text="#{home.adminView.button}" />
 			</p>
 		</div>
-		<div class="centerCard" sec:authorize="hasRole('ROLE_STUDENT')">
+		<div class="centerCard" sec:authorize="hasRole('ROLE_STUDENT')"
+			th:if="${!subjectList.isEmpty()}">
 			<div class="panel panel-default" th:each="subject: ${subjectList}">
 				<div class="panel-heading">
 					<h2 th:text="${subject.name}"></h2>
@@ -59,6 +60,18 @@
 				<div class="panel-body">
 					<a th:href="${'/subject/details/' + subject.id}"><img
 						src="/img/maths.png" /></a><br>
+				</div>
+			</div>
+		</div>
+		<div class="centerCard" sec:authorize="hasRole('ROLE_STUDENT')"
+			th:if="${subjectList.isEmpty()}">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2>No estás asignado a ninguna asignatura</h2>
+				</div>
+				<div class="panel-body">
+					<h4>Espera a que tu profesor de añada.</h4>
+					<img src="/img/subjects.png" /><br>
 				</div>
 			</div>
 		</div>

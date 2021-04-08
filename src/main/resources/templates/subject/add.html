@@ -29,11 +29,10 @@
 						</thead>
 						<tbody>
 							<tr th:each="student, itemStat : ${studentList}">
-								<input name="idStudent" th:field="${student.id}" type="number" hidden />
 								<td th:text="${student.username}" th:field="${student.username}" name="studentName"></td>
 								<td th:text="${student.name}" th:field="${student.name}" name="studentName"></td>
 								<td th:text="${student.lastName}" th:field="${student.lastName}"name="studentLastname"></td>
-								<td><input type="checkbox" name="include" th:id="${iterStat.index}"></td>
+								<td><input type="checkbox" name="include" th:id="${itemStat.index}"></td>
 							</tr>
 						</tbody>
 						</thead>

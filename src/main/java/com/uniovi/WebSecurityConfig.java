@@ -1,4 +1,4 @@
-package com.uniovi.controllers;
+package com.uniovi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

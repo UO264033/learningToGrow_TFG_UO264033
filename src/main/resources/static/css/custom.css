@@ -32,6 +32,11 @@ body {
     border-color: #ABB4FF;
 }
 
+a {
+    color: #5bc0de;
+    text-decoration: none;
+}
+
 
 /* Sticky nav styles-------------------------------------------------- */
 .navbar-inverse {

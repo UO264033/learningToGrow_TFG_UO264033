@@ -83,4 +83,20 @@ public class ExerciseController {
 		exerciseService.deleteExercise(id);
 		return "redirect:/exercise/list";
 	}
+	
+	@RequestMapping("/exercise/details/{id}")
+	public String getDetails(Model model, @PathVariable Long id) {
+		Exercise exercise = exerciseService.getExercise(id);
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("questionList", exercise.getQuestions());
+		return "exercise/details";
+	}
+	
+	@RequestMapping("/exercise/edit/{id}")
+	public String editExercise(Model model, @PathVariable Long id) {
+		Exercise exercise = exerciseService.getExercise(id);
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("questionList", exercise.getQuestions());
+		return "exercise/edit";
+	}
 }
