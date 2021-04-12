@@ -5,24 +5,30 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h2>Agregar ejercicio de subida de fichero</h2>
-		<form class="form-horizontal" method="post" action="/exercise/upFile/add" th:object="${exercise}">
+		<div class="container" align="center">
+			<img src="/img/uploadFile.png" /><br>
+		</div>
+		<form class="form-horizontal" method="post"
+			action="/exercise/upFile/add" th:object="${exercise}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="subject">Grupo:</label>
 				<div class="col-sm-10"
 					th:if="${subjectList != null and not #lists.isEmpty(subjectList)}">
 					<select id="subject" class="form-control" name="subject">
-						<option th:each="subject : ${subjectList}" th:value="${subject.id}"
-							th:text="${subject.name}">
+						<option th:each="subject : ${subjectList}"
+							th:value="${subject.id}" th:text="${subject.name}">
 							Subject</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd" th:text="#{signup.nombre}"/>
+				<label class="control-label col-sm-2" for="pwd"
+					th:text="#{signup.nombre}" />
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="name"
-						placeholder="Ejercicio artístico" required="true" />
-					<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+						placeholder="Ejercicio artístico" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -30,8 +36,10 @@
 				<div class="col-sm-10">
 					<textarea class="form-control" name="description"
 						placeholder="Subid una foto de vuestra lámina del mosaico de plástica."
-						required="true"></textarea> 
-					<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
+						required="true"></textarea>
+					<span class="text-danger"
+						th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}" />
 				</div>
 			</div>
 			<div class="form-group">

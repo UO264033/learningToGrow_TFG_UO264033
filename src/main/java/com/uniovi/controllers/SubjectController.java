@@ -1,16 +1,15 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
@@ -39,28 +38,54 @@ public class SubjectController {
 	public String getSubject(Model model) {
 		model.addAttribute("subject", new Subject());
 		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
-		StudentsCreationSubject studentsToAdd = new StudentsCreationSubject();
 		model.addAttribute("studentList", students);
-		model.addAttribute("form", studentsToAdd);
 		return "subject/add";
 	}
 
-	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
-	public String addSubject(@ModelAttribute Subject subject, @ModelAttribute StudentsCreationSubject form,
-			Principal principal) { //
+	@RequestMapping(value = "/subject/{name}/modalSubject")
+	public String getModalSubject(Model model, Principal principal, @PathVariable String name) {
 		String username = principal.getName();
 		User professor = usersService.getUserByUsername(username);
-
-		subject.setProfessor(professor);
-		for (User user : form.getStudents())
-			System.out.print(user);
-
-		// por cada fila de student
-		// si está include a true
-		// añadir student a la lista de alumnos de la asignatura
-
+		Subject subject = new Subject(name, professor);
 		subjectService.addSubject(subject);
-		return "subject/list";
+		
+		model.addAttribute("subject", subject);
+		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
+		model.addAttribute("studentList", students);
+		return "subject/add";
+	}
+
+	@RequestMapping("/subject/{name}/addStudent/{idSt}")
+	public String setStudents(@PathVariable String name, @PathVariable Long idSt, Principal principal) {
+		Subject subject = subjectService.getSubjectByName(name);
+		if (subject == null) {
+			String username = principal.getName();
+			User professor = usersService.getUserByUsername(username);
+			subject = new Subject(name, professor);
+			subjectService.addSubject(subject);
+		}
+		usersService.setStudent(idSt, name);
+		System.out.println("holaquetalestas");
+		return "redirect:/subject/list";
+	}
+
+	@RequestMapping(value = "/subject/add/update")
+	public String getSubjectUpdate(Model model) {
+		model.addAttribute("subject", new Subject());
+		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
+		model.addAttribute("studentList", students);
+		System.out.println("hola");
+		return "subject/add :: tableUsers";
+	}
+
+	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
+	public String addSubject(@RequestParam String name, Principal principal) { //
+		Subject subject = subjectService.getSubjectByName(name);
+		if(subject == null) {
+			System.out.println("escribe un nombre anda");
+		}
+		
+		return "redirect:/subject/list";
 	}
 
 	@RequestMapping("/subject/delete/{id}")

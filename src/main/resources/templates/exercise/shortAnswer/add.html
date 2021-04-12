@@ -5,6 +5,9 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h2>Agregar ejercicio de respuesta corta</h2>
+		<div class="container" align="center">
+			<img src="/img/shortAnswer.png" /><br>
+		</div>
 		<form class="form-horizontal" method="post"
 			action="/exercise/shortAnswer/add" th:object="${exercise}">
 			<div class="form-group">

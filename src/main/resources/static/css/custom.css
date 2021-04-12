@@ -21,6 +21,7 @@ body {
     color: #fff;
     background-color: lightcoral;
     border-color: lightcoral;
+    border-radius: 37px
 }
 
 .label-success {
@@ -30,6 +31,22 @@ body {
     color: #fff;
     background-color: #ABB4FF;
     border-color: #ABB4FF;
+    border-radius: 37px;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    border-radius: 37px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 37px;
+    padding: 2rem 2rem 2rem 3rem;
 }
 
 a {
@@ -46,7 +63,7 @@ a {
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
     color: white;
-    background-color: #5BD0DE;
+    background-color: #5bd0de;
 }
 
 .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
@@ -104,7 +121,7 @@ footer {
 
 .panel-default>.panel-heading {
     color: #333;
-    background-color: #d9edf7;
+    background-color: #5bc0de78;
     border-color: #ddd;
 }
 
@@ -134,4 +151,18 @@ footer {
     text-decoration: none;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+
+.personal-menu-button {
+    border-radius: 37px;
+    background-color: #ededed;
+    width: 100%;
+    font-size: 2.5rem;
+    color: #5BD0DE;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem 2rem 3rem;
 }

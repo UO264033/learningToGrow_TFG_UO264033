@@ -14,25 +14,19 @@
 			<button type="submit" class="btn btn-info">Buscar</button>
 		</form>
 		<div class="table-responsive">
-			<table class="table table-hover" th:fragment="tableExercise"
-				id="tableExercise">
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th class="col-md-1">id</th>
 						<th>Nombre</th>
 						<th>Descripción</th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="exercise : ${exerciseList}">
-						<td th:text="${exercise.id}">1</td>
-						<td th:text="${exercise.name}">Mate</td>
-						<td th:text="${exercise.description}">Ejercicios de
-							matématicas</td>
+						<td th:text="${exercise.name}">Ejercicio 1</td>
+						<td th:text="${exercise.description}">10</td>
 						<td><a th:href="${'/exercise/details/' + exercise.id}"
 							class="btn btn-info" role="button">detalles</a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"

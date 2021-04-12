@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Homework;
+import com.uniovi.entities.Question;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
@@ -161,6 +164,27 @@ public class HomeworkController {
 	public String setResendFalse(Model model, @PathVariable Long id) {
 		homeworksService.setHomeworkResend(false, id);
 		return "redirect:/homework/list";
+	}
+	
+	@RequestMapping("/homework/do/{id}")
+	public String doHomework(Model model, @PathVariable Long id) {
+		Exercise exercise = exerciseService.getExercise(id);
+		Set<Question> questions = exercise.getQuestions();
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("questionList", questions);
+		return "homework/do";
+	}
+	
+	@RequestMapping(value= "/homework/save", method = RequestMethod.POST)
+	public String saveHomework(Model model, @RequestParam Long idExercise, @ModelAttribute Homework homework, @RequestParam boolean corrected) {
+		Exercise realExercise = exerciseService.getExercise(idExercise);
+//		homeworksService.saveExerciseDone(homework, idExercise, answer);
+//		System.out.println(homework + "" + idExercise + "" + answer);
+		
+//		homeworksService.compareExercise(exercise, realExercise);
+//		model.addAttribute("exercise", exercise);
+//		model.addAttribute("questionList", questions);
+		return "redirect:/homework/exercise/list";
 	}
 
 }

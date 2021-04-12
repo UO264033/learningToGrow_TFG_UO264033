@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.uniovi.util.ArgumentChecks;
+
 @Entity
 public class Homework extends BaseEntity {
 
@@ -45,6 +47,16 @@ public class Homework extends BaseEntity {
 		this.score = score;
 		this.user = user;
 	}
+	
+	public Homework(String description, Exercise exercise, Question question, Answer aswner) {
+		this.description = description;
+		ArgumentChecks.isNotNull(exercise);
+		this.exercise = exercise;
+		ArgumentChecks.isNotNull(question);
+		this.question = question;
+		ArgumentChecks.isNotNull(answer);
+		this.answer = answer;
+	}
 
 	public String getDescription() {
 		return description;
@@ -80,7 +92,9 @@ public class Homework extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Homework [ description=" + description + ", score=" + score + "]";
+		return "Homework [description=" + description + ", exercise=" + exercise + "]";
 	}
+
+	
 
 }

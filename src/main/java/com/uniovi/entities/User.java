@@ -138,6 +138,10 @@ public class User extends BaseEntity {
 		this.subjects = subjects;
 	}
 	
+	public void addSubject(Subject s) {
+		subjects.add(s);
+	}
+	
 	public String getRoleString() {
 		if (role.equals("ROLE_STUDENT"))
 			return "student";

@@ -26,6 +26,9 @@ public class UsersService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private SubjectService subjectService;
 
 	@PostConstruct
 	public void init() {
@@ -94,6 +97,13 @@ public class UsersService {
 			students.add(u);
 		}
 		return students;
+	}
+
+	public void setStudent(Long id, String name) {
+		Subject subject = subjectService.getSubjectByName(name);
+		User student = usersRepository.findById(id).get();
+		student.addSubject(subject);
+		usersRepository.save(student);
 	}
 
 }

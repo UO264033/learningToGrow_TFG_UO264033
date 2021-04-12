@@ -11,25 +11,21 @@
 				<input name="searchText" type="text" class="form-control" size="50"
 					placeholder="Buscar por nombre o por apellido o por asignatura">
 			</div>
-			<button type="submit" class="btn btn-info">Buscar</button>
+			<button type="submit" class="btn btn-info">
+				<span class="material-icons-round"> search </span>
+			</button>
 		</form>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Apellidos</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="student : ${studentList}">
-						<td th:text="${student.name}"></td>
-						<td th:text="${student.lastName}"></td>
-					</tr>
-				</tbody>
-				</thead>
-			</table>
-
+		<div align="center">
+			<img src="/img/students.png" /><br>
+		</div>
+		<div class="panel panel-default" th:each="student : ${studentList}">
+			<div class="panel-heading">
+				<h3>
+					<span th:text="${student.name}" /> <span
+						th:text="${student.lastName}" />
+				</h3>
+			</div>
+			<div class="panel-body"></div>
 		</div>
 		<footer th:replace="fragments/pagination" />
 	</div>

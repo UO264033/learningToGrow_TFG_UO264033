@@ -23,7 +23,8 @@
 						<td><h4><span class="label label-warning" th:text="${exercise.subject.name}">Asignatura</span></h4></td>
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">Ejercicio 1</td>
-						<td><button type="button" class="btn btn-warning">Rellenar</button></td>
+						<td><a th:href="${'/homework/do/' + exercise.id}"
+							class="btn btn-warning" role="button">Rellenar</a></td>
 						<td><button type="button" class="btn btn-warning">Enviar</button></td>
 					</tr>
 				</tbody>

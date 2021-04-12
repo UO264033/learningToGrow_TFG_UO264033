@@ -11,11 +11,13 @@
 				<div class="center">
 					<img class="card-img-top" src="/img/perfil.png"
 						alt="Card image cap">
-					<div class="card-body">
+					<div class="card-body" align="center">
 						<h4 class="card-title"
 							th:text="${user.name + ' ' + user.lastName}">Card title</h4>
 						<h5 class="card-text" th:text="${user.username}">Content.</h5>
-						<a href="#" class="btn btn-info">Go somewhere</a>
+						<a href="/logout" class="btn btn-info btn-lg" align="center">
+							<span class="material-icons-round"> logout </span>  <span>Desconectar</span>
+						</a>
 					</div>
 				</div>
 			</div>

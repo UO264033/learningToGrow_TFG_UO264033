@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<div class="modal fade" id="modalSubject" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLongTitle"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLongTitle">
+					Listado de alumnos  <span th:text="${subject.name}"></span>
+				</h4>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-15">
+					<table class="table table-hover" th:fragment="tableUsers"
+						id="tableUsers">
+						<thead>
+							<tr>
+								<th>Añadir</th>
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>Nombre de usuario</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="student: ${studentList}">
+								<td><input class="checkbox" type="checkbox" name="checkbox"
+									th:id="${student.id}"></td>
+								<td th:text="${student.name}" th:field="${student.name}"
+									name="studentName"></td>
+								<td th:text="${student.lastName}" th:field="${student.lastName}"
+									name="studentLastname"></td>
+								<td th:text="${student.username}" th:field="${student.username}"
+									name="studentName"></td>
+
+							</tr>
+						</tbody>
+						</thead>
+					</table>
+				</div>
+			<div class="modal-footer">
+				<button type="button" id="addStudent" class="btn btn-info">
+					Save changes</button>
+				<script th:inline="javascript">
+					$("#addStudent")
+							.click(
+									function() {
+										var c = 0;
+										var ids = [ 50 ];
+										$('#tableUsers input[type=checkbox]')
+												.each(function() {
+													if (this.checked) {
+														ids[c] = this.id;
+														c++;
+													}
+												});
+										for (let i = 0; i < 51; i++) {
+											if (ids[i] != null) {
+												$
+														.get(
+																$("#nameSub")
+																		.val()
+																		+ "/addStudent/"
+																		+ ids[i],
+																function(data) {
+																	$(
+																			"#tableUsers")
+																			.load(
+																					'/subject/add/update');
+																});
+											}
+
+										}
+									});
+				</script>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

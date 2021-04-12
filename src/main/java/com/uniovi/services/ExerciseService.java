@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Exercise;
+import com.uniovi.entities.Question;
 import com.uniovi.repositories.ExerciseRepository;
+import com.uniovi.repositories.QuestionRepository;
 import com.uniovi.repositories.SubjectRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class ExerciseService {
 	
 	@Autowired
 	private SubjectRepository subjectRepository;
+	
+	@Autowired
+	private QuestionService questionService;
 
 	public void addExercise(Exercise exercise) {
 		exerciseRepository.save(exercise);
@@ -34,6 +39,9 @@ public class ExerciseService {
 	}
 
 	public void deleteExercise(Long id) {
+		List<Question> questions = questionService.getQuestionsByExerciseId(id);
+		for(Question q: questions)
+			questionService.deleteQuestion(q.getId());
 		exerciseRepository.deleteById(id);
 	}
 
