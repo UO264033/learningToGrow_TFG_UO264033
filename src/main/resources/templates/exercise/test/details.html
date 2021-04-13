@@ -22,10 +22,17 @@
 				</div>
 			</div>
 		</div>
-		<div th:if="${questionList.isEmpty()}" align="center" >
-			<div class="alert alert-danger" role="alert">Por favor, rellene
-				el ejercicio antes de enviarlo. No debe estar vacío.</div>
-			<img src="/img/empty-exercise.png"  /><br>
+		<div th:if="${questionList.isEmpty()}" align="center">
+			<div class="card" style="width: 18rem;"
+				th:if="${exercise.description != null}">
+				<div class="center">
+					<h4 class="card-text" th:text="${exercise.description}">Content.</h4>
+				</div>
+				<img src="/img/uploadFile.png" /><br>
+			</div>
+			<div class="alert alert-danger" role="alert" th:unless="${exercise.description != null}">>Por favor, rellene
+				el ejercicio con preguntas antes de enviarlo. No debe estar vacío.</div>
+			<img src="/img/empty-exercise.png" /><br>
 		</div>
 	</div>
 	<div class="container" th:object="${exercise}" align="center">

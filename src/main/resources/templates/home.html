@@ -30,10 +30,10 @@
 					<tr th:each="exercise : ${exerciseList}">
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">10</td>
-						<td><a th:href="${'/exercise/details/' + exercise.id}"
+						<td><a th:href="${'/exercise/test/details/' + exercise.id}"
 							class="btn btn-info" role="button">detalles</a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/exercise/edit/' + exercise.id}" class="btn btn-info"
+							th:href="${'/exercise/test/edit/' + exercise.id}" class="btn btn-info"
 							role="button">modificar</a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/delete/' + exercise.id}"
