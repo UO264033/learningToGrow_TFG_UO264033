@@ -35,7 +35,7 @@
 				<tr th:each="subject : ${subjectList}">
 					<td><h4><span class="label label-success"  th:text="${subject.name}">Asignatura</span></h4></td>
 					<td><a th:href="${'/subject/details/' + subject.id}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-education"></span></a></td>
-					<td><a th:href="${'/homework/exercise/list/' + subject.id}"
+					<td sec:authorize="hasRole('ROLE_STUDENT')"><a th:href="${'/homework/exercise/list/' + subject.id}"
 						class="btn btn-success" role="button"><span class="glyphicon glyphicon-pencil"></span></a></td>
 					<td sec:authorize="hasRole('ROLE_PROFESSOR')"><a th:href="${'/subject/delete/' + subject.id}"
 						class="btn btn-success" role="button" /><span class="glyphicon glyphicon-trash"></span>Eliminar</td>

@@ -26,7 +26,7 @@ public class UsersService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private SubjectService subjectService;
 
@@ -55,7 +55,7 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
-	
+
 	public Page<User> searchUsersByUsernameAndNameAndLastname(Pageable pageable, String searchText) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		searchText = "%" + searchText + "%";
@@ -64,25 +64,24 @@ public class UsersService {
 	}
 
 	public void editUser(User user) {
-		
+
 		Optional<User> userOp = usersRepository.findById(user.getId());
-		if(userOp.isPresent()){
+		if (userOp.isPresent()) {
 			User userToUpdate = userOp.get();
 			userToUpdate.setUsername(user.getUsername());
 			userToUpdate.setName(user.getName());
 			userToUpdate.setLastName(user.getLastName());
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			usersRepository.save(userToUpdate);
-		}
-		else
-			System.out.println("No se pudo actualizar");		
+		} else
+			System.out.println("No se pudo actualizar");
 	}
-	
-	public Page<User> getUsersByRole(Pageable pageable, String role){
+
+	public Page<User> getUsersByRole(Pageable pageable, String role) {
 		return usersRepository.findUsersByRole(pageable, role);
 	}
-	
-	public List<User> getStudentsByRole(String role){
+
+	public List<User> getStudentsByRole(String role) {
 		return usersRepository.findStudentsByRole(role);
 	}
 
@@ -93,9 +92,13 @@ public class UsersService {
 
 	public List<User> getUsersBySubject(Subject subject) {
 		List<User> students = new ArrayList<User>();
-		for (User u : subject.getStudents()) {
-			students.add(u);
+		for (User u : usersRepository.findStudentsByRole("ROLE_STUDENT")) {
+			for(Subject s: u.getSubjects()) {
+				if(s.getName().equals(subject.getName()))
+					students.add(u);
+			}
 		}
+		System.out.println(students);
 		return students;
 	}
 
@@ -103,6 +106,8 @@ public class UsersService {
 		Subject subject = subjectService.getSubjectByName(name);
 		User student = usersRepository.findById(id).get();
 		student.addSubject(subject);
+		subject.addStudent(student);
+		subjectService.addSubject(subject);
 		usersRepository.save(student);
 	}
 

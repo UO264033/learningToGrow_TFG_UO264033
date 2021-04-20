@@ -1,34 +1,23 @@
 package com.uniovi.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
+@Table
+@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
 public class Exercise extends BaseEntity{
 
 	@Column(unique = true)
 	private String name;
 	private String description;
-	
-	/*
-	 * Questions tipo test
-	 */
-	@OneToMany(mappedBy="exercise")
-	private Set<Question> questions = new HashSet<>();
-	
-	/*
-	 * Questions para short Answer
-	 */
-	@OneToMany(mappedBy="exercise")
-	private Set<ShortAnswer> shortAnswers = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "profesor_id")
@@ -36,15 +25,19 @@ public class Exercise extends BaseEntity{
 	
 	@ManyToOne
 	private Subject subject;
+	
+	private ExerciseType type;
 
 	public Exercise() {
 	}
 	
-	public Exercise(String name, String description) {
+	public Exercise(String name, String description, ExerciseType type) {
 		ArgumentChecks.isNotEmpty(name);
 		this.name = name;
 		ArgumentChecks.isNotNull(description);
 		this.description = description;
+		ArgumentChecks.isNotNull(type);
+		this.type = type;
 	}
 	
 	public Exercise(String name, String description, User professor) {
@@ -78,6 +71,14 @@ public class Exercise extends BaseEntity{
 		this.description = description;
 	}
 	
+	public ExerciseType getType() {
+		return type;
+	}
+
+	public void setType(ExerciseType u) {
+		this.type = u;
+	}
+
 	public User getProfessor() {
 		return professor;
 	}
@@ -92,22 +93,6 @@ public class Exercise extends BaseEntity{
 
 	public void setSubject(Subject subject) {
 		this.subject = subject;
-	}
-
-	Set<Question> _getQuestions() {
-		return questions;
-	}
-
-	public Set<Question> getQuestions() {
-		return new HashSet<>(questions);
-	}
-	
-	Set<ShortAnswer> _getShortAnswers() {
-		return shortAnswers;
-	}
-
-	public Set<ShortAnswer> getShortAnswers() {
-		return new HashSet<>(shortAnswers);
 	}
 
 	@Override
@@ -137,7 +122,7 @@ public class Exercise extends BaseEntity{
 
 	@Override
 	public String toString() {
-		return "Exercise [name=" + name + ", description=" + description + "]";
+		return "Exercise [name=" + name + ", description=" + description + ", type= " + type + "]";
 	}
 	
 }

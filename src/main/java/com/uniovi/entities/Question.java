@@ -3,7 +3,6 @@ package com.uniovi.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,8 +12,6 @@ import com.uniovi.util.ArgumentChecks;
 @Entity
 public class Question extends BaseEntity {
 		
-	@Column(unique = true)
-	private String name;
 	private String statement;
 	
 	@OneToMany(mappedBy="question")
@@ -26,25 +23,15 @@ public class Question extends BaseEntity {
 	public Question() {
 	}
 	
-	public Question(String name, String statement) {
-		ArgumentChecks.isNotEmpty(name);
-		this.name = name;
+	public Question(String statement) {
 		ArgumentChecks.isNotNull(statement);
 		this.statement = statement;
 	}
 	
-	public Question(String name, String statement, Exercise exercise) {
-		this(name, statement);
+	public Question(String statement, Exercise exercise) {
+		this(statement);
 		ArgumentChecks.isNotNull(exercise);
 		this.exercise = exercise;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getStatement() {
@@ -70,12 +57,16 @@ public class Question extends BaseEntity {
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
+	
+	public void addAnswer(Answer a) {
+		answers.add(a);
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((statement == null) ? 0 : statement.hashCode());
 		return result;
 	}
 
@@ -88,17 +79,19 @@ public class Question extends BaseEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		Question other = (Question) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (statement == null) {
+			if (other.statement != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!statement.equals(other.statement))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Question [name=" + name + ", statement=" + statement + "]";
+		return "Question [statement=" + statement + ", answers=" + answers + "]";
 	}
+
+	
 	
 }

@@ -9,24 +9,24 @@ import javax.persistence.OneToMany;
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
-public class ShortAnswer extends Exercise {
+public class Test extends Exercise {
 
-	@OneToMany(mappedBy="exercise")
+	@OneToMany(mappedBy = "exercise")
 	private Set<Question> questions = new HashSet<>();
 
-	public ShortAnswer() {
+	public Test() {
 	}
 
-	public ShortAnswer(String name, String description) {
-		super(name, description, ExerciseType.S);
+	public Test(String name, String description) {
+		super(name, description, ExerciseType.T);
 	}
-		
-	public ShortAnswer(String name, String description, Set<Question> questions) {
-		this(name, description);
+
+	public Test(String name, String description, Set<Question> questions) {
+		super(name, description, ExerciseType.T);
 		ArgumentChecks.isNotNull(questions);
 		this.questions = questions;
 	}
-	
+
 	Set<Question> _getQuestions() {
 		return questions;
 	}
@@ -34,7 +34,7 @@ public class ShortAnswer extends Exercise {
 	public Set<Question> getQuestions() {
 		return new HashSet<>(questions);
 	}
-	
+
 	public void setQuestions(Set<Question> questions) {
 		this.questions = questions;
 	}
@@ -42,12 +42,5 @@ public class ShortAnswer extends Exercise {
 	public void addQuestion(Question q) {
 		questions.add(q);
 	}
-
-	@Override
-	public String toString() {
-		return "ShortAnswer [questions=" + questions + "]";
-	}
-	
-	
 
 }

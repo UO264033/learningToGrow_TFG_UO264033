@@ -3,7 +3,8 @@
 <head th:replace="fragments/head" />
 <body>
 	<nav th:replace="fragments/nav" />
-	<div class="container" style="text-align: center">
+	<div class="container" style="text-align: center"
+		sec:authorize="!hasRole('ROLE_ADMIN')">
 		<h2>
 			<span th:text="#{welcome.home}" />
 		</h2>
@@ -13,9 +14,11 @@
 		</h4>
 	</div>
 	<div class="container" style="text-align: center">
-		<p sec:authorize="hasRole('ROLE_PROFESSOR')">Ejercicios creados</p>
 		<div class="table-responsive"
 			sec:authorize="hasRole('ROLE_PROFESSOR')">
+			<div class="panel-body" align="center">
+				<img src="/img/exerciseList.png" /></a><br>
+			</div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -30,10 +33,10 @@
 					<tr th:each="exercise : ${exerciseList}">
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">10</td>
-						<td><a th:href="${'/exercise/test/details/' + exercise.id}"
+						<td><a th:href="${'/exercise/details/' + exercise.id}"
 							class="btn btn-info" role="button">detalles</a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/exercise/test/edit/' + exercise.id}" class="btn btn-info"
+							th:href="${'/exercise/edit/' + exercise.id}" class="btn btn-info"
 							role="button">modificar</a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/delete/' + exercise.id}"
@@ -43,6 +46,10 @@
 			</table>
 		</div>
 
+		<div class="panel-body" sec:authorize="hasRole('ROLE_ADMIN')"
+			align="center">
+			<img src="/img/admin.png" /></a><br>
+		</div>
 		<div class="jumbotron" sec:authorize="hasRole('ROLE_ADMIN')">
 			<h2 th:text="#{home.adminView}" />
 			<p th:text="#{home.adminView.info}" />

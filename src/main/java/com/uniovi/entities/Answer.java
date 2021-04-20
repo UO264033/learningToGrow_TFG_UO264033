@@ -7,29 +7,40 @@ import javax.persistence.ManyToOne;
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
-public class Answer extends BaseEntity{
-	
-	@Basic(optional=false)
+public class Answer extends BaseEntity {
+
+	@Basic(optional = false)
 	private String text;
-	
+
 	private boolean correct;
-	
+
 	@ManyToOne
 	private Question question;
 
 	public Answer() {
 	}
-	
-	public Answer(String text, boolean right) {
+
+	public Answer(String text) {
 		ArgumentChecks.isNotEmpty(text);
 		this.text = text;
+	}
+
+	public Answer(String text, boolean right) {
+		this(text);
 		this.correct = right;
 	}
-	
+
 	public Answer(String text, boolean right, Question question) {
 		ArgumentChecks.isNotEmpty(text);
 		this.text = text;
 		this.correct = right;
+		ArgumentChecks.isNotNull(question);
+		this.question = question;
+	}
+	
+	public Answer(String text, Question question) {
+		ArgumentChecks.isNotEmpty(text);
+		this.text = text;
 		ArgumentChecks.isNotNull(question);
 		this.question = question;
 	}
@@ -49,7 +60,7 @@ public class Answer extends BaseEntity{
 	public void setCorrect(boolean right) {
 		this.correct = right;
 	}
-	
+
 	public Question getQuestion() {
 		return question;
 	}
@@ -90,8 +101,4 @@ public class Answer extends BaseEntity{
 	public String toString() {
 		return "Answer [text=" + text + ", correct=" + correct + "]";
 	}
-	
-	
-	
-	
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Answer;
 import com.uniovi.entities.Question;
-import com.uniovi.repositories.AnswerRepository;
 import com.uniovi.repositories.QuestionRepository;
 
 @Service
@@ -17,10 +17,13 @@ public class QuestionService {
 	private QuestionRepository questionRepository;
 	
 	@Autowired
-	private AnswerRepository answerRepository;
+	private AnswerService answerService;
 	
-	public void addQuestion(Question question) {
-		questionRepository.save(question);
+	public Question addQuestion(Question question) {
+		Question q = questionRepository.save(question);
+		for(Answer a: question.getAnswers())
+			answerService.addAnswer(a);
+		return q;
 	}
 	
 	public List<Question> getQuestions() {
@@ -40,14 +43,8 @@ public class QuestionService {
 	}
 
 	public void deleteQuestion(Long id) {
-		answerRepository.deleteByQuestionId(id);
+		answerService.deleteByQuestionId(id);
 		questionRepository.deleteById(id);
 	}
 	
-	public Question getQuestionByName(String name) {
-		return questionRepository.findByName(name);
-	}
-	
-	
-
 }

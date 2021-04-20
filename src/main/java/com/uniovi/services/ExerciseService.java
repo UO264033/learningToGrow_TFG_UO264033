@@ -1,15 +1,19 @@
 package com.uniovi.services;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
+import com.uniovi.entities.User;
 import com.uniovi.repositories.ExerciseRepository;
-import com.uniovi.repositories.QuestionRepository;
 import com.uniovi.repositories.SubjectRepository;
 
 @Service
@@ -53,6 +57,12 @@ public class ExerciseService {
 		List<Exercise> exercises = new ArrayList<Exercise>();
 		if(subjectRepository.findById(id).isPresent())
 			exerciseRepository.findBySubject(subjectRepository.findById(id).get()).forEach(exercises::add);
+		return exercises;
+	}
+
+	public Page<Exercise> getExercisesByUser(Pageable pageable, User activeUser) {
+		Page<Exercise> exercises = new PageImpl<Exercise>(new LinkedList<Exercise>());
+		exercises = exerciseRepository.findByUser(pageable, activeUser);
 		return exercises;
 	}
 

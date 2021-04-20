@@ -6,14 +6,22 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class User extends BaseEntity {
+public class User {
 
+	@Id
+    @Column(name="ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+	
 	@Column(unique = true)
 	private String username;
 	private String name;
@@ -28,16 +36,12 @@ public class User extends BaseEntity {
 	/**
 	 * Subsistema de cursos
 	 */
-	@OneToOne(mappedBy = "professor", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Subject subject;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "students")
 	private Set<Subject> subjects = new HashSet<Subject>();
 
-
-//	@JoinTable(name = "subject")
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	private Set<User> users_student = new HashSet<User>();
 
 	/**
 	 * Subsistema de deberes
@@ -64,6 +68,14 @@ public class User extends BaseEntity {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

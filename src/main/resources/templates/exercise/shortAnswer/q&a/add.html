@@ -4,13 +4,15 @@
 <body>
 	<!-- Barra de Navegaci�n superior -->
 	<nav th:replace="fragments/nav" />
-	<div class="container" th:object="${exercise}" >
+	<div class="container" th:object="${exercise}">
 		<h2>Agregar pregunta y respuesta</h2>
 		<form class="form-horizontal" method="post"
-			action="/exercise/shortAnswer/q&a/add" th:object="${question}">
+			action="/exercise/shortAnswer/q&a/add">
 			<input name="idExercise" th:value="${exercise.id}" type="number"
 				hidden />
 			<h4 th:text="${exercise.description}"></h4>
+			<div class="alert alert-success" role="alert" th:if="${mensaje != null}" th:text="${mensaje}">
+			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="statement">Pregunta:</label>
 				<div class="col-sm-10">
@@ -21,17 +23,23 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="statement">Respuesta:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="answer"
+					<input type="text" class="form-control" name="text"
 						placeholder="Azul celeste" required="true" />
 				</div>
 			</div>
-			<button type="submit" id="addA" class="btn btn-info">Agregar
-				pregunta</button>
-		</form>
 
-		<div class="col-sm-offset-2 col-sm-10">
-			<a th:href="${'/exercise/shortAnswer/show/' + exercise.id}" class="btn btn-info" role="button">Visualizar ejercicio</a>
-		</div>
+
+			<div class="form-group" align="right">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" id="addA" class="btn btn-info">Agregar
+						pregunta</button>
+					<a th:href="${'/exercise/shortAnswer/show/' + exercise.id}"
+						class="btn btn-info" role="button">Visualizar ejercicio</a> <a
+						href="/home" class="btn btn-info" role="button">Finalizar
+						ejercicio</a>
+				</div>
+			</div>
+		</form>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

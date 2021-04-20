@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container" th:object="${exercise}">
+		<div class="container" align="center">
+			<img src="/img/toDo.png" /><br>
+		</div>
+		<div class="centerCard">
+			<h2>
+				<span th:text="${exercise.name}"></span>
+			</h2>
+			<h4>
+				<span th:text="${exercise.description}"></span>
+			</h4>
+			<input th:value="${exercise.id}" name="idExercise" type="number"
+				hidden />
+		</div>
+		<br> <br>
+		<div class="container">
+			<form class="form-horizontal" method="POST" action="/homework/do/uploadFile">
+				<input name="idExercise" th:value="${exercise.id}" type="number"
+				hidden />
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="description">Fichero:</label>
+					<input type="hidden" name="MAX_FILE_SIZE" value="30000" /> <input
+						type="file" name="file" class="btn btn-info"
+						accept=".pdf, .docx, .doc, .jpg, .png, .jpeg" required>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-info">
+							<span>Enviar</span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

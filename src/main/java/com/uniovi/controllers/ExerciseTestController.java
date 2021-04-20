@@ -1,6 +1,5 @@
 package com.uniovi.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -10,25 +9,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.entities.Exercise;
-import com.uniovi.entities.UploadFile;
+import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
-import com.uniovi.services.ExerciseFileUploadService;
+import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.SubjectService;
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.ExerciseValidator;
 
-
 @Controller
-public class ExerciseFileUploadController {
-	
-	//@Value("${wb.fileLocation}")
-	private String fileLocation;
-	//@Value("${wb.fileDirection}")
-	private String fileDirection;
+public class ExerciseTestController {
 	
 	@Autowired
 	private UsersService usersService;
@@ -37,27 +31,27 @@ public class ExerciseFileUploadController {
 	private ExerciseValidator exerciseValidator;
 	
 	@Autowired
-	private ExerciseFileUploadService exerciseService;
+	private ExerciseTestService exerciseService;
 	
 	@Autowired
 	private SubjectService subjectService;
 	
-	@RequestMapping(value = "/exercise/upFile/add")
+	@RequestMapping(value = "/exercise/test/add")
 	public String getExercise(Model model, Pageable pageable) {
 		model.addAttribute("exercise", new Exercise());
 		model.addAttribute("subjectList", subjectService.getSubjects());
-		return "exercise/upFile/add";
+		return "exercise/test/add";
 	}
 	
-	@RequestMapping(value = "/exercise/upFile/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/exercise/test/add", method = RequestMethod.POST)
 	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result,
-			Model model, @ModelAttribute UploadFile exercise, @ModelAttribute User user) {
+			Model model, @ModelAttribute Test exercise, @ModelAttribute User user) {
 		
 		exerciseValidator.validate(exerciseVa, result);
 		if(result.hasErrors()) {
-			model.addAttribute("subjectList", subjectService.getSubjects());
 			model.addAttribute("exercise", exerciseVa);
-			return "exercise/upFile/add";
+			model.addAttribute("subjectList", subjectService.getSubjects());
+			return "exercise/test/add";
 		}
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -68,30 +62,17 @@ public class ExerciseFileUploadController {
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
 		exerciseService.addExercise(exercise);
-		return "redirect:/home";
+		return "exercise/test/question/add";
 	}
 	
+	@RequestMapping(value = "/exercise/test/show/{id}")
+	public String showQuestions(Model model, @PathVariable Long id) {
+		Test exercise = exerciseService.getExercise(id);
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("idExercise", id);
+		model.addAttribute("questionList", exercise.getQuestions());
+		return "exercise/test/show";
+	}
 	
-//	@RequestMapping(value="/exercise/upFile/add", method=RequestMethod.POST)
-//	public @ResponseBody String handleFileUpload(@RequestParam("file") MultipartFile file,
-//			HttpServletRequest request, HttpServletResponse response) {
-//		if(!file.isEmpty()) {
-//			String name = file.getOriginalFilename();
-//			try {
-//				byte[] bytes = file.getBytes();
-//				BufferedOutputStream stream = new BufferedOutputStream(
-//												new FileOutputStream(
-//														new File(fileLocation + name)));
-//				stream.write(bytes);
-//				stream.close();
-//				return fileDirection + name;
-//			}catch(Exception e) {
-//				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//				return "Failed to upload " + name + " => " + e.getMessage();
-//			} 
-//		}else {
-//			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//			return "Empty file.";
-//		}		
-//	}
+
 }

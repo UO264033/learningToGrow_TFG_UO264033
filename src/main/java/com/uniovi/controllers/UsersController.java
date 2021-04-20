@@ -99,9 +99,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
-	public String setUser(@ModelAttribute User user, BindingResult result) {
+	public String setUser(@ModelAttribute User user, BindingResult result, Model model) {
 		signUpFormValidator.validate(user, result);
 		if (result.hasErrors()) {
+			model.addAttribute("rolesList", rolesService.getRoles());
 			return "user/add";
 		}
 		usersService.addUser(user);
@@ -151,9 +152,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@Validated User user, BindingResult result) {
+	public String signup(@Validated User user, BindingResult result, Model model) {
 		signUpFormValidator.validate(user, result);
 		if (result.hasErrors()) {
+			model.addAttribute("rolesList", rolesService.getPrincipalRoles());
 			return "signup";
 		}
 		usersService.addUser(user);

@@ -6,23 +6,37 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
-public class Subject extends BaseEntity {
+public class Subject {
 	
+	@Id
+    @Column(name="ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
 	@Column(unique = true)
 	private String name;
 
 	@OneToOne
 	private User professor;
-	
-	@OneToMany(mappedBy = "subjects")
+
+	@JoinTable(name = "rel_subjects_students",
+			joinColumns = @JoinColumn(name = "FK_SUBJECT", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "FK_STUDENT", nullable = false))
+	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<User> students = new HashSet<User>();
-	
+
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
 	private Set<Exercise> exercises = new HashSet<Exercise>();
 
@@ -39,23 +53,31 @@ public class Subject extends BaseEntity {
 		ArgumentChecks.isNotNull(professor);
 		this.professor = professor;
 	}
-	
+
 	public Subject(String name, User professor, Set<User> students) {
 		this(name, professor);
 		this.students = students;
 	}
-	
+
 	public Subject(String name, User professor, Set<User> students, Set<Exercise> exercises) {
 		this(name, professor, students);
 		this.exercises = exercises;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public User getProfessor() {
@@ -73,13 +95,17 @@ public class Subject extends BaseEntity {
 	public void setStudents(Set<User> students) {
 		this.students = students;
 	}
-	
+
 	public Set<Exercise> getExercises() {
 		return exercises;
 	}
 
 	public void setExercises(Set<Exercise> exercises) {
 		this.exercises = exercises;
+	}
+
+	public void addStudent(User student) {
+		students.add(student);
 	}
 
 	@Override
@@ -111,6 +137,5 @@ public class Subject extends BaseEntity {
 	public String toString() {
 		return "Subject [name=" + name + "]";
 	}
-	
-	
+
 }

@@ -1,8 +1,13 @@
 package com.uniovi.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.uniovi.util.ArgumentChecks;
 
@@ -10,52 +15,35 @@ import com.uniovi.util.ArgumentChecks;
 public class Homework extends BaseEntity {
 
 	private String description;
-	private Double score;
-	
-	private Boolean resend = false;
+
+	private Boolean send = false;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user; //ALUMNO
-	
-	@ManyToOne
+	private User user; // ALUMNO
+
+	@OneToOne
 	@JoinColumn(name = "exercise_id")
-	private Exercise exercise; //EJERCICIO
-	
-	@ManyToOne
-	@JoinColumn(name = "question_id")
-	private Question question; //PREGUNTA
-	
-	@ManyToOne
-	@JoinColumn(name = "answer_id")
-	private Answer answer; //RESPUESTA
+	private Exercise exercise; // EJERCICIO
+
+	@OneToMany
+	@JoinColumn(name = "homework_id")
+	private Set<Answer> answers = new HashSet<>(); // RESPUESTAS
 
 	public Homework() {
 	}
 
-	public Homework(long id, String description, Double score) {
-		super();
-//		this.id = id;
+	public Homework(String description, boolean send, Exercise exercise) {
+		ArgumentChecks.isNotEmpty(description);
 		this.description = description;
-		this.score = score;
-
-	}
-
-	public Homework(String description, Double score, User user) {
-		super();
-		this.description = description;
-		this.score = score;
-		this.user = user;
-	}
-	
-	public Homework(String description, Exercise exercise, Question question, Answer aswner) {
-		this.description = description;
+		this.send = send;
 		ArgumentChecks.isNotNull(exercise);
 		this.exercise = exercise;
-		ArgumentChecks.isNotNull(question);
-		this.question = question;
-		ArgumentChecks.isNotNull(answer);
-		this.answer = answer;
+	}
+
+	public Homework(String description, boolean send, Exercise exercise, Set<Answer> answers) {
+		this(description, send, exercise);
+		this.answers = answers;
 	}
 
 	public String getDescription() {
@@ -66,14 +54,6 @@ public class Homework extends BaseEntity {
 		this.description = description;
 	}
 
-	public Double getScore() {
-		return score;
-	}
-
-	public void setScore(Double score) {
-		this.score = score;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -82,19 +62,21 @@ public class Homework extends BaseEntity {
 		this.user = user;
 	}
 
-	public Boolean getResend() {
-		return resend;
+	public Boolean isSent() {
+		return send;
 	}
 
-	public void setResend(Boolean resend) {
-		this.resend = resend;
+	public void setSend(Boolean resend) {
+		this.send = resend;
+	}
+
+	public void addAnswer(Answer answer) {
+		answers.add(answer);
 	}
 
 	@Override
 	public String toString() {
 		return "Homework [description=" + description + ", exercise=" + exercise + "]";
 	}
-
-	
 
 }

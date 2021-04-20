@@ -35,6 +35,10 @@ public class AnswerService {
 	}
 	
 	public Answer getQuestionByAll(String text, boolean correct, Question question) {
-		return answerRepository.findByTextAndCorrectAndQuestion(text, correct, question.getId());
+		return answerRepository.findByTextAndCorrectAndQuestion(text, correct, question);
+	}
+
+	public void deleteByQuestionId(Long id) {
+		answerRepository.deleteByQuestionId(id);
 	}
 }

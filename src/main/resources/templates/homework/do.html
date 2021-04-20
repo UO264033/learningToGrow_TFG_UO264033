@@ -10,25 +10,7 @@
 		<form class="form-horizontal" method="post" action="/homework/save">
 			<input th:value="${exercise.id}" name="idExercise" type="number"
 				hidden />
-			<div th:if="${!questionList.isEmpty()}">
-				<div class="panel panel-default"
-					th:each="question : ${questionList}">
-					<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
-					<div th:each="answer : ${question.answers}">
-						<input type="radio" name="corrected" value="huey"> 
-						<label for="huey" th:text="${answer.text}" name="texto"/>
-					</div>
-				</div>
-			</div>
 
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="description">¿Hay
-					algo que quieras decirle a tu profesor?</label>
-				<div class="col-sm-8">
-					<textarea class="form-control" name="description"
-						placeholder="¿Quieres decirle algo a tu profesor?"></textarea>
-				</div>
-			</div>
 			<div class="container" align="center">
 				<button type="submit" class="btn btn-info">Enviar</button>
 			</div>

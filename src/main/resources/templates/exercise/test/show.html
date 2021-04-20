@@ -8,8 +8,12 @@
 		<h2>
 			<span th:text="${exercise.name}"></span>
 		</h2>
+		<h4>
+			<span th:text="${exercise.description}"></span>
+		</h4>
 		<input th:value="${exercise.id}" name="idExercise" type="number"
 			hidden />
+
 		<div th:if="${!questionList.isEmpty()}">
 			<div class="panel panel-default" th:each="question : ${questionList}">
 				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
@@ -20,26 +24,19 @@
 						name="drone" value="huey" disabled> <label for="huey"
 						th:text="${answer.text}" />
 				</div>
-			</div>
-		</div>
-		<div th:if="${questionList.isEmpty()}" align="center">
-			<div class="card" style="width: 18rem;"
-				th:if="${exercise.description != null}">
-				<div class="center">
-					<h4 class="card-text" th:text="${exercise.description}">Content.</h4>
+				<div class="container" align="center">
+					<a th:href="${'/question/delete/' + question.id}"
+						class="glyphicon glyphicon-trash" role="button"></a>
 				</div>
-				<img src="/img/uploadFile.png" /><br>
 			</div>
-			<div class="alert alert-danger" role="alert" th:unless="${exercise.description != null}">>Por favor, rellene
-				el ejercicio con preguntas antes de enviarlo. No debe estar vacío.</div>
-			<img src="/img/empty-exercise.png" /><br>
 		</div>
-	</div>
-	<div class="container" th:object="${exercise}" align="center">
-		<a class="btn btn-info btn-lg"
-			th:href="${'/exercise/edit/' + exercise.id}" role="button"><span
-			class="material-icons-round"> mode_edit_outline </span><span
-			th:text="#{user.list.table.editButton}"></span></a>
+		<div class="form-group" align="right">
+			<div class="col-sm-offset-2 col-sm-10">
+				<a href="/exercise/test/question/add" class="btn btn-info"
+					role="button"> Añadir otra pregunta</a> <a th:href="${'/home'}"
+					class="btn btn-info" role="button">Finalizar ejercicio</a>
+			</div>
+		</div>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

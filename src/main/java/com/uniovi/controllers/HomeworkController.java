@@ -4,7 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+
+import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
+import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
-import com.uniovi.entities.Question;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
@@ -32,7 +32,7 @@ import com.uniovi.services.UsersService;
 @Controller
 public class HomeworkController {
 
-	@Autowired // Inyectar el servicio
+	@Autowired 
 	private HomeworkService homeworksService;
 
 	@Autowired
@@ -148,7 +148,6 @@ public class HomeworkController {
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Homework homework) {
 		Homework original = homeworksService.getHomework(id);
 		// modificar solo score y description
-		original.setScore(homework.getScore());
 		original.setDescription(homework.getDescription());
 		homeworksService.addHomework(original);
 		return "redirect:/homework/details/" + id;
@@ -169,9 +168,13 @@ public class HomeworkController {
 	@RequestMapping("/homework/do/{id}")
 	public String doHomework(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
-		Set<Question> questions = exercise.getQuestions();
 		model.addAttribute("exercise", exercise);
-		model.addAttribute("questionList", questions);
+		if(exercise.getType() == ExerciseType.T)
+			return "homework/do/test";
+		else if(exercise.getType() == ExerciseType.S)
+			return "homework/do/shortAnswer";
+		else if(exercise.getType() == ExerciseType.U )
+			return "homework/do/uploadFile";
 		return "homework/do";
 	}
 	
@@ -185,6 +188,48 @@ public class HomeworkController {
 //		model.addAttribute("exercise", exercise);
 //		model.addAttribute("questionList", questions);
 		return "redirect:/homework/exercise/list";
+	}
+	
+	@RequestMapping("/homework/do/uploadFile")
+	public String getHomeworkUploadFile(Model model, @RequestParam Exercise exercise) {
+		model.addAttribute("exercise", exercise);
+		return "homework/do/uploadFile";
+	}
+	
+	@RequestMapping("/homework/do/test")
+	public String getHomeworkTest(Model model, @RequestParam Exercise exercise) {
+		model.addAttribute("exercise", exercise);
+		return "homework/do/test";
+	}
+	
+	@RequestMapping("/homework/do/shortAnswer")
+	public String getHomeworkShortAnswer(Model model, @RequestParam Exercise exercise) {
+		model.addAttribute("exercise", exercise);
+		return "homework/do/uploadFile";
+	}
+	
+	@RequestMapping(value="/homework/do/shortAnswer", method = RequestMethod.POST)
+	public String savesHomeworkShortAnswer(Model model, @RequestParam(value = "idExercise") Long idExercise) {
+		Exercise realExercise = exerciseService.getExercise(idExercise);
+		Homework homework = new Homework("hola", true, realExercise);		
+		homeworksService.addHomework(homework);
+		return "homework/exercise/list";
+	}
+	
+	@RequestMapping(value="/homework/do/test", method = RequestMethod.POST)
+	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise) {
+		Exercise realExercise = exerciseService.getExercise(idExercise);
+		Homework homework = new Homework("hola", true, realExercise);		
+		homeworksService.addHomework(homework);
+		return "homework/exercise/list";
+	}
+	
+	@RequestMapping(value="/homework/do/uploadFile", method = RequestMethod.POST)
+	public String savesHomeworkUploadFile(Model model, @RequestParam(value = "idExercise") Long idExercise) {
+		Exercise realExercise = exerciseService.getExercise(idExercise);
+		Homework homework = new Homework("hola", true, realExercise);		
+		homeworksService.addHomework(homework);
+		return "homework/exercise/list";
 	}
 
 }
