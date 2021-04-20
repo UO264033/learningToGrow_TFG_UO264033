@@ -19,7 +19,7 @@
 		</div>
 		<br> <br>
 		<div class="container">
-			<form class="form-horizontal" method="POST" action="/homework/do/uploadFile">
+			<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/homework/do/uploadFile">
 				<input name="idExercise" th:value="${exercise.id}" type="number"
 				hidden />
 				<div class="form-group">

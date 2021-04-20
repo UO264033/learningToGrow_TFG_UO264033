@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Ejercicios para corregir</h2>
+		<form class="navbar-form" action="/exercise/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Buscar por nombre o por descripcion">
+			</div>
+			<button type="submit" class="btn btn-info">
+				<span class="material-icons-round"> search </span>
+			</button>
+		</form>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Alumno</th>z
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="homework : ${homeworkList}">
+						<td th:text="${homework.user.name}">Pepe</td>
+						<td th:text="${homework.exercise.name}">Ejercicio 1</td>
+						<td th:text="${homework.description}">No supe hacer el 10</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

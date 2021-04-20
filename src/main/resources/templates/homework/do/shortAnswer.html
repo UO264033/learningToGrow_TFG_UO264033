@@ -7,6 +7,8 @@
 		<div class="container" align="center">
 			<img src="/img/toDo.png" /><br>
 		</div>
+		<div class="alert alert-danger" role="alert" th:if="${message != null}" th:text="${message}">
+			</div>
 		<div class="centerCard">
 			<h2>
 				<span th:text="${exercise.name}"></span>
@@ -26,7 +28,7 @@
 		</div>
 		<br> <br>
 		<div class="container">
-			<form class="form-horizontal" method="POST"
+			<form class="form-horizontal" method="POST" 
 				action="/homework/do/shortAnswer">
 				<input name="idExercise" th:value="${exercise.id}" type="number"
 				hidden />

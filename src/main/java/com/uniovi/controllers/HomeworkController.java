@@ -1,11 +1,13 @@
 package com.uniovi.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
@@ -45,17 +49,20 @@ public class HomeworkController {
 	private ExerciseService exerciseService;
 
 	@RequestMapping("/homework/list")
-	public String getList(Model model, Pageable pageable, Principal principal,
-			@RequestParam(value = "", required = false) String searchText) {
+	public String getList(Model model, Pageable pageable, Principal principal) {
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 
+//		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
+//
+//		if (searchText != null && !searchText.isEmpty())
+//			homeworks = homeworksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
+//		else
+//			homeworks = homeworksService.getHomeworksForUser(pageable, user);
+		
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
-
-		if (searchText != null && !searchText.isEmpty())
-			homeworks = homeworksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
-		else
-			homeworks = homeworksService.getHomeworksForUser(pageable, user);
+		homeworks = homeworksService.getHomeworksToCorrect(pageable, user);
+		
 
 		model.addAttribute("homeworkList", homeworks.getContent());
 		model.addAttribute("page", homeworks);
@@ -105,24 +112,6 @@ public class HomeworkController {
 		Page<Homework> homeworks = homeworksService.getHomeworksForUser(pageable, user);
 		model.addAttribute("homeworkList", homeworks.getContent());
 		return "homework/list :: tableHomework";
-	}
-
-	@RequestMapping(value = "/homework/add")
-	public String getHomework(Model model, Pageable pageable) {
-		model.addAttribute("usersList", usersService.getUsers(pageable).getContent());
-		return "homework/add";
-	}
-
-	@RequestMapping(value = "/homework/add", method = RequestMethod.POST)
-	public String sethomework(@ModelAttribute Homework homework) {
-		homeworksService.addHomework(homework);
-		return "redirect:/homework/list";
-	}
-
-	@RequestMapping(value = "/homework/correct")
-	public String getHomeworkCorrect(Model model, Pageable pageable) {
-		model.addAttribute("usersList", usersService.getUsers(pageable).getContent());
-		return "homework/correct";
 	}
 
 	@RequestMapping("/homework/delete/{id}")
@@ -225,9 +214,30 @@ public class HomeworkController {
 	}
 	
 	@RequestMapping(value="/homework/do/uploadFile", method = RequestMethod.POST)
-	public String savesHomeworkUploadFile(Model model, @RequestParam(value = "idExercise") Long idExercise) {
+	public String savesHomeworkUploadFile(Model model, @RequestParam(value = "idExercise") Long idExercise,
+			@RequestParam("file") MultipartFile file, RedirectAttributes attributes, Principal principal) {
+		if(file == null || file.isEmpty()) {
+			attributes.addFlashAttribute("message", "Por favor, seleccione un archivo.");
+			return "homework/do/uploadFile";
+		}
+		Path directory = Paths.get("src//main//resources//static/file");
+		String absRoute = directory.toFile().getAbsolutePath();
 		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework("hola", true, realExercise);		
+		Homework homework = new Homework("hola", true, realExercise);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = usersService.getUserByUsername(username);
+		homework.setUser(user);
+		try {
+			byte[] bytesImg = file.getBytes();
+			Path completeRoute = Paths.get(absRoute + "//" + file.getOriginalFilename());
+			Files.write(completeRoute, bytesImg);
+			
+			homework.setFile(file.getOriginalFilename());
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
 		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
 	}

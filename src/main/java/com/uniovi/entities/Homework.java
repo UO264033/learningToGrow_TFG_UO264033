@@ -29,6 +29,8 @@ public class Homework extends BaseEntity {
 	@OneToMany
 	@JoinColumn(name = "homework_id")
 	private Set<Answer> answers = new HashSet<>(); // RESPUESTAS
+	
+	private String file;
 
 	public Homework() {
 	}
@@ -72,6 +74,22 @@ public class Homework extends BaseEntity {
 
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
+	}
+	
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+	
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
 	}
 
 	@Override

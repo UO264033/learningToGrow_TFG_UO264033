@@ -95,4 +95,10 @@ public class HomeworkService {
 		
 	}
 
+	public Page<Homework> getHomeworksToCorrect(Pageable pageable, User user) {
+		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
+		homeworks = homeworkRepository.findByProfessor(pageable, user);
+		return homeworks;
+	}
+
 }

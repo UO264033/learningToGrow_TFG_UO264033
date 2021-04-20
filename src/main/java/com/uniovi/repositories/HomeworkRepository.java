@@ -29,4 +29,7 @@ public interface HomeworkRepository extends CrudRepository<Homework, Long> {
 	
 	Page<Homework> findAll(Pageable pageable);
 
+	@Query("SELECT h FROM Homework h WHERE h.exercise.professor = ?1 ORDER BY h.id ASC ")
+	Page<Homework> findByProfessor(Pageable pageable, User user);
+
 }
