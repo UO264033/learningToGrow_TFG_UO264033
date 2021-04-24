@@ -36,8 +36,8 @@ public class User {
 	/**
 	 * Subsistema de cursos
 	 */
-	@OneToOne(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Subject subject;
+	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+	private Set<Subject> subjectsTaught = new HashSet<Subject>();
 	
 	@ManyToMany(mappedBy = "students")
 	private Set<Subject> subjects = new HashSet<Subject>();

@@ -98,7 +98,6 @@ public class UsersService {
 					students.add(u);
 			}
 		}
-		System.out.println(students);
 		return students;
 	}
 

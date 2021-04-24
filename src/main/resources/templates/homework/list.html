@@ -14,19 +14,29 @@
 				<span class="material-icons-round"> search </span>
 			</button>
 		</form>
+		<div align="center">
+			<img
+				src="/img/correct.png">
+		</div>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Alumno</th>z
-						
+						<th>Alumno</th>
+						<th>Asignatura</th>
+						<th>Ejercicio</th>
+						<th>Descripcion</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="homework : ${homeworkList}">
 						<td th:text="${homework.user.name}">Pepe</td>
+						<td th:text="${homework.exercise.subject.name}">Pepe</td>
 						<td th:text="${homework.exercise.name}">Ejercicio 1</td>
 						<td th:text="${homework.description}">No supe hacer el 10</td>
+						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+							th:href="${'/homework/correct/' + homework.id}"
+							class="btn btn-info" role="button">corregir</a></td>
 					</tr>
 				</tbody>
 			</table>

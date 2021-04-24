@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<div class="modal fade" id="modalSubject" tabindex="-1"
-	role="dialog" aria-labelledby="exampleModalLongTitle"
-	aria-hidden="true">
+<div class="modal fade" id="modalSubject" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="exampleModalLongTitle">
-					Listado de alumnos  <span th:text="${subject.name}"></span>
+					Listado de alumnos <span th:text="${subject.name}"></span>
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -41,45 +40,42 @@
 						</thead>
 					</table>
 				</div>
-			<div class="modal-footer">
-				<button type="button" id="addStudent" class="btn btn-info">
-					Save changes</button>
-				<script th:inline="javascript">
-					$("#addStudent")
-							.click(
-									function() {
-										var c = 0;
-										var ids = [ 50 ];
-										$('#tableUsers input[type=checkbox]')
-												.each(function() {
-													if (this.checked) {
-														ids[c] = this.id;
-														c++;
-													}
-												});
-										for (let i = 0; i < 51; i++) {
-											if (ids[i] != null) {
-												$
-														.get(
-																$("#nameSub")
-																		.val()
-																		+ "/addStudent/"
-																		+ ids[i],
-																function(data) {
-																	$(
-																			"#tableUsers")
-																			.load(
-																					'/subject/add/update');
-																});
-											}
-
-										}
-									});
-				</script>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<div class="modal-footer">
+					<button type="button" id="addStudent" class="btn btn-info">
+						Save changes</button>
+					<script th:inline="javascript">
+						$("#addStudent")
+								.click(
+										function() {
+											var c = 0;
+											var ids = [ 50 ];
+											$(
+													'#tableUsers input[type=checkbox]')
+													.each(function() {
+														if (this.checked) {
+															ids[c] = this.id;
+															c++;
+														}
+													});
+											let cadena = ids.join();
+											$
+													.get(
+															$("#nameSub").val()
+																	+ "/addStudent/"
+																	+ cadena,
+															function(data) {
+																console
+																		.log(data);
+																$("#tableUsers")
+																		.load(
+																				'/subject/add/update');
+															});
+											
+										});
+					</script>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-

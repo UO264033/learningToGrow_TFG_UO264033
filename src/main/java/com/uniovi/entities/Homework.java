@@ -91,6 +91,14 @@ public class Homework extends BaseEntity {
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
+	
+	public Set<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
 
 	@Override
 	public String toString() {

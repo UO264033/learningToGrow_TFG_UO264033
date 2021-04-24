@@ -16,9 +16,10 @@
 			</h4>
 			<input th:value="${exercise.id}" name="idExercise" type="number"
 				hidden />
-			<div class="panel panel-default" th:each="question : ${exercise.getQuestions()}">
+			<div class="panel panel-default"
+				th:each="question : ${exercise.getQuestions()}">
 				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
-				
+
 				<div th:each="answer : ${question.answers}">
 					<input type="checkbox" id="huey" name="drone" value="huey">
 					<label for="huey" th:text="${answer.text}" />
@@ -26,21 +27,26 @@
 			</div>
 		</div>
 		<br> <br>
-		<div class="container">
-			<form class="form-horizontal" method="POST" action="/homework/do/test">
+		<form class="form-horizontal" method="POST" action="/homework/do/test">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="description">Comentario:</label>
+				<div class="col-sm-8">
+					<textarea class="form-control" name="description"
+						placeholder="Escribe cualquier cosa que tengas que decirle a tu profesor aquí."
+						required="true"></textarea>
+				</div>
+			</div>
 			<input name="idExercise" th:value="${exercise.id}" type="number"
 				hidden />
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-info">
-							<span class="material-icons-round"> send </span><span>Enviar</span>
-						</button>
-					</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-8" align="center">
+					<button type="submit" class="btn btn-info">
+						<span>Enviar</span>
+					</button>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
-
 
 	<footer th:replace="fragments/footer" />
 </body>

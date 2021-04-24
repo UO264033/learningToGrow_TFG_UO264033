@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -28,7 +29,7 @@ public class Subject {
 	@Column(unique = true)
 	private String name;
 
-	@OneToOne
+	@ManyToOne
 	private User professor;
 
 	@JoinTable(name = "rel_subjects_students",

@@ -56,7 +56,7 @@ public class SubjectController {
 	}
 
 	@RequestMapping("/subject/{name}/addStudent/{idSt}")
-	public String setStudents(@PathVariable String name, @PathVariable Long idSt, Principal principal) {
+	public String setStudents(@PathVariable String name, @PathVariable String idSt, Principal principal) {
 		Subject subject = subjectService.getSubjectByName(name);
 		if (subject == null) {
 			String username = principal.getName();
@@ -64,8 +64,10 @@ public class SubjectController {
 			subject = new Subject(name, professor);
 			subjectService.addSubject(subject);
 		}
-		usersService.setStudent(idSt, name);
-		System.out.println("holaquetalestas");
+		String[] array = idSt.split(",");
+		for(String s: array) {
+			usersService.setStudent(Long.parseLong(s), name);
+		}
 		return "redirect:/subject/list";
 	}
 
@@ -74,7 +76,6 @@ public class SubjectController {
 		model.addAttribute("subject", new Subject());
 		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
 		model.addAttribute("studentList", students);
-		System.out.println("hola");
 		return "subject/add :: tableUsers";
 	}
 
