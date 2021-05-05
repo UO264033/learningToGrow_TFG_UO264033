@@ -2,7 +2,6 @@ package com.uniovi.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +16,17 @@ public class SubjectService {
 	@Autowired
 	private SubjectRepository subjectRepository;
 	
+	@Autowired
+	private UsersService usersService;
+	
 	public void addSubject(Subject subject) {
 		subjectRepository.save(subject);
 	}
 	
 	public void deleteSubject(Long id) {
+		Subject subject = getSubject(id);
+		subject.removeStudents();
+		subjectRepository.save(subject);
 		subjectRepository.deleteById(id);
 	}
 	
@@ -39,15 +44,11 @@ public class SubjectService {
 		return subjects;
 	}
 	
-	public void addStudentToASubject(Subject subject, Set<User> students) {
-		if(subjectRepository.findById(subject.getId()).isPresent()) {
-			subject.setStudents(students);
-			subjectRepository.save(subject);
-			
-			System.out.print("añadir");
+	public void addStudentsToASubject(Subject subject, String idSt) {
+		String[] array = idSt.split(",");
+		for(String s: array) {
+			usersService.setStudent(Long.parseLong(s), subject.getName());
 		}
-		else
-			System.out.print("No se por que no puedo añadir");
 	}
 
 	public List<Subject> getSubjectsByRole(User user) {
@@ -59,6 +60,11 @@ public class SubjectService {
 		return subjects;
 	}
 
-	
+	public List<Subject> getSubjectsFiltered(String searchText, User user) {
+		List<Subject> subjects = new ArrayList<Subject>();
+		searchText = "%" + searchText + "%";
+		subjectRepository.findByUsernameAndSName(searchText, user).forEach(subjects::add);
+		return subjects;
+	}
 
 }

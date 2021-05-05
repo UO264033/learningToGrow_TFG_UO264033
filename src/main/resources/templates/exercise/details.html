@@ -35,15 +35,13 @@
 			</div>
 			<div th:if="${questionList.isEmpty()}" align="center">
 				<div class="alert alert-danger" role="alert"
-					th:unless="${exercise.description != null}">>Por favor,
-					rellene el ejercicio con preguntas antes de enviarlo. No debe estar
-					vacío.</div>
+					th:unless="${exercise.description != null}" th:text="#{exercise.details.empty}"></div>
 				<img src="/img/empty-exercise.png" /><br>
 			</div>
 		</div>
 	</div>
 	<div class="container" th:object="${exercise}" align="center">
-		<a class="btn btn-info btn-lg"
+		<a class="btn btn-info"
 			th:href="${'/exercise/edit/' + exercise.id}" role="button"><span
 			class="material-icons-round"> mode_edit_outline </span><span
 			th:text="#{user.list.table.editButton}"></span></a>

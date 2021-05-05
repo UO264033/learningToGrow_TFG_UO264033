@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
-import com.uniovi.services.ExerciseService;
+import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.QuestionService;
 import com.uniovi.validators.QuestionValidator;
 
@@ -28,31 +28,32 @@ public class QuestionController {
 	private QuestionService questionService;
 
 	@Autowired
-	private ExerciseService exerciseService;
+	private ExerciseTestService exerciseService;
 
 	@Autowired
 	private QuestionValidator questionValidator;
 
 	@RequestMapping(value = "/exercise/test/question/add", method = RequestMethod.GET)
-	public String getQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam Long idExercise) {
+	public String getQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("exerciseId") Long exerciseId) {
 		model.addAttribute("question", new Question());
-		if (exercise == null)
-			exercise = exerciseService.getExercise(idExercise);
+		if (exercise == null) {
+			exercise = exerciseService.getExercise(exerciseId);
+		}
 		model.addAttribute("exercise", exercise);
 		return "exercise/test/question/add";
 	}
 
 	@RequestMapping(value = "/exercise/test/question/add", method = RequestMethod.POST)
 	public String setQuestion(@Validated Question questionVa, BindingResult result, RedirectAttributes redirectAttrs,
-			Model model, @RequestParam String statement, @RequestParam("idExercise") Long idExercise,
+			Model model, @RequestParam String statement, @RequestParam("exerciseId") Long exerciseId,
 			@RequestParam String texto1, @RequestParam String texto2, @RequestParam String texto3,
 			@RequestParam(required = false) boolean correct1, @RequestParam(required = false) boolean correct2,
 			@RequestParam(required = false) boolean correct3) {
 
-		Exercise exercise = exerciseService.getExercise(idExercise);
+		Exercise exercise = exerciseService.getExercise(exerciseId);
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("question", new Question());
-		model.addAttribute("idExercise", idExercise);
+		model.addAttribute("exerciseId", exerciseId);
 
 		questionValidator.validate(questionVa, result);
 		if (result.hasErrors()) {

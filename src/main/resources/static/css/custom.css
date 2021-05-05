@@ -14,13 +14,13 @@ body {
 
 /* Colores de botones y de labels-----------------------------------------*/
 .label-warning {
-    background-color: lightcoral;
+    background-color: #E6648D;
 }
 
 .btn-warning {
     color: #fff;
-    background-color: lightcoral;
-    border-color: lightcoral;
+    background-color: #E6648D;
+    border-color: #E6648D;
     border-radius: 37px
 }
 

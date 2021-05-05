@@ -23,22 +23,22 @@
 				<input name="idExercise" th:value="${exercise.id}" type="number"
 				hidden />
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="file">Fichero:</label>
+					<label class="control-label col-sm-2" for="file" th:text="#{todo.file}"></label>
 					<input type="hidden" name="MAX_FILE_SIZE" value="30000" /> <input
 						type="file" name="file" class="btn btn-info"
 						accept=".pdf, .docx, .doc, .jpg, .png, .jpeg" required>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="description">Comentario:</label>
+					<label class="control-label col-sm-2" for="description" th:text="#{todo.comment}"></label>
 					<div class="col-sm-8">
 					<textarea class="form-control" name="description"
-						placeholder="Escribe cualquier cosa que tengas que decirle a tu profesor aquí."
+						th:placeholder="#{todo.comment.placeholder}"
 						required="true"></textarea></div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-8" align="center">
 						<button type="submit" class="btn btn-info">
-							<span>Enviar</span>
+							<span th:text="#{todo.button}"></span>
 						</button>
 					</div>
 				</div>

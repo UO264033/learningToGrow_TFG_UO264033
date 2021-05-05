@@ -11,7 +11,7 @@
 			</div>
 			<div class="panel-body">
 				<h2>
-					Profesor : <span th:text="${user.name}" th:inline="text"> </span>
+					<span th:text="#{signup.profesor}"/> : <span th:text="${user.name}" th:inline="text"> </span>
 				</h2>
 			</div>
 			<div class="panel-body">
@@ -21,9 +21,9 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Nombre de usuario</th>
+							<th th:text="#{user.list.table.name}"></th>
+							<th th:text="#{user.list.table.lastName}"></th>
+							<th th:text="#{signup.usuario}"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,7 +40,7 @@
 				</table>
 				<div align="center">
 					<a th:href="${'/homework/exercise/list/' + subject.id}"
-						class="btn btn-info" role="button">Ver ejercicios</a>
+						class="btn btn-info" role="button" th:text="#{nav.showExercise}"></a>
 				</div>
 			</div>
 		</div>

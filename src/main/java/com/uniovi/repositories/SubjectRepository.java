@@ -15,4 +15,7 @@ public interface SubjectRepository extends CrudRepository<Subject, Long> {
 	@Query("SELECT s FROM Subject s WHERE s.professor = ?1")
 	List<Subject> findByProfessor(User user);
 
+	@Query("SELECT s FROM Subject s WHERE s.professor = ?2 AND LOWER(s.name) LIKE LOWER(?1)")
+	List<Subject> findByUsernameAndSName(String searchText, User user);
+
 }

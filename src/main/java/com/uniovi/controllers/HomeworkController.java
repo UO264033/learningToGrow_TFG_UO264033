@@ -28,6 +28,7 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.Subject;
+import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
@@ -201,23 +202,33 @@ public class HomeworkController {
 	
 	@RequestMapping(value="/homework/do/shortAnswer", method = RequestMethod.POST)
 	public String savesHomeworkShortAnswer(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value="answerStrings[]") String[] answerStrings,
+			@RequestParam(value="answerStrings[]") String[] answerStrings, Principal principal,
 			@RequestParam(value="description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		Homework homework = new Homework(description, true, realExercise);
-//		for(String a: answerStrings) {
-//			homework.addAnswer(new Answer(a));
-			System.out.println(answerStrings);
-//		}
-//		homeworksService.addHomework(homework);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = usersService.getUserByUsername(username);
+		homework.setUser(user);
+		for(String a: answerStrings) {
+			homework.addAnswer(new Answer(a));
+		}
+		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
 	}
 	
 	@RequestMapping(value="/homework/do/test", method = RequestMethod.POST)
 	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
+			@RequestParam(value="checkAnswers[]") boolean[] checkAnswers, Principal principal,
 			@RequestParam(value="description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);		
+		Homework homework = new Homework(description, true, realExercise);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = usersService.getUserByUsername(username);
+		homework.setUser(user);
+		for(int i=0; i < checkAnswers.length; i++) {
+			homework.addAnswer(new Answer("a-" + realExercise.getId(), checkAnswers[i]));
+			System.out.println(checkAnswers[i]);
+		}
 		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
 	}

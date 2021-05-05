@@ -14,70 +14,73 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/home"> <span class="material-icons-round">
-							home </span> Home
+							home </span> <span th:text="#{nav.home}"></span>
 				</a></li>
 				<li id="exercises-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_PROFESSOR')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"> <span
-						class="material-icons-round"> add_to_photos </span> Nuevo
-						ejercicio<span class="caret"></span></a>
+						class="material-icons-round"> add_to_photos </span> <span
+						th:text="#{nav.exercise.new}"></span><span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/exercise/test/add"><span
-								class="material-icons-round"> checklist </span> Tipo test</a></li>
+								class="material-icons-round"> checklist </span> <span
+								th:text="#{nav.exercise.test}"></span></a></li>
 						<li><a href="/exercise/upFile/add"><span
-								class="material-icons-round"> insert_drive_file </span> Subir
-								fichero</a></li>
+								class="material-icons-round"> insert_drive_file </span> <span
+								th:text="#{nav.exercise.file}"></span></a></li>
 						<li><a href="/exercise/shortAnswer/add"><span
-								class="material-icons-round"> short_text </span> Completar con
-								texto</a></li>
+								class="material-icons-round"> short_text </span> <span
+								th:text="#{nav.exercise.shortAnswer}"></span></a></li>
 					</ul></li>
 
 				<li id="homerworks-menu" class="dropdown"
 					sec:authorize="!hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-						class="material-icons-round"> menu_book </span> Deberes <span
-						class="caret"></span> </a>
+						class="material-icons-round"> menu_book </span> <span
+						th:text="#{nav.homework}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
 							href="/exercise/list"><span class="material-icons-round">
-									list_alt </span> Ver ejercicios</a></li>
+									list_alt </span> <span th:text="#{nav.showExercise}"></span></a></li>
 						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
 							href="/homework/list"><span class="material-icons-round">
-									rule </span> Corregir tareas</a></li>
+									rule </span> <span th:text="#{nav.correct.homework}"></span></a></li>
 						<li sec:authorize="hasRole('ROLE_STUDENT')"><a
 							href="/homework/exercise/list"><span
-								class="material-icons-round"> auto_stories </span> Ver tareas</a></li>
+								class="material-icons-round"> auto_stories </span> <span
+								th:text="#{nav.show.homework}"></span></a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"
 					sec:authorize="!hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-						class="material-icons-round"> group </span> Asignaturas <span
-						class="caret"></span> </a>
+						class="material-icons-round"> group </span> <span
+						th:text="#{nav.subjects}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
 							href="/user/student/list"> <span class="material-icons-round">
-									groups </span> Ver alumnos
+									groups </span> <span th:text="#{nav.show.students}"></span>
 						</a></li>
 						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
 							href="/subject/add"><span class="material-icons-round">
-									group_add </span> Agregar asignatura</a></li>
+									group_add </span> <span th:text="#{nav.add.subject}"></span></a></li>
 						<li><a href="/subject/list"> <span
-								class="material-icons-round"> format_list_bulleted </span> Ver
-								asignaturas
+								class="material-icons-round"> format_list_bulleted </span> <span
+								th:text="#{nav.show.subjects}"></span>
 						</a></li>
 					</ul></li>
 
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-						class="material-icons-round"> people </span>   	Gestión de Usuarios <span
-						class="caret"></span> </a>
+						class="material-icons-round"> people </span> <span
+						th:text="#{nav.user.management}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/user/list"><span
-								class="material-icons-round"> supervisor_account </span>   Ver
-								usuarios</a></li>
+								class="material-icons-round"> supervisor_account </span><span
+								th:text="#{nav.show.users}"></span></a></li>
 						<li><a href="/user/add"><span
-								class="material-icons-round"> person_add </span>   Agregar usuario</a></li>
+								class="material-icons-round"> person_add </span> <span
+								th:text="#{nav.add.user}"></span></a></li>
 					</ul></li>
 			</ul>
 			</ul>
@@ -108,11 +111,12 @@
 				<li id="settings-menu" class="dropdown"
 					sec:authorize="isAuthenticated()"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"><span
-						class="material-icons-round"> settings </span> Ajustes <span
-						class="caret"></span> </a>
+						class="material-icons-round"> settings </span> <span
+						th:text="#{nav.settings}"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/user/perfil"><span
-								class="material-icons-round"> manage_accounts </span> Perfil</a></li>
+								class="material-icons-round"> manage_accounts </span><span
+								th:text="#{nav.perfil}"></span></a></li>
 					</ul></li>
 				<li sec:authorize="isAuthenticated()"><a href="/logout"><span
 						class="material-icons-round"> logout </span> <span

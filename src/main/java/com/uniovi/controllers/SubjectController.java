@@ -1,6 +1,7 @@
 package com.uniovi.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
@@ -30,6 +32,20 @@ public class SubjectController {
 		String username = principal.getName();
 		User user = usersService.getUserByUsername(username);
 		List<Subject> subjects = subjectService.getSubjectsByRole(user);
+		model.addAttribute("subjectList", subjects);
+		return "subject/list";
+	}
+	
+	@RequestMapping(value = "/subject/list", method = RequestMethod.POST)
+	public String searchSubjects(Model model, Principal principal,
+			@RequestParam(value = "", required = false) String searchText) {
+		String username = principal.getName();
+		User user = usersService.getUserByUsername(username);
+		List<Subject> subjects = new ArrayList<Subject>();
+		if (searchText != null && !searchText.isEmpty())
+			subjects = subjectService.getSubjectsFiltered(searchText, user);
+		else
+			subjects = subjectService.getSubjectsByRole(user);
 		model.addAttribute("subjectList", subjects);
 		return "subject/list";
 	}
@@ -64,10 +80,7 @@ public class SubjectController {
 			subject = new Subject(name, professor);
 			subjectService.addSubject(subject);
 		}
-		String[] array = idSt.split(",");
-		for(String s: array) {
-			usersService.setStudent(Long.parseLong(s), name);
-		}
+		subjectService.addStudentsToASubject(subject, idSt);
 		return "redirect:/subject/list";
 	}
 
@@ -80,12 +93,13 @@ public class SubjectController {
 	}
 
 	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
-	public String addSubject(@RequestParam String name, Principal principal) { //
+	public String addSubject(Model model, @RequestParam String name, Principal principal,
+			RedirectAttributes redirectAttrs) { 
 		Subject subject = subjectService.getSubjectByName(name);
 		if(subject == null) {
-			System.out.println("escribe un nombre anda");
+			model.addAttribute("mensaje", "Debes escribir un nombre de la asignatura.");
+			return "subject/add";
 		}
-		
 		return "redirect:/subject/list";
 	}
 

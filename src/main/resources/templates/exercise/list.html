@@ -5,14 +5,14 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2>Ejercicios creados</h2>
+		<h2 th:text="#{exercise.test.h2}"/>
 		<div class="panel-body" align="center">
 			<img src="/img/exerciseList.png" /></a><br>
 		</div>
 		<form class="navbar-form" action="/exercise/list">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
-					placeholder="Buscar por nombre o por descripcion">
+					th:placeholder="#{exercise.list.search}">
 			</div>
 			<button type="submit" class="btn btn-info">
 				<span class="material-icons-round"> search </span>
@@ -22,8 +22,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Nombre</th>
-						<th>Descripción</th>
+						<th th:text="#{signup.nombre}"></th>
+						<th th:text="#{home.description}"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 					</tr>
@@ -33,10 +33,10 @@
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">10</td>
 						<td><a th:href="${'/exercise/details/' + exercise.id}"
-							class="btn btn-info" role="button">detalles</a></td>
+							class="btn btn-info" role="button"> <span th:text="#{user.list.table.detailsButton}"/></a> </td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/delete/' + exercise.id}"
-							class="btn btn-info" role="button">eliminar</a></td>
+							class="btn btn-info" role="button"><span th:text="#{user.list.table.deleteButton}"/></a></td>
 					</tr>
 				</tbody>
 			</table>

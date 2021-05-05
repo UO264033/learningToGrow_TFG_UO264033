@@ -39,7 +39,7 @@
 				<label class="control-label col-sm-2" for="lastName" th:text="#{signup.apellido}"/>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="lastName"
-						placeholder="Ej: DÃ­az FernÃ¡ndez" required="true" /> <span
+						placeholder="Ej: Díaz Fernández" required="true" /> <span
 						class="text-danger" th:if="${#fields.hasErrors('lastName')}"
 						th:errors="*{lastName}" />
 				</div>
@@ -62,8 +62,8 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-info" th:text="#{signup.btn}"/>
+				<div class="col-sm-offset-2 col-sm-10" align="right">
+					<button type="submit" class="btn btn-info" th:text="#{user.add.h2}"/>
 				</div>
 			</div>
 		</form>

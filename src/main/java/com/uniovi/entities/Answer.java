@@ -24,7 +24,7 @@ public class Answer extends BaseEntity {
 		ArgumentChecks.isNotEmpty(text);
 		this.text = text;
 	}
-
+	
 	public Answer(String text, boolean right) {
 		this(text);
 		this.correct = right;

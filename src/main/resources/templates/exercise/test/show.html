@@ -11,9 +11,6 @@
 		<h4>
 			<span th:text="${exercise.description}"></span>
 		</h4>
-		<input th:value="${exercise.id}" name="idExercise" type="number"
-			hidden />
-
 		<div th:if="${!questionList.isEmpty()}">
 			<div class="panel panel-default" th:each="question : ${questionList}">
 				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
@@ -32,9 +29,14 @@
 		</div>
 		<div class="form-group" align="right">
 			<div class="col-sm-offset-2 col-sm-10">
-				<a href="/exercise/test/question/add" class="btn btn-info"
-					role="button"> Añadir otra pregunta</a> <a th:href="${'/home'}"
-					class="btn btn-info" role="button">Finalizar ejercicio</a>
+				<form class="form-horizontal" method="get"
+					action="/exercise/test/question/add" th:object="${exercise}">
+					<input th:value="${exercise.id}" name="exerciseId" type="number"
+						hidden />
+					<button type="submit" id="addA" class="btn btn-info" th:text="#{question.another}"> 
+					<a th:href="${'/home'}"
+					class="btn btn-info" role="button" th:text="#{exercise.finish}"></a> 
+				</form>
 			</div>
 		</div>
 	</div>

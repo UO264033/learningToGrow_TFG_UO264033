@@ -6,7 +6,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container" th:object="${exercise}">
 		<h2>
-			<span class="material-icons-round"> mode_edit </span> Editar <span
+			<span class="material-icons-round"> mode_edit </span> <span th:text="${exercise.edit}" /> <span
 				th:text="${exercise.name}"></span>
 		</h2>
 		<input th:value="${exercise.id}" name="idExercise" type="number"
@@ -30,7 +30,7 @@
 	<div class="container" th:object="${exercise}" align="center">
 		<a class="btn btn-info btn-lg"
 			th:href="${'/exercise/edit/' + exercise.id}" role="button"><span
-			class="material-icons-round"> save </span><span> Guardar</span></a>
+			class="material-icons-round"> save </span><span th:text="${subject.save}"/></a>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

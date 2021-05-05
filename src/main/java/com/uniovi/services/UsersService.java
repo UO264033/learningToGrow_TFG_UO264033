@@ -42,6 +42,10 @@ public class UsersService {
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}
+	
+	public User updateUser(User user) {
+		return usersRepository.save(user);
+	}
 
 	public void addUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

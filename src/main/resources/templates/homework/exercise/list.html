@@ -4,7 +4,7 @@
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h1>Lista de tareas</h1>
+		<h2 th:text="#{homework.exercise.list.h2}" />
 		<div align="center">
 			<img src="/img/homework.png" /><br>
 		</div>
@@ -13,9 +13,9 @@
 				id="tableexercise">
 				<thead>
 					<tr>
-						<th class="col-md-2">Asignatura</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
+						<th class="col-md-2" th:text="#{homework.subject}"></th>
+						<th th:text="#{user.list.table.name}"></th>
+						<th th:text="#{home.description}">Descripción</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 					</tr>
@@ -29,8 +29,8 @@
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">Ejercicio 1</td>
 						<td><a th:href="${'/homework/do/' + exercise.id}"
-							class="btn btn-warning" role="button">Rellenar</a></td>
-						<td><button type="button" class="btn btn-warning">Enviar</button></td>
+							class="btn btn-warning" role="button" th:text="#{homework.todo}"></a></td>
+						<td><button type="button" class="btn btn-warning" th:text="#{homework.send}"></button></td>
 					</tr>
 				</tbody>
 			</table>

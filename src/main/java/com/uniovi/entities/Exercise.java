@@ -124,5 +124,6 @@ public class Exercise extends BaseEntity{
 	public String toString() {
 		return "Exercise [name=" + name + ", description=" + description + ", type= " + type + "]";
 	}
-	
+
+		
 }

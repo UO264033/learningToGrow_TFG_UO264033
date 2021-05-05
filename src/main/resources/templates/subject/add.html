@@ -5,27 +5,29 @@
 	<!-- Barra de Navegaci�n superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
+		<h2 th:text="#{subject.add}">Agregar asignatura</h2>
 		<div align="center">
 			<img src="/img/allSubjects.png" /><br>
 		</div>
+		<br>
 		<form class="form-horizontal" method="post" action="/subject/add"
 			th:object="${subject}">
-			<h2>Agregar asignatura</h2>
+			<div class="alert alert-danger" role="alert"
+				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"
 					th:text="#{signup.nombre}" />
 				<div class="col-sm-7">
 					<input type="text" class="form-control" name="name" id="nameSub"
-						placeholder="Plástica" required="true" />
+						th:placeholder="#{subject.example}" required="true" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd">Alumnos </label>
+				<label class="control-label col-sm-2" for="pwd" th:text="#{subject.students}">Alumnos </label>
 				<div class="col-sm-5">
 					<button type="button" id="botonEnfermedad" class="btn btn-info"
 						data-toggle="modal" data-target="#modalSubject">
-						<span class="material-icons-round"> person_add_alt </span> Agregar
-						alumnos
+						<span class="material-icons-round"> person_add_alt </span> <span th:text="#{subject.students.add}"></span>
 					</button>
 				</div>
 			</div>
@@ -33,8 +35,7 @@
 
 			<div class="container" align="center">
 				<button type="submit" class="btn btn-info ">
-					<span class="material-icons-round"> save </span><span>
-						Guardar</span>
+					<span th:text="#{subject.save}"></span>
 				</button>
 			</div>
 		</form>

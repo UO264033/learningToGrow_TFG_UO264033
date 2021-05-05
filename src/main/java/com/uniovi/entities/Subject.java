@@ -14,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import com.uniovi.util.ArgumentChecks;
 
@@ -108,6 +107,10 @@ public class Subject {
 	public void addStudent(User student) {
 		students.add(student);
 	}
+	
+	public void removeStudent(User student) {
+		students.remove(student);
+	}
 
 	@Override
 	public int hashCode() {
@@ -137,6 +140,10 @@ public class Subject {
 	@Override
 	public String toString() {
 		return "Subject [name=" + name + "]";
+	}
+
+	public void removeStudents() {
+		students = new HashSet<User>();
 	}
 
 }

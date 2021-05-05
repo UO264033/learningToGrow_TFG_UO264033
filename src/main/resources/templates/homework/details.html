@@ -5,13 +5,13 @@
 <!-- Barra de NavegaciÃ³n superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2>Detalles del homework</h2>
+		<h2 th:text="#{homework.details.h2}"></h2>
 		<div class="panel panel-default">
-			<div class="panel-heading">Username</div>
+			<div class="panel-heading" th:text="#{user.list.table.username}"></div>
 			<div class="panel-body" th:text="${homework.user.username}">28276</div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading">Descripción</div>
+			<div class="panel-heading" th:text="#{home.description}"></div>
 			<div class="panel-body" h:text="${homework.description}">
 				Ejercicio 1</div>
 		</div>

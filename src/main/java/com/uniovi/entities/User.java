@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -152,6 +151,10 @@ public class User {
 	
 	public void addSubject(Subject s) {
 		subjects.add(s);
+	}
+	
+	public void removeSubject(Subject s) {
+		subjects.remove(s);
 	}
 	
 	public String getRoleString() {

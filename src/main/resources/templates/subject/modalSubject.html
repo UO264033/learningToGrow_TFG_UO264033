@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="exampleModalLongTitle">
-					Listado de alumnos <span th:text="${subject.name}"></span>
+					<span th:text="#{user.studentsList}"/> <span th:text="${subject.name}"></span>
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -18,10 +18,10 @@
 						id="tableUsers">
 						<thead>
 							<tr>
-								<th>Añadir</th>
-								<th>Nombre</th>
-								<th>Apellidos</th>
-								<th>Nombre de usuario</th>
+								<th th:text="#{add}"></th>
+								<th th:text="#{user.list.table.name}"></th>
+								<th th:text="#{user.list.table.lastName}"></th>
+								<th th:text="#{signup.usuario}"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -41,8 +41,8 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="addStudent" class="btn btn-info">
-						Save changes</button>
+					<button type="button" id="addStudent" class="btn btn-info" th:text="#{subject.save}">
+						</button>
 					<script th:inline="javascript">
 						$("#addStudent")
 								.click(
@@ -74,7 +74,7 @@
 										});
 					</script>
 					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+						data-dismiss="modal" th:text="#{close}"></button>
 				</div>
 			</div>
 		</div>

@@ -25,11 +25,6 @@ import com.uniovi.validators.ExerciseValidator;
 @Controller
 public class ExerciseFileUploadController {
 	
-	//@Value("${wb.fileLocation}")
-	private String fileLocation;
-	//@Value("${wb.fileDirection}")
-	private String fileDirection;
-	
 	@Autowired
 	private UsersService usersService;
 
@@ -68,30 +63,7 @@ public class ExerciseFileUploadController {
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
 		exerciseService.addExercise(exercise);
-		return "redirect:/home";
+		return "redirect:/exercise/list";
 	}
 	
-	
-//	@RequestMapping(value="/exercise/upFile/add", method=RequestMethod.POST)
-//	public @ResponseBody String handleFileUpload(@RequestParam("file") MultipartFile file,
-//			HttpServletRequest request, HttpServletResponse response) {
-//		if(!file.isEmpty()) {
-//			String name = file.getOriginalFilename();
-//			try {
-//				byte[] bytes = file.getBytes();
-//				BufferedOutputStream stream = new BufferedOutputStream(
-//												new FileOutputStream(
-//														new File(fileLocation + name)));
-//				stream.write(bytes);
-//				stream.close();
-//				return fileDirection + name;
-//			}catch(Exception e) {
-//				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//				return "Failed to upload " + name + " => " + e.getMessage();
-//			} 
-//		}else {
-//			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//			return "Empty file.";
-//		}		
-//	}
 }

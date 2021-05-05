@@ -5,11 +5,11 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2>Listado de alumnos</h2>
+		<h2 th:text="#{user.studentsList}"></h2>
 		<form class="navbar-form" action="/user/student/list">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
-					placeholder="Buscar por nombre o por apellido o por asignatura">
+					th:placeholder="#{user.students.search}">
 			</div>
 			<button type="submit" class="btn btn-info">
 				<span class="material-icons-round"> search </span>

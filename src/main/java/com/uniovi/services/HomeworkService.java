@@ -14,9 +14,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.AnswerRepository;
 import com.uniovi.repositories.HomeworkRepository;
 
 @Service
@@ -27,6 +29,9 @@ public class HomeworkService {
 
 	@Autowired
 	private HomeworkRepository homeworkRepository;
+	
+	@Autowired
+	private AnswerService answerService;
 
 	public Page<Homework> getHomeworks(Pageable pageable) {
 		Page<Homework> homeworks = homeworkRepository.findAll(pageable);
@@ -38,7 +43,10 @@ public class HomeworkService {
 	}
 
 	public void addHomework(Homework homework) {
-		// Si en Id es null le asignamos el ultimo + 1 de la lista
+		if(!homework.getAnswers().isEmpty()) {
+			for(Answer answer: homework.getAnswers())
+				answerService.addAnswer(answer);
+		}
 		homeworkRepository.save(homework);
 	}
 

@@ -9,8 +9,9 @@
 			<span th:text="#{welcome.home}" />
 		</h2>
 		<h4>
-			<span th:text="${user.role}" /> autenticado : <span
-				sec:authentication="principal.username" th:inline="text"> </span>
+			<span sec:authentication="principal.username" th:inline="text" /> </span> <span
+				th:text="#{home.autenticated}" />  <span
+				th:text="${user.getRoleString()}" />
 		</h4>
 	</div>
 	<div class="container" style="text-align: center">
@@ -22,8 +23,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Nombre</th>
-						<th>Descripción</th>
+						<th th:text="#{signup.nombre}">Nombre</th>
+						<th th:text="#{home.description}">Descripción</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -34,24 +35,30 @@
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">10</td>
 						<td><a th:href="${'/exercise/details/' + exercise.id}"
-							class="btn btn-info" role="button">detalles</a></td>
+							class="btn btn-info" role="button"><span th:text="#{user.list.table.detailsButton}"/></a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/edit/' + exercise.id}" class="btn btn-info"
-							role="button">modificar</a></td>
+							role="button"><span th:text="#{user.list.table.editButton}"/></a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/delete/' + exercise.id}"
-							class="btn btn-info" role="button">eliminar</a></td>
+							class="btn btn-info" role="button"><span th:text="#{user.list.table.deleteButton}"/></a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<footer sec:authorize="hasRole('ROLE_PROFESSOR')"
+			th:replace="fragments/pagination" />
 
 		<div class="panel-body" sec:authorize="hasRole('ROLE_ADMIN')"
 			align="center">
 			<img src="/img/admin.png" /></a><br>
 		</div>
 		<div class="jumbotron" sec:authorize="hasRole('ROLE_ADMIN')">
-			<h2 th:text="#{home.adminView}" />
+			<h2>
+				<span class="material-icons-round"> visibility </span> <span
+					th:text="#{home.adminView}"></span>
+			</h2>
+
 			<p th:text="#{home.adminView.info}" />
 			<p>
 				<a class="btn btn-info btn-lg" href="/user/list" role="button"
@@ -74,14 +81,15 @@
 			th:if="${subjectList.isEmpty()}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2>No estás asignado a ninguna asignatura</h2>
+					<h2 th:text="#{home.nosubject}"/>
 				</div>
 				<div class="panel-body">
-					<h4>Espera a que tu profesor de añada.</h4>
+					<h4 th:text="#{home.wait}"/>
 					<img src="/img/subjects.png" /><br>
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
