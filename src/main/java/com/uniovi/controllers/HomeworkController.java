@@ -27,8 +27,8 @@ import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
+import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Subject;
-import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
@@ -38,7 +38,7 @@ import com.uniovi.services.UsersService;
 @Controller
 public class HomeworkController {
 
-	@Autowired 
+	@Autowired
 	private HomeworkService homeworksService;
 
 	@Autowired
@@ -61,10 +61,9 @@ public class HomeworkController {
 //			homeworks = homeworksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
 //		else
 //			homeworks = homeworksService.getHomeworksForUser(pageable, user);
-		
+
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworksService.getHomeworksToCorrect(pageable, user);
-		
 
 		model.addAttribute("homeworkList", homeworks.getContent());
 		model.addAttribute("page", homeworks);
@@ -155,89 +154,77 @@ public class HomeworkController {
 		homeworksService.setHomeworkResend(false, id);
 		return "redirect:/homework/list";
 	}
-	
+
 	@RequestMapping("/homework/do/{id}")
 	public String doHomework(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
-		if(exercise.getType() == ExerciseType.T)
+		if (exercise.getType() == ExerciseType.T)
 			return "homework/do/test";
-		else if(exercise.getType() == ExerciseType.S)
+		else if (exercise.getType() == ExerciseType.S)
 			return "homework/do/shortAnswer";
-		else if(exercise.getType() == ExerciseType.U )
+		else if (exercise.getType() == ExerciseType.U)
 			return "homework/do/uploadFile";
 		return "homework/do";
 	}
-	
-	@RequestMapping(value= "/homework/save", method = RequestMethod.POST)
-	public String saveHomework(Model model, @RequestParam Long idExercise,
-				@ModelAttribute Homework homework, @RequestParam boolean corrected) {
-//		Exercise realExercise = exerciseService.getExercise(idExercise);
-//		homeworksService.saveExerciseDone(homework, idExercise, answer);
-//		System.out.println(homework + "" + idExercise + "" + answer);
-		
-//		homeworksService.compareExercise(exercise, realExercise);
-//		model.addAttribute("exercise", exercise);
-//		model.addAttribute("questionList", questions);
-		return "redirect:/homework/exercise/list";
-	}
-	
+
 	@RequestMapping("/homework/do/uploadFile")
 	public String getHomeworkUploadFile(Model model, @RequestParam Exercise exercise) {
 		model.addAttribute("exercise", exercise);
 		return "homework/do/uploadFile";
 	}
-	
+
 	@RequestMapping("/homework/do/test")
 	public String getHomeworkTest(Model model, @RequestParam Exercise exercise) {
 		model.addAttribute("exercise", exercise);
 		return "homework/do/test";
 	}
-	
+
 	@RequestMapping("/homework/do/shortAnswer")
 	public String getHomeworkShortAnswer(Model model, @RequestParam Exercise exercise) {
 		model.addAttribute("exercise", exercise);
 		return "homework/do/uploadFile";
 	}
-	
-	@RequestMapping(value="/homework/do/shortAnswer", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/homework/do/shortAnswer", method = RequestMethod.POST)
 	public String savesHomeworkShortAnswer(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value="answerStrings[]") String[] answerStrings, Principal principal,
-			@RequestParam(value="description", required = false) String description) {
+			@RequestParam(value = "answerStrings[]") String[] answerStrings, Principal principal,
+			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		Homework homework = new Homework(description, true, realExercise);
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		for(String a: answerStrings) {
+		for (String a : answerStrings) {
 			homework.addAnswer(new Answer(a));
 		}
 		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
 	}
-	
-	@RequestMapping(value="/homework/do/test", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
 	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value="checkAnswers[]") boolean[] checkAnswers, Principal principal,
-			@RequestParam(value="description", required = false) String description) {
+			@RequestParam(value = "checkAnswers[]") boolean[] checkAnswers, Principal principal,
+			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		Homework homework = new Homework(description, true, realExercise);
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		for(int i=0; i < checkAnswers.length; i++) {
+		for (int i = 0; i < checkAnswers.length; i++) {
 			homework.addAnswer(new Answer("a-" + realExercise.getId(), checkAnswers[i]));
 			System.out.println(checkAnswers[i]);
 		}
 		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
 	}
-	
-	@RequestMapping(value="/homework/do/uploadFile", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/homework/do/uploadFile", method = RequestMethod.POST)
 	public String savesHomeworkUploadFile(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam("file") MultipartFile file, @RequestParam(value="description", required = false) String description,
-			RedirectAttributes attributes, Principal principal) {
-		if(file == null || file.isEmpty()) {
+			@RequestParam("file") MultipartFile file,
+			@RequestParam(value = "description", required = false) String description, RedirectAttributes attributes,
+			Principal principal) {
+		if (file == null || file.isEmpty()) {
 			attributes.addFlashAttribute("message", "Por favor, seleccione un archivo.");
 			return "homework/do/uploadFile";
 		}
@@ -252,15 +239,44 @@ public class HomeworkController {
 			byte[] bytesImg = file.getBytes();
 			Path completeRoute = Paths.get(absRoute + "//" + file.getOriginalFilename());
 			Files.write(completeRoute, bytesImg);
-			
+
 			homework.setFile(file.getOriginalFilename());
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-			
+
 		homeworksService.addHomework(homework);
 		return "homework/exercise/list";
+	}
+
+	@RequestMapping("/homework/correct/{id}")
+	public String correctHomework(Model model, @PathVariable Long id) {
+		Homework homework = homeworksService.getHomework(id);
+		model.addAttribute("homework", homework);
+		if (homework.getExercise().getType() == ExerciseType.T)
+			return "homework/correct/test";
+		else if (homework.getExercise().getType() == ExerciseType.S) //Por queeeee
+			return "homework/correct/shortAnswer"; 
+		else if (homework.getExercise().getType() == ExerciseType.U)
+			return "homework/correct/uploadFile" ;
+		return "homework/correct";
+	}
+	
+	//Por si solo funciona
+	@RequestMapping("/homework/correct/shortAnswer")
+	public String correctExercise(Model model, @RequestParam Homework homework) {
+		model.addAttribute("homework", homework);
+		System.out.println("hola");
+		List<Answer> correctAnswers = new ArrayList<Answer>();
+		ShortAnswer exercise = (ShortAnswer) homework.getExercise();
+		for(int i=0; i< exercise.getQuestions().size(); i++) {
+			correctAnswers.addAll(exercise.getQuestionsList().get(i).getAnswers());
+		}
+		System.out.println(correctAnswers);
+		model.addAttribute("correctAnswers", correctAnswers);
+		model.addAttribute("markList", homeworksService.differentMarks());
+		return "homework/correct/shortAnswer";
 	}
 
 }

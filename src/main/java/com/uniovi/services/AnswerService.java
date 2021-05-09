@@ -41,4 +41,5 @@ public class AnswerService {
 	public void deleteByQuestionId(Long id) {
 		answerRepository.deleteByQuestionId(id);
 	}
+
 }

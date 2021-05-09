@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/homework/edit/*").hasAnyAuthority("ROLE_PROFESSOR", "ROLE_ADMIN")
 				.antMatchers("/homework/delete/*").hasAuthority("ROLE_PROFESSOR")
 				.antMatchers("/homework/do/**").hasAuthority("ROLE_STUDENT")
+				.antMatchers("/homework/correct/**").hasAuthority("ROLE_PROFESSOR")
 				.antMatchers("/homework/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_PROFESSOR", "ROLE_ADMIN")
 				.antMatchers("/user/student/list").hasAuthority("ROLE_PROFESSOR")
 				.antMatchers("/user/student/search").hasAuthority("ROLE_PROFESSOR")

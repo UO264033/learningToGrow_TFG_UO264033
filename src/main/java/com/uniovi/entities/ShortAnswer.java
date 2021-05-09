@@ -1,6 +1,8 @@
 package com.uniovi.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -33,6 +35,12 @@ public class ShortAnswer extends Exercise {
 
 	public Set<Question> getQuestions() {
 		return new HashSet<>(questions);
+	}
+	
+	public List<Question> getQuestionsList() {
+		List<Question> q = new ArrayList<Question>();
+		q.addAll(questions);
+		return q;
 	}
 	
 	public void setQuestions(Set<Question> questions) {

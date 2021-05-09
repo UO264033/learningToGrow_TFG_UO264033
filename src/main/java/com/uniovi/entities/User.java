@@ -167,6 +167,9 @@ public class User {
 		return "";
 	}
 
+	public String getNameAndSurname() {
+		return name + " " + lastName;
+	}
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", name=" + name + ", lastName=" + lastName + ", role=" + role + "]";

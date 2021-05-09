@@ -1,7 +1,9 @@
 package com.uniovi.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -15,10 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Answer;
-import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.User;
-import com.uniovi.repositories.AnswerRepository;
 import com.uniovi.repositories.HomeworkRepository;
 
 @Service
@@ -98,15 +98,30 @@ public class HomeworkService {
 		return homeworks;
 	}
 
-	public void saveExerciseDone(Exercise exercise) {
-		
-		
-	}
-
 	public Page<Homework> getHomeworksToCorrect(Pageable pageable, User user) {
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworkRepository.findByProfessor(pageable, user);
 		return homeworks;
 	}
+	
+	
+	public String[] differentMarks() {
+		String[] s = { "Ejercicio sin nota", "Sin hacer", "Necesitas esforzarte un poco más pero, seguro que lo consigues ¡A por ello!", 
+				"Estás trabajando muy bien pero aún hay que fijarse un poco más", "Vas por el buen camino, ¡sigue así!",
+				"Muy bien trabajo, ¡enhorabuena!"};
+		return s;
+	}
 
+	public List<Answer> correct(List<Answer> correctAnswers, Set<Answer> answers) {
+		List<Answer> answersList = new ArrayList<Answer>();
+		answersList.addAll(answers);
+		for(int i=0; i<answers.size(); i++) {
+			if(answersList.get(i).equals(correctAnswers.get(i))) 
+				correctAnswers.get(i).setCorrect(true);
+			else
+				correctAnswers.get(i).setCorrect(false);
+		}
+		return correctAnswers;
+	}
+	
 }

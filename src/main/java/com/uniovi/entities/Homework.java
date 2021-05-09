@@ -1,6 +1,8 @@
 package com.uniovi.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -36,7 +38,6 @@ public class Homework extends BaseEntity {
 	}
 
 	public Homework(String description, boolean send, Exercise exercise) {
-		ArgumentChecks.isNotEmpty(description);
 		this.description = description;
 		this.send = send;
 		ArgumentChecks.isNotNull(exercise);
@@ -98,6 +99,12 @@ public class Homework extends BaseEntity {
 
 	public void setAnswers(Set<Answer> answers) {
 		this.answers = answers;
+	}
+	
+	public List<Answer> getAnswersList(){
+		List<Answer> a = new ArrayList<Answer>();
+		a.addAll(answers);
+		return a;
 	}
 
 	@Override

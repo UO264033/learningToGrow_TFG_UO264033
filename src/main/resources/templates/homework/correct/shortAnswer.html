@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<nav th:replace="fragments/nav" />
+	<div class="container" th:object="${homework}">
+		<h2>
+			<span th:text="#{homework.tocorrect}"></span>
+		</h2>
+		<div class="centerCard">
+			<h4>
+				<span th:text="#{signup.alumno}" />: <span
+					th:text="${homework.user.getNameAndSurname()}"></span>
+			</h4>
+			<h5 th:text="${homework.exercise.name}" />
+			<div
+				th:each="question, iterador : ${homework.exercise.getQuestions()}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span
+							th:text="${homework.exercise.getQuestionsList().get(iterador.index).statement}" />
+					</div>
+					<div class="panel-body">
+						<span th:text="#{tocorrect.answer}" /> <span
+							th:text="${homework.getAnswersList().get(iterador.index).text}" />
+					</div>
+				</div>
+			</div>
+			<div class="alert alert-success" role="alert"
+				th:if="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswersList().get(iterador.index).text)}">
+				<span class="material-icons-round"> done </span> La respuesta
+				correcta es: <span
+					th:text="${correctAnswers.get(iterador.index).getText()}" />
+			</div>
+			<div class="alert alert-danger" role="alert"
+				th:unless="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswersList().get(iterador.index).text)}">
+				<span class="material-icons-round"> close </span> La respuesta
+				correcta es: <span
+					th:text="${correctAnswers.get(iterador.index).getText()}" />
+			</div>
+			<div class="centerCard">
+				<h5 th:text="#{tocorrect.message}" />
+				"<span th:text="${homework.description}"> </span>"
+			</div>
+		</div>
+		<br> <br>
+		<form class="form-horizontal" method="POST" action="/homework/correct">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for=”role”
+					th:text="#{tocorrect.mark}"></label>
+				<div class="col-sm-8">
+					<select id="role" class="form-control" name="role">
+						<option th:each="mark : ${markList}" th:value="${mark}"
+							th:text="${mark}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="description"
+					th:text="#{tocorrect}"></label>
+				<div class="col-sm-8">
+					<textarea class="form-control" name="description"
+						th:placeholder="#{tocorrect.placeholder}"></textarea>
+				</div>
+			</div>
+			<input name="idExercise" th:value="${homework.id}" type="number"
+				hidden />
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-8" align="center">
+					<button type="submit" class="btn btn-info">
+						<span th:text="#{todo.button}"></span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
