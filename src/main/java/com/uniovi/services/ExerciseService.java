@@ -66,4 +66,9 @@ public class ExerciseService {
 		return exercises;
 	}
 
+	public void markAsSend(Exercise realExercise) {
+		realExercise.setSend(true);
+		exerciseRepository.save(realExercise);
+	}
+
 }

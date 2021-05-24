@@ -34,9 +34,13 @@
 						<td th:text="${homework.exercise.subject.name}">Pepe</td>
 						<td th:text="${homework.exercise.name}">Ejercicio 1</td>
 						<td th:text="${homework.description}">No supe hacer el 10</td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+						<td ><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/homework/correct/' + homework.id}"
 							class="btn btn-info" role="button">corregir</a></td>
+						<td ><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+							id="tooltip" data-toggle="tooltip" data-placement="left"
+							th:title="#{tooltip.homework.send}" role="button"
+							class="btn btn-info" disabled>corregir</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -45,4 +49,9 @@
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+<script>
+	$(function() {
+		$('#tooltip').tooltip()
+	})
+</script>
 </html>

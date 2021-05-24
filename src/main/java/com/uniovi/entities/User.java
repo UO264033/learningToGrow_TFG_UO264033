@@ -33,7 +33,7 @@ public class User {
 	private String passwordConfirm;
 
 	/**
-	 * Subsistema de cursos
+	 * Atributo del subsistema de cursos
 	 */
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	private Set<Subject> subjectsTaught = new HashSet<Subject>();
@@ -43,13 +43,20 @@ public class User {
 
 
 	/**
-	 * Subsistema de deberes
+	 * Atributos del subsistema de deberes
 	 */
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Homework> homeworks = new HashSet<Homework>();
 
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	private Set<Exercise> exercises = new HashSet<Exercise>();
+	
+	
+	/**
+	 * Atributos del subsistema de retroalimentación
+	 */
+	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+	private Set<Feedback> feedback = new HashSet<Feedback>();
 
 	public User(String username, String name, String lastName) {
 		super();

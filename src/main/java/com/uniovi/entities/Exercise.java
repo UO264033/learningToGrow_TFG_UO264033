@@ -27,6 +27,8 @@ public class Exercise extends BaseEntity{
 	private Subject subject;
 	
 	private ExerciseType type;
+	
+	private boolean send;
 
 	public Exercise() {
 	}
@@ -93,6 +95,14 @@ public class Exercise extends BaseEntity{
 
 	public void setSubject(Subject subject) {
 		this.subject = subject;
+	}
+
+	public boolean isSend() {
+		return send;
+	}
+
+	public void setSend(boolean send) {
+		this.send = send;
 	}
 
 	@Override

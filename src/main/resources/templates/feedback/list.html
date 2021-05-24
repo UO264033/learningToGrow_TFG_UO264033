@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{feedback.h2}" />
+		<div align="center">
+			<img src="/img/feedback.png" /><br>
+		</div>
+
+		<div th:if="${feedbackList.isEmpty()}">
+			<h4 th:text="#{feedback.empty}" />
+		</div>
+		<div th:if="${!feedbackList.isEmpty()}">
+			<div class="panel panel-default" th:each="feedback : ${feedbackList}">
+				<div class="panel-heading">
+					<h3>
+						<div align="left">
+							<span th:text="#{homework.exercise}" />: <span
+								th:text="${feedback.homework.exercise.name}" />
+							<div align="right">
+								<span th:text="${feedback.homework.exercise.subject.name}" /> -
+								<span th:text="${feedback.professor.name}" />
+							</div>
+						</div>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<h4>
+						<span th:text="${feedback.score}" />
+					</h4>
+					<div class="centerCard" th:if="${!feedback.comment.isEmpty()}">
+						<h5 th:text="#{todo.comment}" />
+						<h5 align="center">
+							<span th:text="${feedback.comment}" />
+						</h5>
+					</div>
+					<br>
+					<form class="form-horizontal" method="post" action="/feedback/list">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-8" align="center">
+								<button type="submit" class="btn btn-info">
+									<span>Responder</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

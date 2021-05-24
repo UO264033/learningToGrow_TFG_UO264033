@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
+import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Subject;
@@ -199,6 +202,7 @@ public class HomeworkController {
 			homework.addAnswer(new Answer(a));
 		}
 		homeworksService.addHomework(homework);
+		exerciseService.markAsSend(realExercise);
 		return "homework/exercise/list";
 	}
 
@@ -216,6 +220,7 @@ public class HomeworkController {
 			System.out.println(checkAnswers[i]);
 		}
 		homeworksService.addHomework(homework);
+		exerciseService.markAsSend(realExercise);
 		return "homework/exercise/list";
 	}
 
@@ -247,6 +252,7 @@ public class HomeworkController {
 		}
 
 		homeworksService.addHomework(homework);
+		exerciseService.markAsSend(realExercise);
 		return "homework/exercise/list";
 	}
 
@@ -254,29 +260,22 @@ public class HomeworkController {
 	public String correctHomework(Model model, @PathVariable Long id) {
 		Homework homework = homeworksService.getHomework(id);
 		model.addAttribute("homework", homework);
+		model.addAttribute("markList", homeworksService.differentMarks());
 		if (homework.getExercise().getType() == ExerciseType.T)
 			return "homework/correct/test";
-		else if (homework.getExercise().getType() == ExerciseType.S) //Por queeeee
-			return "homework/correct/shortAnswer"; 
-		else if (homework.getExercise().getType() == ExerciseType.U)
-			return "homework/correct/uploadFile" ;
+		else if (homework.getExercise().getType() == ExerciseType.S) { // Por queeeee
+			List<Answer> correctAnswers = new ArrayList<Answer>();
+			ShortAnswer exercise = (ShortAnswer) homework.getExercise();
+			for (int i = 0; i < exercise.getQuestions().size(); i++) {
+				correctAnswers.addAll(exercise.getQuestionsList().get(i).getAnswers());
+			}
+			model.addAttribute("correctAnswers", correctAnswers);
+			return "homework/correct/shortAnswer";
+		} else if (homework.getExercise().getType() == ExerciseType.U)
+			return "homework/correct/uploadFile";
 		return "homework/correct";
 	}
+
 	
-	//Por si solo funciona
-	@RequestMapping("/homework/correct/shortAnswer")
-	public String correctExercise(Model model, @RequestParam Homework homework) {
-		model.addAttribute("homework", homework);
-		System.out.println("hola");
-		List<Answer> correctAnswers = new ArrayList<Answer>();
-		ShortAnswer exercise = (ShortAnswer) homework.getExercise();
-		for(int i=0; i< exercise.getQuestions().size(); i++) {
-			correctAnswers.addAll(exercise.getQuestionsList().get(i).getAnswers());
-		}
-		System.out.println(correctAnswers);
-		model.addAttribute("correctAnswers", correctAnswers);
-		model.addAttribute("markList", homeworksService.differentMarks());
-		return "homework/correct/shortAnswer";
-	}
 
 }

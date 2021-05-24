@@ -49,6 +49,9 @@
 							href="/homework/exercise/list"><span
 								class="material-icons-round"> auto_stories </span> <span
 								th:text="#{nav.show.homework}"></span></a></li>
+						<li sec:authorize="hasRole('ROLE_STUDENT')"><a
+							href="/feedback/list"><span class="material-icons-round">
+									rule </span> <span th:text="#{nav.correct.feedback}"></span></a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"
 					sec:authorize="!hasRole('ROLE_ADMIN')"><a

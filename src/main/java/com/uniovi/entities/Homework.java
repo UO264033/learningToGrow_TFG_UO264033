@@ -17,8 +17,7 @@ import com.uniovi.util.ArgumentChecks;
 public class Homework extends BaseEntity {
 
 	private String description;
-
-	private Boolean send = false;
+	private boolean send;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

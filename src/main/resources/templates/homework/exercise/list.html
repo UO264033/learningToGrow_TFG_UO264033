@@ -17,7 +17,6 @@
 						<th th:text="#{user.list.table.name}"></th>
 						<th th:text="#{home.description}">Descripción</th>
 						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,9 +27,13 @@
 							</h4></td>
 						<td th:text="${exercise.name}">Ejercicio 1</td>
 						<td th:text="${exercise.description}">Ejercicio 1</td>
-						<td><a th:href="${'/homework/do/' + exercise.id}"
+						<td th:if="${!exercise.send}"><a
+							th:href="${'/homework/do/' + exercise.id}"
 							class="btn btn-warning" role="button" th:text="#{homework.todo}"></a></td>
-						<td><button type="button" class="btn btn-warning" th:text="#{homework.send}"></button></td>
+						<td th:unless="${!exercise.send}"><a class="btn btn-warning"
+							id="tooltip" data-toggle="tooltip" data-placement="left"
+							th:title="#{tooltip.exercise.send}" role="button"
+							th:text="#{homework.todo}" disabled></a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -38,4 +41,9 @@
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
+<script>
+	$(function() {
+		$('#tooltip').tooltip()
+	})
+</script>
 </html>
