@@ -19,8 +19,8 @@
 				<span th:text="${exercise.description}"></span>
 			</h4>
 			<div class="panel panel-default"
-				th:each="question : ${exercise.getQuestions()}">
-				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
+				th:each="question, iter : ${exercise.getQuestions()}">
+				<div class="panel-heading" th:text="${exercise.getQuestionsList().get(iter.index).statement}">Enunciado</div>
 				<div th:each="answer : ${question.answers}">
 					<input name="answerStrings[]" type="text" 
 					th:placeholder="#{todo.placeholder}" class="form-control" required="true"/>

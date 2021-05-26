@@ -195,12 +195,13 @@ public class HomeworkController {
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		for (String a : answerStrings) {
-			homework.addAnswer(new Answer(a));
+		homework.setSend(false);
+		for (int i=0; i<answerStrings.length; i++) {
+			homework.addAnswer(new Answer(answerStrings[i]));
 		}
 		homeworksService.addHomework(homework);
 		exerciseService.markAsSend(realExercise);
-		return "homework/exercise/list";
+		return "redirect:/homework/exercise/list";
 	}
 
 	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
@@ -218,7 +219,7 @@ public class HomeworkController {
 		}
 		homeworksService.addHomework(homework);
 		exerciseService.markAsSend(realExercise);
-		return "homework/exercise/list";
+		return "redirect:/homework/exercise/list";
 	}
 
 	@RequestMapping(value = "/homework/do/uploadFile", method = RequestMethod.POST)
@@ -250,7 +251,7 @@ public class HomeworkController {
 
 		homeworksService.addHomework(homework);
 		exerciseService.markAsSend(realExercise);
-		return "homework/exercise/list";
+		return "redirect:/homework/exercise/list";
 	}
 
 	@RequestMapping("/homework/correct/{id}")

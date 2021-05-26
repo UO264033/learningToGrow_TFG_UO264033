@@ -55,4 +55,16 @@ public class FeedbackService {
 		return feedbackRepository.getFeedbackBySubject(subject);
 	}
 
+	public Feedback getFeedback(Long feedbackId) {
+		if(feedbackRepository.findById(feedbackId).isPresent())
+			return feedbackRepository.findById(feedbackId).get();
+		return null;
+	}
+
+	public void addMessage(String message, Feedback feedback) {
+		feedback.setAnswer(message);
+		feedback.setSend(true);
+		feedbackRepository.save(feedback);
+	}
+
 }

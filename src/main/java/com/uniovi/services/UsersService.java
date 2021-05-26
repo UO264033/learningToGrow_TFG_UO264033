@@ -114,4 +114,9 @@ public class UsersService {
 		usersRepository.save(student);
 	}
 
+	public List<User> getStudentsFiltered(String searchText) {
+		searchText = "%" + searchText + "%";
+		return usersRepository.findStudentsFiltered(searchText, "ROLE_STUDENT");
+	}
+
 }

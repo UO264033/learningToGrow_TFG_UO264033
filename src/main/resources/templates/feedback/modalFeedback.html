@@ -10,14 +10,17 @@
 				<h4 class="modal-title" id="myModalLabel">Responder con un
 					mensaje</h4>
 			</div>
-			<div class="modal-body">
-				<textarea class="form-control" name="answer"
-					th:placeholder="#{message.placeholder}"></textarea>
-			</div>
 			<form class="form-horizontal" method="post" action="/feedback/answer">
+				<input name="feedbackId" th:value="${feedback.id}" type="number"
+				hidden />
+				<div class="modal-body">
+					<textarea class="form-control" name="message"
+						th:placeholder="#{message.placeholder}"></textarea>
+				</div>
+
 				<div class="modal-footer">
-					<button type="sybject" id="answe" class="btn btn-info"
-						th:text="#{subject.save}"></button>
+					<button type="submit" id="enviar" class="btn btn-info"
+						th:text="#{todo.button}"></button>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" th:text="#{close}"></button>
 				</div>

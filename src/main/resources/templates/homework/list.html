@@ -15,10 +15,9 @@
 			</button>
 		</form>
 		<div align="center">
-			<img
-				src="/img/correct.png">
+			<img src="/img/correct.png">
 		</div>
-		<div class="table-responsive">
+		<div class="table-responsive" th:if="${!homeworkList.isEmpty()}">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -26,6 +25,7 @@
 						<th th:text="#{homework.subject}"></th>
 						<th th:text="#{homework.exercise}"></th>
 						<th th:text="#{home.description}"></th>
+						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,16 +34,23 @@
 						<td th:text="${homework.exercise.subject.name}">Pepe</td>
 						<td th:text="${homework.exercise.name}">Ejercicio 1</td>
 						<td th:text="${homework.description}">No supe hacer el 10</td>
-						<td ><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+						<td th:if="${!homework.isSent()}"><a
+							sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/homework/correct/' + homework.id}"
-							class="btn btn-info" role="button">corregir</a></td>
-						<td ><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							id="tool" data-toggle="tooltip" data-placement="left"
+							class="btn btn-info" role="button" th:text="#{homework.correct}"></a></td>
+						<td th:unless="${!homework.isSent()}"><a
+							sec:authorize="hasRole('ROLE_PROFESSOR')" id="tool"
+							data-toggle="tooltip" data-placement="left"
 							th:title="#{tooltip.homework.send}" role="button"
-							class="btn btn-info" disabled>corregir</a></td>
+							class="btn btn-info" th:text="#{homework.correct}" disabled></a></td>
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		<div th:unless="${!homeworkList.isEmpty()}" align="center">
+			<br>
+			<h4 th:text="#{homework.list.empty}" />
+			<br>
 		</div>
 		<footer th:replace="fragments/pagination" />
 	</div>

@@ -39,7 +39,7 @@
 					</tbody>
 					</thead>
 				</table>
-				<div align="center">
+				<div align="center" sec:authorize="hasRole('ROLE_STUDENT')">
 					<a th:href="${'/homework/exercise/list/' + subject.id}"
 						class="btn btn-info" role="button" th:text="#{nav.showExercise}"></a>
 					<a th:href="${'/feedback/list/' + subject.id}"

@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="exampleModalLongTitle">
-					<span th:text="#{user.studentsList}"/> <span th:text="${subject.name}"></span>
+					<span th:text="#{user.studentsList}" /> 
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -13,6 +13,17 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<form class="navbar-form" action="/subject/update">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<input name="searchText" type="text" class="form-control"
+								size="50" th:placeholder="#{user.students.search.to.add}">
+						</div>
+						<button type="submit" class="btn btn-info">
+							<span class="material-icons-round"> search </span>
+						</button>
+					</div>
+				</form>
 				<div class="col-sm-15">
 					<table class="table table-hover" th:fragment="tableUsers"
 						id="tableUsers">
@@ -41,37 +52,31 @@
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="addStudent" class="btn btn-info" th:text="#{subject.save}">
-						</button>
+					<button type="button" id="addStudent" class="btn btn-info"
+						th:text="#{subject.save}"></button>
 					<script th:inline="javascript">
-						$("#addStudent")
-								.click(
-										function() {
-											var c = 0;
-											var ids = [ 50 ];
-											$(
-													'#tableUsers input[type=checkbox]')
-													.each(function() {
-														if (this.checked) {
-															ids[c] = this.id;
-															c++;
-														}
-													});
-											let cadena = ids.join();
-											$
-													.get(
-															$("#nameSub").val()
-																	+ "/addStudent/"
-																	+ cadena,
-															function(data) {
-																console
-																		.log(data);
-																$("#tableUsers")
-																		.load(
-																				'/subject/add/update');
-															});
-											
-										});
+						$("#addStudent").click(
+								function() {
+									var c = 0;
+									var ids = [ 50 ];
+									$('#tableUsers input[type=checkbox]').each(
+											function() {
+												if (this.checked) {
+													ids[c] = this.id;
+													c++;
+												}
+											});
+									let cadena = ids.join();
+									$.get($("#nameSub").val() + "/addStudent/"
+											+ cadena, function(data) {
+										console.log(data);
+										$("#tableUsers").load(
+												'/subject/add/update');
+									});
+
+									$("#modalSubject").modal('hide');//ocultamos el modal
+
+								});
 					</script>
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" th:text="#{close}"></button>

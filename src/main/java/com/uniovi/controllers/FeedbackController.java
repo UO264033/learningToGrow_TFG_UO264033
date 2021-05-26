@@ -24,26 +24,21 @@ import com.uniovi.services.UsersService;
 
 @Controller
 public class FeedbackController {
-	
+
 	@Autowired
 	private HomeworkService homeworksService;
-	
+
 	@Autowired
 	private FeedbackService feedbackService;
-	
+
 	@Autowired
 	private UsersService usersService;
-	
+
 	@RequestMapping(value = { "/feedback/list" }, method = RequestMethod.GET)
 	public String getFeedback(Model model, Pageable pageable) {
+		System.out.println("list" + feedbackService.getFeedback(pageable));
 		model.addAttribute("feedbackList", feedbackService.getFeedback(pageable));
 		return "feedback/list";
-	}
-	
-	@RequestMapping(value = { "/feedback/answer" }, method = RequestMethod.POST)
-	public String answerFeedback(Model model, @RequestParam(value="answer") String answer) {
-		System.out.println(answer);
-		return "feedback/listS";
 	}
 	
 	@RequestMapping("/feedback/list/{id}")
@@ -58,7 +53,19 @@ public class FeedbackController {
 
 		return "feedback/list";
 	}
-	
+
+	@RequestMapping(value = { "/feedback/answer" }, method = RequestMethod.POST)
+	public String answerFeedback(Model model, @RequestParam String message, @RequestParam("feedbackId") Long feedbackId,
+			Pageable pageable) {
+		Feedback feedback = feedbackService.getFeedback(feedbackId);
+		if (feedback != null) {
+			feedbackService.addMessage(message, feedback);
+			model.addAttribute("feedback", feedback);
+		}
+		model.addAttribute("feedbackList", feedbackService.getFeedback(pageable));
+		return "feedback/list";
+	}
+
 	@RequestMapping(value = "/homework/correct/shortAnswer", method = RequestMethod.POST)
 	public String correctExercise(Model model, @ModelAttribute("feedback") Feedback feedback,
 			@RequestParam("idHomework") Long idHomework) {
@@ -70,12 +77,10 @@ public class FeedbackController {
 		User activeUser = usersService.getUserByUsername(username);
 		feedback.setProfessor(activeUser);
 
-		model.addAttribute("feedback", feedback);
 		feedbackService.addFeedback(feedback);
 		homeworksService.markAsSent(homework);
-		return "homework/list";
+		model.addAttribute("feedback", feedback);
+		return "redirect:/homework/list";
 	}
-	
-	
 
 }

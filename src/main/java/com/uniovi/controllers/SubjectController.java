@@ -35,7 +35,7 @@ public class SubjectController {
 		model.addAttribute("subjectList", subjects);
 		return "subject/list";
 	}
-	
+
 	@RequestMapping(value = "/subject/list", method = RequestMethod.POST)
 	public String searchSubjects(Model model, Principal principal,
 			@RequestParam(value = "", required = false) String searchText) {
@@ -58,13 +58,22 @@ public class SubjectController {
 		return "subject/add";
 	}
 
+	@RequestMapping(value = "/subject/update")
+	public String getSubjectFilteredStudents(Model model,
+			@RequestParam(value = "", required = false) String searchText) {
+		model.addAttribute("subject", new Subject());
+		List<User> students = usersService.getStudentsFiltered(searchText);
+		model.addAttribute("studentList", students);
+		return "subject/add :: tableUsers";
+	}
+
 	@RequestMapping(value = "/subject/{name}/modalSubject")
 	public String getModalSubject(Model model, Principal principal, @PathVariable String name) {
 		String username = principal.getName();
 		User professor = usersService.getUserByUsername(username);
 		Subject subject = new Subject(name, professor);
 		subjectService.addSubject(subject);
-		
+
 		model.addAttribute("subject", subject);
 		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
 		model.addAttribute("studentList", students);
@@ -94,9 +103,9 @@ public class SubjectController {
 
 	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
 	public String addSubject(Model model, @RequestParam String name, Principal principal,
-			RedirectAttributes redirectAttrs) { 
+			RedirectAttributes redirectAttrs) {
 		Subject subject = subjectService.getSubjectByName(name);
-		if(subject == null) {
+		if (subject == null) {
 			model.addAttribute("mensaje", "Debes escribir un nombre de la asignatura.");
 			return "subject/add";
 		}

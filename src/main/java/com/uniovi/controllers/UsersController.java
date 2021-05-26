@@ -95,7 +95,7 @@ public class UsersController {
 	@RequestMapping(value = "/user/addGroup")
 	public String createGroup(Model model) {
 		model.addAttribute("user", new User());
-		return "/user/addGroup";
+		return "user/addGroup";
 	}
 
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
