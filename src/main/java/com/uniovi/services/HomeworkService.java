@@ -107,4 +107,9 @@ public class HomeworkService {
 		return correctAnswers;
 	}
 
+	public void markAsSent(Homework homework) {
+		homework.setSend(true);
+		homeworkRepository.save(homework);
+	}
+
 }

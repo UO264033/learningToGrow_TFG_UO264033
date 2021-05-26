@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
+import com.uniovi.entities.Subject;
 import com.uniovi.repositories.FeedbackRepository;
 
 @Service
@@ -25,6 +26,9 @@ public class FeedbackService {
 
 	@Autowired
 	private UsersService userService;
+	
+	@Autowired
+	private SubjectService subjectService;
 
 	public void addFeedback(Feedback feedback) {
 		feedbackRepository.save(feedback);
@@ -44,6 +48,11 @@ public class FeedbackService {
 		}
 
 		return feedbackList;
+	}
+
+	public List<Feedback> getFeedbackBySubject(Long id) {
+		Subject subject = subjectService.getSubject(id);
+		return feedbackRepository.getFeedbackBySubject(subject);
 	}
 
 }

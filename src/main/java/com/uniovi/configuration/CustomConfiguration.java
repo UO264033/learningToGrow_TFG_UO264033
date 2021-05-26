@@ -1,4 +1,4 @@
-package com.uniovi;
+package com.uniovi.configuration;
 
 import java.util.List;
 import java.util.Locale;

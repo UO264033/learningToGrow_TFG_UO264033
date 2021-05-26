@@ -1,5 +1,8 @@
 package com.uniovi.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -7,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +37,25 @@ public class FeedbackController {
 	@RequestMapping(value = { "/feedback/list" }, method = RequestMethod.GET)
 	public String getFeedback(Model model, Pageable pageable) {
 		model.addAttribute("feedbackList", feedbackService.getFeedback(pageable));
-		System.out.print(feedbackService.getFeedback(pageable));
+		return "feedback/list";
+	}
+	
+	@RequestMapping(value = { "/feedback/answer" }, method = RequestMethod.POST)
+	public String answerFeedback(Model model, @RequestParam(value="answer") String answer) {
+		System.out.println(answer);
+		return "feedback/listS";
+	}
+	
+	@RequestMapping("/feedback/list/{id}")
+	public String getFeedbackBySubject(Model model, @PathVariable Long id) {
+		List<Feedback> feedbacks = new ArrayList<Feedback>();
+		if (!feedbackService.getFeedbackBySubject(id).isEmpty()) {
+			for (Feedback f : feedbackService.getFeedbackBySubject(id)) {
+				feedbacks.add(f);
+			}
+		}
+		model.addAttribute("feedbackList", feedbacks);
+
 		return "feedback/list";
 	}
 	
@@ -50,7 +72,7 @@ public class FeedbackController {
 
 		model.addAttribute("feedback", feedback);
 		feedbackService.addFeedback(feedback);
-		System.out.println(feedback);
+		homeworksService.markAsSent(homework);
 		return "homework/list";
 	}
 	

@@ -64,11 +64,11 @@ public class Homework extends BaseEntity {
 		this.user = user;
 	}
 
-	public Boolean isSent() {
+	public boolean isSent() {
 		return send;
 	}
 
-	public void setSend(Boolean resend) {
+	public void setSend(boolean resend) {
 		this.send = resend;
 	}
 

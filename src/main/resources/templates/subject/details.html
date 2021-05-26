@@ -11,7 +11,8 @@
 			</div>
 			<div class="panel-body">
 				<h2>
-					<span th:text="#{signup.profesor}"/> : <span th:text="${user.name}" th:inline="text"> </span>
+					<span th:text="#{signup.profesor}" /> : <span
+						th:text="${user.name}" th:inline="text"> </span>
 				</h2>
 			</div>
 			<div class="panel-body">
@@ -41,6 +42,8 @@
 				<div align="center">
 					<a th:href="${'/homework/exercise/list/' + subject.id}"
 						class="btn btn-info" role="button" th:text="#{nav.showExercise}"></a>
+					<a th:href="${'/feedback/list/' + subject.id}"
+						class="btn btn-info" role="button" th:text="#{nav.showFeedback}"></a>
 				</div>
 			</div>
 		</div>

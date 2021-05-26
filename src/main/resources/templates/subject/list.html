@@ -61,8 +61,15 @@
 											sec:authorize="hasRole('ROLE_STUDENT')">
 											<a th:href="${'/homework/exercise/list/' + subject.id}"
 												class="btn btn-warning" role="button"><span
-												class="material-icons-round"> edit </span><span th:text="#{subject.exercise}"></span>
-												</a>
+												class="material-icons-round"> edit </span><span
+												th:text="#{subject.exercise}"></span> </a>
+										</div></th>
+									<th scope="col"><div
+											sec:authorize="hasRole('ROLE_STUDENT')">
+											<a th:href="${'/feedback/list/' + subject.id}"
+												class="btn btn-warning" role="button"><span
+												class="material-icons-round"> thumb_up_off_alt </span><span
+												th:text="#{nav.showFeedback}"></span> </a>
 										</div></th>
 
 								</tr>

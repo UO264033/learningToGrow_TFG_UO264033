@@ -38,7 +38,7 @@
 							th:href="${'/homework/correct/' + homework.id}"
 							class="btn btn-info" role="button">corregir</a></td>
 						<td ><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							id="tooltip" data-toggle="tooltip" data-placement="left"
+							id="tool" data-toggle="tooltip" data-placement="left"
 							th:title="#{tooltip.homework.send}" role="button"
 							class="btn btn-info" disabled>corregir</a></td>
 					</tr>
@@ -51,7 +51,7 @@
 </body>
 <script>
 	$(function() {
-		$('#tooltip').tooltip()
+		$('#tool').tooltip()
 	})
 </script>
 </html>
