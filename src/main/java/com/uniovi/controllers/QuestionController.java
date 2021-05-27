@@ -42,9 +42,20 @@ public class QuestionController {
 		model.addAttribute("exercise", exercise);
 		return "exercise/test/question/add";
 	}
-
+	
+	@RequestMapping(value = "/exercise/test/question/add/{id}", method = RequestMethod.GET)
+	public String addAnotherQuestion(Model model, @ModelAttribute Exercise exercise, @PathVariable Long id) {
+		model.addAttribute("question", new Question());
+		if (exercise == null) {
+			exercise = exerciseService.getExercise(id);
+		}
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("exerciseId", id);
+		return "exercise/test/question/add";
+	}
+	
 	@RequestMapping(value = "/exercise/test/question/add", method = RequestMethod.POST)
-	public String setQuestion(@Validated Question questionVa, BindingResult result, RedirectAttributes redirectAttrs,
+	public String addQuestion(@Validated Question questionVa, BindingResult result, RedirectAttributes redirectAttrs,
 			Model model, @RequestParam String statement, @RequestParam("exerciseId") Long exerciseId,
 			@RequestParam String texto1, @RequestParam String texto2, @RequestParam String texto3,
 			@RequestParam(required = false) boolean correct1, @RequestParam(required = false) boolean correct2,

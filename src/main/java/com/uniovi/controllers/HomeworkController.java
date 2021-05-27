@@ -1,9 +1,5 @@
 package com.uniovi.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,9 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
@@ -155,105 +148,6 @@ public class HomeworkController {
 		return "redirect:/homework/list";
 	}
 
-	@RequestMapping("/homework/do/{id}")
-	public String doHomework(Model model, @PathVariable Long id) {
-		Exercise exercise = exerciseService.getExercise(id);
-		model.addAttribute("exercise", exercise);
-		if (exercise.getType() == ExerciseType.T)
-			return "homework/do/test";
-		else if (exercise.getType() == ExerciseType.S)
-			return "homework/do/shortAnswer";
-		else if (exercise.getType() == ExerciseType.U)
-			return "homework/do/uploadFile";
-		return "homework/do";
-	}
-
-	@RequestMapping("/homework/do/uploadFile")
-	public String getHomeworkUploadFile(Model model, @RequestParam Exercise exercise) {
-		model.addAttribute("exercise", exercise);
-		return "homework/do/uploadFile";
-	}
-
-	@RequestMapping("/homework/do/test")
-	public String getHomeworkTest(Model model, @RequestParam Exercise exercise) {
-		model.addAttribute("exercise", exercise);
-		return "homework/do/test";
-	}
-
-	@RequestMapping("/homework/do/shortAnswer")
-	public String getHomeworkShortAnswer(Model model, @RequestParam Exercise exercise) {
-		model.addAttribute("exercise", exercise);
-		return "homework/do/uploadFile";
-	}
-
-	@RequestMapping(value = "/homework/do/shortAnswer", method = RequestMethod.POST)
-	public String savesHomeworkShortAnswer(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value = "answerStrings[]") String[] answerStrings, Principal principal,
-			@RequestParam(value = "description", required = false) String description) {
-		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		homework.setSend(false);
-		for (int i=0; i<answerStrings.length; i++) {
-			homework.addAnswer(new Answer(answerStrings[i]));
-		}
-		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
-		return "redirect:/homework/exercise/list";
-	}
-
-	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
-	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value = "checkAnswers[]") boolean[] checkAnswers, Principal principal,
-			@RequestParam(value = "description", required = false) String description) {
-		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		for (int i = 0; i < checkAnswers.length; i++) {
-			homework.addAnswer(new Answer("a-" + realExercise.getId(), checkAnswers[i]));
-			System.out.println(checkAnswers[i]);
-		}
-		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
-		return "redirect:/homework/exercise/list";
-	}
-
-	@RequestMapping(value = "/homework/do/uploadFile", method = RequestMethod.POST)
-	public String savesHomeworkUploadFile(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "description", required = false) String description, RedirectAttributes attributes,
-			Principal principal) {
-		if (file == null || file.isEmpty()) {
-			attributes.addFlashAttribute("message", "Por favor, seleccione un archivo.");
-			return "homework/do/uploadFile";
-		}
-		Path directory = Paths.get("src//main//resources//static/file");
-		String absRoute = directory.toFile().getAbsolutePath();
-		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		try {
-			byte[] bytesImg = file.getBytes();
-			Path completeRoute = Paths.get(absRoute + "//" + file.getOriginalFilename());
-			Files.write(completeRoute, bytesImg);
-
-			homework.setFile(file.getOriginalFilename());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
-		return "redirect:/homework/exercise/list";
-	}
-
 	@RequestMapping("/homework/correct/{id}")
 	public String correctHomework(Model model, @PathVariable Long id) {
 		Homework homework = homeworksService.getHomework(id);
@@ -273,7 +167,5 @@ public class HomeworkController {
 			return "homework/correct/uploadFile";
 		return "homework/correct";
 	}
-
-	
 
 }

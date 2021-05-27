@@ -105,6 +105,10 @@ public class Homework extends BaseEntity {
 		a.addAll(answers);
 		return a;
 	}
+	
+	public void deleteAnswer(Answer answer) {
+		answers.remove(answer);
+	}
 
 	@Override
 	public String toString() {

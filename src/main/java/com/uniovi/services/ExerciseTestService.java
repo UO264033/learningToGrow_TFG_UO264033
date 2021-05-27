@@ -32,6 +32,8 @@ public class ExerciseTestService {
 	}
 
 	public Test getExercise(Long id) {
-		return testRepository.findById(id).get();
+		if(testRepository.findById(id).isPresent())
+			return testRepository.findById(id).get();
+		return null;
 	}
 }

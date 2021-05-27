@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Answer;
+import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.HomeworkRepository;
@@ -26,6 +27,9 @@ public class HomeworkService {
 
 	@Autowired
 	private AnswerService answerService;
+
+	@Autowired
+	private FeedbackService feedbackService;
 
 	public Page<Homework> getHomeworks(Pageable pageable) {
 		Page<Homework> homeworks = homeworkRepository.findAll(pageable);
@@ -110,6 +114,20 @@ public class HomeworkService {
 	public void markAsSent(Homework homework) {
 		homework.setSend(true);
 		homeworkRepository.save(homework);
+	}
+
+	public void deleteByExerciseId(Exercise exercise) {
+		Homework homework = homeworkRepository.findByExercise(exercise);
+		if (homework != null) {
+			if (homework.getAnswers() != null) {
+				for (Answer a : homework.getAnswers()) {
+					answerService.delete(a);
+				}
+			}
+			feedbackService.deleteByHomework(homework);
+			homeworkRepository.deleteByExercise(exercise);
+		}
+
 	}
 
 }

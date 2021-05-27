@@ -28,12 +28,12 @@
 			</div>
 		</div>
 		<div class="form-group" align="right">
-			<div class="col-sm-offset-2 col-sm-10">
+			<div class="col-sm-offset-2 col-sm-10" th:object="${exercise}">
 				<form class="form-horizontal" method="get"
-					action="/exercise/test/question/add" th:object="${exercise}">
+					th:action="${'/exercise/test/question/add/' + exercise.id}" >
 					<input th:value="${exercise.id}" name="exerciseId" type="number"
 						hidden />
-					<button type="submit" id="addA" class="btn btn-info" th:text="#{question.another}"> 
+					<button type="submit" id="addA" class="btn btn-info" th:text="#{question.another}"/> 
 					<a th:href="${'/home'}"
 					class="btn btn-info" role="button" th:text="#{exercise.finish}"></a> 
 				</form>

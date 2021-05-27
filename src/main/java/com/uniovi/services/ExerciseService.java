@@ -21,13 +21,16 @@ public class ExerciseService {
 
 	@Autowired
 	private ExerciseRepository exerciseRepository;
-	
+
 	@Autowired
 	private SubjectRepository subjectRepository;
-	
+
 	@Autowired
 	private QuestionService questionService;
 
+	@Autowired
+	private HomeworkService homeworkService;
+	
 	public void addExercise(Exercise exercise) {
 		exerciseRepository.save(exercise);
 	}
@@ -44,18 +47,22 @@ public class ExerciseService {
 
 	public void deleteExercise(Long id) {
 		List<Question> questions = questionService.getQuestionsByExerciseId(id);
-		for(Question q: questions)
+		for (Question q : questions)
 			questionService.deleteQuestion(q.getId());
-		exerciseRepository.deleteById(id);
+		if (exerciseRepository.findById(id).isPresent()) {
+			Exercise exercise = exerciseRepository.findById(id).get();
+			homeworkService.deleteByExerciseId(exercise);
+			exerciseRepository.deleteById(id);
+		}
 	}
 
 	public Exercise getExerciseByName(String name) {
 		return exerciseRepository.findByName(name);
 	}
-	
+
 	public List<Exercise> getExercisesBySubject(Long id) {
 		List<Exercise> exercises = new ArrayList<Exercise>();
-		if(subjectRepository.findById(id).isPresent())
+		if (subjectRepository.findById(id).isPresent())
 			exerciseRepository.findBySubject(subjectRepository.findById(id).get()).forEach(exercises::add);
 		return exercises;
 	}

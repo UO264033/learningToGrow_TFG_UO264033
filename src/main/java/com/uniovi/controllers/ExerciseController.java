@@ -64,7 +64,6 @@ public class ExerciseController {
 	public String editExercise(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
-//		model.addAttribute("questionList", exercise.getQuestions());
 		return "exercise/edit";
 	}
 }

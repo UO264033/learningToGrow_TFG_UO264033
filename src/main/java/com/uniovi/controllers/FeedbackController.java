@@ -36,7 +36,6 @@ public class FeedbackController {
 
 	@RequestMapping(value = { "/feedback/list" }, method = RequestMethod.GET)
 	public String getFeedback(Model model, Pageable pageable) {
-		System.out.println("list" + feedbackService.getFeedback(pageable));
 		model.addAttribute("feedbackList", feedbackService.getFeedback(pageable));
 		return "feedback/list";
 	}
@@ -54,10 +53,10 @@ public class FeedbackController {
 		return "feedback/list";
 	}
 
-	@RequestMapping(value = { "/feedback/answer" }, method = RequestMethod.POST)
-	public String answerFeedback(Model model, @RequestParam String message, @RequestParam("feedbackId") Long feedbackId,
+	@RequestMapping(value = { "/feedback/answer/{id}" }, method = RequestMethod.POST)
+	public String answerFeedback(Model model, @PathVariable Long id, @RequestParam String message, @RequestParam("feedbackId") Long feedbackId,
 			Pageable pageable) {
-		Feedback feedback = feedbackService.getFeedback(feedbackId);
+		Feedback feedback = feedbackService.getFeedback(id);
 		if (feedback != null) {
 			feedbackService.addMessage(message, feedback);
 			model.addAttribute("feedback", feedback);
@@ -67,7 +66,24 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = "/homework/correct/shortAnswer", method = RequestMethod.POST)
-	public String correctExercise(Model model, @ModelAttribute("feedback") Feedback feedback,
+	public String correctExerciseShortAnswer(Model model, @ModelAttribute("feedback") Feedback feedback,
+			@RequestParam("idHomework") Long idHomework) {
+
+		Homework homework = homeworksService.getHomework(idHomework);
+		feedback.setHomework(homework);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = usersService.getUserByUsername(username);
+		feedback.setProfessor(activeUser);
+
+		feedbackService.addFeedback(feedback);
+		homeworksService.markAsSent(homework);
+		model.addAttribute("feedback", feedback);
+		return "redirect:/homework/list";
+	}
+	
+	@RequestMapping(value = "/homework/correct/uploadFile", method = RequestMethod.POST)
+	public String correctExerciseUploadFile(Model model, @ModelAttribute("feedback") Feedback feedback,
 			@RequestParam("idHomework") Long idHomework) {
 
 		Homework homework = homeworksService.getHomework(idHomework);

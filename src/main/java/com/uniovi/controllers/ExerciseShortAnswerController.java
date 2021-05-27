@@ -71,11 +71,21 @@ public class ExerciseShortAnswerController {
 	}
 
 	@RequestMapping(value = "/exercise/shortAnswer/q&a/add", method = RequestMethod.GET)
-	public String getQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("idExercise") Long idExercise) {
+	public String addQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("idExercise") Long idExercise) {
 //		model.addAttribute("question", new Question());
 		if(exercise == null)
 			exercise = exerciseService.getExercise(idExercise);
 		model.addAttribute("exercise", exercise);
+		return "exercise/shortAnswer/q&a/add";
+	}
+	
+	@RequestMapping(value = "/exercise/shortAnswer/q&a/add/{id}", method = RequestMethod.GET)
+	public String addAnotherQuestion(Model model, @ModelAttribute Exercise exercise, @PathVariable Long id) {
+//		model.addAttribute("question", new Question());
+		if(exercise == null)
+			exercise = exerciseService.getExercise(id);
+		model.addAttribute("exercise", exercise);
+		model.addAttribute("exerciseId", id);
 		return "exercise/shortAnswer/q&a/add";
 	}
 

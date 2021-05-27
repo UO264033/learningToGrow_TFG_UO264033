@@ -42,4 +42,9 @@ public class AnswerService {
 		answerRepository.deleteByQuestionId(id);
 	}
 
+	public void delete(Answer answer) {
+		answerRepository.delete(answer);
+	}
+
+
 }

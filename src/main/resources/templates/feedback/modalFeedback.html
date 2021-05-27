@@ -10,7 +10,7 @@
 				<h4 class="modal-title" id="myModalLabel">Responder con un
 					mensaje</h4>
 			</div>
-			<form class="form-horizontal" method="post" action="/feedback/answer">
+			<form class="form-horizontal" method="post" th:action="${'/feedback/answer/' + feedback.id }">
 				<input name="feedbackId" th:value="${feedback.id}" type="number"
 				hidden />
 				<div class="modal-body">
@@ -30,7 +30,7 @@
 </div>
 
 <script th:inline="javascript">
-	$("#answerMessage").click(function() {
-		$("#answerMessage").load('/feedback/answer');
+	$("#miModal").click(function() {
+		$("#miModal").load('/feedback/answer');
 	});
 </script>

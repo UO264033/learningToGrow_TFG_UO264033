@@ -24,10 +24,16 @@
 			</div>
 		</div>
 		<div class="form-group" align="right">
-			<div class="col-sm-offset-2 col-sm-10">
-				<a href="/exercise/shortAnswer/q&a/add/" class="btn btn-info"
-					role="button" th:text="#{question.another}"> </a> <a th:href="${'/home'}"
-					class="btn btn-info" role="button" th:text="#{exercise.finish}"></a>
+			<div class="col-sm-offset-2 col-sm-10" th:object="${exercise}">
+				<form class="form-horizontal" method="get"
+					th:action="${'/exercise/shortAnswer/q&a/add/' + exercise.id}">
+					<input th:value="${exercise.id}" name="exerciseId" type="number"
+						hidden />
+					<button type="submit" id="addA" class="btn btn-info"
+						th:text="#{question.another}" />
+					<a th:href="${'/home'}" class="btn btn-info" role="button"
+						th:text="#{exercise.finish}"></a>
+				</form>
 			</div>
 		</div>
 	</div>

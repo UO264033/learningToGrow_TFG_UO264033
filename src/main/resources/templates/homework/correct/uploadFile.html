@@ -13,16 +13,21 @@
 					th:text="${homework.user.getNameAndSurname()}"></span>
 			</h4>
 			<h5 th:text="${homework.exercise.name}" />
-			 Fichero
+			<div class="alert alert-info" role="alert">
+				<span th:text="#{tocorrect.gotoFiles}" />
+			</div>
+
 			<div class="centerCard">
 				<h5 th:text="#{tocorrect.message}" />
 				"<span th:text="${homework.description}"> </span>"
 			</div>
 		</div>
 		<br> <br>
-		<form class="form-horizontal" method="POST" action="/homework/correct">
+		<form class="form-horizontal" method="POST"
+			action="/homework/correct/uploadFile">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for=”role”
+				<input name="idHomework" th:value="${homework.id}" type="number"
+					hidden /> <label class="control-label col-sm-2" for=”role”
 					th:text="#{tocorrect.mark}"></label>
 				<div class="col-sm-8">
 					<select id="role" class="form-control" name="role">

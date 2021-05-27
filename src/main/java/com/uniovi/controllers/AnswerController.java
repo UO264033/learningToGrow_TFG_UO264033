@@ -15,20 +15,16 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
 import com.uniovi.services.AnswerService;
 import com.uniovi.services.QuestionService;
-import com.uniovi.validators.AnswerValidator;
 
 @Controller
 public class AnswerController {
-	
+
 	@Autowired
 	private QuestionService questionService;
-	
+
 	@Autowired
 	private AnswerService answerService;
-	
-	@Autowired
-	private AnswerValidator answerValidator;
-	
+
 	@RequestMapping(value = "/answer/add")
 	public String getAnswer(Model model, @ModelAttribute Question question, @ModelAttribute Exercise exercise) {
 		model.addAttribute("answer", new Answer());
@@ -36,15 +32,16 @@ public class AnswerController {
 		model.addAttribute("exercise", exercise);
 		return "answer/add";
 	}
-	
+
 	@RequestMapping(value = "/answer/add", method = RequestMethod.POST)
-	public String setAnswers(@Validated Answer answerVa, BindingResult result,
-			Model model, @RequestParam("texto") String texto,  @RequestParam(value="correct", required = false) boolean correct,  @RequestParam("idQuestion") Long idQuestion) {
+	public String setAnswers(@Validated Answer answerVa, BindingResult result, Model model,
+			@RequestParam("texto") String texto, @RequestParam(value = "correct", required = false) boolean correct,
+			@RequestParam("idQuestion") Long idQuestion) {
 //		answerValidator.validate(answerVa, result);
 //		if(result.hasErrors()) {
 //			return "/answer/add";
 //		}
-		
+
 		Question question = questionService.getQuestion(idQuestion);
 		Answer answer = new Answer(texto, correct, question);
 		answerService.addAnswer(answer);

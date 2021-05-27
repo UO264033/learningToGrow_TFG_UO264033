@@ -1,7 +1,5 @@
 package com.uniovi.repositories;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.uniovi.entities.Answer;
-import com.uniovi.entities.Homework;
 import com.uniovi.entities.Question;
 
 public interface AnswerRepository extends CrudRepository<Answer, Long> {
