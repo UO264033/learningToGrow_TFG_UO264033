@@ -15,9 +15,12 @@
 				<span class="material-icons-round"> search </span>
 			</button>
 		</form>
+		<div class="alert alert-danger" role="alert"
+				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 		<div align="center">
 			<img src="/img/students.png" /><br>
 		</div>
+		
 		<div class="panel panel-default" th:each="student : ${studentList}">
 			<div class="panel-heading">
 				<h3>

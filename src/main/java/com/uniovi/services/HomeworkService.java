@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
+import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
+import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.HomeworkRepository;
 
@@ -30,6 +32,16 @@ public class HomeworkService {
 
 	@Autowired
 	private FeedbackService feedbackService;
+	
+	@Autowired
+	private SubjectService subjectService;
+	
+	@Autowired
+	private ExerciseService exerciseService;
+	
+	@Autowired
+	private UsersService userService;
+	
 
 	public Page<Homework> getHomeworks(Pageable pageable) {
 		Page<Homework> homeworks = homeworkRepository.findAll(pageable);
@@ -45,6 +57,7 @@ public class HomeworkService {
 			for (Answer answer : homework.getAnswers())
 				answerService.addAnswer(answer);
 		}
+		homework.setSend(true);
 		homeworkRepository.save(homework);
 	}
 
@@ -88,6 +101,15 @@ public class HomeworkService {
 	public Page<Homework> getHomeworksToCorrect(Pageable pageable, User user) {
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworkRepository.findByProfessor(pageable, user);
+		for(Homework homework: homeworks.getContent()) {
+			Feedback feedback = feedbackService.findByHomework(homework);
+			if(feedback == null) 
+				homework.setSend(false);
+			else if(feedback != null && !feedback.isSend())
+				homework.setSend(false);
+			else if(feedback != null && feedback.isSend()) 
+				homework.setSend(true);
+		}
 		return homeworks;
 	}
 
@@ -98,7 +120,7 @@ public class HomeworkService {
 				"Muy bien trabajo, ¡enhorabuena!" };
 		return s;
 	}
-
+	
 	public List<Answer> correct(List<Answer> correctAnswers, Set<Answer> answers) {
 		List<Answer> answersList = new ArrayList<Answer>();
 		answersList.addAll(answers);
@@ -129,5 +151,26 @@ public class HomeworkService {
 		}
 
 	}
+
+	public List<Exercise> getListOfExercises(String username) {
+		User user = userService.getUserByUsername(username);
+		List<Subject> subjects = subjectService.getSubjectsByRole(user);
+		List<Exercise> homeworks = new ArrayList<>();
+		for (Subject s : subjects) {
+			if (!exerciseService.getExercisesBySubject(s.getId()).isEmpty())
+				;
+			for (Exercise exercise : exerciseService.getExercisesBySubject(s.getId())) {
+				Homework homework = homeworkRepository.findByExerciseAndUser(exercise, user);
+				if(homework!= null && homework.isSent()) {
+					exercise.setSend(true);
+				}
+				homeworks.add(exercise);
+			}
+		}
+		
+		return homeworks;
+	}
+
+	
 
 }

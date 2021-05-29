@@ -98,5 +98,23 @@ public class FeedbackController {
 		model.addAttribute("feedback", feedback);
 		return "redirect:/homework/list";
 	}
+	
+	
+	@RequestMapping(value = "/homework/correct/test", method = RequestMethod.POST)
+	public String correctExerciseTest(Model model, @ModelAttribute("feedback") Feedback feedback,
+			@RequestParam("idHomework") Long idHomework) {
+
+		Homework homework = homeworksService.getHomework(idHomework);
+		feedback.setHomework(homework);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = usersService.getUserByUsername(username);
+		feedback.setProfessor(activeUser);
+
+		feedbackService.addFeedback(feedback);
+		homeworksService.markAsSent(homework);
+		model.addAttribute("feedback", feedback);
+		return "redirect:/homework/list";
+	}
 
 }

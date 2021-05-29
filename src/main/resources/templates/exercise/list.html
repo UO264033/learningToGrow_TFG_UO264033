@@ -18,6 +18,8 @@
 				<span class="material-icons-round"> search </span>
 			</button>
 		</form>
+		<div class="alert alert-success" role="alert"
+				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>

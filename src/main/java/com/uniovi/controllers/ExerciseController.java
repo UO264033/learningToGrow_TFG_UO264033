@@ -42,8 +42,9 @@ public class ExerciseController {
 	}
 
 	@RequestMapping("/exercise/delete/{id}")
-	public String getDelete(@PathVariable Long id) {
+	public String getDelete(Model model, @PathVariable Long id) {
 		exerciseService.deleteExercise(id);
+		model.addAttribute("mensaje", "El ejercicio se ha eliminado correctamente");
 		return "redirect:/exercise/list";
 	}
 	

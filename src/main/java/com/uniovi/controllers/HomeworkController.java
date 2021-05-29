@@ -21,7 +21,6 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.ShortAnswer;
-import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
@@ -47,14 +46,6 @@ public class HomeworkController {
 	public String getList(Model model, Pageable pageable, Principal principal) {
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
-
-//		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
-//
-//		if (searchText != null && !searchText.isEmpty())
-//			homeworks = homeworksService.searchMarksByDescriptionAndNameForUser(pageable, searchText, user);
-//		else
-//			homeworks = homeworksService.getHomeworksForUser(pageable, user);
-
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworksService.getHomeworksToCorrect(pageable, user);
 
@@ -66,21 +57,8 @@ public class HomeworkController {
 
 	@RequestMapping("/homework/exercise/list")
 	public String getListOfExercises(Model model, Principal principal) {
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-
-		List<Subject> subjects = new ArrayList<>();
-		subjects = subjectService.getSubjectsByRole(user);
-		List<Exercise> homeworks = new ArrayList<>();
-		for (Subject s : subjects) {
-			if (!exerciseService.getExercisesBySubject(s.getId()).isEmpty())
-				;
-			for (Exercise e : exerciseService.getExercisesBySubject(s.getId())) {
-				homeworks.add(e);
-			}
-		}
-		model.addAttribute("exerciseList", homeworks);
-
+		String username = principal.getName(); 
+		model.addAttribute("exerciseList", homeworksService.getListOfExercises(username));
 		return "homework/exercise/list";
 	}
 
@@ -153,8 +131,10 @@ public class HomeworkController {
 		Homework homework = homeworksService.getHomework(id);
 		model.addAttribute("homework", homework);
 		model.addAttribute("markList", homeworksService.differentMarks());
-		if (homework.getExercise().getType() == ExerciseType.T)
+		if (homework.getExercise().getType() == ExerciseType.T) {
+			
 			return "homework/correct/test";
+		}
 		else if (homework.getExercise().getType() == ExerciseType.S) { // Por queeeee
 			List<Answer> correctAnswers = new ArrayList<Answer>();
 			ShortAnswer exercise = (ShortAnswer) homework.getExercise();

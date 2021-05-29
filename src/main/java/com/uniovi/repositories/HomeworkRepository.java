@@ -1,5 +1,7 @@
 package com.uniovi.repositories;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -40,5 +42,9 @@ public interface HomeworkRepository extends CrudRepository<Homework, Long> {
 
 	@Query("SELECT h FROM Homework h WHERE h.exercise = ?1")
 	Homework findByExercise(Exercise exercise);
+
+	@Query("SELECT h FROM Homework h WHERE h.exercise = ?1 AND h.user= ?2")
+	Homework findByExerciseAndUser(Exercise exercise, User user);
+
 
 }

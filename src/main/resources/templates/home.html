@@ -20,6 +20,9 @@
 			<div class="panel-body" align="center">
 				<img src="/img/exerciseList.png" /></a><br>
 			</div>
+			<h4 th:text="#{exercise.list}"/>
+			<div class="alert alert-success" role="alert"
+				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 			<table class="table table-hover">
 				<thead>
 					<tr>

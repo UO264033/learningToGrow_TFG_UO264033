@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
+import com.uniovi.entities.Test;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.QuestionService;
 import com.uniovi.validators.QuestionValidator;
@@ -77,6 +78,7 @@ public class QuestionController {
 		q.addAnswer(new Answer(texto3, correct3, q));
 		model.addAttribute("question", q);
 		q = questionService.addQuestion(q);
+		exerciseService.addExercise((Test)exercise);
 
 		if (q != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");

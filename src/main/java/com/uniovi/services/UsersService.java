@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.UsersRepository;
@@ -30,6 +31,9 @@ public class UsersService {
 	@Autowired
 	private SubjectService subjectService;
 
+	@Autowired
+	private ExerciseService exerciseService;
+
 	@PostConstruct
 	public void init() {
 	}
@@ -42,7 +46,7 @@ public class UsersService {
 	public User getUser(Long id) {
 		return usersRepository.findById(id).get();
 	}
-	
+
 	public User updateUser(User user) {
 		return usersRepository.save(user);
 	}
@@ -57,6 +61,16 @@ public class UsersService {
 	}
 
 	public void deleteUser(Long id) {
+		User user = getUser(id);
+		if (!user.getSubjects().isEmpty()) {
+			for (Subject s : user.getSubjects())
+				subjectService.deleteSubject(s.getId());
+		}
+		if (!user.getExercises().isEmpty()) {
+			for (Exercise e : user.getExercises()) {
+				exerciseService.deleteExercise(e.getId());
+			}
+		}
 		usersRepository.deleteById(id);
 	}
 
@@ -97,8 +111,8 @@ public class UsersService {
 	public List<User> getUsersBySubject(Subject subject) {
 		List<User> students = new ArrayList<User>();
 		for (User u : usersRepository.findStudentsByRole("ROLE_STUDENT")) {
-			for(Subject s: u.getSubjects()) {
-				if(s.getName().equals(subject.getName()))
+			for (Subject s : u.getSubjects()) {
+				if (s.getName().equals(subject.getName()))
 					students.add(u);
 			}
 		}

@@ -50,11 +50,16 @@
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" id="addA" class="btn btn-info"
 						th:text="#{question.button.add}"></button>
-					<a th:href="${'/exercise/test/show/' + exercise.id}"
+					<a th:if="${mensaje == null}" 
+						class="btn btn-info" role="button"
+						th:text="#{question.showExercise}" disabled></a>
+					<a th:unless="${mensaje == null}" th:href="${'/exercise/test/show/' + exercise.id}"
 						class="btn btn-info" role="button"
 						th:text="#{question.showExercise}"></a>
-					<a href="/home" th:text="#{exercise.finish}"
-						class="btn btn-info" role="button"></a> 
+					<a th:if="${mensaje == null}"  th:text="#{exercise.finish}"
+						class="btn btn-info" role="button" disabled></a>
+					<a th:unless="${mensaje == null}"  href="/home" th:text="#{exercise.finish}"
+						class="btn btn-info" role="button" ></a>
 				</div>
 			</div>
 		</form>

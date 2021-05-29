@@ -75,4 +75,8 @@ public class FeedbackService {
 		feedbackRepository.deleteByHomeworkId(homework);
 	}
 
+	public Feedback findByHomework(Homework homework) {
+		return feedbackRepository.getFeedbackByHomeworkId(homework);
+	}
+
 }

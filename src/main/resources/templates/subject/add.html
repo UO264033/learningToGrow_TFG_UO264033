@@ -10,34 +10,39 @@
 			<img src="/img/allSubjects.png" /><br>
 		</div>
 		<br>
+		<div class="alert alert-danger" role="alert"
+			th:if="${mensaje != null}" th:text="${mensaje}"></div>
 		<form class="form-horizontal" method="post" action="/subject/add"
 			th:object="${subject}">
-			<div class="alert alert-danger" role="alert"
+			<div class="alert alert-success" role="alert"
 				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"
 					th:text="#{signup.nombre}" />
 				<div class="col-sm-7">
 					<input type="text" class="form-control" name="name" id="nameSub"
-						th:placeholder="#{subject.example}" required="true" />
+						th:placeholder="#{subject.example}" required="true" /> <span
+						class="text-danger" th:if="${#fields.hasErrors('name')}"
+						th:errors="*{name}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="pwd" th:text="#{subject.students}">Alumnos </label>
+				<label class="control-label col-sm-2" for="pwd"
+					th:text="#{subject.students}">Alumnos </label>
 				<div class="col-sm-5">
 					<button type="button" id="studentsButton" class="btn btn-info"
 						data-toggle="modal" data-target="#modalSubject">
-						<span class="material-icons-round"> person_add_alt </span> <span th:text="#{subject.students.add}"></span>
+						<span class="material-icons-round"> person_add_alt </span> <span
+							th:text="#{subject.students.add}"></span>
 					</button>
 				</div>
 			</div>
 			<div th:replace="subject/modalSubject" /></div>
-
 			<div class="container" align="center">
-				<button type="submit" class="btn btn-info ">
-					<span th:text="#{subject.save}"></span>
-				</button>
+				<a href="/subject/addSubject" th:text="#{subject.save}"
+					class="btn btn-info" role="button"></a>
 			</div>
+
 		</form>
 	</div>
 	<footer th:replace="fragments/footer" />

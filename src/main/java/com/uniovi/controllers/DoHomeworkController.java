@@ -78,29 +78,31 @@ public class DoHomeworkController {
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		homework.setSend(false);
 		for (int i = 0; i < answerStrings.length; i++) {
 			homework.addAnswer(new Answer(answerStrings[i]));
 		}
 		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
 		return "redirect:/homework/exercise/list";
 	}
 
 	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
 	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value = "checkAnswers[]") boolean[] checkAnswers, Principal principal,
+			@RequestParam(value = "checkAnswers[]") boolean[] checkAnswers,
+			@RequestParam(value = "idsAnswers[]") int[] idsAnswers, Principal principal,
 			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		Homework homework = new Homework(description, true, realExercise);
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		for (int i = 0; i < checkAnswers.length; i++) {
-			homework.addAnswer(new Answer("a-" + realExercise.getId(), checkAnswers[i]));
+		System.out.println(checkAnswers[0]);
+		for (int i = 0; i < idsAnswers.length; i++) {
+			
+			System.out.println(idsAnswers[i]);
+			
+			homework.addAnswer(new Answer(idsAnswers[i] + "-" + realExercise.getId(), checkAnswers[0]));
 		}
 		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
 		return "redirect:/homework/exercise/list";
 	}
 
@@ -135,9 +137,7 @@ public class DoHomeworkController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		homework.setSend(false);
 		homeworksService.addHomework(homework);
-		exerciseService.markAsSend(realExercise);
 		return "redirect:/homework/exercise/list";
 	}
 

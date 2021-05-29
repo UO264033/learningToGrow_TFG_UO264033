@@ -32,9 +32,6 @@ public class UsersController {
 	private UsersService usersService;
 
 	@Autowired
-	private SecurityService securityService;
-
-	@Autowired
 	private SignUpFormValidator signUpFormValidator;
 
 	@Autowired
@@ -42,6 +39,9 @@ public class UsersController {
 
 	@Autowired
 	private RolesService rolesService;
+	
+	@Autowired
+	private SecurityService securityService;
 
 	@RequestMapping("/user/list")
 	public String getList(Model model, Pageable pageable,
@@ -51,6 +51,9 @@ public class UsersController {
 			users = usersService.searchUsersByUsernameAndNameAndLastname(pageable, searchText);
 		else
 			users = usersService.getUsers(pageable);
+		if(users.getContent().isEmpty()) {
+			model.addAttribute("mensaje", "No se han encontrado resultados.");
+		}
 		model.addAttribute("usersList", users.getContent());
 		model.addAttribute("page", users);
 		return "user/list";
@@ -64,6 +67,9 @@ public class UsersController {
 			users = usersService.searchStudentsByNameAndLastname(pageable, searchText, "ROLE_STUDENT");
 		else
 			users = usersService.getUsersByRole(pageable, "ROLE_STUDENT");
+		if(users.getContent().isEmpty()) {
+			model.addAttribute("mensaje", "No se han encontrado resultados.");
+		}
 		model.addAttribute("studentList", users);
 		model.addAttribute("page", users);
 		return "user/student/list";
@@ -139,11 +145,7 @@ public class UsersController {
 		usersService.editUser(user);
 		return "redirect:/user/list";
 	}
-
-	/*
-	 * ---------------REGISTRO E INICIO DE SESIÓN--------------------
-	 */
-
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
 		model.addAttribute("user", new User());

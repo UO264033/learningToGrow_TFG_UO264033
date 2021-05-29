@@ -12,7 +12,7 @@ import com.uniovi.util.ArgumentChecks;
 public class Feedback extends BaseEntity {
 
 	private String comment;
-	private String score;
+	private String score; 
 	private boolean send;
 	private String answer;
 
