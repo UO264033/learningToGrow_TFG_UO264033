@@ -1,9 +1,7 @@
 package com.uniovi.entities;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -29,7 +27,7 @@ public class Homework extends BaseEntity {
 
 	@OneToMany
 	@JoinColumn(name = "homework_id")
-	private Set<Answer> answers = new HashSet<>(); // RESPUESTAS
+	private List<Answer> answers = new ArrayList<>(); // RESPUESTAS
 	
 	private String file;
 
@@ -43,7 +41,7 @@ public class Homework extends BaseEntity {
 		this.exercise = exercise;
 	}
 
-	public Homework(String description, boolean send, Exercise exercise, Set<Answer> answers) {
+	public Homework(String description, boolean send, Exercise exercise, List<Answer> answers) {
 		this(description, send, exercise);
 		this.answers = answers;
 	}
@@ -92,19 +90,17 @@ public class Homework extends BaseEntity {
 		this.exercise = exercise;
 	}
 	
-	public Set<Answer> getAnswers() {
+	public List<Answer> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(Set<Answer> answers) {
+	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
 	
-	public List<Answer> getAnswersList(){
-		List<Answer> a = new ArrayList<Answer>();
-		a.addAll(answers);
-		return a;
-	}
+//	public List<Answer> getAnswersList(){
+//		return
+//	}
 	
 	public void deleteAnswer(Answer answer) {
 		answers.remove(answer);

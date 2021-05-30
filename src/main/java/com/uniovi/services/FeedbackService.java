@@ -67,10 +67,6 @@ public class FeedbackService {
 		feedbackRepository.save(feedback);
 	}
 
-//	public void deleteByExerciseId(Exercise exercise) {
-//		feedbackRepository.deleteByExerciseId(exercise);
-//	}
-
 	public void deleteByHomework(Homework homework) {
 		feedbackRepository.deleteByHomeworkId(homework);
 	}

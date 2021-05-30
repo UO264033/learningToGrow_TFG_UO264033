@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.uniovi.util.ArgumentChecks;
+
 @Entity
 public class User {
 
@@ -25,6 +27,7 @@ public class User {
 	private String username;
 	private String name;
 	private String lastName;
+	private String email;
 
 	private String role;
 
@@ -58,11 +61,16 @@ public class User {
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	private Set<Feedback> feedback = new HashSet<Feedback>();
 
-	public User(String username, String name, String lastName) {
+	public User(String username, String name, String lastName, String email) {
 		super();
+		ArgumentChecks.isNotNull(username);
 		this.username = username;
+		ArgumentChecks.isNotNull(name);
 		this.name = name;
+		ArgumentChecks.isNotNull(lastName);
 		this.lastName = lastName;
+		ArgumentChecks.isNotNull(email);
+		this.email = email;
 	}
 
 	public User() {
@@ -98,6 +106,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<Homework> getHomeworks() {

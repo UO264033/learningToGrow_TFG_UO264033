@@ -54,7 +54,7 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = { "/feedback/answer/{id}" }, method = RequestMethod.POST)
-	public String answerFeedback(Model model, @PathVariable Long id, @RequestParam String message, @RequestParam("feedbackId") Long feedbackId,
+	public String answerFeedback(Model model, @PathVariable Long id, @RequestParam String message,
 			Pageable pageable) {
 		Feedback feedback = feedbackService.getFeedback(id);
 		if (feedback != null) {

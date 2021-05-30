@@ -22,18 +22,18 @@
 					</div>
 					<div class="panel-body">
 						<span th:text="#{tocorrect.answer}" /> <span
-							th:text="${homework.getAnswersList().get(iterador.index).text}" />
+							th:text="${homework.getAnswers().get(iterador.index).text}" />
 					</div>
 				</div>
 
 				<div class="alert alert-success" role="alert"
-					th:if="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswersList().get(iterador.index).text)}">
+					th:if="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswers().get(iterador.index).text)}">
 					<span class="material-icons-round"> done </span> La respuesta
 					correcta es: <span
 						th:text="${correctAnswers.get(iterador.index).getText()}" />
 				</div>
 				<div class="alert alert-danger" role="alert"
-					th:unless="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswersList().get(iterador.index).text)}">
+					th:unless="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswers().get(iterador.index).text)}">
 					<span class="material-icons-round"> close </span> La respuesta
 					correcta es: <span
 						th:text="${correctAnswers.get(iterador.index).getText()}" />

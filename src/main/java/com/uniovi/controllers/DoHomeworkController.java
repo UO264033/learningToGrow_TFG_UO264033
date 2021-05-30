@@ -79,6 +79,7 @@ public class DoHomeworkController {
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
 		for (int i = 0; i < answerStrings.length; i++) {
+			System.out.println(answerStrings[i]);
 			homework.addAnswer(new Answer(answerStrings[i]));
 		}
 		homeworksService.addHomework(homework);

@@ -40,23 +40,23 @@ public class InsertDataService {
 
 	@PostConstruct
 	public void init() {
-		User user1 = new User("alumno", "Pedro", "Díaz");
+		User user1 = new User("alumno", "Pedro", "Díaz", "pedro@gamil.com");
 		user1.setPassword("123456");
 		user1.setRole(rolesService.getRoles()[0]);
-		User user2 = new User("99999991B", "Lucas", "Núñez");
+		User user2 = new User("99999991B", "Lucas", "Núñez", "lucas@gmail.com");
 		user2.setPassword("123456");
 		user2.setRole(rolesService.getRoles()[0]);
-		User user3 = new User("99999992C", "María", "Rodríguez");
+		User user3 = new User("99999992C", "María", "Rodríguez", "maria@gmail.com");
 		user3.setPassword("123456");
 		user3.setRole(rolesService.getRoles()[0]);
-		User user4 = new User("profesor", "Marta", "Almonte");
+		User user4 = new User("profesor", "Marta", "Almonte", "marta@gmail.com");
 		user4.setPassword("123456");
 		user4.setRole(rolesService.getRoles()[1]);
-		User user5 = new User("99999977E", "Pelayo", "Valdes");
+		User user5 = new User("99999977E", "Pelayo", "Valdes", "pelayo@gmail.com");
 		user5.setPassword("123456");
 		user5.setRole(rolesService.getRoles()[1]);
-		User user6 = new User("mariagg", "María", "González");
-		user6.setPassword("Dasdas33");
+		User user6 = new User("mariagg", "María", "González", "admin@gmail.com");
+		user6.setPassword("Admin33");
 		user6.setRole(rolesService.getRoles()[2]);
 
 		usersService.addUser(user4);
