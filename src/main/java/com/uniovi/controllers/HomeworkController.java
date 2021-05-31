@@ -21,10 +21,10 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.ShortAnswer;
+import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
-import com.uniovi.services.SubjectService;
 import com.uniovi.services.UsersService;
 
 @Controller
@@ -35,9 +35,6 @@ public class HomeworkController {
 
 	@Autowired
 	private UsersService usersService;
-
-	@Autowired
-	private SubjectService subjectService;
 
 	@Autowired
 	private ExerciseService exerciseService;
@@ -132,14 +129,19 @@ public class HomeworkController {
 		model.addAttribute("homework", homework);
 		model.addAttribute("markList", homeworksService.differentMarks());
 		if (homework.getExercise().getType() == ExerciseType.T) {
-			
+			List<Answer> correctAnswers = new ArrayList<Answer>();
+			Test exercise = (Test) homework.getExercise();
+			for (int i = 0; i < exercise.getQuestions().size(); i++) {
+				correctAnswers.addAll(exercise.getQuestions().get(i).getAnswers());
+			}
+			model.addAttribute("correctAnswers", correctAnswers);
 			return "homework/correct/test";
 		}
 		else if (homework.getExercise().getType() == ExerciseType.S) { // Por queeeee
 			List<Answer> correctAnswers = new ArrayList<Answer>();
 			ShortAnswer exercise = (ShortAnswer) homework.getExercise();
 			for (int i = 0; i < exercise.getQuestions().size(); i++) {
-				correctAnswers.addAll(exercise.getQuestionsList().get(i).getAnswers());
+				correctAnswers.addAll(exercise.getQuestions().get(i).getAnswers());
 			}
 			model.addAttribute("correctAnswers", correctAnswers);
 			return "homework/correct/shortAnswer";

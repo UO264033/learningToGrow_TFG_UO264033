@@ -75,4 +75,9 @@ public class FeedbackService {
 		return feedbackRepository.getFeedbackByHomeworkId(homework);
 	}
 
+	public void markAsSent(Feedback feedback) {
+		feedback.setSend(true);
+		feedbackRepository.save(feedback);
+	}
+
 }

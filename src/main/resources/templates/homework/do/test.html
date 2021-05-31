@@ -20,7 +20,7 @@
 					<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
 
 					<div th:each="answer : ${question.answers}">
-						<input type="checkbox" id="huey" name="checkAnswers[]">
+						<input type="checkbox" id="huey" name="checkAnswers[]" th:value="${answer.id}">
 						<input type="text" id="huey" th:value="${answer.id}" name="idsAnswers[]" hidden>
 						<label for="huey" th:text="${answer.text}" />
 						

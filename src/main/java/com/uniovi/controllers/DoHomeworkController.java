@@ -22,6 +22,7 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.User;
+import com.uniovi.services.AnswerService;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
 import com.uniovi.services.UsersService;
@@ -37,6 +38,9 @@ public class DoHomeworkController {
 
 	@Autowired
 	private ExerciseService exerciseService;
+	
+	@Autowired
+	private AnswerService answerService;
 
 	@RequestMapping("/homework/do/{id}")
 	public String doHomework(Model model, @PathVariable Long id) {
@@ -86,22 +90,18 @@ public class DoHomeworkController {
 		return "redirect:/homework/exercise/list";
 	}
 
+	//fhadaisbdfajsdbfkajsdf
 	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
 	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
-			@RequestParam(value = "checkAnswers[]") boolean[] checkAnswers,
-			@RequestParam(value = "idsAnswers[]") int[] idsAnswers, Principal principal,
+			@RequestParam(value = "checkAnswers[]") int[] checkAnswers, Principal principal,
 			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		Homework homework = new Homework(description, true, realExercise);
 		String username = principal.getName(); // Username es el name de la autenticación
 		User user = usersService.getUserByUsername(username);
 		homework.setUser(user);
-		System.out.println(checkAnswers[0]);
-		for (int i = 0; i < idsAnswers.length; i++) {
-			
-			System.out.println(idsAnswers[i]);
-			
-			homework.addAnswer(new Answer(idsAnswers[i] + "-" + realExercise.getId(), checkAnswers[0]));
+		for (int i = 0; i < checkAnswers.length; i++) {
+			homework.addAnswer(new Answer( answerService.getById(checkAnswers[i]).getText()));
 		}
 		homeworksService.addHomework(homework);
 		return "redirect:/homework/exercise/list";

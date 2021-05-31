@@ -1,9 +1,7 @@
 package com.uniovi.entities;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -14,7 +12,7 @@ import com.uniovi.util.ArgumentChecks;
 public class ShortAnswer extends Exercise {
 
 	@OneToMany(mappedBy="exercise")
-	private Set<Question> questions = new HashSet<>();
+	private List<Question> questions = new ArrayList<>();
 
 	public ShortAnswer() {
 	}
@@ -23,27 +21,21 @@ public class ShortAnswer extends Exercise {
 		super(name, description, ExerciseType.S);
 	}
 		
-	public ShortAnswer(String name, String description, Set<Question> questions) {
+	public ShortAnswer(String name, String description, List<Question> questions) {
 		this(name, description);
 		ArgumentChecks.isNotNull(questions);
 		this.questions = questions;
 	}
 	
-	Set<Question> _getQuestions() {
+	List<Question> _getQuestions() {
 		return questions;
 	}
 
-	public Set<Question> getQuestions() {
-		return new HashSet<>(questions);
+	public List<Question> getQuestions() {
+		return new ArrayList<>(questions);
 	}
 	
-	public List<Question> getQuestionsList() {
-		List<Question> q = new ArrayList<Question>();
-		q.addAll(questions);
-		return q;
-	}
-	
-	public void setQuestions(Set<Question> questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 	

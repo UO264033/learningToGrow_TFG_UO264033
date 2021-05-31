@@ -58,7 +58,7 @@
 						$("#addStudent").click(
 								function() {
 									var c = 0;
-									var ids = [ 50 ];
+									var ids = [ 100 ];
 									$('#tableUsers input[type=checkbox]').each(
 											function() {
 												if (this.checked) {
@@ -66,6 +66,7 @@
 													c++;
 												}
 											});
+									
 									let cadena = ids.join();
 									$.get($("#nameSub").val() + "/addStudent/"
 											+ cadena, function(data) {

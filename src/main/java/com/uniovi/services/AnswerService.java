@@ -24,14 +24,11 @@ public class AnswerService {
 	public void addAnswer(Answer answer) {
 		answerRepository.save(answer);
 	}
-
-	public void addAnswer(Answer answer, Question question) {
-		System.out.println("aaa" + question);
-//		Optional<Question> q = questionRepository.findById(question.getId());
-//		if(q.isPresent())
-//			answer._setQuestion(q.get());
-		System.out.println("hola" + answer.toString());
-		answerRepository.save(answer);
+	
+	public Answer getById(int checkAnswers) {
+		if(answerRepository.findById((long) checkAnswers).isPresent()) 
+			return answerRepository.findById((long) checkAnswers).get();
+		return null;
 	}
 	
 	public Answer getQuestionByAll(String text, boolean correct, Question question) {

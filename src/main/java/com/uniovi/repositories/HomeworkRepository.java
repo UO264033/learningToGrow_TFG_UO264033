@@ -1,7 +1,5 @@
 package com.uniovi.repositories;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;

@@ -41,15 +41,15 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-8" align="center">
 							<button type="button" class="btn btn-info" data-toggle="modal"
-								data-target="#miModal" th:if="${!feedback.send}" id="${feedback.id}" >Responder</button>
+								data-target="#miModal" th:if="${!feedback.send}" >Responder</button>
 						</div>
+						<div th:replace="feedback/modalFeedback" /></div>
 						<div class="col-sm-offset-2 col-sm-8" align="center"
 							th:if="${feedback.send}">
 							<div class="alert alert-info" role="alert">
 								<span class="material-icons-round"> done </span> <span
 									th:text="#{feedback.sent}" />
 							</div>
-							<div th:replace="feedback/modalFeedback" /></div>
 						</div>
 					</div>
 

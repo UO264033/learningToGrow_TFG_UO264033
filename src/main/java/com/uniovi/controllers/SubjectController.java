@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
@@ -63,17 +62,23 @@ public class SubjectController {
 		model.addAttribute("studentList", students);
 		return "subject/add";
 	}
+	
+	@RequestMapping(value = "/subject/add/{message}") //COMO VALIDAR??
+	public String getSubjectWithMessage(Model model, @PathVariable String message) {
+		model.addAttribute("subject", new Subject());
+		model.addAttribute("message", message);
+		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
+		model.addAttribute("studentList", students);
+		return "subject/add";
+	}
 
-	@RequestMapping(value = "/subject/addSubject", method = RequestMethod.GET)
+	@RequestMapping(value = "/addStudent/{idSt}", method = RequestMethod.GET)
 	public String addSubject(Model model, @Validated Subject subject, BindingResult result) {
-		subjectValidator.validate(subject, result);
-		if (result.hasErrors()) {
-			List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
-			model.addAttribute("studentList", students);
-			return "subject/add";
-		}
-		
-		return "redirect:/subject/list";
+		System.out.println("hola");
+		String message =  "Debes añadir un nombre a la asignatura.";
+		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
+		model.addAttribute("studentList", students);
+		return "subject/add/" + message;
 	}
 
 	@RequestMapping(value = "/subject/update")
@@ -85,21 +90,8 @@ public class SubjectController {
 		return "subject/add :: tableUsers";
 	}
 
-//	@RequestMapping(value = "/subject/{name}/modalSubject")
-//	public String getModalSubject(Model model, Principal principal, @PathVariable String name) {
-//		String username = principal.getName();
-//		User professor = usersService.getUserByUsername(username);
-//		Subject subject = new Subject(name, professor);
-//		subjectService.addSubject(subject);
-//
-//		model.addAttribute("subject", subject);
-//		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
-//		model.addAttribute("studentList", students);
-//		return "subject/add";
-//	}
-
 	@RequestMapping("/subject/{name}/addStudent/{idSt}")
-	public String setStudents(@PathVariable String name, @PathVariable String idSt, Principal principal) {
+	public String setStudents(Model model, @PathVariable String name, @PathVariable String idSt, Principal principal) {
 		Subject subject = subjectService.getSubjectByName(name);
 		if (subject == null) {
 			String username = principal.getName();
@@ -118,17 +110,6 @@ public class SubjectController {
 		model.addAttribute("studentList", students);
 		return "subject/add :: tableUsers";
 	}
-
-//	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
-//	public String addSubject(Model model, @RequestParam String name, Principal principal,
-//			RedirectAttributes redirectAttrs) {
-//		Subject subject = subjectService.getSubjectByName(name);
-//		if (subject == null) {
-//			model.addAttribute("mensaje", "Debes escribir un nombre de la asignatura.");
-//			return "subject/add";
-//		}
-//		return "redirect:/subject/list";
-//	}
 
 	@RequestMapping("/subject/delete/{id}")
 	public String getDelete(@PathVariable Long id) {
