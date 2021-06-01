@@ -56,6 +56,10 @@ a {
 
 
 /* Sticky nav styles-------------------------------------------------- */
+.navbar-inverse .navbar-nav>li>a {
+    color: #000000;
+}
+
 .navbar-inverse {
     background-color: white;
     border-color: white;
@@ -77,7 +81,7 @@ a {
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
-    color: #9d9d9d;
+    color: #000000;
     white-space: nowrap;
     font-size: medium;
 }

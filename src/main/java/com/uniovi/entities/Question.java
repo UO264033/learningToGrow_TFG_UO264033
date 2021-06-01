@@ -1,7 +1,7 @@
 package com.uniovi.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -15,7 +15,7 @@ public class Question extends BaseEntity {
 	private String statement;
 	
 	@OneToMany(mappedBy="question")
-	private Set<Answer> answers = new HashSet<>();
+	private List<Answer> answers = new ArrayList<>();
 	
 	@ManyToOne
 	private Exercise exercise;
@@ -42,12 +42,12 @@ public class Question extends BaseEntity {
 		this.statement = statement;
 	}
 	
-	Set<Answer> _getAnswers() {
+	List<Answer> _getAnswers() {
 		return answers;
 	}
 
-	public Set<Answer> getAnswers() {
-		return new HashSet<>(answers);
+	public List<Answer> getAnswers() {
+		return new ArrayList<>(answers);
 	}
 
 	public Exercise getExercise() {

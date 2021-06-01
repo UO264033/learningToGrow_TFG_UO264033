@@ -54,7 +54,7 @@ public class HomeworkController {
 
 	@RequestMapping("/homework/exercise/list")
 	public String getListOfExercises(Model model, Principal principal) {
-		String username = principal.getName(); 
+		String username = principal.getName();
 		model.addAttribute("exerciseList", homeworksService.getListOfExercises(username));
 		return "homework/exercise/list";
 	}
@@ -131,13 +131,18 @@ public class HomeworkController {
 		if (homework.getExercise().getType() == ExerciseType.T) {
 			List<Answer> correctAnswers = new ArrayList<Answer>();
 			Test exercise = (Test) homework.getExercise();
-			for (int i = 0; i < exercise.getQuestions().size(); i++) {
-				correctAnswers.addAll(exercise.getQuestions().get(i).getAnswers());
+			List<Answer> answers;
+			for (int k = 0; k < exercise.getQuestions().size(); k++) {
+				answers = exercise.getQuestions().get(k).getAnswers();
+				for (int j = 0; j < answers.size(); j++) {
+					if (answers.get(j).isCorrect()) {
+						correctAnswers.add(answers.get(j));
+					}
+				}
 			}
 			model.addAttribute("correctAnswers", correctAnswers);
 			return "homework/correct/test";
-		}
-		else if (homework.getExercise().getType() == ExerciseType.S) {
+		} else if (homework.getExercise().getType() == ExerciseType.S) {
 			List<Answer> correctAnswers = new ArrayList<Answer>();
 			ShortAnswer exercise = (ShortAnswer) homework.getExercise();
 			for (int i = 0; i < exercise.getQuestions().size(); i++) {

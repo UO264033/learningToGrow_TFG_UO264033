@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="exampleModalLongTitle">
-					<span th:text="#{user.studentsList}" /> 
+					<span th:text="#{user.studentsList}" />
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -55,6 +55,7 @@
 					<button type="button" id="addStudent" class="btn btn-info"
 						th:text="#{subject.save}"></button>
 					<script th:inline="javascript">
+						
 						$("#addStudent").click(
 								function() {
 									var c = 0;
@@ -66,7 +67,7 @@
 													c++;
 												}
 											});
-									
+
 									let cadena = ids.join();
 									$.get($("#nameSub").val() + "/addStudent/"
 											+ cadena, function(data) {

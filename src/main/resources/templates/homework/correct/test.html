@@ -38,12 +38,14 @@
 					correcta es: <span
 						th:text="${correctAnswers.get(iterador.index).getText()}" />
 				</div>
-				<div class="centerCard">
+				
+			</div>
+			<div class="centerCard">
 					<h5 th:text="#{tocorrect.message}" />
 					"<span th:text="${homework.description}"> </span>"
 				</div>
-			</div>
 		</div>
+		
 		<br> <br>
 		<form class="form-horizontal" method="POST"
 			action="/homework/correct">
