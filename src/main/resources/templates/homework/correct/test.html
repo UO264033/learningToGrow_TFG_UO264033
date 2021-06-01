@@ -18,26 +18,42 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<span
-							th:text="${homework.exercise.getQuestions().get(iterador.index).statement}"/>
+							th:text="${homework.exercise.getQuestions().get(iterador.index).statement}" />
 					</div>
 					<div class="panel-body">
-									<span th:text="#{tocorrect.answer}" /> <span
+						<span th:text="#{tocorrect.answer}" /> <span
 							th:text="${homework.getAnswers().get(iterador.index).text}" />
 					</div>
 				</div>
-			</div>
-			<div class="centerCard">
-				<h5 th:text="#{tocorrect.message}" />
-				"<span th:text="${homework.description}"> </span>"
+
+				<div class="alert alert-success" role="alert"
+				th:if="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswers().get(iterador.index).text)}">
+					<span class="material-icons-round"> done </span> La respuesta
+					correcta es: <span
+						th:text="${correctAnswers.get(iterador.index).getText()}" />
+				</div>
+				<div class="alert alert-danger" role="alert"
+				th:unless="${correctAnswers.get(iterador.index).getText().equals(homework.getAnswers().get(iterador.index).text)}">
+					<span class="material-icons-round"> close </span> La respuesta
+					correcta es: <span
+						th:text="${correctAnswers.get(iterador.index).getText()}" />
+				</div>
+				<div class="centerCard">
+					<h5 th:text="#{tocorrect.message}" />
+					"<span th:text="${homework.description}"> </span>"
+				</div>
 			</div>
 		</div>
 		<br> <br>
-		<form class="form-horizontal" method="POST" action="/homework/correct/test">
+		<form class="form-horizontal" method="POST"
+			action="/homework/correct">
+			<input name="idHomework" th:value="${homework.id}" type="number"
+				hidden />
 			<div class="form-group">
-				<label class="control-label col-sm-2" for=”role”
+				<label class="control-label col-sm-2" for="score"
 					th:text="#{tocorrect.mark}"></label>
 				<div class="col-sm-8">
-					<select id="role" class="form-control" name="role">
+					<select id="role" class="form-control" name="score">
 						<option th:each="mark : ${markList}" th:value="${mark}"
 							th:text="${mark}"></option>
 					</select>

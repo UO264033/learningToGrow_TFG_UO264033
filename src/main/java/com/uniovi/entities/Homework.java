@@ -98,10 +98,6 @@ public class Homework extends BaseEntity {
 		this.answers = answers;
 	}
 	
-//	public List<Answer> getAnswersList(){
-//		return
-//	}
-	
 	public void deleteAnswer(Answer answer) {
 		answers.remove(answer);
 	}

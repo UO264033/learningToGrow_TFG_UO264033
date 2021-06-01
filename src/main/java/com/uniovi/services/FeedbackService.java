@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.Subject;
+import com.uniovi.entities.User;
 import com.uniovi.repositories.FeedbackRepository;
 
 @Service
@@ -78,6 +79,16 @@ public class FeedbackService {
 	public void markAsSent(Feedback feedback) {
 		feedback.setSend(true);
 		feedbackRepository.save(feedback);
+	}
+	
+	public void createFeedback(Feedback feedback, Homework homework) {
+		feedback.setHomework(homework);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = userService.getUserByUsername(username);
+		feedback.setProfessor(activeUser);
+		addFeedback(feedback);
+		homeworkService.markAsSent(homework);
 	}
 
 }

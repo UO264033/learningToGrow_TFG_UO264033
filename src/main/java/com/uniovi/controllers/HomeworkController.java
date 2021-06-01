@@ -137,7 +137,7 @@ public class HomeworkController {
 			model.addAttribute("correctAnswers", correctAnswers);
 			return "homework/correct/test";
 		}
-		else if (homework.getExercise().getType() == ExerciseType.S) { // Por queeeee
+		else if (homework.getExercise().getType() == ExerciseType.S) {
 			List<Answer> correctAnswers = new ArrayList<Answer>();
 			ShortAnswer exercise = (ShortAnswer) homework.getExercise();
 			for (int i = 0; i < exercise.getQuestions().size(); i++) {

@@ -18,7 +18,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<span
-							th:text="${homework.exercise.getQuestionsList().get(iterador.index).statement}" />
+							th:text="${homework.exercise.getQuestions().get(iterador.index).statement}" />
 					</div>
 					<div class="panel-body">
 						<span th:text="#{tocorrect.answer}" /> <span
@@ -46,7 +46,7 @@
 		</div>
 		<br> <br>
 		<form class="form-horizontal" method="POST"
-			action="/homework/correct/shortAnswer" th:object="${feedback}">
+			action="/homework/correct" th:object="${feedback}">
 			<input name="idHomework" th:value="${homework.id}" type="number"
 				hidden />
 			<div class="form-group">
