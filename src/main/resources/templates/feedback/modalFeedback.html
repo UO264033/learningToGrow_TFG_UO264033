@@ -1,4 +1,4 @@
-<div class="modal fade" id="miModal" tabindex="-1" role="dialog"
+<div class="modal fade" id="miModal" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -10,8 +10,8 @@
 				<h4 class="modal-title" id="myModalLabel">Responder con un
 					mensaje</h4>
 			</div>
-			<form class="form-horizontal" method="post" th:action="${'/feedback/answer/' + feedback.id }">
-				<input name="feedbackId" th:value="${feedback.id}" type="number"
+			<form class="form-horizontal" method="post" action="/feedback/answer/" id="nameForm">
+				<input name="feedbackId" id ="feedbackId"  type="number"
 				hidden />
 				<div class="modal-body">
 					<textarea class="form-control" name="message"

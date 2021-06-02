@@ -40,8 +40,11 @@
 					<br>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-8" align="center">
-							<button type="button" class="btn btn-info" data-toggle="modal"
-								data-target="#miModal" th:if="${!feedback.send}" >Responder</button>
+							<button class="btn btn-info" th:if="${!feedback.send}"
+								th:data-id="${feedback.id}" data-target="#miModal"
+								data-toggle="tooltip" data-placement="left"
+								th:text="#{feedback.send}">
+							</button>
 						</div>
 						<div th:replace="feedback/modalFeedback" /></div>
 						<div class="col-sm-offset-2 col-sm-8" align="center"
@@ -61,3 +64,17 @@
 	<footer th:replace="fragments/footer" />
 </body>
 </html>
+<script>
+let botones = document.querySelectorAll('[data-target="#miModal"]');
+botones.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Obtener ID desde el botón
+        let id = this.dataset.id;
+        console.log(id);
+        // Asignar datos a ventana modal:
+       
+        $('#miModal').modal();
+        document.querySelector('#nameForm').action += id;
+    });
+});
+</script>
