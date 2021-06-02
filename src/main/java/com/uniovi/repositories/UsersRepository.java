@@ -12,6 +12,8 @@ import com.uniovi.entities.User;
 public interface UsersRepository extends CrudRepository<User, Long> {
 
 	User findByUsername(String username);
+	
+	User findByEmail(String email);
 
 	@Query("SELECT u FROM User u WHERE (LOWER(u.username) LIKE LOWER(?1) OR LOWER(u.name) LIKE LOWER(?1) OR LOWER(u.lastName) LIKE LOWER(?1) OR LOWER(u.role) LIKE LOWER(?1))")
 	Page<User> findByUsernameAndLastNameAndName(Pageable pageable, String searchtext);

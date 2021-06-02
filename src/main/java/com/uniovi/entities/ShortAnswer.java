@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import com.uniovi.util.ArgumentChecks;
@@ -11,7 +12,7 @@ import com.uniovi.util.ArgumentChecks;
 @Entity
 public class ShortAnswer extends Exercise {
 
-	@OneToMany(mappedBy="exercise")
+	@OneToMany(mappedBy="exercise", fetch = FetchType.EAGER)
 	private List<Question> questions = new ArrayList<>();
 
 	public ShortAnswer() {
@@ -45,7 +46,9 @@ public class ShortAnswer extends Exercise {
 
 	@Override
 	public String toString() {
-		return "ShortAnswer [questions=" + questions + "]";
+		return "ShortAnswer [questions=" + questions + ", getName()=" + getName() + ", getDescription()="
+				+ getDescription() + ", getType()=" + getType() + ", getSubject()=" + getSubject() + ", isSend()="
+				+ isSend() + "]";
 	}
 	
 	

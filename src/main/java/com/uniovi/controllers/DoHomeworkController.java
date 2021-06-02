@@ -132,7 +132,7 @@ public class DoHomeworkController {
 					.get(directorioEjercicio + "//" + user.getFullName() + "_" + file.getOriginalFilename());
 			Files.write(completeRoute, bytesImg);
 
-			homework.setFile(file.getOriginalFilename());
+			homework.setFile(user.getFullName() + "_" + file.getOriginalFilename());
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -133,4 +133,8 @@ public class UsersService {
 		return usersRepository.findStudentsFiltered(searchText, "ROLE_STUDENT");
 	}
 
+	public User getByEmail(String email) {
+		return usersRepository.findByEmail(email);
+	}
+
 }

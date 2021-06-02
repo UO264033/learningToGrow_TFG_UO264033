@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,7 +30,7 @@ public class Subject extends BaseEntity{
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<User> students = new HashSet<User>();
 
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Exercise> exercises = new HashSet<Exercise>();
 
 	public Subject() {

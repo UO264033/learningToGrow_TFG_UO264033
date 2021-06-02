@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import com.uniovi.util.ArgumentChecks;
@@ -11,7 +12,7 @@ import com.uniovi.util.ArgumentChecks;
 @Entity
 public class Test extends Exercise {
 
-	@OneToMany(mappedBy = "exercise")
+	@OneToMany(mappedBy = "exercise", fetch = FetchType.EAGER)
 	private List<Question> questions = new ArrayList<>();
 
 	public Test() {
@@ -43,4 +44,12 @@ public class Test extends Exercise {
 		questions.add(q);
 	}
 
+	@Override
+	public String toString() {
+		return "Test [questions=" + questions + ", getName()=" + getName() + ", getDescription()=" + getDescription()
+				+ ", getType()=" + getType() + ", getSubject()=" + getSubject() + ", isSend()=" + isSend() + "]";
+	}
+
+	
+	
 }

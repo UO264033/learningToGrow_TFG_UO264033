@@ -15,7 +15,10 @@ public class UploadFile extends Exercise{
 
 	@Override
 	public String toString() {
-		return "UploadFile [" + "]";
+		return "UploadFile [getName()=" + getName() + ", getDescription()=" + getDescription() + ", getType()="
+				+ getType() + ", getSubject()=" + getSubject() + ", isSend()=" + isSend() + "]";
 	}
+
+	
 
 }

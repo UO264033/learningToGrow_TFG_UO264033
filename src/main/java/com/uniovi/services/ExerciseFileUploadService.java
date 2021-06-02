@@ -18,5 +18,4 @@ public class ExerciseFileUploadService {
 		exerciseRepository.save(exercise);
 	}
 
-
 }
