@@ -20,6 +20,10 @@
 					<div th:each="answer : ${question.answers}">
 						<label for="huey" th:text="${answer.text}" />
 					</div>
+					<div class="container" align="center">
+					<a th:href="${'/question/delete/' + question.id}"
+						class="glyphicon glyphicon-trash" role="button"></a>
+				</div>
 				</div>
 			</div>
 		</div>

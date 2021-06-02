@@ -30,7 +30,6 @@
 						<th th:text="#{home.description}">Descripción</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,9 +38,6 @@
 						<td th:text="${exercise.description}">10</td>
 						<td><a th:href="${'/exercise/details/' + exercise.id}"
 							class="btn btn-info" role="button"><span th:text="#{user.list.table.detailsButton}"/></a></td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/exercise/edit/' + exercise.id}" class="btn btn-info"
-							role="button"><span th:text="#{user.list.table.editButton}"/></a></td>
 						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/exercise/delete/' + exercise.id}"
 							class="btn btn-info" role="button"><span th:text="#{user.list.table.deleteButton}"/></a></td>

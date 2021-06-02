@@ -1,13 +1,8 @@
 package com.uniovi.controllers;
 
-import java.util.LinkedList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,11 +41,7 @@ public class UsersController {
 	@RequestMapping("/user/list")
 	public String getList(Model model, Pageable pageable,
 			@RequestParam(value = "", required = false) String searchText) {
-		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		if (searchText != null && !searchText.isEmpty())
-			users = usersService.searchUsersByUsernameAndNameAndLastname(pageable, searchText);
-		else
-			users = usersService.getUsers(pageable);
+		Page<User> users = usersService.getList(pageable, searchText);
 		if(users.getContent().isEmpty()) {
 			model.addAttribute("mensaje", "No se han encontrado resultados.");
 		}
@@ -62,11 +53,7 @@ public class UsersController {
 	@RequestMapping("/user/student/list")
 	public String getStudentList(Model model, Pageable pageable,
 			@RequestParam(value = "", required = false) String searchText) {
-		Page<User> users = new PageImpl<User>(new LinkedList<User>());
-		if (searchText != null && !searchText.isEmpty())
-			users = usersService.searchStudentsByNameAndLastname(pageable, searchText, "ROLE_STUDENT");
-		else
-			users = usersService.getUsersByRole(pageable, "ROLE_STUDENT");
+		Page<User> users = usersService.getStudentList(pageable, searchText);
 		if(users.getContent().isEmpty()) {
 			model.addAttribute("mensaje", "No se han encontrado resultados.");
 		}
@@ -77,10 +64,7 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/perfil")
 	public String perfil(Model model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		User activeUser = usersService.getUserByUsername(username);
-		model.addAttribute("user", activeUser);
+		model.addAttribute("user", usersService.perfil());
 		return "user/perfil";
 	}
 
@@ -96,12 +80,6 @@ public class UsersController {
 		model.addAttribute("user", new User());
 		model.addAttribute("rolesList", rolesService.getRoles());
 		return "user/student/search";
-	}
-
-	@RequestMapping(value = "/user/addGroup")
-	public String createGroup(Model model) {
-		model.addAttribute("user", new User());
-		return "user/addGroup";
 	}
 
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
@@ -141,8 +119,7 @@ public class UsersController {
 			model.addAttribute("user", user);
 			return "user/edit";
 		}
-		user.setId(id);
-		usersService.editUser(user);
+		usersService.editUser(user, id);
 		return "redirect:/user/list";
 	}
 	

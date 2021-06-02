@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -81,14 +83,15 @@ public class UsersService {
 		return users;
 	}
 
-	public void editUser(User user) {
+	public void editUser(User user, Long id) {
 
-		Optional<User> userOp = usersRepository.findById(user.getId());
+		Optional<User> userOp = usersRepository.findById(id);
 		if (userOp.isPresent()) {
 			User userToUpdate = userOp.get();
 			userToUpdate.setUsername(user.getUsername());
 			userToUpdate.setName(user.getName());
 			userToUpdate.setLastName(user.getLastName());
+			userToUpdate.setEmail(user.getEmail());
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			usersRepository.save(userToUpdate);
 		} else
@@ -137,4 +140,28 @@ public class UsersService {
 		return usersRepository.findByEmail(email);
 	}
 
+	public Page<User> getList(Pageable pageable, String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		if (searchText != null && !searchText.isEmpty())
+			users = searchUsersByUsernameAndNameAndLastname(pageable, searchText);
+		else
+			users = getUsers(pageable);
+		return users;
+	}
+	
+	public Page<User> getStudentList(Pageable pageable, String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		if (searchText != null && !searchText.isEmpty())
+			users = searchStudentsByNameAndLastname(pageable, searchText, "ROLE_STUDENT");
+		else
+			users = getUsersByRole(pageable, "ROLE_STUDENT");
+		return users;
+	}
+	
+	public User perfil() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = getUserByUsername(username);
+		return activeUser;
+	}
 }

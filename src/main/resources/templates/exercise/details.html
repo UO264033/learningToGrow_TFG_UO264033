@@ -40,12 +40,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" th:object="${exercise}" align="center">
-		<a class="btn btn-info"
-			th:href="${'/exercise/edit/' + exercise.id}" role="button"><span
-			class="material-icons-round"> mode_edit_outline </span><span
-			th:text="#{user.list.table.editButton}"></span></a>
-	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 </html>

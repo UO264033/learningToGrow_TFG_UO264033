@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
-import com.uniovi.entities.Test;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.QuestionService;
 import com.uniovi.validators.QuestionValidator;
@@ -71,19 +69,10 @@ public class QuestionController {
 		if (result.hasErrors()) {
 			return "exercise/test/question/add";
 		}
-
-		Question q = new Question(statement, exercise);
-		q.addAnswer(new Answer(texto1, correct1, q));
-		q.addAnswer(new Answer(texto2, correct2, q));
-		q.addAnswer(new Answer(texto3, correct3, q));
-		model.addAttribute("question", q);
-		q = questionService.addQuestion(q);
-		exerciseService.addExercise((Test)exercise);
-
+		Question q = questionService.addNewQuestion(model, statement, texto1, texto2, texto3, correct1, correct2, correct3, exercise);
 		if (q != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");
 		}
-
 		return "exercise/test/question/add";
 	}
 
