@@ -34,7 +34,7 @@ public class EmailService {
 	private EmailConfig emailConfig;
 
 	@Autowired
-	private UsersService userService;
+	private UserService userService;
 
 	@Autowired
 	private SubjectService subjectService;

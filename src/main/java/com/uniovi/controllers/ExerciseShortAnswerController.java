@@ -23,14 +23,14 @@ import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseShortAnswerService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
 public class ExerciseShortAnswerController {
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;

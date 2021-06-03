@@ -19,13 +19,13 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
-import com.uniovi.repositories.UsersRepository;
+import com.uniovi.repositories.UserRepository;
 
 @Service
-public class UsersService {
+public class UserService {
 
 	@Autowired
-	private UsersRepository usersRepository;
+	private UserRepository usersRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;

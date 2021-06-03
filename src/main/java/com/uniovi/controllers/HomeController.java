@@ -19,13 +19,13 @@ import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private SubjectService subjectService;

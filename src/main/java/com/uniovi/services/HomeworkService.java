@@ -40,7 +40,7 @@ public class HomeworkService {
 	private ExerciseService exerciseService;
 	
 	@Autowired
-	private UsersService userService;
+	private UserService userService;
 	
 
 	public Page<Homework> getHomeworks(Pageable pageable) {

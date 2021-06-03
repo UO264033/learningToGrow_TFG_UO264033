@@ -25,7 +25,7 @@ import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 
 @Controller
 public class HomeworkController {
@@ -34,7 +34,7 @@ public class HomeworkController {
 	private HomeworkService homeworksService;
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private ExerciseService exerciseService;

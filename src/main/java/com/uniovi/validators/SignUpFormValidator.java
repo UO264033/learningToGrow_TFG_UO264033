@@ -10,13 +10,13 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.uniovi.entities.User;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 
 @Component
 public class SignUpFormValidator implements Validator{
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Override
 	public boolean supports(Class<?> aClass) {

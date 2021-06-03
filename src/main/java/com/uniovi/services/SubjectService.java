@@ -17,7 +17,7 @@ public class SubjectService {
 	private SubjectRepository subjectRepository;
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	public void addSubject(Subject subject) {
 		subjectRepository.save(subject);

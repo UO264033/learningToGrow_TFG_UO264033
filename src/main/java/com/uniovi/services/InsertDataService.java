@@ -21,7 +21,7 @@ import com.uniovi.entities.User;
 @Service
 public class InsertDataService {
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private QuestionService qService;

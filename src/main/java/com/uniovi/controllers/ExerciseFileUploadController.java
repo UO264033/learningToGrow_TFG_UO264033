@@ -18,7 +18,7 @@ import com.uniovi.entities.UploadFile;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseFileUploadService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 
@@ -26,7 +26,7 @@ import com.uniovi.validators.ExerciseValidator;
 public class ExerciseFileUploadController {
 	
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;

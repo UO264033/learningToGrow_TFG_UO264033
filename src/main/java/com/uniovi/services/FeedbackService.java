@@ -26,7 +26,7 @@ public class FeedbackService {
 	private HomeworkService homeworkService;
 
 	@Autowired
-	private UsersService userService;
+	private UserService userService;
 	
 	@Autowired
 	private SubjectService subjectService;

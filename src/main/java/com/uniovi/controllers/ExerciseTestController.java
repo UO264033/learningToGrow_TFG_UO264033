@@ -18,14 +18,14 @@ import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
 public class ExerciseTestController {
 	
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;

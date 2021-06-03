@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.SubjectValidator;
 
 @Controller
@@ -27,7 +27,7 @@ public class SubjectController {
 	private SubjectService subjectService;
 
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 
 	@Autowired
 	private SubjectValidator subjectValidator;

@@ -19,13 +19,13 @@ import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
-import com.uniovi.services.UsersService;
+import com.uniovi.services.UserService;
 
 @Controller
 public class ExerciseController {
 	
 	@Autowired
-	private UsersService usersService;
+	private UserService usersService;
 	
 	@Autowired
 	private ExerciseService exerciseService;
