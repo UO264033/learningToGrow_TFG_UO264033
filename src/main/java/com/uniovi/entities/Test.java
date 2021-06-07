@@ -1,7 +1,9 @@
 package com.uniovi.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,6 +36,10 @@ public class Test extends Exercise {
 
 	public List<Question> getQuestions() {
 		return new ArrayList<>(questions);
+	}
+	
+	public Set<Question> getQuestionsSet() {
+		return new HashSet<>(questions);
 	}
 
 	public void setQuestions(List<Question> questions) {

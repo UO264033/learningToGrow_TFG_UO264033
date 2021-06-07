@@ -14,7 +14,7 @@
 		<div th:if="${!questionList.isEmpty()}">
 			<div class="panel panel-default" th:each="question : ${questionList}">
 				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
-				<div th:each="answer : ${question.answers}">
+				<div th:each="answer : ${question.getAnswersSet()}">
 					<input th:if="${answer.correct == true}" type="checkbox" id="huey"
 						name="drone" value="huey" checked disabled> <input
 						th:if="${answer.correct == false}" type="checkbox" id="huey"

@@ -29,7 +29,6 @@
 						<th th:text="#{signup.nombre}">Nombre</th>
 						<th th:text="#{home.description}">Descripción</th>
 						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,9 +37,6 @@
 						<td th:text="${exercise.description}">10</td>
 						<td><a th:href="${'/exercise/details/' + exercise.id}"
 							class="btn btn-info" role="button"><span th:text="#{user.list.table.detailsButton}"/></a></td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/exercise/delete/' + exercise.id}"
-							class="btn btn-info" role="button"><span th:text="#{user.list.table.deleteButton}"/></a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -72,7 +68,7 @@
 				</div>
 				<div class="panel-body">
 					<a th:href="${'/subject/details/' + subject.id}"><img
-						src="/img/maths.png" /></a><br>
+						src="/img/subjects.png" /></a><br>
 				</div>
 			</div>
 		</div>

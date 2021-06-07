@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uniovi.entities.Exercise;
+import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Question;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.QuestionService;
@@ -98,6 +99,10 @@ public class QuestionController {
 		List<Question> questions = questionService.getQuestionsByExerciseId(q.getExercise().getId());
 		model.addAttribute("questionList", questions);
 		model.addAttribute("exercise", q.getExercise());
-		return "redirect:/exercise/test/show/" + q.getExercise().getId();
+		if(q.getExercise().getType().equals(ExerciseType.T))
+			return "redirect:/exercise/test/show/" + q.getExercise().getId();
+		else if(q.getExercise().getType().equals(ExerciseType.S))
+			return "redirect:/exercise/shortAnswer/show/" + q.getExercise().getId();
+		return "redirect:/home";	
 	}
 }

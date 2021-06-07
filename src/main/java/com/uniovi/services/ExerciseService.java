@@ -30,7 +30,7 @@ public class ExerciseService {
 
 	@Autowired
 	private HomeworkService homeworkService;
-	
+
 	public void addExercise(Exercise exercise) {
 		exerciseRepository.save(exercise);
 	}
@@ -45,14 +45,21 @@ public class ExerciseService {
 		return exerciseRepository.findById(id).get();
 	}
 
-	public void deleteExercise(Long id) {
+	public void deleteInsideExercise(Long id) {
 		List<Question> questions = questionService.getQuestionsByExerciseId(id);
 		for (Question q : questions)
 			questionService.deleteQuestion(q.getId());
 		if (exerciseRepository.findById(id).isPresent()) {
 			Exercise exercise = exerciseRepository.findById(id).get();
 			homeworkService.deleteByExerciseId(exercise);
-			exerciseRepository.deleteById(id);
+//			exerciseRepository.deleteById(id);
+		}
+	}
+
+	public void deleteExercise(Long id) {
+		if (exerciseRepository.findById(id).isPresent()) {
+			Exercise exercise = exerciseRepository.findById(id).get();
+			exerciseRepository.delete(exercise);
 		}
 	}
 

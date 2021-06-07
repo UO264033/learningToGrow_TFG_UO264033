@@ -16,14 +16,14 @@
 		<div th:if="${!questionList.isEmpty()}">
 			<div class="panel panel-default" th:each="question : ${questionList}">
 				<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
-				<div th:each="answer : ${question.answers}">
-					<div th:each="answer : ${question.answers}">
+				<div th:each="answer : ${question.getAnswersSet()}">
+					<div>
 						<label for="huey" th:text="${answer.text}" />
 					</div>
 					<div class="container" align="center">
-					<a th:href="${'/question/delete/' + question.id}"
-						class="glyphicon glyphicon-trash" role="button"></a>
-				</div>
+						<a th:href="${'/question/delete/' + question.id}"
+							class="glyphicon glyphicon-trash" role="button"></a>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -20,4 +20,5 @@ public interface ExerciseRepository  extends CrudRepository<Exercise, Long>  {
 
 	@Query("SELECT e FROM Exercise e WHERE e.professor = ?1")
 	Page<Exercise> findByUser(Pageable pageable, User activeUser);
+
 }

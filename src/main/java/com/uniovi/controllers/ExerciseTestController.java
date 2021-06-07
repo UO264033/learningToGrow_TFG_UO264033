@@ -70,7 +70,7 @@ public class ExerciseTestController {
 		Test exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("idExercise", id);
-		model.addAttribute("questionList", exercise.getQuestions());
+		model.addAttribute("questionList", exercise.getQuestionsSet());
 		return "exercise/test/show";
 	}
 	

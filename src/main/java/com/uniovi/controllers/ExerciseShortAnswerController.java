@@ -122,7 +122,7 @@ public class ExerciseShortAnswerController {
 	public String showQuestions(Model model, @PathVariable Long id) {
 		ShortAnswer exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
-		model.addAttribute("questionList", exercise.getQuestions());
+		model.addAttribute("questionList", exercise.getQuestionsSet());
 		return "exercise/shortAnswer/show";
 	}
 

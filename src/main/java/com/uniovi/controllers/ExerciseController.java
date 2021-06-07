@@ -43,6 +43,7 @@ public class ExerciseController {
 
 	@RequestMapping("/exercise/delete/{id}")
 	public String getDelete(Model model, @PathVariable Long id) {
+		exerciseService.deleteInsideExercise(id);
 		exerciseService.deleteExercise(id);
 		model.addAttribute("mensaje", "El ejercicio se ha eliminado correctamente");
 		return "redirect:/exercise/list";
@@ -52,10 +53,14 @@ public class ExerciseController {
 	public String getDetails(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
-		if(exercise.getType() == ExerciseType.S)
+		if(exercise.getType() == ExerciseType.S) {
 			model.addAttribute("questionList", ((ShortAnswer) exercise).getQuestions());
-		else if(exercise.getType() == ExerciseType.T)
+			model.addAttribute("short", "short");
+		}
+		else if(exercise.getType() == ExerciseType.T) {
 			model.addAttribute("questionList", ((Test) exercise).getQuestions());
+			model.addAttribute("test", "test");
+		}
 		else
 			model.addAttribute("questionList", null);
 		return "exercise/details";
