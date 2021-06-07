@@ -39,14 +39,18 @@ public class SignUpFormValidator implements Validator{
 		if (user.getLastName().length() < 2 || user.getLastName().length() > 30) {
 			errors.rejectValue("lastName", "Error.signup.lastName.length");
 		}
-		Pattern pattern = Pattern
+		Pattern patternEmail = Pattern
                 .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-		Matcher mather = pattern.matcher(user.getEmail());
+		Matcher mather = patternEmail.matcher(user.getEmail());
 		if (!mather.find()) {
 			errors.rejectValue("email", "Error.signup.email");
 		}
-		if (user.getPassword().length() < 8 || user.getPassword().length() > 60) {   //VALIDAR MEJOR
+		
+		Pattern patternPassword = Pattern
+                .compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
+		Matcher mather2 = patternPassword.matcher(user.getPassword());
+		if (!mather2.find()) {
 			errors.rejectValue("password", "Error.signup.password.length");
 		}
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {

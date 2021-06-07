@@ -81,15 +81,6 @@ public class SubjectController {
 		return "subject/add/" + message;
 	}
 
-	@RequestMapping(value = "/subject/update")
-	public String getSubjectFilteredStudents(Model model,
-			@RequestParam(value = "", required = false) String searchText) {
-		model.addAttribute("subject", new Subject());
-		List<User> students = usersService.getStudentsFiltered(searchText);
-		model.addAttribute("studentList", students);
-		return "subject/add :: tableUsers";
-	}
-
 	@RequestMapping("/subject/{name}/addStudent/{idSt}")
 	public String setStudents(Model model, @PathVariable String name, @PathVariable String idSt, Principal principal) {
 		Subject subject = subjectService.getSubjectByName(name);

@@ -105,7 +105,7 @@
 								th:text="#{language.es}">Español</span>
 						</a></li>
 					</ul></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/signup"><span
+				<li sec:authorize="!isAuthenticated()"><a href="/signup" id="signup"><span
 						class="material-icons-round"> person </span> <span
 						th:text="#{signup.message}"> Regístrate <span class="caret"></span></a></li>
 				<li sec:authorize="!isAuthenticated()"><a href="/login"><span

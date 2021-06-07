@@ -37,7 +37,9 @@
 				<div class="alert alert-danger" role="alert"
 					th:unless="${exercise.description != null}" th:text="#{exercise.details.empty}"></div>
 				<img src="/img/empty-exercise.png" /><br>
-				<form class="form-horizontal" method="get"
+			</div>
+			<div align="center">
+			<form class="form-horizontal" method="get"
 					th:action="${'/exercise/shortAnswer/q&a/add/' + exercise.id}" th:if="${short != null}">
 					<input th:value="${exercise.id}" name="exerciseId" type="number"
 						hidden />
@@ -50,7 +52,7 @@
 						hidden />
 					<button type="submit" id="addA" class="btn btn-info" th:text="#{question.another}"/> 
 				</form>
-			</div>
+				</div>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer" />

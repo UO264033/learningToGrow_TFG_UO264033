@@ -52,7 +52,7 @@
 						th:text="#{question.button.add}"></button>
 					<a th:if="${mensaje == null}" 
 						class="btn btn-info" role="button"
-						th:text="#{question.showExercise}" disabled></a>
+						th:text="#{question.showExercise}" id="showE" disabled></a>
 					<a th:unless="${mensaje == null}" th:href="${'/exercise/test/show/' + exercise.id}"
 						class="btn btn-info" role="button"
 						th:text="#{question.showExercise}"></a>
