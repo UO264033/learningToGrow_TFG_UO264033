@@ -8,7 +8,7 @@
 		<h2 th:text="#{user.studentsList}"></h2>
 		<form class="navbar-form" action="/user/student/list">
 			<div class="form-group">
-				<input name="searchText" type="text" class="form-control" size="50"
+				<input name="searchText" type="text" class="form-control" size="50" id="searchText"
 					th:placeholder="#{user.students.search}">
 			</div>
 			<button type="submit" class="btn btn-info">
@@ -21,7 +21,7 @@
 			<img src="/img/students.png" /><br>
 		</div>
 		
-		<div class="panel panel-default" th:each="student : ${studentList}">
+		<div class="panel panel-default" th:each="student : ${studentList}" id="card">
 			<div class="panel-heading">
 				<h3>
 					<span th:text="${student.name}" /> <span

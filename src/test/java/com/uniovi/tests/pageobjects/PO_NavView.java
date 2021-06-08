@@ -55,5 +55,16 @@ public class PO_NavView extends PO_View {
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id", textLanguage, getTimeout());
 		elementos.get(0).click();
 	}
+	
+	public static void clickOptionMenu(WebDriver driver, String groupmenu, String option, String text) {
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", groupmenu);
+		elementos.get(0).click();
+		// Esperamos a aparezca la opción de ver ejercicios:
+		// //a[contains(@href,'exercise/list')]
+		elementos = PO_View.checkElement(driver, "free", option);
+		// Pinchamos en listado de ejercicios.
+		elementos.get(0).click();
+		PO_View.checkElement(driver, "text", text);
+	}
 
 }

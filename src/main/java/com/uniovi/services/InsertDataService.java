@@ -43,13 +43,20 @@ public class InsertDataService {
 		User user1 = new User("alumno", "Pedro", "Díaz", "gonzalezgancedomaria@gmail.com");
 		user1.setPassword("123456");
 		user1.setRole(rolesService.getRoles()[0]);
-		User user2 = new User("99999991B", "Lucas", "Núñez", "lucas@gmail.com");
+		User user2 = new User("lucasnunez", "Lucas", "Núñez", "lucas@gmail.com");
 		user2.setPassword("123456");
 		user2.setRole(rolesService.getRoles()[0]);
-		User user3 = new User("99999992C", "María", "Rodríguez", "maria@gmail.com");
+		User user3 = new User("mariarodri", "María", "Rodríguez", "maria@gmail.com");
 		user3.setPassword("123456");
 		user3.setRole(rolesService.getRoles()[0]);
+		User user7 = new User("garcialucia", "Lucía", "García", "garcialucia@gmail.com");
+		user7.setPassword("123456");
+		user7.setRole(rolesService.getRoles()[0]);
+		User user8 = new User("raquelsan", "Raquel", "Sánchez", "raquel@gmail.com");
+		user8.setPassword("123456");
+		user8.setRole(rolesService.getRoles()[0]);
 		User user4 = new User("profesor", "Marta", "Almonte", "marta@gmail.com");
+		user4.setPassword("123456");
 		user4.setPassword("123456");
 		user4.setRole(rolesService.getRoles()[1]);
 		User user5 = new User("99999977E", "Pelayo", "Valdes", "pelayo@gmail.com");
@@ -72,7 +79,10 @@ public class InsertDataService {
 		user1.addSubject(s1);
 		user1.addSubject(s2);
 		user2.addSubject(s1);
+		user6.addSubject(s1);
 		user1.addSubject(s2);
+		user6.addSubject(s2);
+		user8.addSubject(s2);
 		
 		sService.addSubject(s1);
 		sService.addSubject(s2);
@@ -80,6 +90,8 @@ public class InsertDataService {
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
+		usersService.addUser(user7);
+		usersService.addUser(user8);
 
 		Test e1 = new Test("E1", "Ejercicio de colores");
 		e1.setProfessor(user4);
