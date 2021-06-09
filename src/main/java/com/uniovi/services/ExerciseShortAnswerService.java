@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Question;
 import com.uniovi.entities.ShortAnswer;
+import com.uniovi.entities.User;
 import com.uniovi.repositories.ExerciseShortAnswerRepository;
 
 @Service
@@ -24,6 +28,9 @@ public class ExerciseShortAnswerService {
 	
 	@Autowired
 	private AnswerService answerService;
+	
+	@Autowired
+	private UserService usersService;
 
 	public ShortAnswer addExercise(ShortAnswer shortAnswer) {
 		for(Question q: shortAnswer.getQuestions()) {
@@ -57,5 +64,21 @@ public class ExerciseShortAnswerService {
 		Question q = questionService.getQuestion(idQuestion);
 		return q.getExercise();
 	}
+	
+	public void setProfesor(ShortAnswer exercise) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = usersService.getUserByUsername(username);
+		exercise.setProfessor(activeUser);
+	}
+
+	public void setQuestion(Model model, String statement, String text, ShortAnswer exercise) {
+		Question question = new Question(statement, exercise);
+		Answer answer = new Answer(text, question);
+		question.addAnswer(answer);
+		exercise.addQuestion(question);
+		model.addAttribute("exercise", exercise);
+	}
+
 
 }

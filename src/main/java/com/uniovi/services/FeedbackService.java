@@ -27,7 +27,7 @@ public class FeedbackService {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private SubjectService subjectService;
 
@@ -57,7 +57,7 @@ public class FeedbackService {
 	}
 
 	public Feedback getFeedback(Long feedbackId) {
-		if(feedbackRepository.findById(feedbackId).isPresent())
+		if (feedbackRepository.findById(feedbackId).isPresent())
 			return feedbackRepository.findById(feedbackId).get();
 		return null;
 	}
@@ -80,7 +80,7 @@ public class FeedbackService {
 		feedback.setSend(true);
 		feedbackRepository.save(feedback);
 	}
-	
+
 	public void createFeedback(Feedback feedback, Homework homework) {
 		feedback.setHomework(homework);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -91,4 +91,13 @@ public class FeedbackService {
 		homeworkService.markAsSent(homework);
 	}
 
+	public List<Feedback> getFeedbackBySubjectList(Long id) {
+		List<Feedback> feedbacks = new ArrayList<Feedback>();
+		if (!getFeedbackBySubject(id).isEmpty()) {
+			for (Feedback f : getFeedbackBySubject(id)) {
+				feedbacks.add(f);
+			}
+		}
+		return feedbacks;
+	}
 }

@@ -164,4 +164,12 @@ public class UserService {
 		User activeUser = getUserByUsername(username);
 		return activeUser;
 	}
+
+
+	public User activeUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User activeUser = getUserByUsername(username);
+		return activeUser;
+	}
 }

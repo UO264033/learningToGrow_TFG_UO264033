@@ -3,8 +3,6 @@ package com.uniovi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,15 +16,11 @@ import com.uniovi.entities.UploadFile;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseFileUploadService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 
 @Controller
 public class ExerciseFileUploadController {
-	
-	@Autowired
-	private UserService usersService;
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;
@@ -54,16 +48,11 @@ public class ExerciseFileUploadController {
 			model.addAttribute("exercise", exerciseVa);
 			return "exercise/upFile/add";
 		}
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		User activeUser = usersService.getUserByUsername(username);
-		exercise.setProfessor(activeUser);
+		exerciseService.setProfessor(exercise);
+		exerciseService.addExercise(exercise);
 		
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
-		exerciseService.addExercise(exercise);
 		return "redirect:/exercise/list";
 	}
-	
 }

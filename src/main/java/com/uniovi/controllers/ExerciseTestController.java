@@ -2,8 +2,6 @@ package com.uniovi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,15 +16,11 @@ import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
 public class ExerciseTestController {
 	
-	@Autowired
-	private UserService usersService;
-
 	@Autowired
 	private ExerciseValidator exerciseValidator;
 	
@@ -54,17 +48,14 @@ public class ExerciseTestController {
 			return "exercise/test/add";
 		}
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		User activeUser = usersService.getUserByUsername(username);
-		exercise.setProfessor(activeUser);
+		exerciseService.setProfesor(exercise);
+		exerciseService.addExercise(exercise);
 		
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
-		exerciseService.addExercise(exercise);
 		return "exercise/test/question/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/test/show/{id}")
 	public String showQuestions(Model model, @PathVariable Long id) {
 		Test exercise = exerciseService.getExercise(id);

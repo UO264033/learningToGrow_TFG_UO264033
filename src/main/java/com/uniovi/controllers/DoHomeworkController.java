@@ -1,10 +1,5 @@
 package com.uniovi.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Homework;
-import com.uniovi.entities.User;
-import com.uniovi.services.AnswerService;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.HomeworkService;
-import com.uniovi.services.UserService;
 
 @Controller
 public class DoHomeworkController {
@@ -34,14 +25,8 @@ public class DoHomeworkController {
 	private HomeworkService homeworksService;
 
 	@Autowired
-	private UserService usersService;
-
-	@Autowired
 	private ExerciseService exerciseService;
 	
-	@Autowired
-	private AnswerService answerService;
-
 	@RequestMapping("/homework/do/{id}")
 	public String doHomework(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
@@ -78,30 +63,17 @@ public class DoHomeworkController {
 			@RequestParam(value = "answerStrings[]") String[] answerStrings, Principal principal,
 			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		for (int i = 0; i < answerStrings.length; i++) {
-			homework.addAnswer(new Answer(answerStrings[i]));
-		}
+		Homework homework = homeworksService.saveShortAnswers(answerStrings, principal, description, realExercise);
 		homeworksService.addHomework(homework);
 		return "redirect:/homework/exercise/list";
 	}
 
-	//fhadaisbdfajsdbfkajsdf
 	@RequestMapping(value = "/homework/do/test", method = RequestMethod.POST)
 	public String savesHomeworkTest(Model model, @RequestParam(value = "idExercise") Long idExercise,
 			@RequestParam(value = "checkAnswers[]") int[] checkAnswers, Principal principal,
 			@RequestParam(value = "description", required = false) String description) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		for (int i = 0; i < checkAnswers.length; i++) {
-			homework.addAnswer(new Answer( answerService.getById(checkAnswers[i]).getText()));
-		}
+		Homework homework = homeworksService.saveAnswersTest(checkAnswers, principal, description, realExercise);
 		homeworksService.addHomework(homework);
 		return "redirect:/homework/exercise/list";
 	}
@@ -115,30 +87,9 @@ public class DoHomeworkController {
 			attributes.addFlashAttribute("message", "Por favor, seleccione un archivo.");
 			return "homework/do/uploadFile";
 		}
-//		Path directory = Paths.get("C:\\tfg_ltg");
-//		String absRoute = directory.toFile().getAbsolutePath();
 		Exercise realExercise = exerciseService.getExercise(idExercise);
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = usersService.getUserByUsername(username);
-		homework.setUser(user);
-		try {
-			byte[] bytesImg = file.getBytes();
-			File directorioAsignatura = new File("C:\\tfg_ltg//" + realExercise.getSubject().getName());
-			directorioAsignatura.mkdir();
-			File directorioEjercicio = new File(directorioAsignatura + "//" + realExercise.getName());
-			directorioEjercicio.mkdir();
-			Path completeRoute = Paths
-					.get(directorioEjercicio + "//" + user.getFullName() + "_" + file.getOriginalFilename());
-			Files.write(completeRoute, bytesImg);
-
-			homework.setFile(user.getFullName() + "_" + file.getOriginalFilename());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Homework homework = homeworksService.saveFiles(file, description, principal, realExercise);
 		homeworksService.addHomework(homework);
 		return "redirect:/homework/exercise/list";
 	}
-
 }

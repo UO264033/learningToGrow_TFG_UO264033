@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,21 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
 import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseShortAnswerService;
 import com.uniovi.services.SubjectService;
-import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
 public class ExerciseShortAnswerController {
-
-	@Autowired
-	private UserService usersService;
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;
@@ -59,20 +52,16 @@ public class ExerciseShortAnswerController {
 			return "exercise/shortAnswer/add";
 		}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		User activeUser = usersService.getUserByUsername(username);
-		exercise.setProfessor(activeUser);
-
+		exerciseService.setProfesor(exercise);
+		exerciseService.addExercise(exercise);
+		
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
-		exerciseService.addExercise(exercise);
 		return "exercise/shortAnswer/q&a/add";
 	}
 
 	@RequestMapping(value = "/exercise/shortAnswer/q&a/add", method = RequestMethod.GET)
 	public String addQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("idExercise") Long idExercise) {
-//		model.addAttribute("question", new Question());
 		if(exercise == null)
 			exercise = exerciseService.getExercise(idExercise);
 		model.addAttribute("exercise", exercise);
@@ -81,7 +70,6 @@ public class ExerciseShortAnswerController {
 	
 	@RequestMapping(value = "/exercise/shortAnswer/q&a/add/{id}", method = RequestMethod.GET)
 	public String addAnotherQuestion(Model model, @ModelAttribute Exercise exercise, @PathVariable Long id) {
-//		model.addAttribute("question", new Question());
 		if(exercise == null)
 			exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
@@ -99,24 +87,14 @@ public class ExerciseShortAnswerController {
 		model.addAttribute("question", shortAnswer);
 		model.addAttribute("idExercise", idExercise);
 
-//		questionValidator.validate(questionVa, result);
-//		if(result.hasErrors()) {
-//			return "question/add";
-//		}
-
-		Question question = new Question(statement, exercise);
-		Answer answer = new Answer(text, question);
-		question.addAnswer(answer);
-		exercise.addQuestion(question);
-		model.addAttribute("exercise", exercise);
+		exerciseService.setQuestion(model, statement, text, exercise);
 		exercise = exerciseService.addExercise(exercise);
-		
 		if (exercise != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");
 		}
-		
 		return "exercise/shortAnswer/q&a/add";
 	}
+
 
 	@RequestMapping(value = "/exercise/shortAnswer/show/{id}")
 	public String showQuestions(Model model, @PathVariable Long id) {

@@ -1,6 +1,5 @@
 package com.uniovi.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +34,8 @@ public class FeedbackController {
 	
 	@RequestMapping("/feedback/list/{id}")
 	public String getFeedbackBySubject(Model model, @PathVariable Long id) {
-		List<Feedback> feedbacks = new ArrayList<Feedback>();
-		if (!feedbackService.getFeedbackBySubject(id).isEmpty()) {
-			for (Feedback f : feedbackService.getFeedbackBySubject(id)) {
-				feedbacks.add(f);
-			}
-		}
+		List<Feedback> feedbacks = feedbackService.getFeedbackBySubjectList(id);
 		model.addAttribute("feedbackList", feedbacks);
-
 		return "feedback/list";
 	}
 
@@ -61,11 +54,9 @@ public class FeedbackController {
 	@RequestMapping(value = "/homework/correct", method = RequestMethod.POST)
 	public String correctExerciseShortAnswer(Model model, @ModelAttribute("feedback") Feedback feedback,
 			@RequestParam("idHomework") Long idHomework) {
-		
 		Homework homework = homeworksService.getHomework(idHomework);
 		feedbackService.createFeedback(feedback, homework);
 		model.addAttribute("feedback", feedback);
-		
 		return "redirect:/homework/list";
 	}
 

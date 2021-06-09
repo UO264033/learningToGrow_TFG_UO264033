@@ -1,5 +1,11 @@
 package com.uniovi.services;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
@@ -170,7 +177,53 @@ public class HomeworkService {
 		
 		return homeworks;
 	}
+	
+	public Homework saveShortAnswers(String[] answerStrings, Principal principal, String description,
+			Exercise realExercise) {
+		Homework homework = new Homework(description, true, realExercise);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = userService.getUserByUsername(username);
+		homework.setUser(user);
+		for (int i = 0; i < answerStrings.length; i++) {
+			homework.addAnswer(new Answer(answerStrings[i]));
+		}
+		return homework;
+	}
+	
+	public Homework saveAnswersTest(int[] checkAnswers, Principal principal, String description,
+			Exercise realExercise) {
+		Homework homework = new Homework(description, true, realExercise);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = userService.getUserByUsername(username);
+		homework.setUser(user);
+		for (int i = 0; i < checkAnswers.length; i++) {
+			homework.addAnswer(new Answer( answerService.getById(checkAnswers[i]).getText()));
+		}
+		return homework;
+	}
 
+	public Homework saveFiles(MultipartFile file, String description, Principal principal, Exercise realExercise) {
+		Homework homework = new Homework(description, true, realExercise);
+		String username = principal.getName(); // Username es el name de la autenticación
+		User user = userService.getUserByUsername(username);
+		homework.setUser(user);
+		try {
+			byte[] bytesImg = file.getBytes();
+			File directorioAsignatura = new File("C:\\tfg_ltg//" + realExercise.getSubject().getName());
+			directorioAsignatura.mkdir();
+			File directorioEjercicio = new File(directorioAsignatura + "//" + realExercise.getName());
+			directorioEjercicio.mkdir();
+			Path completeRoute = Paths
+					.get(directorioEjercicio + "//" + user.getFullName() + "_" + file.getOriginalFilename());
+			Files.write(completeRoute, bytesImg);
+
+			homework.setFile(user.getFullName() + "_" + file.getOriginalFilename());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return homework;
+	}
 	
 
 }
