@@ -3,7 +3,7 @@
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
+				data-target="#myNavbar" aria-label="Center Align">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
@@ -17,53 +17,53 @@
 							home </span> <span th:text="#{nav.home}"></span>
 				</a></li>
 				<li id="exercises-menu" class="dropdown"
-					sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+					sec:authorize="hasRole('ROLE_PROFESSOR')"><a aria-label="Center Align"
 					class="dropdown-toggle" data-toggle="dropdown" href="#"> <span
 						class="material-icons-round"> add_to_photos </span> <span
 						th:text="#{nav.exercise.new}"></span><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/exercise/test/add"><span
+						<li><a href="/exercise/test/add" aria-label="Center Align"><span
 								class="material-icons-round"> checklist </span> <span
 								th:text="#{nav.exercise.test}"></span></a></li>
-						<li><a href="/exercise/upFile/add"><span
+						<li><a href="/exercise/upFile/add" aria-label="Center Align"><span
 								class="material-icons-round"> insert_drive_file </span> <span
 								th:text="#{nav.exercise.file}"></span></a></li>
-						<li><a href="/exercise/shortAnswer/add"><span
+						<li><a href="/exercise/shortAnswer/add" aria-label="Center Align"><span
 								class="material-icons-round"> short_text </span> <span
-								th:text="#{nav.exercise.shortAnswer}"></span></a></li>
+								th:text="#{nav.exercise.shortAnswer}" aria-label="Center Align"></span></a></li>
 					</ul></li>
 
 				<li id="homerworks-menu" class="dropdown"
 					sec:authorize="!hasRole('ROLE_ADMIN')"><a
-					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+					class="dropdown-toggle" data-toggle="dropdown" href="#" aria-label="Center Align"><span
 						class="material-icons-round"> menu_book </span> <span
 						th:text="#{nav.homework}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a aria-label="Center Align"
 							href="/exercise/list"><span class="material-icons-round">
 									list_alt </span> <span th:text="#{nav.showExercise}"></span></a></li>
-						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a aria-label="Center Align"
 							href="/homework/list"><span class="material-icons-round">
 									rule </span> <span th:text="#{nav.correct.homework}"></span></a></li>
-						<li sec:authorize="hasRole('ROLE_STUDENT')"><a
+						<li sec:authorize="hasRole('ROLE_STUDENT')"><a aria-label="Center Align"
 							href="/homework/exercise/list"><span
 								class="material-icons-round"> auto_stories </span> <span
 								th:text="#{nav.show.homework}"></span></a></li>
-						<li sec:authorize="hasRole('ROLE_STUDENT')"><a
+						<li sec:authorize="hasRole('ROLE_STUDENT')"><a aria-label="Center Align"
 							href="/feedback/list"><span class="material-icons-round">
 									rule </span> <span th:text="#{nav.correct.feedback}"></span></a></li>
 					</ul></li>
 				<li id="users-menu" class="dropdown"
-					sec:authorize="!hasRole('ROLE_ADMIN')"><a
+					sec:authorize="!hasRole('ROLE_ADMIN')"><a aria-label="Center Align"
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
 						class="material-icons-round"> group </span> <span
 						th:text="#{nav.subjects}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a aria-label="Center Align"
 							href="/user/student/list"> <span class="material-icons-round">
 									groups </span> <span th:text="#{nav.show.students}"></span>
 						</a></li>
-						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+						<li sec:authorize="hasRole('ROLE_PROFESSOR')"><a aria-label="Center Align"
 							href="/subject/add"><span class="material-icons-round">
 									group_add </span> <span th:text="#{nav.add.subject}"></span></a></li>
 						<li><a href="/subject/list"> <span
@@ -73,15 +73,15 @@
 					</ul></li>
 
 				<li id="users-menu" class="dropdown"
-					sec:authorize="hasRole('ROLE_ADMIN')"><a
+					sec:authorize="hasRole('ROLE_ADMIN')"><a aria-label="Center Align"
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><span
 						class="material-icons-round"> people </span> <span
 						th:text="#{nav.user.management}"></span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/list"><span
+						<li><a href="/user/list" aria-label="Center Align"><span
 								class="material-icons-round"> supervisor_account </span><span
 								th:text="#{nav.show.users}"></span></a></li>
-						<li><a href="/user/add"><span
+						<li><a href="/user/add" aria-label="Center Align"><span
 								class="material-icons-round"> person_add </span> <span
 								th:text="#{nav.add.user}"></span></a></li>
 					</ul></li>
@@ -90,38 +90,38 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href=" #"
 					class="dropdown-toggle" data-toggle="dropdown" role="button"
-					aria-haspopup="true" aria-expanded="false"><span
+					aria-haspopup="true" aria-expanded="false" aria-label="Center Align"><span
 						class="material-icons-round"> language </span> <span
 						th:text="#{language.change}"></span> <span class="caret"></span> </a>
 					<ul id="languageDropdownMenuButton" class="dropdown-menu">
-						<li><a id="btnEnglish" value="EN"> <img
+						<li><a id="btnEnglish" value="EN" aria-label="Center Align"> <img
 								th:src="@{/img/if_uk_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.en}">Inglés</span>
 						</a></li>
-						<li><a id="btnSpanish" value="ES"> <img
+						<li><a id="btnSpanish" value="ES" aria-label="Center Align"> <img
 								th:src="@{/img/if_spain_flag.png}"
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.es}">Español</span>
 						</a></li>
 					</ul></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/signup" id="signup"><span
+				<li sec:authorize="!isAuthenticated()"><a href="/signup" id="signup" aria-label="Center Align"><span
 						class="material-icons-round"> person </span> <span
 						th:text="#{signup.message}"> Regístrate <span class="caret"></span></a></li>
-				<li sec:authorize="!isAuthenticated()"><a href="/login"><span
+				<li sec:authorize="!isAuthenticated()"><a href="/login" aria-label="Center Align"><span
 						class="material-icons-round"> login </span><span
 						th:text="#{login.message}"> Identifícate </span></a></li>
 				<li id="settings-menu" class="dropdown"
 					sec:authorize="isAuthenticated()"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"><span
+					data-toggle="dropdown" href="#" aria-label="Center Align"><span
 						class="material-icons-round"> settings </span> <span
 						th:text="#{nav.settings}"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/user/perfil"><span
+						<li><a href="/user/perfil" aria-label="Center Align"><span
 								class="material-icons-round"> manage_accounts </span><span
 								th:text="#{nav.perfil}"></span></a></li>
 					</ul></li>
-				<li sec:authorize="isAuthenticated()"><a href="/logout"><span
+				<li sec:authorize="isAuthenticated()"><a href="/logout" aria-label="Center Align"><span
 						class="material-icons-round"> logout </span> <span
 						class="font-effect-vintage" th:text="#{logout.message}"> </span></a></li>
 			</ul>

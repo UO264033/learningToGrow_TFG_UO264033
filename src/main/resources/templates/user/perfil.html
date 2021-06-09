@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{profile.h2}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -23,7 +26,7 @@
 		</div>
 		<br><br>
 		<div class="container" align="center">
-			<a href="/logout" class="btn btn-info btn-lg" align="center"> <span
+			<a href="/logout" class="btn btn-info btn-lg" align="center" aria-label="Center Align"> <span
 				class="material-icons-round"> logout </span> <span th:text="#{logout.message}"/>
 			</a>
 		</div>

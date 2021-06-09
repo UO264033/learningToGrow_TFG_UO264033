@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{user.details.h2}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -20,10 +23,10 @@
 			<div class="col-sm-offset-2 col-sm-10">
 				<a class="btn btn-info" th:href="${'/user/edit/' + user.id}"
 					role="button" th:text="#{user.details.editButton}"> <span
-					class="glyphicon glyphicon-pencil"></span> Editar usuario
+					class="glyphicon glyphicon-pencil" aria-label="Center Align"></span> Editar usuario
 				</a> <a class="btn btn-info" th:href="${'/user/delete/' + user.id}"
 					role="button" th:text="#{user.details.deleteButton}"> <span
-					class="glyphicon glyphicon-trash"></span> Eliminar usuario
+					class="glyphicon glyphicon-trash" aria-label="Center Align"></span> Eliminar usuario
 				</a>
 			</div>
 		</div>

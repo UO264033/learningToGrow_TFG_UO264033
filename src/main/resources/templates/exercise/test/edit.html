@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{exercise.edit}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -29,7 +32,7 @@
 	</div>
 	<div class="container" th:object="${exercise}" align="center">
 		<a class="btn btn-info btn-lg"
-			th:href="${'/exercise/edit/' + exercise.id}" role="button"><span
+			th:href="${'/exercise/edit/' + exercise.id}" role="button" aria-label="Center Align"><span
 			class="material-icons-round"> save </span><span th:text="${subject.save}"/></a>
 	</div>
 	<footer th:replace="fragments/footer" />

@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.tests.util.SeleniumUtils;
-
 public class PO_RegisterView extends PO_NavView {
 
 	static public void fillForm(WebDriver driver, String usernamep, String namep, String lastnamep, String emailp, String passwordp, String passwordconfp) {
@@ -34,9 +32,8 @@ public class PO_RegisterView extends PO_NavView {
 		passwordConfirm.clear();
 		passwordConfirm.sendKeys(passwordconfp);
 		//Pulsar el boton de Alta.
-		By enlace = By.xpath("//*[@id=\"signup\"]");
+		By enlace = By.id("registro");
 		driver.findElement(enlace).click();
-//		SeleniumUtils.esperarSegundos(driver, 3);
 	}
 
 }

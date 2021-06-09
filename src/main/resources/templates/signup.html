@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head" />
+<title th:text="#{signup.message}" />
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -80,7 +83,8 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-info" th:text="#{signup.btn}" id="registro"/>
+					<button type="submit" class="btn btn-info" th:text="#{signup.btn}"
+						id="registro" aria-label="Center Align"></button>
 				</div>
 			</div>
 		</form>

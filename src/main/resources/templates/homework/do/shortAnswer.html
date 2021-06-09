@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{todo.exercise}"/>
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container" th:object="${exercise}">
@@ -41,7 +44,7 @@
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-8" align="center">
 					<button type="submit" class="btn btn-info">
-						<span th:text="#{todo.button}"></span>
+						<span th:text="#{todo.button}" aria-label="Center Align"></span>
 					</button>
 				</div>
 			</div>

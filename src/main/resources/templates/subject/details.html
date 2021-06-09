@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{subject.details}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />

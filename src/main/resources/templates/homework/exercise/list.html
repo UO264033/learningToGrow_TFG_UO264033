@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{homework.exercise.list.h2}"/>
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
@@ -32,10 +35,10 @@
 						<td th:text="${exercise.description}">Ejercicio 1</td>
 						<td th:if="${!exercise.send}"><a
 							th:href="${'/homework/do/' + exercise.id}"
-							class="btn btn-warning" role="button" th:text="#{homework.todo}"></a></td>
+							class="btn btn-warning" role="button" th:text="#{homework.todo}" aria-label="Center Align"></a></td>
 						<td th:unless="${!exercise.send}"><a class="btn btn-warning"
 							id="tooltip" data-toggle="tooltip" data-placement="left"
-							th:title="#{tooltip.exercise.send}" role="button"
+							th:title="#{tooltip.exercise.send}" role="button" aria-label="Center Align"
 							th:text="#{homework.todo}" disabled></a></td>
 					</tr>
 				</tbody>

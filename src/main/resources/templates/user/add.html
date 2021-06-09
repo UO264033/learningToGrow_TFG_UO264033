@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{user.add.h2}"/>
+</head>
 <body>
 	<!-- Barra de NavegaciÃ³n superior -->
 	<nav th:replace="fragments/nav" />
@@ -72,7 +75,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10" align="right">
-					<button type="submit" class="btn btn-info" th:text="#{user.add.h2}"/>
+					<button type="submit" id="addU" class="btn btn-info" th:text="#{user.add.h2}" aria-label="Center Align"/>
 				</div>
 			</div>
 		</form>

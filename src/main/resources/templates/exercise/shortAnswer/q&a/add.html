@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head" />
+<title th:text="#{question.button.add}" />
+</head>
+</head>
 <body>
 	<!-- Barra de Navegaci�n superior -->
 	<nav th:replace="fragments/nav" />
@@ -34,15 +38,15 @@
 			<div class="form-group" align="right">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" id="addA" class="btn btn-info"
-						th:text="#{question.button.add}"></button>
+						th:text="#{question.button.add}" aria-label="Center Align"></button>
 					<a th:if="${mensaje == null}"  
-						class="btn btn-info" role="button"
+						class="btn btn-info" role="button" aria-label="Center Align"
 						th:text="#{question.showExercise}" disabled></a>
 						<a th:unless="${mensaje == null}" th:href="${'/exercise/shortAnswer/show/' + exercise.id}"
-						class="btn btn-info" role="button"
+						class="btn btn-info" role="button" aria-label="Center Align"
 						th:text="#{question.showExercise}"></a> <a th:if="${mensaje == null}" 
-						class="btn btn-info" role="button" th:text="#{exercise.finish}" disabled></a>
-					<a th:unless="${mensaje == null}" href="/home" class="btn btn-info" role="button"
+						class="btn btn-info" role="button" th:text="#{exercise.finish}" disabled aria-label="Center Align"></a>
+					<a th:unless="${mensaje == null}" href="/home" class="btn btn-info" role="button" aria-label="Center Align"
 						th:text="#{exercise.finish}"></a>
 				</div>
 			</div>

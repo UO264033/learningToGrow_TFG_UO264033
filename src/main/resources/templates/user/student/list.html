@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{user.studentsList}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -12,7 +15,7 @@
 					th:placeholder="#{user.students.search}">
 			</div>
 			<button type="submit" class="btn btn-info">
-				<span class="material-icons-round"> search </span>
+				<span class="material-icons-round" aria-label="Center Align"> search </span>
 			</button>
 		</form>
 		<div class="alert alert-danger" role="alert"

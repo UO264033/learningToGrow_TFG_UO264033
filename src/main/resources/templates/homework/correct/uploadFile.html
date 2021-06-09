@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{homework.tocorrect}"/>
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container" th:object="${homework}">
@@ -49,7 +52,7 @@
 				hidden />
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-8" align="center">
-					<button type="submit" class="btn btn-info">
+					<button aria-label="Center Align" type="submit" class="btn btn-info">
 						<span th:text="#{todo.button}"></span>
 					</button>
 				</div>

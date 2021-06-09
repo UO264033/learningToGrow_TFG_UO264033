@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{exercise.list}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -14,7 +17,7 @@
 				<input name="searchText" type="text" class="form-control" size="50"
 					th:placeholder="#{exercise.list.search}">
 			</div>
-			<button type="submit" class="btn btn-info">
+			<button aria-label="Center Align" type="submit" class="btn btn-info">
 				<span class="material-icons-round"> search </span>
 			</button>
 		</form>

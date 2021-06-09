@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{subject.details}"/>
+</head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
@@ -43,7 +46,7 @@
 					th:action="${'/exercise/shortAnswer/q&a/add/' + exercise.id}" th:if="${short != null}">
 					<input th:value="${exercise.id}" name="exerciseId" type="number"
 						hidden />
-					<button type="submit" id="addA" class="btn btn-info"
+					<button aria-label="Center Align" type="submit" id="addA" class="btn btn-info"
 						th:text="#{question.another}" />
 				</form>
 				<form class="form-horizontal" method="get"

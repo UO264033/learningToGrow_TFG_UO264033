@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{question.showExercise}"/>
+</head>
 <body>
 	<!-- Barra de Navegaci�n superior -->
 	<nav th:replace="fragments/nav" />
@@ -22,7 +25,7 @@
 					</div>
 					<div class="container" align="center">
 						<a th:href="${'/question/delete/' + question.id}"
-							class="glyphicon glyphicon-trash" role="button"></a>
+							class="glyphicon glyphicon-trash" role="button" aria-label="Center Align"></a>
 					</div>
 				</div>
 			</div>
@@ -33,9 +36,9 @@
 					th:action="${'/exercise/shortAnswer/q&a/add/' + exercise.id}">
 					<input th:value="${exercise.id}" name="exerciseId" type="number"
 						hidden />
-					<button type="submit" id="addA" class="btn btn-info"
+					<button type="submit" id="addA" class="btn btn-info" aria-label="Center Align"
 						th:text="#{question.another}" />
-					<a th:href="${'/home'}" class="btn btn-info" role="button"
+					<a th:href="${'/home'}" class="btn btn-info" role="button" aria-label="Center Align"
 						th:text="#{exercise.finish}"></a>
 				</form>
 			</div>

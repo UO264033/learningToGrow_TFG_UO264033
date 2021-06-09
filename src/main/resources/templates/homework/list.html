@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head>
+<div th:replace="fragments/head"/>
+<title th:text="#{homework.list.h2}"/>
+</head>
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container">
@@ -11,7 +14,7 @@
 					placeholder="Buscar por nombre o por descripcion">
 			</div>
 			<button type="submit" class="btn btn-info">
-				<span class="material-icons-round"> search </span>
+				<span class="material-icons-round" aria-label="Center Align"> search </span>
 			</button>
 		</form>
 		<div align="center">
@@ -37,11 +40,11 @@
 						<td th:if="${!homework.isSent()}"><a
 							sec:authorize="hasRole('ROLE_PROFESSOR')"
 							th:href="${'/homework/correct/' + homework.id}"
-							class="btn btn-info" role="button" th:text="#{homework.correct}"></a></td>
+							class="btn btn-info" role="button" th:text="#{homework.correct}" aria-label="Center Align"></a></td>
 						<td th:unless="${!homework.isSent()}"><a
 							sec:authorize="hasRole('ROLE_PROFESSOR')" id="tool"
 							data-toggle="tooltip" data-placement="left"
-							th:title="#{tooltip.homework.send}" role="button"
+							th:title="#{tooltip.homework.send}" role="button" aria-label="Center Align"
 							class="btn btn-info" th:text="#{homework.correct}" disabled></a></td>
 					</tr>
 				</tbody>
