@@ -63,7 +63,7 @@ public class SubjectController {
 		return "subject/add";
 	}
 	
-	@RequestMapping(value = "/subject/add/{message}") //COMO VALIDAR??
+	@RequestMapping(value = "/subject/add/{message}")
 	public String getSubjectWithMessage(Model model, @PathVariable String message) {
 		model.addAttribute("subject", new Subject());
 		model.addAttribute("message", message);
@@ -74,7 +74,6 @@ public class SubjectController {
 
 	@RequestMapping(value = "/addStudent/{idSt}", method = RequestMethod.GET)
 	public String addSubject(Model model, @Validated Subject subject, BindingResult result) {
-		System.out.println("hola");
 		String message =  "Debes añadir un nombre a la asignatura.";
 		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
 		model.addAttribute("studentList", students);
@@ -117,5 +116,4 @@ public class SubjectController {
 		model.addAttribute("user", professor);
 		return "subject/details";
 	}
-
 }

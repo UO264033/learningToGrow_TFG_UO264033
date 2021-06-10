@@ -24,7 +24,9 @@ import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
+import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Subject;
+import com.uniovi.entities.Test;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.HomeworkRepository;
 
@@ -223,6 +225,64 @@ public class HomeworkService {
 			e.printStackTrace();
 		}
 		return homework;
+	}
+	
+	public List<Exercise> listOfExercisesBySubject(Long id) {
+		List<Exercise> homeworks = new ArrayList<>();
+		if (!exerciseService.getExercisesBySubject(id).isEmpty()) {
+			for (Exercise e : exerciseService.getExercisesBySubject(id)) {
+				homeworks.add(e);
+			}
+		}
+		return homeworks;
+	}
+	
+	public List<Answer> correctTest(Homework homework) {
+		List<Answer> correctAnswers = new ArrayList<Answer>();
+		Test exercise = (Test) homework.getExercise();
+		List<Answer> answers;
+		for (int k = 0; k < exercise.getQuestions().size(); k++) {
+			answers = exercise.getQuestions().get(k).getAnswers();
+			for (int j = 0; j < answers.size(); j++) {
+				if (answers.get(j).isCorrect()) {
+					correctAnswers.add(answers.get(j));
+				}
+			}
+		}
+		return correctAnswers;
+	}
+	
+	public List<Answer> correctShortAnswer(Homework homework) {
+		List<Answer> correctAnswers = new ArrayList<Answer>();
+		ShortAnswer exercise = (ShortAnswer) homework.getExercise();
+		for (int i = 0; i < exercise.getQuestions().size(); i++) {
+			correctAnswers.addAll(exercise.getQuestions().get(i).getAnswers());
+		}
+		return correctAnswers;
+	}
+
+	public Page<Homework> homeworkList(Pageable pageable, User user, String searchText) {
+		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
+		if (searchText != null && !searchText.isEmpty())
+			homeworks = getHomeworksToCorrectFiltered(pageable, user, searchText);
+		else
+			homeworks = getHomeworksToCorrect(pageable, user);
+		return homeworks; 
+	}
+
+	public Page<Homework> getHomeworksToCorrectFiltered(Pageable pageable, User user, String searchText) {
+		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
+		homeworks = homeworkRepository.findByProfessorFiltered(pageable, user, searchText);
+		for(Homework homework: homeworks.getContent()) {
+			Feedback feedback = feedbackService.findByHomework(homework);
+			if(feedback == null) 
+				homework.setSend(false); 
+			else if(feedback != null && !feedback.isSend())
+				homework.setSend(false);
+			else if(feedback != null && feedback.isSend()) 
+				homework.setSend(true);
+		}
+		return homeworks;
 	}
 	
 

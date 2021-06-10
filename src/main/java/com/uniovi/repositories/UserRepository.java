@@ -26,8 +26,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Query("SELECT u FROM User u WHERE u.role = ?1")
 	Page<User> findUsersByRole(Pageable pageable, String role);
 
-	@Query("SELECT u FROM User u WHERE (LOWER(u.name) LIKE LOWER(?1) OR LOWER(u.lastName) LIKE LOWER(?1)) AND u.role = ?2")
-	Page<User> findStudentsByNameAndLastname(Pageable pageable, String searchText, String role);
+	@Query("SELECT u FROM User u WHERE (LOWER(u.name) LIKE LOWER(?1) OR LOWER(u.lastName) LIKE LOWER(?1) OR LOWER(u.username) LIKE LOWER(?1)) AND u.role = ?2")
+	Page<User> findStudentsFiltered(Pageable pageable, String searchText, String string);
 
 	@Query("SELECT u FROM User u WHERE (LOWER(u.name) LIKE LOWER(?1) OR LOWER(u.lastName) LIKE LOWER(?1) OR LOWER(u.username) LIKE LOWER(?1)) AND u.role = ?2")
 	List<User> findStudentsFiltered(String searchText, String string);

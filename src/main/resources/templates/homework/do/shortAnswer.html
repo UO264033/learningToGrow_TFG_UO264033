@@ -25,7 +25,7 @@
 				th:each="question, iter : ${exercise.getQuestions()}">
 				<div class="panel-heading" th:text="${exercise.getQuestions().get(iter.index).statement}">Enunciado</div>
 				<div th:each="answer : ${question.answers}">
-					<input name="answerStrings[]" type="text" 
+					<input name="answerStrings[]" type="text" id="fill"
 					th:placeholder="#{todo.placeholder}" class="form-control" required="true"/>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 				hidden />
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-8" align="center">
-					<button type="submit" class="btn btn-info">
+					<button type="submit" class="btn btn-info" id="send">
 						<span th:text="#{todo.button}" aria-label="Center Align"></span>
 					</button>
 				</div>

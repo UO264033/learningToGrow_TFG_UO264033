@@ -74,9 +74,14 @@ public class ExerciseService {
 		return exercises;
 	}
 
-	public Page<Exercise> getExercisesByUser(Pageable pageable, User activeUser) {
+	public Page<Exercise> getExercisesByUser(Pageable pageable, User activeUser, String searchText) {
 		Page<Exercise> exercises = new PageImpl<Exercise>(new LinkedList<Exercise>());
-		exercises = exerciseRepository.findByUser(pageable, activeUser);
+		if (searchText != null && !searchText.isEmpty()) {
+			searchText = "%" + searchText + "%";
+			exercises = exerciseRepository.findByUserFiltered(pageable, activeUser, searchText);
+		}
+		else
+			exercises = exerciseRepository.findByUser(pageable, activeUser);
 		return exercises;
 	}
 

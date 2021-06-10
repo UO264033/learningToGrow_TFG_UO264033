@@ -108,7 +108,7 @@ public class UserService {
 
 	public Page<User> searchStudentsByNameAndLastname(Pageable pageable, String searchText, String role) {
 		searchText = "%" + searchText + "%";
-		return usersRepository.findStudentsByNameAndLastname(pageable, searchText, role);
+		return usersRepository.findStudentsFiltered(pageable, searchText, role);
 	}
 
 	public List<User> getUsersBySubject(Subject subject) {
@@ -132,7 +132,7 @@ public class UserService {
 	}
 
 	public List<User> getStudentsFiltered(String searchText) {
-		searchText = "%" + searchText + "%";
+		searchText = "%" + searchText + "%"; 
 		return usersRepository.findStudentsFiltered(searchText, "ROLE_STUDENT");
 	}
 

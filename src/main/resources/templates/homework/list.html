@@ -8,15 +8,17 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 		<h2 th:text="#{homework.list.h2}"></h2>
-		<form class="navbar-form" action="/exercise/list">
+		<form class="navbar-form" action="/homework/list">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
-					placeholder="Buscar por nombre o por descripcion">
+					th:placeholder="#{homework.placeholder}">
 			</div>
 			<button type="submit" class="btn btn-info">
 				<span class="material-icons-round" aria-label="Center Align"> search </span>
 			</button>
 		</form>
+		<div class="alert alert-danger" role="alert"
+				th:if="${mensaje != null}" th:text="${mensaje}"></div>
 		<div align="center">
 			<img src="/img/correct.png">
 		</div>

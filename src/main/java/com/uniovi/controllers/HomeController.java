@@ -40,7 +40,7 @@ public class HomeController {
 	public String home(Model model, Pageable pageable) {
 		User activeUser = usersService.activeUser();
 		Page<Exercise> exercises = new PageImpl<Exercise>(new LinkedList<Exercise>());
-		exercises = exerciseService.getExercisesByUser(pageable, activeUser);
+		exercises = exerciseService.getExercisesByUser(pageable, activeUser, null);
 		List<Subject> subjects = subjectService.getSubjectsByRole(activeUser);
 
 		model.addAttribute("subjectList", subjects);

@@ -64,7 +64,8 @@ public class PO_NavView extends PO_View {
 		elementos = PO_View.checkElement(driver, "free", option);
 		// Pinchamos en listado de ejercicios.
 		elementos.get(0).click();
-		PO_View.checkElement(driver, "text", text);
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.textoPresentePagina(driver, text);
 	}
 
 }

@@ -35,7 +35,7 @@ public class ExerciseController {
 		Page<Exercise> exercises = new PageImpl<Exercise>(new LinkedList<Exercise>());
 		String username = principal.getName(); // Username es el name de la autenticación 
 		User activeUser = usersService.getUserByUsername(username);
-		exercises = exerciseService.getExercisesByUser(pageable, activeUser);
+		exercises = exerciseService.getExercisesByUser(pageable, activeUser, searchText);
 		model.addAttribute("exerciseList", exercises.getContent());
 		model.addAttribute("page", exercises);
 		return "exercise/list";

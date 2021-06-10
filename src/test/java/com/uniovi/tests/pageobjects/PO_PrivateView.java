@@ -99,8 +99,8 @@ public class PO_PrivateView extends PO_NavView {
 		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
 	}
 
-	public static void fillFormAddOrEditUser(WebDriver driver, String usernamep, String namep, String lastNamep, String emailp,
-			String passwordp, String passwordConfirmp) {
+	public static void fillFormAddOrEditUser(WebDriver driver, String usernamep, String namep, String lastNamep,
+			String emailp, String passwordp, String passwordConfirmp) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
 		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
 		// Rellenemos el campo de descripción
@@ -130,7 +130,40 @@ public class PO_PrivateView extends PO_NavView {
 		By enlace = By.id("addU");
 		driver.findElement(enlace).click();
 		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
-		
+
+	}
+
+	public static void fillFormAddHomeworkShortAnswer(WebDriver driver, String answerp, String descriptionp) {
+		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		// Rellenemos el campo de descripción
+		WebElement answer = driver.findElement(By.xpath("/html/body/div/form/div[1]/div/div[2]/input"));
+		answer.clear();
+		answer.sendKeys(answerp);
+		WebElement description = driver.findElement(By.name("description"));
+		description.click();
+		description.clear();
+		description.sendKeys(descriptionp);
+		By enlace = By.id("send");
+		driver.findElement(enlace).click();
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+
+	}
+	
+	public static void fillFormAddHomeworkTest(WebDriver driver, String descriptionp) {
+		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		// Rellenemos el campo de descripción
+		By answer = By.xpath("//*[@id=\"huey\"]");
+		driver.findElement(answer).click();
+		WebElement description = driver.findElement(By.name("description"));
+		description.click();
+		description.clear();
+		description.sendKeys(descriptionp);
+		By enlace = By.id("send");
+		driver.findElement(enlace).click();
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+
 	}
 
 }
