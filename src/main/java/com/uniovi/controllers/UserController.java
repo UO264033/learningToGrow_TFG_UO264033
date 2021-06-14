@@ -34,7 +34,7 @@ public class UserController {
 
 	@Autowired
 	private RolesService rolesService;
-	
+
 	@Autowired
 	private SecurityService securityService;
 
@@ -42,7 +42,7 @@ public class UserController {
 	public String getList(Model model, Pageable pageable,
 			@RequestParam(value = "", required = false) String searchText) {
 		Page<User> users = usersService.getList(pageable, searchText);
-		if(users.getContent().isEmpty()) {
+		if (users.getContent().isEmpty()) {
 			model.addAttribute("mensaje", "No se han encontrado resultados.");
 		}
 		model.addAttribute("usersList", users.getContent());
@@ -54,7 +54,7 @@ public class UserController {
 	public String getStudentList(Model model, Pageable pageable,
 			@RequestParam(value = "", required = false) String searchText) {
 		Page<User> users = usersService.getStudentList(pageable, searchText);
-		if(users.getContent().isEmpty()) {
+		if (users.getContent().isEmpty()) {
 			model.addAttribute("mensaje", "No se han encontrado resultados.");
 		}
 		model.addAttribute("studentList", users);
@@ -122,7 +122,7 @@ public class UserController {
 		usersService.editUser(user, id);
 		return "redirect:/user/list";
 	}
-	
+
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
 		model.addAttribute("user", new User());
@@ -143,8 +143,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(Model model, String error, String logout) {
+		if (error != null)
+			model.addAttribute("error", "Usuario y/o contraseña incorrectos.");
+		if (logout != null)
+			model.addAttribute("message", "Sesión cerrada con éxito.");
 		return "login";
+
 	}
 
 }

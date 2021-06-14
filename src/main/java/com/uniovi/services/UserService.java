@@ -49,13 +49,11 @@ public class UserService {
 		return usersRepository.findById(id).get();
 	}
 
-	public User updateUser(User user) {
-		return usersRepository.save(user);
-	}
-
 	public void addUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		usersRepository.save(user);
+		if (getUser(user.getId()) == null) {
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+			usersRepository.save(user);
+		}
 	}
 
 	public User getUserByUsername(String username) {
@@ -132,7 +130,7 @@ public class UserService {
 	}
 
 	public List<User> getStudentsFiltered(String searchText) {
-		searchText = "%" + searchText + "%"; 
+		searchText = "%" + searchText + "%";
 		return usersRepository.findStudentsFiltered(searchText, "ROLE_STUDENT");
 	}
 
@@ -148,7 +146,7 @@ public class UserService {
 			users = getUsers(pageable);
 		return users;
 	}
-	
+
 	public Page<User> getStudentList(Pageable pageable, String searchText) {
 		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		if (searchText != null && !searchText.isEmpty())
@@ -157,14 +155,13 @@ public class UserService {
 			users = getUsersByRole(pageable, "ROLE_STUDENT");
 		return users;
 	}
-	
+
 	public User perfil() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
 		User activeUser = getUserByUsername(username);
 		return activeUser;
 	}
-
 
 	public User activeUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

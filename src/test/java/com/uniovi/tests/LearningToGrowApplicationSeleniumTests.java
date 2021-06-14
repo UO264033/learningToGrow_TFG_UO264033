@@ -29,7 +29,7 @@ import com.uniovi.tests.util.SeleniumUtils;
 @SpringBootTest
 //Ordenamos las pruebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LearningToGrowApplicationTests {
+public class LearningToGrowApplicationSeleniumTests {
 
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	static String Geckdriver024 = "C:\\Users\\maari\\OneDrive\\Documentos\\Universidad\\CUARTO\\TFG\\proyecto\\workspace\\learningToGrow\\learningToGrow_TFG_UO264033\\geckodriver024win64.exe";
@@ -140,7 +140,7 @@ public class LearningToGrowApplicationTests {
 		PO_RegisterView.checkKey(driver, "Error.signup.email", PO_Properties.getSPANISH());
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "joseperez", "Jose", "Perez", "jose@gmail.com", "pollito", "pollito");
-		// Comprobamos el error de Nombre corto .
+		// Comprobamos el error de contraseña invalida .
 		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH());
 	}
 
@@ -180,8 +180,11 @@ public class LearningToGrowApplicationTests {
 	@Test
 	public void PR08_loginInvalidTest() {
 		PO_LoginView.login(driver, "mariagg", "123456", "¡Hola! Conéctate");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario y/o contraseña incorrectos.");
 		PO_LoginView.login(driver, "mariagg", "", "¡Hola! Conéctate");
 		PO_LoginView.login(driver, "", "Admin33", "¡Hola! Conéctate");
+		PO_LoginView.login(driver, "pepitogrillo", "Admin33", "¡Hola! Conéctate");
+		SeleniumUtils.textoPresentePagina(driver, "Usuario y/o contraseña incorrectos.");
 		PO_LoginView.login(driver, "", "", "¡Hola! Conéctate");
 	}
 
@@ -193,6 +196,7 @@ public class LearningToGrowApplicationTests {
 		PO_LoginView.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
 
 		PO_HomeView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+		SeleniumUtils.textoPresentePagina(driver, "Sesión cerrada con éxito.");
 	}
 
 	/**
@@ -290,6 +294,29 @@ public class LearningToGrowApplicationTests {
 
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicios creados");
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de tipo test");
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+	
+	/**
+	 * P13a2. Loguearse como profesor y agregar un ejercicio de tipo test
+	 */
+	@Test
+	public void PR13a2_addTestExerciseTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de nuevo ejercicio: //li[contains(@id,
+		// 'exercise-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'exercises-menu')]/a",
+				"//a[contains(@href, 'exercise/test/add')]", "Agregar ejercicio de tipo test");
+
+		// Ahora vamos a rellenar el ejercicio. //option[contains(@value, '4')]
+		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de tipo test",
+				"Dos.- Este es un ejemplo de ejercicio de tipo test");
+
+		SeleniumUtils.textoPresentePagina(driver, "Introduzca otro nombre de ejercicio, el introducido ya existe");
+		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
+		
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 	}
@@ -972,8 +999,7 @@ public class LearningToGrowApplicationTests {
 	}
 
 	/**
-	 * Acceder a la página de ejercicios a traves de la vista de detalles de
-	 * asignatura
+	 * Ver página de detalles de la asignatura
 	 */
 	@Test
 	public void PR35_viewDetailsSubjectTest() {
@@ -1002,7 +1028,7 @@ public class LearningToGrowApplicationTests {
 	}
 
 	/**
-	 * Acceder a la página de feedback a traves de la vista de detalles de
+	 * Acceder a la página de ejercicios a traves de la vista de detalles de
 	 * asignatura
 	 */
 	@Test
@@ -1026,6 +1052,10 @@ public class LearningToGrowApplicationTests {
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 	}
 
+	/**
+	 * Acceder a la página de feedback a traves de la vista de detalles de
+	 * asignatura
+	 */
 	@Test
 	public void PR37_viewFeedbackThroghoutSubjectDetailsTest() {
 		PR07a_rolStudentTest();
@@ -1062,17 +1092,17 @@ public class LearningToGrowApplicationTests {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
 		assertEquals(elementos.size(), 6);
-		SeleniumUtils.textoPresentePagina(driver,  "E1");
-		SeleniumUtils.textoPresentePagina(driver,  "E2");
-		SeleniumUtils.textoPresentePagina(driver,  "E3");
-		SeleniumUtils.textoPresentePagina(driver,  "Ejercicio de respuesta corta");
-		SeleniumUtils.textoPresentePagina(driver,  "Ejercicio de tipo test");
-		SeleniumUtils.textoPresentePagina(driver,  "Ejercicio de subida de fichero");
+		SeleniumUtils.textoPresentePagina(driver, "E1");
+		SeleniumUtils.textoPresentePagina(driver, "E2");
+		SeleniumUtils.textoPresentePagina(driver, "E3");
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de respuesta corta");
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de tipo test");
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de subida de fichero");
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 	}
-	
+
 	/**
 	 * Hacer tarea de respuesta corta
 	 */
@@ -1084,19 +1114,19 @@ public class LearningToGrowApplicationTests {
 		// 'homerworks-menu')]/a
 		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
 				"//a[contains(@href, 'homework/exercise/list')]", "Lista de tareas");
-		
+
 		By rellenar = By.xpath("//*[@id=\"tableexercise\"]/tbody/tr[1]/td[4]/a");
 		driver.findElement(rellenar).click();
-		
+
 		SeleniumUtils.textoPresentePagina(driver, "E3");
 		SeleniumUtils.textoPresentePagina(driver, "Responder a las siguientes cuestiones");
 		SeleniumUtils.textoPresentePagina(driver, "¿De qué color es el cielo?");
-		
+
 		PO_PrivateView.fillFormAddHomeworkShortAnswer(driver, "Azul celeste", "Comentario del alumno");
 		SeleniumUtils.textoPresentePagina(driver, "Lista de tareas");
 
 	}
-	
+
 	/**
 	 * Hacer tarea de tipo test
 	 */
@@ -1108,19 +1138,18 @@ public class LearningToGrowApplicationTests {
 		// 'homerworks-menu')]/a
 		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
 				"//a[contains(@href, 'homework/exercise/list')]", "Lista de tareas");
-		
+
 		By rellenar = By.xpath("//*[@id=\"tableexercise\"]/tbody/tr[2]/td[4]/a");
 		driver.findElement(rellenar).click();
-		
+
 		SeleniumUtils.textoPresentePagina(driver, "E1");
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de colores");
 		SeleniumUtils.textoPresentePagina(driver, "¿De qué color es el coche?");
-		
+
 		PO_PrivateView.fillFormAddHomeworkTest(driver, "Comentario del alumno");
 		SeleniumUtils.textoPresentePagina(driver, "Lista de tareas");
 
 	}
-	
 
 	/**
 	 * Ver correcciones
