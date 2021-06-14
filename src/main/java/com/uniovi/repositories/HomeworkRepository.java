@@ -47,5 +47,4 @@ public interface HomeworkRepository extends CrudRepository<Homework, Long> {
 	@Query("SELECT h FROM Homework h WHERE h.exercise.professor = ?1 AND (h.user.name = ?2 OR h.exercise.name = ?2 OR h.exercise.subject.name = ?2) ORDER BY h.id ASC ")
 	Page<Homework> findByProfessorFiltered(Pageable pageable, User user, String searchText);
 
-
 }

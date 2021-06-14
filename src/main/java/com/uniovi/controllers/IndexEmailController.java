@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uniovi.entities.EmailConfig;
 
-
 @RestController
 public class IndexEmailController {
+	
 	@Autowired
 	EmailConfig config;
+
 	@GetMapping
-	public  EmailConfig index() {
+	public EmailConfig index() {
 		return config;
 	}
 }

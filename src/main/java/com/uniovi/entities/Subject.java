@@ -16,17 +16,15 @@ import javax.persistence.OneToMany;
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
-public class Subject extends BaseEntity{
-	
+public class Subject extends BaseEntity {
+
 	@Column(unique = true)
 	private String name;
 
 	@ManyToOne
 	private User professor;
 
-	@JoinTable(name = "rel_subjects_students",
-			joinColumns = @JoinColumn(name = "FK_SUBJECT", nullable = false),
-			inverseJoinColumns = @JoinColumn(name = "FK_STUDENT", nullable = false))
+	@JoinTable(name = "rel_subjects_students", joinColumns = @JoinColumn(name = "FK_SUBJECT", nullable = false), inverseJoinColumns = @JoinColumn(name = "FK_STUDENT", nullable = false))
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<User> students = new HashSet<User>();
 
@@ -92,7 +90,7 @@ public class Subject extends BaseEntity{
 	public void addStudent(User student) {
 		students.add(student);
 	}
-	
+
 	public void removeStudent(User student) {
 		students.remove(student);
 	}

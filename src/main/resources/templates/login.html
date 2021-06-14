@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<div th:replace="fragments/head"/>
-<title th:text="#{login.message}"/>
+<div th:replace="fragments/head" />
+<title th:text="#{login.message}" />
 </head>
 <body>
 	<nav th:replace="fragments/nav" />
@@ -11,7 +11,7 @@
 			<h2 th:text="#{login.h2}" />
 			<h4 th:text="#{login.h4}" />
 		</div>
-		
+		<div class="alert alert-info" role="alert" th:if="${message!=null}" th:text="${message}"></div>
 		<form class="form-horizontal" method="post" action="/login">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="username"
@@ -26,12 +26,14 @@
 					th:text="#{signup.password}" />
 				<div class="col-sm-10">
 					<input type="password" class="form-control" name="password"
-						placeholder="Pollito88" required="true" />
+						placeholder="Pollito88" required="true" />  <span class="text-danger"
+						th:if="${error != null}" th:text="${error}">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-info" th:text="#{signup.btn}" aria-label="Center Align"/>
+					<button type="submit" class="btn btn-info" th:text="#{signup.btn}"
+						aria-label="Center Align" />
 				</div>
 			</div>
 			<input type="hidden" name="${_csrf.parameterName}"

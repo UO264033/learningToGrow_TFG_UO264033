@@ -62,7 +62,7 @@ public class SubjectController {
 		model.addAttribute("studentList", students);
 		return "subject/add";
 	}
-	
+
 	@RequestMapping(value = "/subject/add/{message}")
 	public String getSubjectWithMessage(Model model, @PathVariable String message) {
 		model.addAttribute("subject", new Subject());
@@ -74,7 +74,7 @@ public class SubjectController {
 
 	@RequestMapping(value = "/addStudent/{idSt}", method = RequestMethod.GET)
 	public String addSubject(Model model, @Validated Subject subject, BindingResult result) {
-		String message =  "Debes añadir un nombre a la asignatura.";
+		String message = "Debes añadir un nombre a la asignatura.";
 		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
 		model.addAttribute("studentList", students);
 		return "subject/add/" + message;

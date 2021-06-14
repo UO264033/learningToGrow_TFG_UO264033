@@ -3,8 +3,7 @@ package com.uniovi.entities;
 import javax.persistence.Entity;
 
 @Entity
-public class UploadFile extends Exercise{
-
+public class UploadFile extends Exercise {
 
 	public UploadFile() {
 	}
@@ -18,7 +17,5 @@ public class UploadFile extends Exercise{
 		return "UploadFile [getName()=" + getName() + ", getDescription()=" + getDescription() + ", getType()="
 				+ getType() + ", getSubject()=" + getSubject() + ", isSend()=" + isSend() + "]";
 	}
-
-	
 
 }

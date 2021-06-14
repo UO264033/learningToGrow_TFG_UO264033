@@ -20,10 +20,10 @@ import com.uniovi.util.ArgumentChecks;
 public class User {
 
 	@Id
-    @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@Column(unique = true)
 	private String username;
 	private String name;
@@ -41,10 +41,9 @@ public class User {
 	 */
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	private Set<Subject> subjectsTaught = new HashSet<Subject>();
-	
+
 	@ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
 	private Set<Subject> subjects = new HashSet<Subject>();
-
 
 	/**
 	 * Atributos del subsistema de deberes
@@ -54,8 +53,7 @@ public class User {
 
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	private Set<Exercise> exercises = new HashSet<Exercise>();
-	
-	
+
 	/**
 	 * Atributos del subsistema de retroalimentación
 	 */
@@ -84,7 +82,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -160,7 +158,7 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	Set<Subject> _getSubjects() {
 		return subjects;
 	}
@@ -168,19 +166,19 @@ public class User {
 	public Set<Subject> getSubjects() {
 		return new HashSet<>(subjects);
 	}
-	
+
 	public void setSubjects(Set<Subject> subjects) {
 		this.subjects = subjects;
 	}
-	
+
 	public void addSubject(Subject s) {
 		subjects.add(s);
 	}
-	
+
 	public void removeSubject(Subject s) {
 		subjects.remove(s);
 	}
-	
+
 	public String getRoleString() {
 		if (role.equals("ROLE_STUDENT"))
 			return "student";
@@ -194,6 +192,7 @@ public class User {
 	public String getNameAndSurname() {
 		return name + " " + lastName;
 	}
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", name=" + name + ", lastName=" + lastName + ", role=" + role + "]";

@@ -24,7 +24,7 @@ public class Answer extends BaseEntity {
 		ArgumentChecks.isNotEmpty(text);
 		this.text = text;
 	}
-	
+
 	public Answer(String text, boolean right) {
 		this(text);
 		this.correct = right;
@@ -37,7 +37,7 @@ public class Answer extends BaseEntity {
 		ArgumentChecks.isNotNull(question);
 		this.question = question;
 	}
-	
+
 	public Answer(String text, Question question) {
 		ArgumentChecks.isNotEmpty(text);
 		this.text = text;

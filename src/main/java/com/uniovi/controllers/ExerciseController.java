@@ -23,17 +23,18 @@ import com.uniovi.services.UserService;
 
 @Controller
 public class ExerciseController {
-	
+
 	@Autowired
 	private UserService usersService;
-	
+
 	@Autowired
 	private ExerciseService exerciseService;
-	
+
 	@RequestMapping(value = "/exercise/list")
-	public String getExercises(Model model, Principal principal, Pageable pageable,  @RequestParam(value= "", required = false) String searchText) {
+	public String getExercises(Model model, Principal principal, Pageable pageable,
+			@RequestParam(value = "", required = false) String searchText) {
 		Page<Exercise> exercises = new PageImpl<Exercise>(new LinkedList<Exercise>());
-		String username = principal.getName(); // Username es el name de la autenticación 
+		String username = principal.getName(); // Username es el name de la autenticación
 		User activeUser = usersService.getUserByUsername(username);
 		exercises = exerciseService.getExercisesByUser(pageable, activeUser, searchText);
 		model.addAttribute("exerciseList", exercises.getContent());
@@ -48,24 +49,22 @@ public class ExerciseController {
 		model.addAttribute("mensaje", "El ejercicio se ha eliminado correctamente");
 		return "redirect:/exercise/list";
 	}
-	
+
 	@RequestMapping("/exercise/details/{id}")
 	public String getDetails(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
-		if(exercise.getType() == ExerciseType.S) {
+		if (exercise.getType() == ExerciseType.S) {
 			model.addAttribute("questionList", ((ShortAnswer) exercise).getQuestions());
 			model.addAttribute("short", "short");
-		}
-		else if(exercise.getType() == ExerciseType.T) {
+		} else if (exercise.getType() == ExerciseType.T) {
 			model.addAttribute("questionList", ((Test) exercise).getQuestions());
 			model.addAttribute("test", "test");
-		}
-		else
+		} else
 			model.addAttribute("questionList", null);
 		return "exercise/details";
 	}
-	
+
 	@RequestMapping("/exercise/edit/{id}")
 	public String editExercise(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);

@@ -31,7 +31,7 @@ public class FeedbackController {
 		model.addAttribute("feedbackList", feedbackService.getFeedback(pageable));
 		return "feedback/list";
 	}
-	
+
 	@RequestMapping("/feedback/list/{id}")
 	public String getFeedbackBySubject(Model model, @PathVariable Long id) {
 		List<Feedback> feedbacks = feedbackService.getFeedbackBySubjectList(id);
@@ -40,8 +40,7 @@ public class FeedbackController {
 	}
 
 	@RequestMapping(value = { "/feedback/answer/{id}" }, method = RequestMethod.POST)
-	public String answerFeedback(Model model, @PathVariable Long id, @RequestParam String message,
-			Pageable pageable) {
+	public String answerFeedback(Model model, @PathVariable Long id, @RequestParam String message, Pageable pageable) {
 		Feedback feedback = feedbackService.getFeedback(id);
 		if (feedback != null) {
 			feedbackService.addMessage(message, feedback);

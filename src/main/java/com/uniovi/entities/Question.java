@@ -14,23 +14,23 @@ import com.uniovi.util.ArgumentChecks;
 
 @Entity
 public class Question extends BaseEntity {
-		
+
 	private String statement;
-	
-	@OneToMany(mappedBy="question", fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
 	private List<Answer> answers = new ArrayList<>();
-	
+
 	@ManyToOne
 	private Exercise exercise;
-	
+
 	public Question() {
 	}
-	
+
 	public Question(String statement) {
 		ArgumentChecks.isNotNull(statement);
 		this.statement = statement;
 	}
-	
+
 	public Question(String statement, Exercise exercise) {
 		this(statement);
 		ArgumentChecks.isNotNull(exercise);
@@ -44,7 +44,7 @@ public class Question extends BaseEntity {
 	public void setStatement(String statement) {
 		this.statement = statement;
 	}
-	
+
 	List<Answer> _getAnswers() {
 		return answers;
 	}
@@ -52,7 +52,7 @@ public class Question extends BaseEntity {
 	public List<Answer> getAnswers() {
 		return new ArrayList<>(answers);
 	}
-	
+
 	public Set<Answer> getAnswersSet() {
 		return new HashSet<>(answers);
 	}
@@ -64,7 +64,7 @@ public class Question extends BaseEntity {
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
-	
+
 	public void addAnswer(Answer a) {
 		answers.add(a);
 	}
@@ -99,6 +99,4 @@ public class Question extends BaseEntity {
 		return "Question [statement=" + statement + ", answers=" + answers + "]";
 	}
 
-	
-	
 }

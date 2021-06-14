@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.uniovi.entities.Test;
 
-public interface ExerciseTestRepository extends CrudRepository<Test, Long>{
+public interface ExerciseTestRepository extends CrudRepository<Test, Long> {
 
 }

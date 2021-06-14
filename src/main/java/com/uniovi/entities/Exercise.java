@@ -12,28 +12,28 @@ import com.uniovi.util.ArgumentChecks;
 
 @Entity
 @Table
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
-public class Exercise extends BaseEntity{
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Exercise extends BaseEntity {
 
 	@Column(unique = true)
 	private String name;
 	private String description;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "profesor_id")
-	private User professor; //PROFESOR
-	
+	private User professor; // PROFESOR
+
 	@ManyToOne
 	private Subject subject;
-	
+
 	private ExerciseType type;
-	
+
 	private boolean send;
 	private boolean done;
 
 	public Exercise() {
 	}
-	
+
 	public Exercise(String name, String description, ExerciseType type) {
 		ArgumentChecks.isNotEmpty(name);
 		this.name = name;
@@ -42,7 +42,7 @@ public class Exercise extends BaseEntity{
 		ArgumentChecks.isNotNull(type);
 		this.type = type;
 	}
-	
+
 	public Exercise(String name, String description, User professor) {
 		ArgumentChecks.isNotEmpty(name);
 		this.name = name;
@@ -51,7 +51,7 @@ public class Exercise extends BaseEntity{
 		ArgumentChecks.isNotNull(professor);
 		this.professor = professor;
 	}
-	
+
 	public Exercise(String name, String description, User professor, Subject subject) {
 		this(name, description, professor);
 		ArgumentChecks.isNotNull(subject);
@@ -73,7 +73,7 @@ public class Exercise extends BaseEntity{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public ExerciseType getType() {
 		return type;
 	}
@@ -89,7 +89,7 @@ public class Exercise extends BaseEntity{
 	public void setProfessor(User professor) {
 		this.professor = professor;
 	}
-	
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -144,5 +144,4 @@ public class Exercise extends BaseEntity{
 		return "Exercise [name=" + name + ", description=" + description + ", type= " + type + "]";
 	}
 
-		
 }

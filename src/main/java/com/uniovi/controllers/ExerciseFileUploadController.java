@@ -1,6 +1,5 @@
 package com.uniovi.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -18,39 +17,38 @@ import com.uniovi.services.ExerciseFileUploadService;
 import com.uniovi.services.SubjectService;
 import com.uniovi.validators.ExerciseValidator;
 
-
 @Controller
 public class ExerciseFileUploadController {
 
 	@Autowired
 	private ExerciseValidator exerciseValidator;
-	
+
 	@Autowired
 	private ExerciseFileUploadService exerciseService;
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@RequestMapping(value = "/exercise/upFile/add")
 	public String getExercise(Model model, Pageable pageable) {
 		model.addAttribute("exercise", new Exercise());
 		model.addAttribute("subjectList", subjectService.getSubjects());
 		return "exercise/upFile/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/upFile/add", method = RequestMethod.POST)
-	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result,
-			Model model, @ModelAttribute UploadFile exercise, @ModelAttribute User user) {
-		
+	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result, Model model,
+			@ModelAttribute UploadFile exercise, @ModelAttribute User user) {
+
 		exerciseValidator.validate(exerciseVa, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.addAttribute("subjectList", subjectService.getSubjects());
 			model.addAttribute("exercise", exerciseVa);
 			return "exercise/upFile/add";
 		}
 		exerciseService.setProfessor(exercise);
 		exerciseService.addExercise(exercise);
-		
+
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
 		return "redirect:/exercise/list";

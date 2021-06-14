@@ -30,8 +30,9 @@ public class HomeworkController {
 	private UserService usersService;
 
 	@RequestMapping("/homework/list")
-	public String getList(Model model, Pageable pageable, Principal principal, @RequestParam(value= "", required = false) String searchText) {
-		String username = principal.getName(); 
+	public String getList(Model model, Pageable pageable, Principal principal,
+			@RequestParam(value = "", required = false) String searchText) {
+		String username = principal.getName();
 		User user = usersService.getUserByUsername(username);
 		Page<Homework> homeworks = homeworksService.homeworkList(pageable, user, searchText);
 		model.addAttribute("homeworkList", homeworks.getContent());

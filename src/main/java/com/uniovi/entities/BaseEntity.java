@@ -6,11 +6,11 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BaseEntity {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	public long getId() {
 		return id;
 	}
@@ -40,6 +40,5 @@ public abstract class BaseEntity {
 			return false;
 		return true;
 	}
-	
 
 }

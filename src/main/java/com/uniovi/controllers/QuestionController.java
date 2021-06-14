@@ -34,7 +34,8 @@ public class QuestionController {
 	private QuestionValidator questionValidator;
 
 	@RequestMapping(value = "/exercise/test/question/add", method = RequestMethod.GET)
-	public String getQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("exerciseId") Long exerciseId) {
+	public String getQuestion(Model model, @ModelAttribute Exercise exercise,
+			@RequestParam("exerciseId") Long exerciseId) {
 		model.addAttribute("question", new Question());
 		if (exercise == null) {
 			exercise = exerciseService.getExercise(exerciseId);
@@ -42,7 +43,7 @@ public class QuestionController {
 		model.addAttribute("exercise", exercise);
 		return "exercise/test/question/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/test/question/add/{id}", method = RequestMethod.GET)
 	public String addAnotherQuestion(Model model, @ModelAttribute Exercise exercise, @PathVariable Long id) {
 		model.addAttribute("question", new Question());
@@ -53,7 +54,7 @@ public class QuestionController {
 		model.addAttribute("exerciseId", id);
 		return "exercise/test/question/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/test/question/add", method = RequestMethod.POST)
 	public String addQuestion(@Validated Question questionVa, BindingResult result, RedirectAttributes redirectAttrs,
 			Model model, @RequestParam String statement, @RequestParam("exerciseId") Long exerciseId,
@@ -70,7 +71,8 @@ public class QuestionController {
 		if (result.hasErrors()) {
 			return "exercise/test/question/add";
 		}
-		Question q = questionService.addNewQuestion(model, statement, texto1, texto2, texto3, correct1, correct2, correct3, exercise);
+		Question q = questionService.addNewQuestion(model, statement, texto1, texto2, texto3, correct1, correct2,
+				correct3, exercise);
 		if (q != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");
 		}
@@ -99,10 +101,10 @@ public class QuestionController {
 		List<Question> questions = questionService.getQuestionsByExerciseId(q.getExercise().getId());
 		model.addAttribute("questionList", questions);
 		model.addAttribute("exercise", q.getExercise());
-		if(q.getExercise().getType().equals(ExerciseType.T))
+		if (q.getExercise().getType().equals(ExerciseType.T))
 			return "redirect:/exercise/test/show/" + q.getExercise().getId();
-		else if(q.getExercise().getType().equals(ExerciseType.S))
+		else if (q.getExercise().getType().equals(ExerciseType.S))
 			return "redirect:/exercise/shortAnswer/show/" + q.getExercise().getId();
-		return "redirect:/home";	
+		return "redirect:/home";
 	}
 }

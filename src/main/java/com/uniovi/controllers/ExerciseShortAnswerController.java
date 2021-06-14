@@ -54,23 +54,24 @@ public class ExerciseShortAnswerController {
 
 		exerciseService.setProfesor(exercise);
 		exerciseService.addExercise(exercise);
-		
+
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
 		return "exercise/shortAnswer/q&a/add";
 	}
 
 	@RequestMapping(value = "/exercise/shortAnswer/q&a/add", method = RequestMethod.GET)
-	public String addQuestion(Model model, @ModelAttribute Exercise exercise, @RequestParam("idExercise") Long idExercise) {
-		if(exercise == null)
+	public String addQuestion(Model model, @ModelAttribute Exercise exercise,
+			@RequestParam("idExercise") Long idExercise) {
+		if (exercise == null)
 			exercise = exerciseService.getExercise(idExercise);
 		model.addAttribute("exercise", exercise);
 		return "exercise/shortAnswer/q&a/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/shortAnswer/q&a/add/{id}", method = RequestMethod.GET)
 	public String addAnotherQuestion(Model model, @ModelAttribute Exercise exercise, @PathVariable Long id) {
-		if(exercise == null)
+		if (exercise == null)
 			exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("exerciseId", id);
@@ -94,7 +95,6 @@ public class ExerciseShortAnswerController {
 		}
 		return "exercise/shortAnswer/q&a/add";
 	}
-
 
 	@RequestMapping(value = "/exercise/shortAnswer/show/{id}")
 	public String showQuestions(Model model, @PathVariable Long id) {

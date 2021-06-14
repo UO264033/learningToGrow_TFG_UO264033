@@ -28,7 +28,7 @@ public class Homework extends BaseEntity {
 	@OneToMany
 	@JoinColumn(name = "homework_id")
 	private List<Answer> answers = new ArrayList<>(); // RESPUESTAS
-	
+
 	private String file;
 
 	public Homework() {
@@ -73,7 +73,7 @@ public class Homework extends BaseEntity {
 	public void addAnswer(Answer answer) {
 		answers.add(answer);
 	}
-	
+
 	public String getFile() {
 		return file;
 	}
@@ -81,7 +81,7 @@ public class Homework extends BaseEntity {
 	public void setFile(String file) {
 		this.file = file;
 	}
-	
+
 	public Exercise getExercise() {
 		return exercise;
 	}
@@ -89,7 +89,7 @@ public class Homework extends BaseEntity {
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
-	
+
 	public List<Answer> getAnswers() {
 		return answers;
 	}
@@ -97,7 +97,7 @@ public class Homework extends BaseEntity {
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
-	
+
 	public void deleteAnswer(Answer answer) {
 		answers.remove(answer);
 	}

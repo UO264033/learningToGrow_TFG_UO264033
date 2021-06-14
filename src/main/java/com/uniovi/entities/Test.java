@@ -37,7 +37,7 @@ public class Test extends Exercise {
 	public List<Question> getQuestions() {
 		return new ArrayList<>(questions);
 	}
-	
+
 	public Set<Question> getQuestionsSet() {
 		return new HashSet<>(questions);
 	}
@@ -45,7 +45,7 @@ public class Test extends Exercise {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-	
+
 	public void addQuestion(Question q) {
 		questions.add(q);
 	}
@@ -56,6 +56,4 @@ public class Test extends Exercise {
 				+ ", getType()=" + getType() + ", getSubject()=" + getSubject() + ", isSend()=" + isSend() + "]";
 	}
 
-	
-	
 }

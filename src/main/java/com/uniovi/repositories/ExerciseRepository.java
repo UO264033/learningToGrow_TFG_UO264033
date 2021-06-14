@@ -11,7 +11,7 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 
-public interface ExerciseRepository  extends CrudRepository<Exercise, Long>  {
+public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
 
 	Exercise findByName(String name);
 
@@ -20,7 +20,7 @@ public interface ExerciseRepository  extends CrudRepository<Exercise, Long>  {
 
 	@Query("SELECT e FROM Exercise e WHERE e.professor = ?1")
 	Page<Exercise> findByUser(Pageable pageable, User activeUser);
-	
+
 	@Query("SELECT e FROM Exercise e WHERE e.professor = ?1 AND (e.name = ?2 OR e.description = ?2)")
 	Page<Exercise> findByUserFiltered(Pageable pageable, User activeUser, String searchText);
 

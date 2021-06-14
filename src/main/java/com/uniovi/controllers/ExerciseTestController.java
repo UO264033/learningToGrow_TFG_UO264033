@@ -20,37 +20,37 @@ import com.uniovi.validators.ExerciseValidator;
 
 @Controller
 public class ExerciseTestController {
-	
+
 	@Autowired
 	private ExerciseValidator exerciseValidator;
-	
+
 	@Autowired
 	private ExerciseTestService exerciseService;
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@RequestMapping(value = "/exercise/test/add")
 	public String getExercise(Model model, Pageable pageable) {
 		model.addAttribute("exercise", new Exercise());
 		model.addAttribute("subjectList", subjectService.getSubjects());
 		return "exercise/test/add";
 	}
-	
+
 	@RequestMapping(value = "/exercise/test/add", method = RequestMethod.POST)
-	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result,
-			Model model, @ModelAttribute Test exercise, @ModelAttribute User user) {
-		
+	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result, Model model,
+			@ModelAttribute Test exercise, @ModelAttribute User user) {
+
 		exerciseValidator.validate(exerciseVa, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			model.addAttribute("exercise", exerciseVa);
 			model.addAttribute("subjectList", subjectService.getSubjects());
 			return "exercise/test/add";
 		}
-		
+
 		exerciseService.setProfesor(exercise);
 		exerciseService.addExercise(exercise);
-		
+
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("user", user);
 		return "exercise/test/question/add";
@@ -64,6 +64,5 @@ public class ExerciseTestController {
 		model.addAttribute("questionList", exercise.getQuestionsSet());
 		return "exercise/test/show";
 	}
-	
 
 }

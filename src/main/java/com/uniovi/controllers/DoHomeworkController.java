@@ -26,7 +26,7 @@ public class DoHomeworkController {
 
 	@Autowired
 	private ExerciseService exerciseService;
-	
+
 	@RequestMapping("/homework/do/{id}")
 	public String doHomework(Model model, @PathVariable Long id) {
 		Exercise exercise = exerciseService.getExercise(id);
