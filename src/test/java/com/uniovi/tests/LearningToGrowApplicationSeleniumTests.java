@@ -297,9 +297,9 @@ public class LearningToGrowApplicationSeleniumTests {
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 	}
-	
+
 	/**
-	 * P13a2. Loguearse como profesor y agregar un ejercicio de tipo test
+	 * P13a2. Loguearse como profesor y agregar un ejercicio de tipo test inválido
 	 */
 	@Test
 	public void PR13a2_addTestExerciseTest() {
@@ -310,13 +310,32 @@ public class LearningToGrowApplicationSeleniumTests {
 		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'exercises-menu')]/a",
 				"//a[contains(@href, 'exercise/test/add')]", "Agregar ejercicio de tipo test");
 
-		// Ahora vamos a rellenar el ejercicio. //option[contains(@value, '4')]
+		// Ahora vamos a rellenar el ejercicio: nombre repetido
 		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de tipo test",
 				"Dos.- Este es un ejemplo de ejercicio de tipo test");
 
 		SeleniumUtils.textoPresentePagina(driver, "Introduzca otro nombre de ejercicio, el introducido ya existe");
 		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
-		
+
+		// Ahora vamos a rellenar el ejercicio: nombre vacio
+		PO_PrivateView.fillFormAddExercise(driver, "", "");
+
+		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
+
+		// Ahora vamos a rellenar el ejercicio.
+		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de tipo test 2",
+				"Dos.- Este es un ejemplo de ejercicio de tipo test");
+
+		SeleniumUtils.textoPresentePagina(driver, "Agregar pregunta");
+		SeleniumUtils.textoPresentePagina(driver, "Dos.- Este es un ejemplo de ejercicio de tipo test");
+
+		// Ahora vamos a rellenar las preguntas: pregunta y respuestas vacias
+		PO_PrivateView.fillFormAddQuestionTest(driver, "", "", "", "", "");
+
+		SeleniumUtils.textoNoPresentePagina(driver, "La pregunta se ha añadido correctamente");
+		SeleniumUtils.textoPresentePagina(driver, "Agregar pregunta");
+		SeleniumUtils.textoPresentePagina(driver, "Dos.- Este es un ejemplo de ejercicio de tipo test");
+
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 	}
@@ -339,6 +358,35 @@ public class LearningToGrowApplicationSeleniumTests {
 
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicios creados");
 		SeleniumUtils.textoPresentePagina(driver, "Este es un ejemplo de ejercicio de subida de fichero");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+
+	/**
+	 * P13b. Loguearse como profesor y agregar un ejercicio de subida de fichero
+	 * invalido
+	 */
+	@Test
+	public void PR13b2_addUploadFileExerciseTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de nuevo ejercicio: //li[contains(@id,
+		// 'exercise-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'exercises-menu')]/a",
+				"//a[contains(@href, 'exercise/upFile/add')]", "Agregar ejercicio de subida de fichero");
+
+		// Ahora vamos a rellenar el ejercicio. nombre y descripcion vacia
+		PO_PrivateView.fillFormAddExercise(driver, "", "");
+
+		SeleniumUtils.textoPresentePagina(driver, "Agregar ejercicio de subida de fichero");
+
+		// Ahora vamos a rellenar el ejercicio. //option[contains(@value, '4')]
+		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de subida de fichero",
+				"Este es un ejemplo de ejercicio de subida de fichero");
+
+		SeleniumUtils.textoPresentePagina(driver, "Introduzca otro nombre de ejercicio, el introducido ya existe");
+		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
@@ -379,6 +427,45 @@ public class LearningToGrowApplicationSeleniumTests {
 
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicios creados");
 		SeleniumUtils.textoPresentePagina(driver, "Este es un ejemplo de ejercicio de respuesta corta");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+
+	/**
+	 * P13c2. Loguearse como profesor y agregar un ejercicio de completar con texto
+	 * invalido
+	 */
+	@Test
+	public void PR13c2_addShortAnswerExerciseTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de nuevo ejercicio: //li[contains(@id,
+		// 'exercise-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'exercises-menu')]/a",
+				"//a[contains(@href, 'exercise/shortAnswer/add')]", "Agregar ejercicio de respuesta corta");
+
+		// Ahora vamos a rellenar el ejercicio. nombre repetido
+		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de respuesta corta",
+				"Este es un ejemplo de ejercicio de respuesta corta");
+
+		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
+		SeleniumUtils.textoPresentePagina(driver, "Introduzca otro nombre de ejercicio, el introducido ya existe");
+
+		// Ahora vamos a rellenar el ejercicio. : nombre y descripcion vacia
+		PO_PrivateView.fillFormAddExercise(driver, "", "");
+		SeleniumUtils.textoNoPresentePagina(driver, "Agregar pregunta");
+		SeleniumUtils.textoPresentePagina(driver, "Agregar ejercicio de respuesta corta");
+
+		// Ahora vamos a rellenar el ejercicio.
+		PO_PrivateView.fillFormAddExercise(driver, "Ejercicio de respuesta corta 2",
+				"Dos.- Este es un ejemplo de ejercicio de respuesta corta");
+		// Pregunta y respuesta vacia
+		PO_PrivateView.fillFormAddQuestionShortAnswer(driver, "", "");
+
+		SeleniumUtils.textoNoPresentePagina(driver, "La pregunta se ha añadido correctamente");
+		SeleniumUtils.textoPresentePagina(driver, "Agregar pregunta");
+		SeleniumUtils.textoPresentePagina(driver, "Dos.- Este es un ejemplo de ejercicio de respuesta corta");
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
@@ -656,7 +743,7 @@ public class LearningToGrowApplicationSeleniumTests {
 	}
 
 	/**
-	 * PR22.- Ver feedback
+	 * PR22.- Ver feedback vacio
 	 */
 	@Test
 	public void PR22_viewEmptyFeedbackTest() {
@@ -846,6 +933,37 @@ public class LearningToGrowApplicationSeleniumTests {
 	}
 
 	/**
+	 * PR27.-Añadir un nuevo usuario
+	 */
+	@Test
+	public void PR27b_addNewUserInvalidTest() {
+		PR07c_rolAdministradorTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'users-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'users-menu')]/a", "//a[contains(@href, 'user/add')]",
+				"Añadir nuevo usuario");
+
+		PO_PrivateView.fillFormAddOrEditUser(driver, "alumnoEjemplo", "a", "e", "alumnocom", "pepe", "pepe");
+
+		SeleniumUtils.textoNoPresentePagina(driver, "Usuarios");
+
+		// Comprobamos el error de username repetido.
+		PO_RegisterView.checkKey(driver, "Error.signup.username.duplicate", PO_Properties.getSPANISH());
+		// Comprobamos el error de name corto .
+		PO_RegisterView.checkKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH());
+		// Comprobamos el error de apellido corto .
+		PO_RegisterView.checkKey(driver, "Error.signup.lastName.length", PO_Properties.getSPANISH());
+		// Comprobamos el error de email no valido.
+		PO_RegisterView.checkKey(driver, "Error.signup.email", PO_Properties.getSPANISH());
+		// Comprobamos el error de contraseña invalida .
+		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH());
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+
+	/**
 	 * PR28.- Detalles de usuario
 	 */
 	@Test
@@ -887,7 +1005,7 @@ public class LearningToGrowApplicationSeleniumTests {
 	}
 
 	/**
-	 * PR30.- Modificar usuario
+	 * PR30.- Modificar usuario datos validos
 	 */
 	@Test
 	public void PR30_editUserTest() {
@@ -913,6 +1031,38 @@ public class LearningToGrowApplicationSeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "ejemplo@alumno.es");
 		SeleniumUtils.textoNoPresentePagina(driver, "alumnoEjemplo");
 		SeleniumUtils.textoNoPresentePagina(driver, "alumno@gmail.com");
+	}
+	
+	/**
+	 * PR30.- Modificar usuario datos invalidos
+	 */
+	@Test
+	public void PR30b_editUserTest() {
+		PR07c_rolAdministradorTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'users-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'users-menu')]/a", "//a[contains(@href, 'user/list')]",
+				"Usuarios");
+
+		By pagination = By.xpath("/html/body/div/div[3]/ul/li[3]/a");
+		driver.findElement(pagination).click();
+		By edit = By.xpath("/html/body/div/div[2]/table/tbody/tr[4]/td[7]/a");
+		driver.findElement(edit).click();
+
+		PO_PrivateView.fillFormAddOrEditUser(driver, "e", "a", "e", "ejemplo.es",
+				"pepe", "pepe");
+
+		PO_RegisterView.checkKey(driver, "Error.signup.username.length", PO_Properties.getSPANISH());
+		// Comprobamos el error de name corto .
+		PO_RegisterView.checkKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH());
+		// Comprobamos el error de apellido corto .
+		PO_RegisterView.checkKey(driver, "Error.signup.lastName.length", PO_Properties.getSPANISH());
+		// Comprobamos el error de email no valido.
+		PO_RegisterView.checkKey(driver, "Error.signup.email", PO_Properties.getSPANISH());
+		// Comprobamos el error de contraseña invalida .
+		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH());
+		
 	}
 
 	/**
@@ -1150,9 +1300,136 @@ public class LearningToGrowApplicationSeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Lista de tareas");
 
 	}
+	/**-----------------------------------------------------------------------------------**/
 
 	/**
-	 * Ver correcciones
+	 * PR22.- Ver feedback desde profesor
 	 */
+	@Test
+	public void PR40_listFeedbackTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'homeworks-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'homework/list')]", "Ejercicios para corregir");
+
+		// Contamos el número de filas de usuarios + 1 (la de buscar)
+		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+				PO_View.getTimeout());
+		assertTrue(elementos.size() == 2);
+		SeleniumUtils.textoPresentePagina(driver, "E1");
+		SeleniumUtils.textoPresentePagina(driver, "E3");
+		SeleniumUtils.textoPresentePagina(driver, "Pedro");
+		SeleniumUtils.textoPresentePagina(driver, "Matemáticas");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+
+	/**
+	 * PR41.- Corregir ejercicio de tipo test profesor
+	 */
+	@Test
+	public void PR41_correctTestExerciseTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'homeworks-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'homework/list')]", "Ejercicios para corregir");
+
+		By corregir = By.xpath("/html/body/div/div[2]/table/tbody/tr[2]/td[5]/a");
+		driver.findElement(corregir).click();
+		SeleniumUtils.textoPresentePagina(driver, "Corregir ejercicio");
+		SeleniumUtils.textoPresentePagina(driver, "E1");
+		SeleniumUtils.textoPresentePagina(driver, "Comentario del alumno");
+
+		PO_PrivateView.fillFormCorrectTest(driver, "hola");
+
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicios para corregir");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+
+	/**
+	 * PR41.- Corregir ejercicio de tipo test profesor
+	 */
+	@Test
+	public void PR41_correctShortAnswerExerciseTest() {
+		PR07b_rolProfessorTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'homeworks-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'homework/list')]", "Ejercicios para corregir");
+
+		By corregir = By.xpath("/html/body/div/div[2]/table/tbody/tr[1]/td[5]/a");
+		driver.findElement(corregir).click();
+		SeleniumUtils.textoPresentePagina(driver, "Corregir ejercicio");
+		SeleniumUtils.textoPresentePagina(driver, "E3");
+		SeleniumUtils.textoPresentePagina(driver, "Comentario del alumno");
+
+		PO_PrivateView.fillFormCorrectTest(driver, "adios");
+
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicios para corregir");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+	
+	
+	/**------------------------------------------------------------------------------------------**/
+	
+	/**
+	 * ver retroalimentaciones desde alumno
+	 */
+	@Test
+	public void PR42_listFeedbackTest() {
+		PR07a_rolStudentTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'homerworks-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'feedback/list')]", "Retroalimentación de los deberes");
+
+		SeleniumUtils.textoPresentePagina(driver, "E1");
+		SeleniumUtils.textoPresentePagina(driver, "E3");
+		SeleniumUtils.textoPresentePagina(driver, "Matemáticas");
+		SeleniumUtils.textoPresentePagina(driver, "Responder");
+		SeleniumUtils.textoPresentePagina(driver, "hola");
+		SeleniumUtils.textoPresentePagina(driver, "adios");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+	
+	/**
+	 * responder retroalimentaciones desde alumno
+	 */
+	@Test
+	public void PR43_answerFeedbackTest() {
+		PR07a_rolStudentTest();
+
+		// Pinchamos en la opción de menu de deberes: //li[contains(@id,
+		// 'homerworks-menu')]/a
+		PO_NavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'feedback/list')]", "Retroalimentación de los deberes");
+
+		SeleniumUtils.textoPresentePagina(driver, "E1");
+		SeleniumUtils.textoPresentePagina(driver, "E3");
+		
+		By responder = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[2]/div[1]/button");
+		driver.findElement(responder).click();
+		
+		PO_PrivateView.fillFormAnswerFeedback(driver, "respuesta");
+		
+		SeleniumUtils.textoPresentePagina(driver, "Respondido");
+
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+	}
+	
 
 }

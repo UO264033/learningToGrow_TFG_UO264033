@@ -23,7 +23,6 @@ public class PO_PrivateView extends PO_NavView {
 		description.sendKeys(descriptionp);
 		By boton = By.className("btn");
 		driver.findElement(boton).click();
-
 	}
 
 	public static void fillFormAddQuestionTest(WebDriver driver, String statementp, String texto1, String texto2,
@@ -164,6 +163,31 @@ public class PO_PrivateView extends PO_NavView {
 		driver.findElement(enlace).click();
 		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
 
+	}
+	
+	public static void fillFormCorrectTest(WebDriver driver, String retrop) {
+		By nota = By.xpath("//*[@id=\"role\"]/option[6]");
+		driver.findElement(nota).click();
+		
+		WebElement retro = driver.findElement(By.name("comment"));
+		retro.click();
+		retro.clear();
+		retro.sendKeys(retrop);
+		By enlace = By.id("correct");
+		driver.findElement(enlace).click();
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+	}
+
+	public static void fillFormAnswerFeedback(WebDriver driver, String answerp) {
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		WebElement answer = driver.findElement(By.name("message"));
+		answer.click();
+		answer.clear();
+		answer.sendKeys(answerp);
+		
+		By enviar = By.xpath("//*[@id=\"enviar\"]");
+		driver.findElement(enviar).click();
+		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
 	}
 
 }

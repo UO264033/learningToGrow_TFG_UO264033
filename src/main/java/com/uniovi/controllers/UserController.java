@@ -113,7 +113,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user, BindingResult result) {
+	public String setEdit(Model model, @PathVariable Long id, 
+			@ModelAttribute User user, BindingResult result) {
 		editUserValidator.validate(user, result);
 		if (result.hasErrors()) {
 			model.addAttribute("user", user);

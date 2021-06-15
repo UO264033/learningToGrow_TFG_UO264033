@@ -50,10 +50,10 @@ public class UserService {
 	}
 
 	public void addUser(User user) {
-		if (getUser(user.getId()) == null) {
+//		if (getUser(user.getId()) == null) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			usersRepository.save(user);
-		}
+//		}
 	}
 
 	public User getUserByUsername(String username) {

@@ -81,7 +81,9 @@ public class SubjectController {
 	}
 
 	@RequestMapping("/subject/{name}/addStudent/{idSt}")
-	public String setStudents(Model model, @PathVariable String name, @PathVariable String idSt, Principal principal) {
+	public String setStudents(Model model, @PathVariable String name, 
+			@PathVariable String idSt, Principal principal
+			) {
 		Subject subject = subjectService.getSubjectByName(name);
 		if (subject == null) {
 			String username = principal.getName();
