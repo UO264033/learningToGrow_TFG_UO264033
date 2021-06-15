@@ -62,36 +62,30 @@ public class SubjectController {
 		model.addAttribute("studentList", students);
 		return "subject/add";
 	}
-
-	@RequestMapping(value = "/subject/add/{message}")
-	public String getSubjectWithMessage(Model model, @PathVariable String message) {
-		model.addAttribute("subject", new Subject());
-		model.addAttribute("message", message);
-		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
-		model.addAttribute("studentList", students);
-		return "subject/add";
-	}
-
-	@RequestMapping(value = "/addStudent/{idSt}", method = RequestMethod.GET)
-	public String addSubject(Model model, @Validated Subject subject, BindingResult result) {
-		String message = "Debes añadir un nombre a la asignatura.";
-		List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
-		model.addAttribute("studentList", students);
-		return "subject/add/" + message;
+	
+	@RequestMapping(value = "/subject/add", method = RequestMethod.POST)
+	public String addSubject(Model model, @Validated Subject subjectVa, BindingResult result) {
+		subjectValidator.validate(subjectVa, result);
+		if (result.hasErrors()) {
+			model.addAttribute("message", "El nombre de la asignatura ya existe. Por favor, introduzca otro.");
+			return "subject/add";
+		}
+		subjectService.addSubject();
+		subjectService.addStudentsToASubject();
+		return "redirect:/subject/list";
 	}
 
 	@RequestMapping("/subject/{name}/addStudent/{idSt}")
 	public String setStudents(Model model, @PathVariable String name, 
-			@PathVariable String idSt, Principal principal
-			) {
+			@PathVariable String idSt, Principal principal) {
 		Subject subject = subjectService.getSubjectByName(name);
 		if (subject == null) {
 			String username = principal.getName();
 			User professor = usersService.getUserByUsername(username);
 			subject = new Subject(name, professor);
-			subjectService.addSubject(subject);
+			subjectService.addSubjectTemporal(subject);
 		}
-		subjectService.addStudentsToASubject(subject, idSt);
+		subjectService.addStudentsToASubjectTemporal(idSt);
 		return "redirect:/subject/list";
 	}
 

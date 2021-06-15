@@ -26,7 +26,7 @@ public class SubjectValidator  implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Error.empty");
 		
 		if (subjectService.getSubjectByName(subject.getName()) != null) {
-			errors.rejectValue("username", "Error.subject.duplicate");
+			errors.rejectValue("name", "Error.subject.duplicate");
 		}
 	}
 

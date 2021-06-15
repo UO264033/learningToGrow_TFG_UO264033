@@ -13,8 +13,6 @@
 			<img src="/img/allSubjects.png" /><br>
 		</div>
 		<br>
-		<div class="alert alert-danger" role="alert"
-			th:if="${message != null}" th:text="${message}"></div>
 		<form class="form-horizontal" method="post" action="/subject/add"
 			th:object="${subject}">
 			<div class="form-group">
@@ -22,9 +20,9 @@
 					th:text="#{signup.nombre}" />
 				<div class="col-sm-7">
 					<input type="text" class="form-control" name="name" id="nameSub"
-						th:placeholder="#{subject.example}" required="true" /> <span
+						th:placeholder="#{subject.example}" required="true" /><span
 						class="text-danger" th:if="${#fields.hasErrors('name')}"
-						th:errors="*{name}">
+						th:errors="*{name}" /> 
 				</div>
 			</div>
 			<div class="form-group">
@@ -40,8 +38,8 @@
 			</div>
 			<div th:replace="subject/modalSubject" /></div>
 			<div class="container" align="center">
-				<a href="/subject/list" th:text="#{subject.save}"
-					class="btn btn-info" role="button" aria-label="Center Align"></a>
+				<button type="submit" th:text="#{subject.save}"
+					class="btn btn-info" role="button" aria-label="Center Align"></button>
 			</div>
 		</form>
 	</div>
