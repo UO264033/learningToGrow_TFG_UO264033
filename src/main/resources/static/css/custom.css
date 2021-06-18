@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	margin-bottom: 60px;
+	  margin-bottom: 60px;
 	  font-size: 16px;
 }
 
@@ -19,7 +19,7 @@ body {
 .btn-warning {
 	color: #fff;
 	  background-color: #e6648d;
-	border-color: #e6648d;
+	  border-color: #e6648d;
 	border-radius: 37px;
 }
 
@@ -51,12 +51,12 @@ body {
 
 a {
 	  color: #5bc0de;
-	text-decoration: none;
+	  text-decoration: none;
 }
 
 /* Sticky nav styles-------------------------------------------------- */
 .navbar-inverse .navbar-nav > li > a {
-	color: #000;
+	  color: #000;
 }
 
 .navbar-inverse {
@@ -66,7 +66,7 @@ a {
 
 .navbar-inverse .navbar-nav>.open > a,
  .navbar-inverse .navbar-nav>.open > a:focus,
-  .navbar-inverse .navbar-nav>.open > a:hover {
+  .navbar-inverse .navbar-nav>.open >a:hover {
 	  color: white;
 	background-color: #5bd0de;
 }
@@ -78,13 +78,13 @@ a {
 }
 
 .dropdown-menu > li > a {
-	display: block;
+	  display: block;
 	  padding: 3px 20px;
 	clear: both;
-	font-weight: 400;
+	  font-weight: 400;
 	line-height: 1.42857143;
 	color: #000;
-	white-space: nowrap;
+	  white-space: nowrap;
 	font-size: medium;
 }
 
@@ -96,7 +96,7 @@ footer {
 	height: 60px;
 	background-color: #e6648d;
 	text-align: center;
-	line-height: 60px;
+	  line-height: 60px;
 }
 
 .text-muted {
@@ -157,9 +157,9 @@ h5 {
 .pagination > li > a,
  .pagination > li > span {
 	position: relative;
-	float: left;
-	padding: 6px 12px;
-	margin-left: -1px;
+	  float: left;
+	  padding: 6px 12px;
+	  margin-left: -1px;
 	line-height: 1.42857143;
 	color: darkslategrey;
 	text-decoration: none;
@@ -171,7 +171,7 @@ h5 {
 	border-radius: 37px;
 	background-color: #ededed;
 	width: 100%;
-	font-size: 2.5rem;
+	  font-size: 2.5rem;
 	color: #5bd0de;
 	text-decoration: none;
 	display: flex;
@@ -188,12 +188,12 @@ h5 {
 }
 
 .tooltip .tiptext {
-	visibility: hidden;
+	  visibility: hidden;
 	width: 120px;
 	background-color: black;
 	color: #fff;
 	text-align: center;
-	border-radius: 3px;
+	  border-radius: 3px;
 	padding: 6px 0;
 	position: absolute;
 	z-index: 1;
