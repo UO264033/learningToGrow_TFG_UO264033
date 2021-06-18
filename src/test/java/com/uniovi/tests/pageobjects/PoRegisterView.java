@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class PO_RegisterView extends PO_NavView {
+public class PoRegisterView extends PoNavView {
 
 	static public void fillForm(WebDriver driver, String usernamep, String namep, String lastnamep, String emailp, String passwordp, String passwordconfp) {
 		WebElement username = driver.findElement(By.name("username"));

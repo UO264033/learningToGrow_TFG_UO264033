@@ -38,7 +38,7 @@ public class ExerciseController {
 		User activeUser = usersService.getUserByUsername(username);
 		exercises = exerciseService.getExercisesByUser(pageable, activeUser, searchText);
 		model.addAttribute("exerciseList", exercises.getContent());
-		model.addAttribute("page", exercises);	
+		model.addAttribute("page", exercises);
 		return "exercise/list";
 	}
 

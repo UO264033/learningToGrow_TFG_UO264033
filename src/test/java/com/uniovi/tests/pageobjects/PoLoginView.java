@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.uniovi.tests.util.SeleniumUtils;
 
-public class PO_LoginView {
+public class PoLoginView {
 
 	static public void fillForm(WebDriver driver, String usernamef, String passwordf) {
 		WebElement username = driver.findElement(By.name("username"));
@@ -34,11 +34,11 @@ public class PO_LoginView {
 
 	public static void login(WebDriver driver, String username, String contraseña, String text) {
 		// Vamos al formulario de registro
-		PO_HomeView.clickOption(driver, "login", "text", "¡Hola! Conéctate");
+		PoHomeView.clickOption(driver, "login", "text", "¡Hola! Conéctate");
 		// Rellenamos el formulario
-		PO_LoginView.fillForm(driver, username, contraseña);
+		PoLoginView.fillForm(driver, username, contraseña);
 		SeleniumUtils.esperarSegundos(driver, 2);
 		// Comprobamos que entramos en la pagina del usuario
-		PO_View.checkElement(driver, "text", text);
+		PoView.checkElement(driver, "text", text);
 	}
 }

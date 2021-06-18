@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -35,10 +33,6 @@ public class UserService {
 
 	@Autowired
 	private ExerciseService exerciseService;
-
-	@PostConstruct
-	public void init() {
-	}
 
 	public Page<User> getUsers(Pageable pageable) {
 		Page<User> users = usersRepository.findAll(pageable);

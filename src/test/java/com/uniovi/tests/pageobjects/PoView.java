@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import com.uniovi.tests.util.SeleniumUtils;
 
-public class PO_View {
+public class PoView {
 	
-	protected static PO_Properties p = new PO_Properties("messages");
+	protected static PoProperties p = new PoProperties("messages");
 	protected static int timeout = 2;
 
 	public static int getTimeout() {
@@ -17,15 +17,15 @@ public class PO_View {
 	}
 
 	public static void setTimeout(int timeout) {
-		PO_View.timeout = timeout;
+		PoView.timeout = timeout;
 	}
 
-	public static PO_Properties getP() {
+	public static PoProperties getP() {
 		return p;
 	}
 
-	public static void setP(PO_Properties p) {
-		PO_View.p = p;
+	public static void setP(PoProperties p) {
+		PoView.p = p;
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class PO_View {
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkKey(WebDriver driver, String key, int locale) {
-		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "text", p.getString(key, locale), getTimeout());
+		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, "text", p.getString(key, locale), getTimeout());
 		return elementos;
 	}
 	/**
@@ -48,7 +48,7 @@ public class PO_View {
 	 * @return Se retornará la lista de elementos resultantes de la búsqueda.
 	 */
 	static public List<WebElement> checkElement(WebDriver driver, String type, String text) {
-		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, type, text, getTimeout());
+		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, type, text, getTimeout());
 		return elementos;		
 	}
 }

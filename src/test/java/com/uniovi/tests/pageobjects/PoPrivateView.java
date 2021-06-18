@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 
 import com.uniovi.tests.util.SeleniumUtils;
 
-public class PO_PrivateView extends PO_NavView {
+public class PoPrivateView extends PoNavView {
 
 	static public void fillFormAddExercise(WebDriver driver, String namep, String descriptionp) {
 		// Esperamos 3 segundo a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Seleccionamos el alumnos userOrder
 //		new Select(driver.findElement(By.id("user"))).selectByIndex(userOrder);
 		// Rellenemos el campo de descripción
@@ -28,7 +28,7 @@ public class PO_PrivateView extends PO_NavView {
 	public static void fillFormAddQuestionTest(WebDriver driver, String statementp, String texto1, String texto2,
 			String text3, String xpath) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Rellenemos el campo de descripción
 		WebElement statement = driver.findElement(By.name("statement"));
 		statement.clear();
@@ -47,14 +47,14 @@ public class PO_PrivateView extends PO_NavView {
 		answer3.sendKeys(text3);
 		By enlace = By.xpath(xpath);
 		driver.findElement(enlace).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		By boton = By.id("addA");
 		driver.findElement(boton).click();
 	}
 
 	public static void fillFormAddQuestionShortAnswer(WebDriver driver, String statementp, String texto) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Rellenemos el campo de descripción
 		WebElement statement = driver.findElement(By.name("statement"));
 		statement.clear();
@@ -70,7 +70,7 @@ public class PO_PrivateView extends PO_NavView {
 
 	public static void fillFormAddSubject(WebDriver driver, String namep) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		WebElement name = driver.findElement(By.name("name"));
 		name.clear();
 		name.sendKeys(namep);
@@ -79,29 +79,29 @@ public class PO_PrivateView extends PO_NavView {
 
 		By check = By.xpath("//*[@id=\"4\"]");
 		driver.findElement(check).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		check = By.xpath("//*[@id=\"5\"]");
 		driver.findElement(check).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		check = By.xpath("//*[@id=\"6\"]");
 		driver.findElement(check).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		check = By.xpath("//*[@id=\"7\"]");
 		driver.findElement(check).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		check = By.xpath("//*[@id=\"8\"]");
 		driver.findElement(check).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 
 		boton = By.id("addStudent");
 		driver.findElement(boton).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 	}
 
 	public static void fillFormAddOrEditUser(WebDriver driver, String usernamep, String namep, String lastNamep,
 			String emailp, String passwordp, String passwordConfirmp) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Rellenemos el campo de descripción
 		WebElement username = driver.findElement(By.name("username"));
 		username.clear();
@@ -128,13 +128,13 @@ public class PO_PrivateView extends PO_NavView {
 		passwordConfirm.sendKeys(passwordConfirmp);
 		By enlace = By.id("addU");
 		driver.findElement(enlace).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 
 	}
 
 	public static void fillFormAddHomeworkShortAnswer(WebDriver driver, String answerp, String descriptionp) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Rellenemos el campo de descripción
 		WebElement answer = driver.findElement(By.xpath("/html/body/div/form/div[1]/div/div[2]/input"));
 		answer.clear();
@@ -145,13 +145,13 @@ public class PO_PrivateView extends PO_NavView {
 		description.sendKeys(descriptionp);
 		By enlace = By.id("send");
 		driver.findElement(enlace).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 
 	}
 	
 	public static void fillFormAddHomeworkTest(WebDriver driver, String descriptionp) {
 		// Esperamos 2 segundos a que carge el DOM porque en algunos equipos falla
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		// Rellenemos el campo de descripción
 		By answer = By.xpath("//*[@id=\"huey\"]");
 		driver.findElement(answer).click();
@@ -161,7 +161,7 @@ public class PO_PrivateView extends PO_NavView {
 		description.sendKeys(descriptionp);
 		By enlace = By.id("send");
 		driver.findElement(enlace).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 
 	}
 	
@@ -175,11 +175,11 @@ public class PO_PrivateView extends PO_NavView {
 		retro.sendKeys(retrop);
 		By enlace = By.id("correct");
 		driver.findElement(enlace).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 	}
 
 	public static void fillFormAnswerFeedback(WebDriver driver, String answerp) {
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 		WebElement answer = driver.findElement(By.name("message"));
 		answer.click();
 		answer.clear();
@@ -187,7 +187,7 @@ public class PO_PrivateView extends PO_NavView {
 		
 		By enviar = By.xpath("//*[@id=\"enviar\"]");
 		driver.findElement(enviar).click();
-		SeleniumUtils.esperarSegundos(driver, PO_View.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
 	}
 
 }

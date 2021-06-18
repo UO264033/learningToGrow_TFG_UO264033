@@ -18,6 +18,9 @@ public class SubjectService {
 
 	@Autowired
 	private UserService usersService;
+	
+	private Subject temporal = new Subject();
+	private String[] idsStudent;
 
 	public void addSubject(Subject subject) {
 		subjectRepository.save(subject);
@@ -94,8 +97,5 @@ public class SubjectService {
 	public String[] getIdsStudent() {
 		return idsStudent;
 	}
-
-	private Subject temporal = new Subject();
-	private String[] idsStudent;
 
 }

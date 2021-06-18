@@ -19,7 +19,7 @@ public class Assert {
 	}
 	
 	public static void isTrue(boolean test, String msg) {
-		if (test == true) return;
+		if (test) return;
 		throwException(msg);
 	}
 

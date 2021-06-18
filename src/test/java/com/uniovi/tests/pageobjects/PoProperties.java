@@ -4,14 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class PO_Properties {
-	public PO_Properties() {
-	}
-
+public class PoProperties {
+	
 	protected static String Path;
 	protected static int SPANISH = 0;
 	protected static int ENGLISH = 1;
 	protected static Locale[] idioms = new Locale[] { new Locale("ES"), new Locale("EN") };
+	
+	public PoProperties() {
+	}
 
 //static Properties p = new Properties();
 	public static int getSPANISH() {
@@ -23,7 +24,7 @@ public class PO_Properties {
 	}
 
 	@SuppressWarnings("static-access")
-	public PO_Properties(String path) // throws FileNotFoundException, IOException
+	public PoProperties(String path) // throws FileNotFoundException, IOException
 	{
 		this.Path = path;
 		// p.load(new FileReader(Path));

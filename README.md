@@ -5,6 +5,6 @@
 
 ## TFG del Grado Ingeniería Informática del Software en la Univerdidad de Oviedo
 
-- Estudiante: María González Gancedo - UO264033
-- Tutor: Miguel Sánchez Santillán 
-- Cotutor: Natalia Sánchez Fernández
+-Estudiante: María González Gancedo - UO264033
+-Tutor: Miguel Sánchez Santillán 
+-Cotutor: Natalia Sánchez Fernández

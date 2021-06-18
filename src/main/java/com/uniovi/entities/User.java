@@ -166,6 +166,22 @@ public class User {
 	public void setSubjects(Set<Subject> subjects) {
 		this.subjects = subjects;
 	}
+	
+	public Set<Subject> getSubjectsTaught() {
+		return subjectsTaught;
+	}
+
+	public void setSubjectsTaught(Set<Subject> subjectsTaught) {
+		this.subjectsTaught = subjectsTaught;
+	}
+
+	public Set<Feedback> getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Set<Feedback> feedback) {
+		this.feedback = feedback;
+	}
 
 	public void addSubject(Subject s) {
 		subjects.add(s);

@@ -50,6 +50,8 @@ public class HomeworkService {
 
 	@Autowired
 	private UserService userService;
+	
+	private int[] idsAnswers;
 
 	public Page<Homework> getHomeworks(Pageable pageable) {
 		Page<Homework> homeworks = homeworkRepository.findAll(pageable);
@@ -286,8 +288,6 @@ public class HomeworkService {
 		}
 		return homeworks;
 	}
-
-	private int[] idsAnswers;
 
 	public void saveStudentAnswer(int[] checkAnswers) {
 		if (checkAnswers != null)

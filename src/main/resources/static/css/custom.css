@@ -12,26 +12,26 @@ body {
 	font-size: 16px;
 }
 
-/* Colores de botones y de labels-----------------------------------------*/
+/* Colores de botones y de labels----------------------------------------- */
 .label-warning {
-	background-color: #E6648D;
+	background-color: #e6648d;
 }
 
 .btn-warning {
 	color: #fff;
-	background-color: #E6648D;
-	border-color: #E6648D;
-	border-radius: 37px
+	background-color: #e6648d;
+	border-color: #e6648d;
+	border-radius: 37px;
 }
 
 .label-success {
-	background-color: #ABB4FF;
+	background-color: #abb4ff;
 }
 
 .btn-success {
 	color: #fff;
-	background-color: #ABB4FF;
-	border-color: #ABB4FF;
+	background-color: #abb4ff;
+	border-color: #abb4ff;
 	border-radius: 37px;
 }
 
@@ -42,12 +42,13 @@ body {
 	border-radius: 37px;
 }
 
-.btn-group-lg>.btn, .btn-lg {
+.btn-group-lg > .btn,
+ 				.btn-lg {
 	padding: 10px 16px;
 	font-size: 18px;
 	line-height: 1.3333333;
 	border-radius: 37px;
-	padding: 2rem 2rem 2rem 3rem;
+	padding: 2rem;
 }
 
 a {
@@ -56,8 +57,8 @@ a {
 }
 
 /* Sticky nav styles-------------------------------------------------- */
-.navbar-inverse .navbar-nav>li>a {
-	color: #000000;
+.navbar-inverse .navbar-nav > li > a {
+	color: #000;
 }
 
 .navbar-inverse {
@@ -65,19 +66,21 @@ a {
 	border-color: white;
 }
 
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
+.navbar-inverse .navbar-nav > .open > a,
+ .navbar-inverse .navbar-nav > .open > a:focus,
 	.navbar-inverse .navbar-nav>.open>a:hover {
 	color: white;
 	background-color: #5bd0de;
 }
 
-.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover
+.navbar-inverse .navbar-nav > li > a:focus,
+ .navbar-inverse .navbar-nav > li > a:hover
 	{
 	color: #fff;
-	background-color: #5BD0DE;
+	background-color: #5bd0de;
 }
 
-.dropdown-menu>li>a {
+.dropdown-menu > li > a {
 	display: block;
 	padding: 3px 20px;
 	clear: both;
@@ -94,26 +97,29 @@ footer {
 	bottom: 0;
 	width: 100%;
 	height: 60px;
-	background-color: #E6648D;
+	background-color: #e6648d;
 	text-align: center;
-	line-height: 60px
+	line-height: 60px;
 }
 
 .text-muted {
 	color: black;
 }
 
-.h2, h2 {
+.h2, 
+h2 {
 	font-size: 32px;
-	color: #E6648D;
+	color: #e6648d;
 }
 
-.h4, h4 {
-	color: #5BD0DE;
+.h4, 
+h4 {
+	color: #5bd0de;
 	font-size: 20px;
 }
 
-.h5, h5 {
+.h5, 
+h5 {
 	color: #737373;
 	font-size: 16px;
 }
@@ -123,7 +129,7 @@ footer {
 	padding: 10px;
 }
 
-.panel-default>.panel-heading {
+.panel-default > .panel-heading {
 	color: #333;
 	background-color: #5bc0de78;
 	border-color: #ddd;
@@ -132,13 +138,13 @@ footer {
 .centerCard {
 	margin: auto;
 	width: 60%;
-	border: 3px solid #E6648D;
+	border: 3px solid #e6648d;
 	padding: 10px;
 }
 
 /* Sticky pagination styles-------------------------------------------------- */
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover,
-	.pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover,
+	.pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover
 	{
 	z-index: 3;
 	color: #fff;
@@ -147,7 +153,8 @@ footer {
 	border-color: #46b8da;
 }
 
-.pagination>li>a, .pagination>li>span {
+.pagination > li > a,
+ .pagination > li > span {
 	position: relative;
 	float: left;
 	padding: 6px 12px;
@@ -213,5 +220,5 @@ footer {
 	margin-left: -5px;
 	bottom: 100%;
 	left: 50%;
-	border-color: transparent transparent #2E2E2E transparent;
+	border-color: transparent transparent #2e2e2e transparent;
 }
