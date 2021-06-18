@@ -1,20 +1,6 @@
 package com.uniovi.configuration;
 
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-
-import org.apache.catalina.connector.Connector;
-import org.apache.coyote.http11.AbstractHttp11Protocol;
-import org.apache.coyote.http11.Http11NioProtocol;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.net.ssl.HttpsURLConnection;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 public class SSLTomcatConfiguration {

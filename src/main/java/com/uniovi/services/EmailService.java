@@ -42,9 +42,9 @@ public class EmailService {
 	@Autowired
 	private HomeworkService homeworkService;
 
-	Folder emailFolder;
-	Store store;
-	Properties properties = new Properties();
+	private Folder emailFolder;
+//	Store store;
+	private Properties properties = new Properties();
 
 	@PostConstruct
 	void setup() {

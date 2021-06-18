@@ -159,7 +159,7 @@ public class User {
 		this.role = role;
 	}
 
-	Set<Subject> _getSubjects() {
+	Set<Subject> getSubjects2() {
 		return subjects;
 	}
 

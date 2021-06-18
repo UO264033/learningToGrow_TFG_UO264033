@@ -45,7 +45,7 @@ public class Question extends BaseEntity {
 		this.statement = statement;
 	}
 
-	List<Answer> _getAnswers() {
+	List<Answer> getAnswers2() {
 		return answers;
 	}
 

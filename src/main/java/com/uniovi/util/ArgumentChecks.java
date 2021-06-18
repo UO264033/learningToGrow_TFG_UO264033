@@ -19,7 +19,7 @@ public abstract class ArgumentChecks {
 	}
 
 	public static void isTrue(final boolean test, final String msg) {
-		if (test == true) {
+		if (test) {
 			return;
 		}
 		throwException(msg);

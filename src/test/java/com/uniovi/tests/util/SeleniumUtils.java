@@ -42,7 +42,7 @@ public class SeleniumUtils {
 	 * @param texto: texto a buscar
 	 * @param timeout: el tiempo máximo que se esperará por la aparición del texto a buscar
 	 */
-	static public void EsperaCargaPaginaNoTexto(WebDriver driver, String texto, int timeout)
+	static public void esperaCargaPaginaNoTexto(WebDriver driver, String texto, int timeout)
 	{
 		Boolean resultado = 
 				(new WebDriverWait(driver, timeout)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + texto + "')]")));

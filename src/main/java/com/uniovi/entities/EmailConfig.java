@@ -31,7 +31,4 @@ public class EmailConfig {
 		return protocol;
 	}
 
-	public EmailConfig() {
-	}
-
 }

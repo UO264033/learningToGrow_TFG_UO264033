@@ -165,14 +165,14 @@ public class HomeworkService {
 		List<Subject> subjects = subjectService.getSubjectsByRole(user);
 		List<Exercise> homeworks = new ArrayList<>();
 		for (Subject s : subjects) {
-			if (!exerciseService.getExercisesBySubject(s.getId()).isEmpty())
-				;
-			for (Exercise exercise : exerciseService.getExercisesBySubject(s.getId())) {
-				Homework homework = homeworkRepository.findByExerciseAndUser(exercise, user);
-				if (homework != null && homework.isSent()) {
-					exercise.setSend(true);
+			if (!exerciseService.getExercisesBySubject(s.getId()).isEmpty()) {
+				for (Exercise exercise : exerciseService.getExercisesBySubject(s.getId())) {
+					Homework homework = homeworkRepository.findByExerciseAndUser(exercise, user);
+					if (homework != null && homework.isSent()) {
+						exercise.setSend(true);
+					}
+					homeworks.add(exercise);
 				}
-				homeworks.add(exercise);
 			}
 		}
 
