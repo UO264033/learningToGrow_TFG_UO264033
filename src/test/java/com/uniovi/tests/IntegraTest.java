@@ -29,7 +29,7 @@ import com.uniovi.tests.util.SeleniumUtils;
 @SpringBootTest
 //Ordenamos las pRuebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Selenium {
+public class IntegraTest {
 
 	protected static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	protected static String Geckdriver024 = "C:\\Users\\maari\\OneDrive\\Documentos\\Universidad\\CUARTO\\TFG\\pRoyecto\\workspace\\learningToGrow\\learningToGrow_TFG_UO264033\\geckodriver024win64.exe";

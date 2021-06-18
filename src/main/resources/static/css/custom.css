@@ -47,7 +47,6 @@ body {
 	 font-size: 18px;
 	line-height: 1.3333333;
 	border-radius: 37px;
-	padding: 2rem;
 }
 
 a {
@@ -65,16 +64,15 @@ a {
 	  border-color: white;
 }
 
-.navbar-inverse .navbar-nav>.open>a,
- .navbar-inverse .navbar-nav>.open>a:focus,
-  .navbar-inverse .navbar-nav>.open>a:hover {
+.navbar-inverse .navbar-nav>.open > a,
+ .navbar-inverse .navbar-nav>.open > a:focus,
+  .navbar-inverse .navbar-nav>.open > a:hover {
 	  color: white;
 	background-color: #5bd0de;
 }
 
-.navbar-inverse .navbar-nav>li>a:focus,
- .navbar-inverse .navbar-nav>li>a:hover
-	{
+.navbar-inverse .navbar-nav > li > a:focus,
+ .navbar-inverse .navbar-nav > li > a:hover {
 	color: #fff;
 	background-color: #5bd0de;
 }
@@ -85,7 +83,7 @@ a {
 	clear: both;
 	font-weight: 400;
 	line-height: 1.42857143;
-	color: #000000;
+	color: #000;
 	white-space: nowrap;
 	font-size: medium;
 }
@@ -142,8 +140,12 @@ h5 {
 }
 
 /* Sticky pagination styles-------------------------------------------------- */
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover,
- .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
+.pagination>.active > a,
+ .pagination>.active > a:focus,
+  .pagination>.active > a:hover,
+ .pagination>.active > span,
+  .pagination>.active > span:focus,
+   .pagination>.active > span:hover
 	{
 	  z-index: 3;
 	color: #fff;
@@ -170,7 +172,7 @@ h5 {
 	background-color: #ededed;
 	width: 100%;
 	font-size: 2.5rem;
-	color: #5BD0DE;
+	color: #5bd0de;
 	text-decoration: none;
 	display: flex;
 	justify-content: space-between;
