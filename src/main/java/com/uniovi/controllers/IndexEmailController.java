@@ -10,7 +10,7 @@ import com.uniovi.entities.EmailConfig;
 public class IndexEmailController {
 	
 	@Autowired
-	EmailConfig config;
+	private EmailConfig config;
 
 	@GetMapping
 	public EmailConfig index() {

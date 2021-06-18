@@ -8,10 +8,10 @@ public class PO_Properties {
 	public PO_Properties() {
 	}
 
-	static private String Path;
-	static int SPANISH = 0;
-	static int ENGLISH = 1;
-	static Locale[] idioms = new Locale[] { new Locale("ES"), new Locale("EN") };
+	protected static String Path;
+	protected static int SPANISH = 0;
+	protected static int ENGLISH = 1;
+	protected static Locale[] idioms = new Locale[] { new Locale("ES"), new Locale("EN") };
 
 //static Properties p = new Properties();
 	public static int getSPANISH() {

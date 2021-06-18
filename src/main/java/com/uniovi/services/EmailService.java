@@ -47,7 +47,7 @@ public class EmailService {
 	private Properties properties = new Properties();
 
 	@PostConstruct
-	void setup() {
+	protected void setup() {
 		String server = emailConfig.getHost();
 		properties.put("mail.pop3.host", server);
 		properties.put("mail.pop3.port", emailConfig.getPort());
@@ -64,7 +64,7 @@ public class EmailService {
 	}
 
 	@Scheduled(fixedRate = 5000)
-	synchronized void read() throws MessagingException, IOException {
+	protected synchronized void read() throws MessagingException, IOException {
 		emailFolder.open(Folder.READ_ONLY);
 		Message[] messages = emailFolder.getMessages();
 		for (int i = 0; i < messages.length; i++) {

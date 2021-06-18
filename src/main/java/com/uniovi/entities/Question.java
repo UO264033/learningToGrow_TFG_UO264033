@@ -45,10 +45,6 @@ public class Question extends BaseEntity {
 		this.statement = statement;
 	}
 
-	List<Answer> getAnswers2() {
-		return answers;
-	}
-
 	public List<Answer> getAnswers() {
 		return new ArrayList<>(answers);
 	}

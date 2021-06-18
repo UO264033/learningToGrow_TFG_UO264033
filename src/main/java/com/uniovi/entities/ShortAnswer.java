@@ -30,10 +30,6 @@ public class ShortAnswer extends Exercise {
 		this.questions = questions;
 	}
 
-	List<Question> _getQuestions() {
-		return questions;
-	}
-
 	public List<Question> getQuestions() {
 		return new ArrayList<>(questions);
 	}

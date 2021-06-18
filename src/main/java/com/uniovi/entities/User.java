@@ -159,10 +159,6 @@ public class User {
 		this.role = role;
 	}
 
-	Set<Subject> getSubjects2() {
-		return subjects;
-	}
-
 	public Set<Subject> getSubjects() {
 		return new HashSet<>(subjects);
 	}
