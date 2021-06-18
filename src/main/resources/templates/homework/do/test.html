@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<div th:replace="fragments/head"/>
-<title th:text="#{homework.tocorrect}"/>
+<div th:replace="fragments/head" />
+<title th:text="#{homework.tocorrect}" />
 </head>
 <body>
 	<nav th:replace="fragments/nav" />
@@ -23,16 +23,20 @@
 					<div class="panel-heading" th:text="${question.statement}">Enunciado</div>
 
 					<div th:each="answer : ${question.answers}">
-						<input type="checkbox" id="huey" name="checkAnswers[]" th:value="${answer.id}">
-						<input type="text" id="huey" th:value="${answer.id}" name="idsAnswers[]" hidden>
-						<label for="huey" th:text="${answer.text}" />
-						
+						<input type="checkbox" id="huey" name="checkAnswers[]"
+							th:value="${answer.id}"> <input type="text" id="huey"
+							th:value="${answer.id}" name="idsAnswers" hidden> <label
+							for="huey" th:text="${answer.text}" name="name" />
 					</div>
 				</div>
+				
+				<div class="alert alert-danger" role="alert"
+				th:if="${message != null}" th:text="${message}"></div>
 			</div>
 			<br> <br>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="description" th:text="#{todo.comment}"></label>
+				<label class="control-label col-sm-2" for="description"
+					th:text="#{todo.comment}"></label>
 				<div class="col-sm-8">
 					<textarea class="form-control" name="description"
 						th:placeholder="#{todo.comment.placeholder}"></textarea>

@@ -58,8 +58,10 @@ public class ExerciseService {
 
 	public void deleteExercise(Long id) {
 		if (exerciseRepository.findById(id).isPresent()) {
+			System.out.println(exerciseRepository.findById(id) + "-" + id);
 			Exercise exercise = exerciseRepository.findById(id).get();
 			exerciseRepository.delete(exercise);
+			exerciseRepository.deleteById(id);
 		}
 	}
 

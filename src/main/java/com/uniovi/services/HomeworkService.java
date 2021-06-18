@@ -41,16 +41,15 @@ public class HomeworkService {
 
 	@Autowired
 	private FeedbackService feedbackService;
-	
+
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private ExerciseService exerciseService;
-	
+
 	@Autowired
 	private UserService userService;
-	
 
 	public Page<Homework> getHomeworks(Pageable pageable) {
 		Page<Homework> homeworks = homeworkRepository.findAll(pageable);
@@ -110,13 +109,13 @@ public class HomeworkService {
 	public Page<Homework> getHomeworksToCorrect(Pageable pageable, User user) {
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworkRepository.findByProfessor(pageable, user);
-		for(Homework homework: homeworks.getContent()) {
+		for (Homework homework : homeworks.getContent()) {
 			Feedback feedback = feedbackService.findByHomework(homework);
-			if(feedback == null) 
+			if (feedback == null)
 				homework.setSend(false);
-			else if(feedback != null && !feedback.isSend())
+			else if (feedback != null && !feedback.isSend())
 				homework.setSend(false);
-			else if(feedback != null && feedback.isSend()) 
+			else if (feedback != null && feedback.isSend())
 				homework.setSend(true);
 		}
 		return homeworks;
@@ -129,7 +128,7 @@ public class HomeworkService {
 				"Muy bien trabajo, ¡enhorabuena!" };
 		return s;
 	}
-	
+
 	public List<Answer> correct(List<Answer> correctAnswers, Set<Answer> answers) {
 		List<Answer> answersList = new ArrayList<Answer>();
 		answersList.addAll(answers);
@@ -170,16 +169,16 @@ public class HomeworkService {
 				;
 			for (Exercise exercise : exerciseService.getExercisesBySubject(s.getId())) {
 				Homework homework = homeworkRepository.findByExerciseAndUser(exercise, user);
-				if(homework!= null && homework.isSent()) {
+				if (homework != null && homework.isSent()) {
 					exercise.setSend(true);
 				}
 				homeworks.add(exercise);
 			}
 		}
-		
+
 		return homeworks;
 	}
-	
+
 	public Homework saveShortAnswers(String[] answerStrings, Principal principal, String description,
 			Exercise realExercise) {
 		Homework homework = new Homework(description, true, realExercise);
@@ -191,17 +190,20 @@ public class HomeworkService {
 		}
 		return homework;
 	}
-	
+
 	public Homework saveAnswersTest(int[] checkAnswers, Principal principal, String description,
 			Exercise realExercise) {
-		Homework homework = new Homework(description, true, realExercise);
-		String username = principal.getName(); // Username es el name de la autenticación
-		User user = userService.getUserByUsername(username);
-		homework.setUser(user);
-		for (int i = 0; i < checkAnswers.length; i++) {
-			homework.addAnswer(new Answer( answerService.getById(checkAnswers[i]).getText()));
+		if (checkAnswers != null) {
+			Homework homework = new Homework(description, true, realExercise);
+			String username = principal.getName(); // Username es el name de la autenticación
+			User user = userService.getUserByUsername(username);
+			homework.setUser(user);
+			for (int i = 0; i < checkAnswers.length; i++) {
+				homework.addAnswer(new Answer(answerService.getById(checkAnswers[i]).getText()));
+			}
+			return homework;
 		}
-		return homework;
+		return null;
 	}
 
 	public Homework saveFiles(MultipartFile file, String description, Principal principal, Exercise realExercise) {
@@ -226,7 +228,7 @@ public class HomeworkService {
 		}
 		return homework;
 	}
-	
+
 	public List<Exercise> listOfExercisesBySubject(Long id) {
 		List<Exercise> homeworks = new ArrayList<>();
 		if (!exerciseService.getExercisesBySubject(id).isEmpty()) {
@@ -236,7 +238,7 @@ public class HomeworkService {
 		}
 		return homeworks;
 	}
-	
+
 	public List<Answer> correctTest(Homework homework) {
 		List<Answer> correctAnswers = new ArrayList<Answer>();
 		Test exercise = (Test) homework.getExercise();
@@ -251,7 +253,7 @@ public class HomeworkService {
 		}
 		return correctAnswers;
 	}
-	
+
 	public List<Answer> correctShortAnswer(Homework homework) {
 		List<Answer> correctAnswers = new ArrayList<Answer>();
 		ShortAnswer exercise = (ShortAnswer) homework.getExercise();
@@ -267,23 +269,39 @@ public class HomeworkService {
 			homeworks = getHomeworksToCorrectFiltered(pageable, user, searchText);
 		else
 			homeworks = getHomeworksToCorrect(pageable, user);
-		return homeworks; 
+		return homeworks;
 	}
 
 	public Page<Homework> getHomeworksToCorrectFiltered(Pageable pageable, User user, String searchText) {
 		Page<Homework> homeworks = new PageImpl<Homework>(new LinkedList<Homework>());
 		homeworks = homeworkRepository.findByProfessorFiltered(pageable, user, searchText);
-		for(Homework homework: homeworks.getContent()) {
+		for (Homework homework : homeworks.getContent()) {
 			Feedback feedback = feedbackService.findByHomework(homework);
-			if(feedback == null) 
-				homework.setSend(false); 
-			else if(feedback != null && !feedback.isSend())
+			if (feedback == null)
 				homework.setSend(false);
-			else if(feedback != null && feedback.isSend()) 
+			else if (feedback != null && !feedback.isSend())
+				homework.setSend(false);
+			else if (feedback != null && feedback.isSend())
 				homework.setSend(true);
 		}
 		return homeworks;
 	}
-	
+
+	private int[] idsAnswers;
+
+	public void saveStudentAnswer(int[] checkAnswers) {
+		if (checkAnswers != null)
+			this.setIdsAnswers(checkAnswers);
+
+		System.out.println("2.-  " + checkAnswers);
+	}
+
+	public int[] getIdsAnswers() {
+		return idsAnswers;
+	}
+
+	public void setIdsAnswers(int[] idsAnswers) {
+		this.idsAnswers = idsAnswers;
+	}
 
 }
