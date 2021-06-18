@@ -28,25 +28,25 @@ body {
 }
 
 .btn-success {
-	color: #fff;
-	  background-color: #abb4ff;
-	    border-color: #abb4ff;
-	      border-radius: 37px;
+  color: #fff;
+	background-color: #abb4ff;
+	  border-color: #abb4ff;
+	    border-radius: 37px;
 }
 
 .btn-info {
-	color: #fff;
-	  background-color: #5bc0de;
-	    border-color: #46b8da;
-	      border-radius: 37px;
+  color: #fff;
+	background-color: #5bc0de;
+	  border-color: #46b8da;
+	    border-radius: 37px;
 }
 
 .btn-group-lg > .btn,
  				.btn-lg {
-	padding: 10px 16px;
-	  font-size: 18px;
-	    line-height: 1.3333333;
-	      border-radius: 37px;
+  padding: 10px 16px;
+	font-size: 18px;
+	  line-height: 1.3333333;
+	    border-radius: 37px;
 }
 
 a {
@@ -66,37 +66,37 @@ a {
 
 .navbar-inverse .navbar-nav>.open > a,
  .navbar-inverse .navbar-nav>.open > a:focus,
-  .navbar-inverse .navbar-nav>.open >a:hover {
+  .navbar-inverse .navbar-nav>.open > a:hover {
   color: white;
     background-color: #5bd0de;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus,
  .navbar-inverse .navbar-nav > li > a:hover {
-	color: #fff;
+  color: #fff;
 	  background-color: #5bd0de;
 }
 
 .dropdown-menu > li > a {
-	display: block;
-	  padding: 3px 20px;
-	    clear: both;
-	      font-weight: 400;
-	line-height: 1.42857143;
-	color: #000;
-	  white-space: nowrap;
-	font-size: medium;
+  display: block;
+	padding: 3px 20px;
+	  clear: both;
+	    font-weight: 400;
+	      line-height: 1.42857143;
+	        color: #000;
+	          white-space: nowrap;
+	            font-size: medium;
 }
 
 /* Sticky footer styles-------------------------------------------------- */
 footer {
-	position: absolute;
-	  bottom: 0;
-	width: 100%;
-	height: 60px;
-	background-color: #e6648d;
-	text-align: center;
-	  line-height: 60px;
+  position: absolute;
+	bottom: 0;
+	  width: 100%;
+	   height: 60px;
+	     background-color: #e6648d;
+	       text-align: center;
+	         line-height: 60px;
 }
 
 .text-muted {
@@ -147,20 +147,20 @@ h5 {
   .pagination>.active > span:focus,
    .pagination>.active > span:hover
 	{
-	  z-index: 3;
+  z-index: 3;
 	color: #fff;
 	  cursor: default;
-	background-color: #5bc0de;
-	border-color: #46b8da;
+	    background-color: #5bc0de;
+	      border-color: #46b8da;
 }
 
 .pagination > li > a,
  .pagination > li > span {
-	position: relative;
-	  float: left;
+  position: relative;
+	float: left;
 	  padding: 6px 12px;
-	  margin-left: -1px;
-	line-height: 1.42857143;
+	    margin-left: -1px;
+	      line-height: 1.42857143;
 	color: darkslategrey;
 	text-decoration: none;
 	background-color: #fff;
@@ -168,10 +168,10 @@ h5 {
 }
 
 .personal-menu-button {
-	border-radius: 37px;
+  border-radius: 37px;
 	background-color: #ededed;
-	width: 100%;
-	  font-size: 2.5rem;
+	  width: 100%;
+	    font-size: 2.5rem;
 	color: #5bd0de;
 	text-decoration: none;
 	display: flex;
@@ -182,16 +182,16 @@ h5 {
 
 /* Tooltip */
 .tooltip {
-	position: relative;
-	  display: inline-block;
+  position: relative;
+	display: inline-block;
 	  border-bottom: 1px dotted black;
 }
 
 .tooltip .tiptext {
-	  visibility: hidden;
+  visibility: hidden;
 	width: 120px;
-	background-color: black;
-	color: #fff;
+	  background-color: black;
+	    color: #fff;
 	text-align: center;
 	  border-radius: 3px;
 	padding: 6px 0;
@@ -201,10 +201,10 @@ h5 {
 }
 
 .tooltip .tiptext::after {
-	content: "";
+  content: "";
 	position: absolute;
 	  border-width: 5px;
-	border-style: solid;
+	    border-style: solid;
 }
 
 .tooltip:hover .tiptext {
@@ -218,8 +218,8 @@ h5 {
 }
 
 .tooltip.bottom .tiptext::after {
-	  margin-left: -5px;
+  margin-left: -5px;
 	bottom: 100%;
-	left: 50%;
-	border-color: transparent transparent #2e2e2e transparent;
+	  left: 50%;
+	    border-color: transparent transparent #2e2e2e transparent;
 }
