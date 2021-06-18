@@ -18,15 +18,16 @@ public class SubjectService {
 
 	@Autowired
 	private UserService usersService;
-	
+
 	public void addSubject(Subject subject) {
 		subjectRepository.save(subject);
 	}
-	
+
 	public void addSubject() {
-		subjectRepository.save(temporal);
+		if (getSubjectByName(temporal.getName()) == null)
+			subjectRepository.save(temporal);
 	}
-	
+
 	public void addSubjectTemporal(Subject subject) {
 		temporal = subject;
 	}
@@ -58,16 +59,18 @@ public class SubjectService {
 			usersService.setStudent(Long.parseLong(s), subject.getName());
 		}
 	}
-	
+
 	public void addStudentsToASubject() {
 		for (String s : idsStudent) {
 			usersService.setStudent(Long.parseLong(s), temporal.getName());
 		}
 	}
-	
+
 	public void addStudentsToASubjectTemporal(String idSt) {
-		String[] array = idSt.split(",");
-		idsStudent = array;
+		if (idSt != null) {
+			String[] array = idSt.split(",");
+			idsStudent = array;
+		}
 	}
 
 	public List<Subject> getSubjectsByRole(User user) {
@@ -87,7 +90,11 @@ public class SubjectService {
 		subjectRepository.findByUsernameAndSName(searchText, user).forEach(subjects::add);
 		return subjects;
 	}
-	
+
+	public String[] getIdsStudent() {
+		return idsStudent;
+	}
+
 	private Subject temporal = new Subject();
 	private String[] idsStudent;
 

@@ -20,6 +20,7 @@ import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseShortAnswerService;
 import com.uniovi.services.SubjectService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
@@ -33,11 +34,15 @@ public class ExerciseShortAnswerController {
 
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private UserService usersService;
 
 	@RequestMapping(value = "/exercise/shortAnswer/add")
 	public String getExercise(Model model, Pageable pageable) {
+		User user = usersService.activeUser();
 		model.addAttribute("exercise", new Exercise());
-		model.addAttribute("subjectList", subjectService.getSubjects());
+		model.addAttribute("subjectList", subjectService.getSubjectsByRole(user));
 		return "exercise/shortAnswer/add";
 	}
 

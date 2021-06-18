@@ -68,6 +68,8 @@ public class SubjectController {
 		subjectValidator.validate(subjectVa, result);
 		if (result.hasErrors()) {
 			model.addAttribute("message", "El nombre de la asignatura ya existe. Por favor, introduzca otro.");
+			List<User> students = usersService.getStudentsByRole("ROLE_STUDENT");
+			model.addAttribute("studentList", students);
 			return "subject/add";
 		}
 		subjectService.addSubject();

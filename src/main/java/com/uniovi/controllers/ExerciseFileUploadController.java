@@ -15,6 +15,7 @@ import com.uniovi.entities.UploadFile;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseFileUploadService;
 import com.uniovi.services.SubjectService;
+import com.uniovi.services.UserService;
 import com.uniovi.validators.ExerciseValidator;
 
 @Controller
@@ -28,11 +29,15 @@ public class ExerciseFileUploadController {
 
 	@Autowired
 	private SubjectService subjectService;
+	
+	@Autowired
+	private UserService usersService;
 
 	@RequestMapping(value = "/exercise/upFile/add")
 	public String getExercise(Model model, Pageable pageable) {
+		User user = usersService.activeUser();
 		model.addAttribute("exercise", new Exercise());
-		model.addAttribute("subjectList", subjectService.getSubjects());
+		model.addAttribute("subjectList", subjectService.getSubjectsByRole(user));
 		return "exercise/upFile/add";
 	}
 

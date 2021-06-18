@@ -53,7 +53,7 @@ public class InsertDataService {
 		user7.setPassword("123456");
 		user7.setRole(rolesService.getRoles()[0]);
 		User user8 = new User("raquelsan", "Raquel", "Sánchez", "raquel@gmail.com");
-		user8.setPassword("123456");
+		user8.setPassword("123456"); 
 		user8.setRole(rolesService.getRoles()[0]);
 		User user4 = new User("profesor", "Marta", "Almonte", "marta@gmail.com");
 		user4.setPassword("123456");

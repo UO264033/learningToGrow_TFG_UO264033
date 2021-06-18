@@ -28,6 +28,10 @@ public class SubjectValidator  implements Validator {
 		if (subjectService.getSubjectByName(subject.getName()) != null) {
 			errors.rejectValue("name", "Error.subject.duplicate");
 		}
+		
+		if(subjectService.getIdsStudent() == null) {
+			errors.rejectValue("students", "Error.subject.noStudents");
+		}
 	}
 
 }
