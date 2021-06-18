@@ -18,18 +18,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.uniovi.tests.pageobjects.PoHomeView;
-import com.uniovi.tests.pageobjects.PoLoginView;
+import com.uniovi.tests.pageobjects.PoLoginview;
 import com.uniovi.tests.pageobjects.PoNavView;
 import com.uniovi.tests.pageobjects.PoPrivateView;
 import com.uniovi.tests.pageobjects.PoProperties;
 import com.uniovi.tests.pageobjects.PoRegisterView;
-import com.uniovi.tests.pageobjects.PoView;
+import com.uniovi.tests.pageobjects.Poview;
 import com.uniovi.tests.util.SeleniumUtils;
 
 @SpringBootTest
 //Ordenamos las pRuebas por el nombre del método 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SelemTests {
+public class Selenium {
 
 	protected static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	protected static String Geckdriver024 = "C:\\Users\\maari\\OneDrive\\Documentos\\Universidad\\CUARTO\\TFG\\pRoyecto\\workspace\\learningToGrow\\learningToGrow_TFG_UO264033\\geckodriver024win64.exe";
@@ -162,7 +162,7 @@ public class SelemTests {
 	 */
 	@Test
 	public void pR07arolStudentTest() {
-		PoLoginView.login(driver, "alumno", "123456", "student");
+		PoLoginview.login(driver, "alumno", "123456", "student");
 		assertTrue(x==y);
 	}
 
@@ -171,7 +171,7 @@ public class SelemTests {
 	 */
 	@Test
 	public void pR07brolprofessorTest() {
-		PoLoginView.login(driver, "pRofesor", "123456", "professor");
+		PoLoginview.login(driver, "pRofesor", "123456", "professor");
 		assertTrue(x==y);
 	}
 
@@ -180,7 +180,7 @@ public class SelemTests {
 	 */
 	@Test
 	public void pR07crolAdministradorTest() {
-		PoLoginView.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
+		PoLoginview.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
 		assertTrue(x==y);
 	}
 
@@ -191,13 +191,13 @@ public class SelemTests {
 	 */
 	@Test
 	public void pR08loginInvalidTest() {
-		PoLoginView.login(driver, "mariagg", "123456", "¡Hola! Conéctate");
+		PoLoginview.login(driver, "mariagg", "123456", "¡Hola! Conéctate");
 		SeleniumUtils.textoPresentePagina(driver, "Usuario y/o contraseña incorrectos.");
-		PoLoginView.login(driver, "mariagg", "", "¡Hola! Conéctate");
-		PoLoginView.login(driver, "", "Admin33", "¡Hola! Conéctate");
-		PoLoginView.login(driver, "pepitogrillo", "Admin33", "¡Hola! Conéctate");
+		PoLoginview.login(driver, "mariagg", "", "¡Hola! Conéctate");
+		PoLoginview.login(driver, "", "Admin33", "¡Hola! Conéctate");
+		PoLoginview.login(driver, "pepitogrillo", "Admin33", "¡Hola! Conéctate");
 		SeleniumUtils.textoPresentePagina(driver, "Usuario y/o contraseña incorrectos.");
-		PoLoginView.login(driver, "", "", "¡Hola! Conéctate");
+		PoLoginview.login(driver, "", "", "¡Hola! Conéctate");
 		assertTrue(x==y);
 	}
 
@@ -206,7 +206,7 @@ public class SelemTests {
 	 */
 	@Test
 	public void pR09loginAndLogoutTest() {
-		PoLoginView.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
+		PoLoginview.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
 
 		PoHomeView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 		SeleniumUtils.textoPresentePagina(driver, "Sesión cerrada con éxito.");
@@ -239,7 +239,7 @@ public class SelemTests {
 		pR07brolprofessorTest();
 		// Contamos el número de filas de notas
 		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr",
-				PoView.getTimeout());
+				Poview.getTimeout());
 		assertTrue(elementos.size() == 3);
 		SeleniumUtils.textoPresentePagina(driver, "E1");
 		SeleniumUtils.textoPresentePagina(driver, "E2");
@@ -505,15 +505,15 @@ public class SelemTests {
 				"//a[contains(@href, 'exercise/list')]", "Ejercicios creados");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de peticiones
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 
 		// Contamos el número de filas de peticiones
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		assertTrue(elementos.size() == 5);
 		By finish = By.xpath("/html/body/div/div[3]/ul/li[3]/a");
 		driver.findElement(finish).click();
 
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		assertTrue(elementos.size() == 1);
 
 		// Ahora nos desconectamos
@@ -559,8 +559,8 @@ public class SelemTests {
 				"//a[contains(@href, 'user/student/list')]", "Listado de alumnos");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de peticiones
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "/html/body/div/div[2]", PoView.getTimeout());
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "/html/body/div/div[2]", Poview.getTimeout());
 		elementos.clear();
 
 		SeleniumUtils.textoPresentePagina(driver, "Pedro");
@@ -815,10 +815,10 @@ public class SelemTests {
 				"Usuarios");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de usuarios
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 
 		// Contamos el número de filas de usuarios + 1 (la de buscar)
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		System.out.println(elementos.size());
 		assertTrue(elementos.size() == 6); // son 5+1
 		SeleniumUtils.textoPresentePagina(driver, "pRofesor");
@@ -829,7 +829,7 @@ public class SelemTests {
 		By next = By.xpath("/html/body/div/div[3]/ul/li[3]/a");
 		driver.findElement(next).click();
 
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		assertTrue(elementos.size() == 4); // son 3+1
 		SeleniumUtils.textoPresentePagina(driver, "mariarodri");
 		SeleniumUtils.textoPresentePagina(driver, "garcialucia");
@@ -853,7 +853,7 @@ public class SelemTests {
 				"Usuarios");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de usuarios
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 
 		// Realizar una busqueda --> cadena vacia
 		WebElement text = driver.findElement(By.id("searchText"));
@@ -864,7 +864,7 @@ public class SelemTests {
 		driver.findElement(boton).click();
 
 		// CompRobamos que no filtra nada, y se muestran los usuarios
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		System.out.println(elementos.size());
 		assertTrue(elementos.size() == 6); // son 5+1
 		SeleniumUtils.textoPresentePagina(driver, "pRofesor");
@@ -891,7 +891,7 @@ public class SelemTests {
 				"Usuarios");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de usuarios
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 
 		// Realizar una busqueda --> cadena vacia
 		WebElement text = driver.findElement(By.id("searchText"));
@@ -902,7 +902,7 @@ public class SelemTests {
 		driver.findElement(boton).click();
 
 		// CompRobamos que no filtra nada, y se muestran los usuarios
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		System.out.println(elementos.size());
 		assertTrue(elementos.size() == 2); // son 1+1
 		SeleniumUtils.textoPresentePagina(driver, "garcialucia");
@@ -925,7 +925,7 @@ public class SelemTests {
 				"Usuarios");
 
 		// Esperamos a que se muestren los enlaces de paginacion la lista de usuarios
-		List<WebElement> elementos = PoView.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		List<WebElement> elementos = Poview.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 
 		// Realizar una busqueda --> cadena vacia
 		WebElement text = driver.findElement(By.id("searchText"));
@@ -936,7 +936,7 @@ public class SelemTests {
 		driver.findElement(boton).click();
 
 		// CompRobamos que no filtra nada, y se muestran los usuarios
-		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", PoView.getTimeout());
+		elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr", Poview.getTimeout());
 		System.out.println(elementos.size());
 		assertTrue(elementos.size() == 1); // es 0+1
 		SeleniumUtils.textoPresentePagina(driver, "No se han encontrado resultados.");
@@ -1293,7 +1293,7 @@ public class SelemTests {
 
 		// Contamos el número de filas de notas
 		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr",
-				PoView.getTimeout());
+				Poview.getTimeout());
 		assertEquals(elementos.size(), 6);
 		SeleniumUtils.textoPresentePagina(driver, "E1");
 		SeleniumUtils.textoPresentePagina(driver, "E2");
@@ -1372,7 +1372,7 @@ public class SelemTests {
 
 		// Contamos el número de filas de usuarios + 1 (la de buscar)
 		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr",
-				PoView.getTimeout());
+				Poview.getTimeout());
 		assertTrue(elementos.size() == 2);
 		SeleniumUtils.textoPresentePagina(driver, "E1");
 		SeleniumUtils.textoPresentePagina(driver, "E3");

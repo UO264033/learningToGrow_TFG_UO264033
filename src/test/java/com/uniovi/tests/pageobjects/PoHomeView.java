@@ -33,8 +33,8 @@ public class PoHomeView extends PoNavView {
 		driver.findElement(enlace).click();
 		SeleniumUtils.esperarSegundos(driver, 1);
 		// Esperamos por la ventana de detalle
-		PoView.checkElement(driver, "text", text1);
-		PoView.checkElement(driver, "text", text2);
+		Poview.checkElement(driver, "text", text1);
+		Poview.checkElement(driver, "text", text2);
 		driver.navigate().to("http://localhost:8090/home");
 	}
 

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.uniovi.tests.util.SeleniumUtils;
 
-public class PoNavView extends PoView {
+public class PoNavView extends Poview {
 
 	/**
 	 * CLicka una de las opciones principales (a href) y comprueba que se vaya a la
@@ -57,14 +57,14 @@ public class PoNavView extends PoView {
 	}
 	
 	public static void clickOptionMenu(WebDriver driver, String groupmenu, String option, String text) {
-		List<WebElement> elementos = PoView.checkElement(driver, "free", groupmenu);
+		List<WebElement> elementos = Poview.checkElement(driver, "free", groupmenu);
 		elementos.get(0).click();
 		// Esperamos a aparezca la opción de ver ejercicios:
 		// //a[contains(@href,'exercise/list')]
-		elementos = PoView.checkElement(driver, "free", option);
+		elementos = Poview.checkElement(driver, "free", option);
 		// Pinchamos en listado de ejercicios.
 		elementos.get(0).click();
-		SeleniumUtils.esperarSegundos(driver, PoView.getTimeout());
+		SeleniumUtils.esperarSegundos(driver, Poview.getTimeout());
 		SeleniumUtils.textoPresentePagina(driver, text);
 	}
 

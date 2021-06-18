@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import com.uniovi.tests.util.SeleniumUtils;
 
-public class PoView {
+public class Poview {
 	
 	protected static PoProperties p = new PoProperties("messages");
 	protected static int timeout = 2;
@@ -17,7 +17,7 @@ public class PoView {
 	}
 
 	public static void setTimeout(int timeout) {
-		PoView.timeout = timeout;
+		Poview.timeout = timeout;
 	}
 
 	public static PoProperties getP() {
@@ -25,7 +25,7 @@ public class PoView {
 	}
 
 	public static void setP(PoProperties p) {
-		PoView.p = p;
+		Poview.p = p;
 	}
 	
 	/**

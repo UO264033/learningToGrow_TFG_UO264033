@@ -7,9 +7,8 @@ html {
 }
 
 body {
-	/* Margin bottom by footer height */
 	margin-bottom: 60px;
-	font-size: 16px;
+	  font-size: 16px;
 }
 
 /* Colores de botones y de labels----------------------------------------- */
@@ -19,7 +18,7 @@ body {
 
 .btn-warning {
 	color: #fff;
-	background-color: #e6648d;
+	  background-color: #e6648d;
 	border-color: #e6648d;
 	border-radius: 37px;
 }
@@ -38,14 +37,14 @@ body {
 .btn-info {
 	color: #fff;
 	background-color: #5bc0de;
-	border-color: #46b8da;
+	  border-color: #46b8da;
 	border-radius: 37px;
 }
 
 .btn-group-lg > .btn,
  				.btn-lg {
 	padding: 10px 16px;
-	font-size: 18px;
+	 font-size: 18px;
 	line-height: 1.3333333;
 	border-radius: 37px;
 	padding: 2rem;
@@ -62,7 +61,7 @@ a {
 }
 
 .navbar-inverse {
-	background-color: white;
+	  background-color: white;
 	border-color: white;
 }
 
@@ -143,8 +142,8 @@ h5 {
 }
 
 /* Sticky pagination styles-------------------------------------------------- */
-.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover,
-	.pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover
+.pagination > .active > a,.pagination>.active>a:focus, .pagination>.active>a:hover,
+	.pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover
 	{
 	z-index: 3;
 	color: #fff;
