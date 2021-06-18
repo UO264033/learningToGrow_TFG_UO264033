@@ -2,29 +2,29 @@
 
 /* Sticky global styles-------------------------------------------------- */
 html {
-	position: relative;
-	min-height: 100%;
+  position: relative;
+    min-height: 100%;
 }
 
 body {
-	margin-bottom: 60px;
-	  font-size: 16px;
+  margin-bottom: 60px;
+    font-size: 16px;
 }
 
 /* Colores de botones y de labels----------------------------------------- */
 .label-warning {
-	background-color: #e6648d;
+  background-color: #e6648d;
 }
 
 .btn-warning {
-	color: #fff;
-	  background-color: #e6648d;
-	    border-color: #e6648d;
-	      border-radius: 37px;
+  color: #fff;
+     background-color: #e6648d;
+       border-color: #e6648d;
+	     border-radius: 37px;
 }
 
 .label-success {
-	background-color: #abb4ff;
+  background-color: #abb4ff;
 }
 
 .btn-success {
@@ -50,25 +50,25 @@ body {
 }
 
 a {
-	color: #5bc0de;
-	  text-decoration: none;
+  color: #5bc0de;
+	text-decoration: none;
 }
 
 /* Sticky nav styles-------------------------------------------------- */
 .navbar-inverse .navbar-nav > li > a {
-	color: #000;
+  color: #000;
 }
 
 .navbar-inverse {
-	background-color: white;
-	  border-color: white;
+  background-color: white;
+	border-color: white;
 }
 
 .navbar-inverse .navbar-nav>.open > a,
  .navbar-inverse .navbar-nav>.open > a:focus,
   .navbar-inverse .navbar-nav>.open >a:hover {
-	color: white;
-	  background-color: #5bd0de;
+  color: white;
+    background-color: #5bd0de;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus,
@@ -100,43 +100,43 @@ footer {
 }
 
 .text-muted {
-	  color: black;
+  color: black;
 }
 
 .h2, 
 h2 {
-	font-size: 32px;
-	  color: #e6648d;
+  font-size: 32px;
+	color: #e6648d;
 }
 
 .h4, 
 h4 {
-	color: #5bd0de;
-	  font-size: 20px;
+  color: #5bd0de;
+	font-size: 20px;
 }
 
 .h5, 
 h5 {
-	color: #737373;
-	  font-size: 16px;
+  color: #737373;
+	font-size: 16px;
 }
 
 .center {
-	margin: auto;
-	  padding: 10px;
+  margin: auto;
+	padding: 10px;
 }
 
 .panel-default > .panel-heading {
-	color: #333;
-	  background-color: #5bc0de78;
-	    border-color: #ddd;
+  color: #333;
+	background-color: #5bc0de78;
+	  border-color: #ddd;
 }
 
 .centerCard {
-	margin: auto;
+  margin: auto;
 	width: 60%;
-	border: 3px solid #e6648d;
-	padding: 10px;
+	  border: 3px solid #e6648d;
+	    padding: 10px;
 }
 
 /* Sticky pagination styles-------------------------------------------------- */
@@ -208,13 +208,13 @@ h5 {
 }
 
 .tooltip:hover .tiptext {
-	visibility: visible;
+  visibility: visible;
 }
 
 .tooltip.bottom .tiptext {
-	margin-left: -60px;
-	  top: 150%;
-	left: 50%;
+  margin-left: -60px;
+	top: 150%;
+	  left: 50%;
 }
 
 .tooltip.bottom .tiptext::after {
