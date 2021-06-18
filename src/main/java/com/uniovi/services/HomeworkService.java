@@ -114,7 +114,7 @@ public class HomeworkService {
 			if (feedback == null)
 				homework.setSend(false);
 			else if (feedback != null && !feedback.isSend())
-				homework.setSend(false);
+				homework.setSend(true);
 			else if (feedback != null && feedback.isSend())
 				homework.setSend(true);
 		}
@@ -280,7 +280,7 @@ public class HomeworkService {
 			if (feedback == null)
 				homework.setSend(false);
 			else if (feedback != null && !feedback.isSend())
-				homework.setSend(false);
+				homework.setSend(true);
 			else if (feedback != null && feedback.isSend())
 				homework.setSend(true);
 		}

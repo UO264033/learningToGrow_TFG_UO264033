@@ -87,6 +87,7 @@ public class FeedbackService {
 		String username = auth.getName();
 		User activeUser = userService.getUserByUsername(username);
 		feedback.setProfessor(activeUser);
+		feedback.setSend(true);
 		addFeedback(feedback);
 		homeworkService.markAsSent(homework);
 	}
