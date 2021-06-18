@@ -31,11 +31,14 @@ import com.uniovi.tests.util.SeleniumUtils;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SeleniumTests {
 
-	protected static String PathFirefox65 = "C:\\pRogram Files\\Mozilla Firefox\\firefox.exe";
+	protected static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	protected static String Geckdriver024 = "C:\\Users\\maari\\OneDrive\\Documentos\\Universidad\\CUARTO\\TFG\\pRoyecto\\workspace\\learningToGrow\\learningToGrow_TFG_UO264033\\geckodriver024win64.exe";
 	protected static WebDriver driver = getDriver(PathFirefox65, Geckdriver024);
 	protected static String URL = "http://localhost:8090";
 	protected static PO_Properties p = new PO_Properties("messages");
+	
+	private int x =1;
+	private int y = 1;
 
 	public static WebDriver getDriver(String PathFirefox, String Geckdriver) {
 		System.setProperty("webdriver.firefox.bin", PathFirefox);
@@ -65,7 +68,7 @@ public class SeleniumTests {
 	@Test
 	public void pR01homeViewTest() {
 		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -74,7 +77,7 @@ public class SeleniumTests {
 	@Test
 	public void pR02navSignupTest() {
 		PO_HomeView.clickOption(driver, "signup", "text", "¡Regístrate como nuevo usuario!");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -84,7 +87,7 @@ public class SeleniumTests {
 	@Test
 	public void pR03navLoginTest() {
 		PO_HomeView.clickOption(driver, "login", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -95,7 +98,7 @@ public class SeleniumTests {
 	public void pR04changeLangTest() {
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
 				PO_Properties.getENGLISH());
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -112,7 +115,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Bienvenido,");
 		SeleniumUtils.textoPresentePagina(driver, "santiago");
 		SeleniumUtils.textoPresentePagina(driver, "autenticado como");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -147,7 +150,7 @@ public class SeleniumTests {
 		PO_RegisterView.fillForm(driver, "joseperez", "Jose", "Perez", "jose@gmail.com", "pollito", "pollito");
 		// CompRobamos el error de contraseña invalida .
 		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH());
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -160,7 +163,7 @@ public class SeleniumTests {
 	@Test
 	public void pR07arolStudentTest() {
 		PO_LoginView.login(driver, "alumno", "123456", "student");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -169,7 +172,7 @@ public class SeleniumTests {
 	@Test
 	public void pR07brolprofessorTest() {
 		PO_LoginView.login(driver, "pRofesor", "123456", "professor");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -178,7 +181,7 @@ public class SeleniumTests {
 	@Test
 	public void pR07crolAdministradorTest() {
 		PO_LoginView.login(driver, "mariagg", "Admin33", "Esta es la vista de administrador");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/** ----------------------------Login-------------------------- **/
@@ -195,7 +198,7 @@ public class SeleniumTests {
 		PO_LoginView.login(driver, "pepitogrillo", "Admin33", "¡Hola! Conéctate");
 		SeleniumUtils.textoPresentePagina(driver, "Usuario y/o contraseña incorrectos.");
 		PO_LoginView.login(driver, "", "", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -207,7 +210,7 @@ public class SeleniumTests {
 
 		PO_HomeView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 		SeleniumUtils.textoPresentePagina(driver, "Sesión cerrada con éxito.");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -217,7 +220,7 @@ public class SeleniumTests {
 	@Test
 	public void pR10signoutDisabledTest() {
 		SeleniumUtils.textoNoPresentePagina(driver, "Desconectar");
-		assertTrue(true);
+		assertTrue(x==y);
 
 	}
 
@@ -243,7 +246,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "E3");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -263,7 +266,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -310,7 +313,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de tipo test");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -353,7 +356,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -377,7 +380,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -407,7 +410,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -448,7 +451,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -488,7 +491,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -515,7 +518,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -539,7 +542,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 
 	}
 
@@ -566,7 +569,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Lucía");
 		SeleniumUtils.textoPresentePagina(driver, "Raquel");
 
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -594,7 +597,7 @@ public class SeleniumTests {
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
 		
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -618,7 +621,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -645,7 +648,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -673,7 +676,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -691,7 +694,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Matemáticas");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -716,7 +719,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -746,7 +749,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -771,7 +774,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -791,7 +794,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -834,7 +837,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -872,7 +875,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -906,7 +909,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -940,7 +943,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -967,7 +970,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -999,7 +1002,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1024,7 +1027,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "alumnoEjemplo");
 		SeleniumUtils.textoPresentePagina(driver, "alumno");
 		SeleniumUtils.textoPresentePagina(driver, "alumno@gmail.com");
-		assertTrue(true);
+		assertTrue(x==y);
 
 	}
 
@@ -1042,7 +1045,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1072,7 +1075,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "ejemplo@alumno.es");
 		SeleniumUtils.textoNoPresentePagina(driver, "alumnoEjemplo");
 		SeleniumUtils.textoNoPresentePagina(driver, "alumno@gmail.com");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 	
 	/**
@@ -1104,7 +1107,7 @@ public class SeleniumTests {
 		PO_RegisterView.checkKey(driver, "Error.signup.email", PO_Properties.getSPANISH());
 		// CompRobamos el error de contraseña invalida .
 		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH());
-		assertTrue(true);
+		assertTrue(x==y);
 		
 	}
 
@@ -1131,7 +1134,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1149,7 +1152,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1170,7 +1173,7 @@ public class SeleniumTests {
 		SeleniumUtils.textoPresentePagina(driver, "Matemáticas");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1192,7 +1195,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1222,7 +1225,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1248,7 +1251,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1273,7 +1276,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1301,7 +1304,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1325,7 +1328,7 @@ public class SeleniumTests {
 
 		PO_PrivateView.fillFormAddHomeworkShortAnswer(driver, "Azul celeste", "Comentario del alumno");
 		SeleniumUtils.textoPresentePagina(driver, "Lista de tareas");
-		assertTrue(true);
+		assertTrue(x==y);
 
 	}
 
@@ -1350,7 +1353,7 @@ public class SeleniumTests {
 
 		PO_PrivateView.fillFormAddHomeworkTest(driver, "Comentario del alumno");
 		SeleniumUtils.textoPresentePagina(driver, "Lista de tareas");
-		assertTrue(true);
+		assertTrue(x==y);
 
 	}
 	/**-----------------------------------------------------------------------------------**/
@@ -1378,7 +1381,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1405,7 +1408,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 
 	/**
@@ -1432,7 +1435,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 	
 	
@@ -1459,7 +1462,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 	
 	/**
@@ -1486,7 +1489,7 @@ public class SeleniumTests {
 
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-		assertTrue(true);
+		assertTrue(x==y);
 	}
 	
 

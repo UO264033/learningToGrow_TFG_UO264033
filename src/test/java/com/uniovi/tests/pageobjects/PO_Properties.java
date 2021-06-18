@@ -22,9 +22,10 @@ public class PO_Properties {
 		return ENGLISH;
 	}
 
-	public PO_Properties(String Path) // throws FileNotFoundException, IOException
+	@SuppressWarnings("static-access")
+	public PO_Properties(String path) // throws FileNotFoundException, IOException
 	{
-//		this.Path = Path;
+		this.Path = path;
 		// p.load(new FileReader(Path));
 		// p.getProperty()
 	}
