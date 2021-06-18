@@ -7,7 +7,7 @@ html {
 }
 
 body {
-	  margin-bottom: 60px;
+	margin-bottom: 60px;
 	  font-size: 16px;
 }
 
@@ -19,8 +19,8 @@ body {
 .btn-warning {
 	color: #fff;
 	  background-color: #e6648d;
-	  border-color: #e6648d;
-	border-radius: 37px;
+	    border-color: #e6648d;
+	      border-radius: 37px;
 }
 
 .label-success {
@@ -29,59 +29,59 @@ body {
 
 .btn-success {
 	color: #fff;
-	background-color: #abb4ff;
-	  border-color: #abb4ff;
-	border-radius: 37px;
+	  background-color: #abb4ff;
+	    border-color: #abb4ff;
+	      border-radius: 37px;
 }
 
 .btn-info {
 	color: #fff;
-	background-color: #5bc0de;
-	  border-color: #46b8da;
-	border-radius: 37px;
+	  background-color: #5bc0de;
+	    border-color: #46b8da;
+	      border-radius: 37px;
 }
 
 .btn-group-lg > .btn,
  				.btn-lg {
 	padding: 10px 16px;
-	 font-size: 18px;
-	line-height: 1.3333333;
-	border-radius: 37px;
+	  font-size: 18px;
+	    line-height: 1.3333333;
+	      border-radius: 37px;
 }
 
 a {
-	  color: #5bc0de;
+	color: #5bc0de;
 	  text-decoration: none;
 }
 
 /* Sticky nav styles-------------------------------------------------- */
 .navbar-inverse .navbar-nav > li > a {
-	  color: #000;
+	color: #000;
 }
 
 .navbar-inverse {
-	  background-color: white;
+	background-color: white;
 	  border-color: white;
 }
 
 .navbar-inverse .navbar-nav>.open > a,
  .navbar-inverse .navbar-nav>.open > a:focus,
   .navbar-inverse .navbar-nav>.open >a:hover {
-	  color: white;
-	background-color: #5bd0de;
+	color: white;
+	  background-color: #5bd0de;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus,
  .navbar-inverse .navbar-nav > li > a:hover {
 	color: #fff;
-	background-color: #5bd0de;
+	  background-color: #5bd0de;
 }
 
 .dropdown-menu > li > a {
-	  display: block;
+	display: block;
 	  padding: 3px 20px;
-	clear: both;
-	  font-weight: 400;
+	    clear: both;
+	      font-weight: 400;
 	line-height: 1.42857143;
 	color: #000;
 	  white-space: nowrap;
@@ -106,30 +106,30 @@ footer {
 .h2, 
 h2 {
 	font-size: 32px;
-	color: #e6648d;
+	  color: #e6648d;
 }
 
 .h4, 
 h4 {
 	color: #5bd0de;
-	font-size: 20px;
+	  font-size: 20px;
 }
 
 .h5, 
 h5 {
-	  color: #737373;
-	font-size: 16px;
+	color: #737373;
+	  font-size: 16px;
 }
 
 .center {
-	  margin: auto;
-	padding: 10px;
+	margin: auto;
+	  padding: 10px;
 }
 
 .panel-default > .panel-heading {
 	color: #333;
-	background-color: #5bc0de78;
-	border-color: #ddd;
+	  background-color: #5bc0de78;
+	    border-color: #ddd;
 }
 
 .centerCard {
