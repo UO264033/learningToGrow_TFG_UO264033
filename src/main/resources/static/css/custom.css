@@ -42,7 +42,7 @@ body {
 }
 
 .btn-group-lg > .btn,
- 				.btn-lg {
+.btn-lg {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
@@ -64,15 +64,15 @@ a {
   border-color: white;
 }
 
-.navbar-inverse .navbar-nav>.open > a,
- .navbar-inverse .navbar-nav>.open > a:focus,
-  .navbar-inverse .navbar-nav>.open > a:hover {
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover {
   color: white;
   background-color: #5bd0de;
 }
 
 .navbar-inverse .navbar-nav > li > a:focus,
- .navbar-inverse .navbar-nav > li > a:hover {
+.navbar-inverse .navbar-nav > li > a:hover {
   color: #fff;
   background-color: #5bd0de;
 }
@@ -140,12 +140,12 @@ h5 {
 }
 
 /* Sticky pagination styles-------------------------------------------------- */
-.pagination>.active > a,
- .pagination>.active > a:focus,
-  .pagination>.active > a:hover,
- .pagination>.active > span,
-  .pagination>.active > span:focus,
-   .pagination>.active > span:hover
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover
 	{
   z-index: 3;
   color: #fff;
@@ -155,7 +155,7 @@ h5 {
 }
 
 .pagination > li > a,
- .pagination > li > span {
+.pagination > li > span {
   position: relative;
   float: left;
   padding: 6px 12px;
