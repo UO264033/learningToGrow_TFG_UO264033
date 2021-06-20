@@ -1,10 +1,10 @@
-package com.uniovi.tests.pageobjects;
+package com.uniovi.tests.integration.util.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.tests.util.SeleniumUtils;
+import com.uniovi.tests.integration.util.SeleniumUtils;
 
 public class PoPrivateView extends PoNavView {
 
@@ -23,6 +23,7 @@ public class PoPrivateView extends PoNavView {
 		description.sendKeys(descriptionp);
 		By boton = By.className("btn");
 		driver.findElement(boton).click();
+		SeleniumUtils.esperarSegundos(driver, Poview.getTimeout());
 	}
 
 	public static void fillFormAddQuestionTest(WebDriver driver, String statementp, String texto1, String texto2,
@@ -50,6 +51,7 @@ public class PoPrivateView extends PoNavView {
 		SeleniumUtils.esperarSegundos(driver, Poview.getTimeout());
 		By boton = By.id("addA");
 		driver.findElement(boton).click();
+		SeleniumUtils.esperarSegundos(driver, Poview.getTimeout());
 	}
 
 	public static void fillFormAddQuestionShortAnswer(WebDriver driver, String statementp, String texto) {
@@ -65,6 +67,7 @@ public class PoPrivateView extends PoNavView {
 		answer1.sendKeys(texto);
 		By boton = By.id("addA");
 		driver.findElement(boton).click();
+		SeleniumUtils.esperarSegundos(driver, Poview.getTimeout());
 
 	}
 

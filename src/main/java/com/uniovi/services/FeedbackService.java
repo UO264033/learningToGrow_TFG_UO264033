@@ -89,7 +89,7 @@ public class FeedbackService {
 			User activeUser = userService.getUserByUsername(username);
 			feedback.setProfessor(activeUser);
 		}
-		feedback.setSend(true);
+		feedback.setSend(false);
 		addFeedback(feedback);
 		homeworkService.markAsSent(homework);
 	}

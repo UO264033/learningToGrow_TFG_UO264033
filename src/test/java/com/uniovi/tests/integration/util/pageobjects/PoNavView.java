@@ -1,4 +1,4 @@
-package com.uniovi.tests.pageobjects;
+package com.uniovi.tests.integration.util.pageobjects;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.tests.util.SeleniumUtils;
+import com.uniovi.tests.integration.util.SeleniumUtils;
 
 public class PoNavView extends Poview {
 

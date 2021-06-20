@@ -1,10 +1,10 @@
-package com.uniovi.tests.pageobjects;
+package com.uniovi.tests.integration.util.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.tests.util.SeleniumUtils;
+import com.uniovi.tests.integration.util.SeleniumUtils;
 
 public class PoLoginview {
 
