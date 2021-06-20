@@ -84,9 +84,11 @@ public class FeedbackService {
 	public void createFeedback(Feedback feedback, Homework homework) {
 		feedback.setHomework(homework);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-		User activeUser = userService.getUserByUsername(username);
-		feedback.setProfessor(activeUser);
+		if (auth != null) {
+			String username = auth.getName();
+			User activeUser = userService.getUserByUsername(username);
+			feedback.setProfessor(activeUser);
+		}
 		feedback.setSend(true);
 		addFeedback(feedback);
 		homeworkService.markAsSent(homework);

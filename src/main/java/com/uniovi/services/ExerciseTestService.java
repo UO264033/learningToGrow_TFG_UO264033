@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.Question;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.ExerciseTestRepository;
 
@@ -27,7 +27,7 @@ public class ExerciseTestService {
 	@Autowired
 	private AnswerService answerService;
 	
-	public void addExercise(Test test) {
+	public void addExercise(TestType test) {
 		for(Question q: test.getQuestions()) {
 			questionService.addQuestion(q);
 			for(Answer a: q.getAnswers())
@@ -37,13 +37,13 @@ public class ExerciseTestService {
 		testRepository.save(test);
 	}
 
-	public Test getExercise(Long id) {
+	public TestType getExercise(Long id) {
 		if(testRepository.findById(id).isPresent())
 			return testRepository.findById(id).get();
 		return null;
 	}
 
-	public void setProfesor(Test exercise) {
+	public void setProfesor(TestType exercise) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
 		User activeUser = usersService.getUserByUsername(username);

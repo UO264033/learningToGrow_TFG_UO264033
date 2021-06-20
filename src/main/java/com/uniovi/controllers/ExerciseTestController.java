@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.entities.Exercise;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseTestService;
 import com.uniovi.services.SubjectService;
@@ -44,7 +44,7 @@ public class ExerciseTestController {
 
 	@RequestMapping(value = "/exercise/test/add", method = RequestMethod.POST)
 	public String setExercise(Pageable pageable, @Validated Exercise exerciseVa, BindingResult result, Model model,
-			@ModelAttribute Test exercise, @ModelAttribute User user) {
+			@ModelAttribute TestType exercise, @ModelAttribute User user) {
 
 		exerciseValidator.validate(exerciseVa, result);
 		if (result.hasErrors()) {
@@ -63,7 +63,7 @@ public class ExerciseTestController {
 
 	@RequestMapping(value = "/exercise/test/show/{id}")
 	public String showQuestions(Model model, @PathVariable Long id) {
-		Test exercise = exerciseService.getExercise(id);
+		TestType exercise = exerciseService.getExercise(id);
 		model.addAttribute("exercise", exercise);
 		model.addAttribute("idExercise", id);
 		model.addAttribute("questionList", exercise.getQuestionsSet());

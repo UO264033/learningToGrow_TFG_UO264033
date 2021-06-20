@@ -13,7 +13,7 @@ import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
 import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Subject;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.entities.UploadFile;
 import com.uniovi.entities.User;
 
@@ -66,9 +66,9 @@ public class InsertDataService {
 		user6.setPassword("Admin33");
 		user6.setRole(rolesService.getRoles()[2]);
 
-		usersService.addUser(user4);
-		usersService.addUser(user5);
-		usersService.addUser(user6);
+		usersService.saveUser(user4);
+		usersService.saveUser(user5);
+		usersService.saveUser(user6);
 
 		Subject s1 = new Subject("Matemáticas", user4);
 		s1.addStudent(user1);
@@ -87,13 +87,13 @@ public class InsertDataService {
 		sService.addSubject(s1);
 		sService.addSubject(s2);
 
-		usersService.addUser(user1);
-		usersService.addUser(user2);
-		usersService.addUser(user3);
-		usersService.addUser(user7);
-		usersService.addUser(user8);
+		usersService.saveUser(user1);
+		usersService.saveUser(user2);
+		usersService.saveUser(user3);
+		usersService.saveUser(user7);
+		usersService.saveUser(user8);
 
-		Test e1 = new Test("E1", "Ejercicio de colores");
+		TestType e1 = new TestType("E1", "Ejercicio de colores");
 		e1.setProfessor(user4);
 		e1.setSubject(s1);
 		eService.addExercise(e1);

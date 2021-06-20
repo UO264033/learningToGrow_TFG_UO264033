@@ -19,9 +19,14 @@ public class ExerciseFileUploadService {
 	@Autowired
 	private UserService usersService;
 	
-	public void addExercise(UploadFile exercise) {
+	@Autowired
+	private ExerciseService exerciseService;
+	
+	public UploadFile addExercise(UploadFile exercise) {
+		if(exerciseService.getExerciseByName(exercise.getName())!= null)
+			return null;
 		exercise.setType(ExerciseType.U);
-		exerciseRepository.save(exercise);
+		return exerciseRepository.save(exercise);
 	}
 	
 	public void setProfessor(UploadFile exercise) {

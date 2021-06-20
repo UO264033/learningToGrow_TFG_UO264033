@@ -22,7 +22,11 @@ public class SubjectService {
 	private Subject temporal = new Subject();
 	private String[] idsStudent;
 
-	public void addSubject(Subject subject) {
+	public Subject addSubject(Subject subject) {
+		return (getSubjectByName(subject.getName()) == null) ? subjectRepository.save(subject) : null;
+	}
+	
+	public void saveSubject(Subject subject) {
 		subjectRepository.save(subject);
 	}
 

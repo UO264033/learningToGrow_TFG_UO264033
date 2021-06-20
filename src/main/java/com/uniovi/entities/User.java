@@ -51,7 +51,7 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Homework> homeworks = new HashSet<Homework>();
 
-	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Exercise> exercises = new HashSet<Exercise>();
 
 	/**
@@ -207,6 +207,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", name=" + name + ", lastName=" + lastName + ", role=" + role + "]";
+		return "User [username=" + username + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", role=" + role + ", subjects=" + subjects + "]";
 	}
 }

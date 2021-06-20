@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.repositories.QuestionRepository;
 
 @Service
@@ -40,7 +40,7 @@ public class QuestionService {
 		q.addAnswer(new Answer(texto3, correct3, q));
 		model.addAttribute("question", q);
 		q = addQuestion(q);
-		exerciseService.addExercise((Test)exercise);
+		exerciseService.addExercise((TestType)exercise);
 		return q;
 	}
 	

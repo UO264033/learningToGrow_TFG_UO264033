@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,15 +45,52 @@ public class UserService {
 		return usersRepository.findById(id).get();
 	}
 
-	public void addUser(User user) {
-//		if (getUser(user.getId()) == null) {
+	public User addUser(User user) {
+		User u = checkValidParamaters(user);
+		if (u != null) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-			usersRepository.save(user);
-//		}
+			return usersRepository.save(user);
+		}
+		return null;
+	}
+	
+	public void saveUser(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		usersRepository.save(user);
+	}
+
+	private User checkValidParamaters(User user) {
+		if (user.getUsername().length() < 6 || user.getUsername().length() > 30) {
+			return null;
+		}
+		if (getUserByUsername(user.getUsername()) != null) {
+			return null;
+		}
+		if (user.getName().length() < 2 || user.getName().length() > 24) {
+			return null;
+		}
+		if (user.getLastName().length() < 2 || user.getLastName().length() > 30) {
+			return null;
+		}
+		Pattern patternEmail = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher mather = patternEmail.matcher(user.getEmail());
+		if (!mather.find()) {
+			return null;
+		}
+		
+		Pattern patternPassword = Pattern
+                .compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
+		Matcher mather2 = patternPassword.matcher(user.getPassword());
+		if (!mather2.find()) {
+			return null;
+		}
+		return user;
 	}
 
 	public User getUserByUsername(String username) {
-		return usersRepository.findByUsername(username);
+		return (usersRepository.findByUsername(username) == null) ? null : usersRepository.findByUsername(username);
 	}
 
 	public void deleteUser(Long id) {
@@ -119,7 +158,7 @@ public class UserService {
 		User student = usersRepository.findById(id).get();
 		student.addSubject(subject);
 		subject.addStudent(student);
-		subjectService.addSubject(subject);
+		subjectService.saveSubject(subject);
 		usersRepository.save(student);
 	}
 

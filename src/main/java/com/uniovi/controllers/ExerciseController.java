@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.ExerciseType;
 import com.uniovi.entities.ShortAnswer;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.entities.User;
 import com.uniovi.services.ExerciseService;
 import com.uniovi.services.UserService;
@@ -58,7 +58,7 @@ public class ExerciseController {
 			model.addAttribute("questionList", ((ShortAnswer) exercise).getQuestions());
 			model.addAttribute("short", "short");
 		} else if (exercise.getType() == ExerciseType.T) {
-			model.addAttribute("questionList", ((Test) exercise).getQuestions());
+			model.addAttribute("questionList", ((TestType) exercise).getQuestions());
 			model.addAttribute("test", "test");
 		} else
 			model.addAttribute("questionList", null);

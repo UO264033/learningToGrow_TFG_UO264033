@@ -25,7 +25,7 @@ public class Subject extends BaseEntity {
 	private User professor;
 
 	@JoinTable(name = "rel_subjects_students", joinColumns = @JoinColumn(name = "FK_SUBJECT", nullable = false), inverseJoinColumns = @JoinColumn(name = "FK_STUDENT", nullable = false))
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<User> students = new HashSet<User>();
 
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

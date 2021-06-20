@@ -12,19 +12,19 @@ import javax.persistence.OneToMany;
 import com.uniovi.util.ArgumentChecks;
 
 @Entity
-public class Test extends Exercise {
+public class TestType extends Exercise {
 
 	@OneToMany(mappedBy = "exercise", fetch = FetchType.EAGER)
 	private List<Question> questions = new ArrayList<>();
 
-	public Test() {
+	public TestType() {
 	}
 
-	public Test(String name, String description) {
+	public TestType(String name, String description) {
 		super(name, description, ExerciseType.T);
 	}
 
-	public Test(String name, String description, List<Question> questions) {
+	public TestType(String name, String description, List<Question> questions) {
 		super(name, description, ExerciseType.T);
 		ArgumentChecks.isNotNull(questions);
 		this.questions = questions;

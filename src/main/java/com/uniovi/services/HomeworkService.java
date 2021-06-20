@@ -26,7 +26,7 @@ import com.uniovi.entities.Feedback;
 import com.uniovi.entities.Homework;
 import com.uniovi.entities.ShortAnswer;
 import com.uniovi.entities.Subject;
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.HomeworkRepository;
 
@@ -243,7 +243,7 @@ public class HomeworkService {
 
 	public List<Answer> correctTest(Homework homework) {
 		List<Answer> correctAnswers = new ArrayList<Answer>();
-		Test exercise = (Test) homework.getExercise();
+		TestType exercise = (TestType) homework.getExercise();
 		List<Answer> answers;
 		for (int k = 0; k < exercise.getQuestions().size(); k++) {
 			answers = exercise.getQuestions().get(k).getAnswers();
@@ -302,6 +302,10 @@ public class HomeworkService {
 
 	public void setIdsAnswers(int[] idsAnswers) {
 		this.idsAnswers = idsAnswers;
+	}
+
+	public Homework getHomeworkByExerciseAndUser(ShortAnswer exercise, User user) {
+		return homeworkRepository.findByExerciseAndUser(exercise, user);
 	}
 
 }

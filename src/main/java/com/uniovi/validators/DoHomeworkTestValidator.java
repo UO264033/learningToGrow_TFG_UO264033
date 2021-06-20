@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.uniovi.entities.Test;
+import com.uniovi.entities.TestType;
 import com.uniovi.services.HomeworkService;
 
 @Component
@@ -16,7 +16,7 @@ public class DoHomeworkTestValidator  implements Validator {
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Test.class.equals(aClass);
+		return TestType.class.equals(aClass);
 	}
 
 	@Override
