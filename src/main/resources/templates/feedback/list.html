@@ -14,7 +14,7 @@
 		</div>
 
 		<div th:if="${feedbackList.isEmpty()}">
-			<h4 th:text="#{feedback.empty}" />
+			<h5 th:text="#{feedback.empty}" />
 		</div>
 		<div th:if="${!feedbackList.isEmpty()}">
 			<div class="panel panel-default" th:each="feedback : ${feedbackList}">

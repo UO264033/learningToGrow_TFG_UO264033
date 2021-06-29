@@ -52,17 +52,19 @@ public class ExerciseService {
 		if (exerciseRepository.findById(id).isPresent()) {
 			Exercise exercise = exerciseRepository.findById(id).get();
 			homeworkService.deleteByExerciseId(exercise);
-//			exerciseRepository.deleteById(id);
+			exercise.setProfessor(null);
+			exercise.setSubject(null);
+			exerciseRepository.deleteById(id);
 		}
 	}
 
 	public void deleteExercise(Long id) {
-		if (exerciseRepository.findById(id).isPresent()) {
-			System.out.println(exerciseRepository.findById(id) + "-" + id);
-			Exercise exercise = exerciseRepository.findById(id).get();
-			exerciseRepository.delete(exercise);
+//		if (exerciseRepository.findById(id).isPresent()) {
+//			System.out.println(exerciseRepository.findById(id) + "-" + id);
+//			Exercise exercise = exerciseRepository.findById(id).get();
+//			exerciseRepository.delete(exercise);
 			exerciseRepository.deleteById(id);
-		}
+//		}
 	}
 
 	public Exercise getExerciseByName(String name) {

@@ -46,24 +46,24 @@
 					<div class="panel-body">
 						<div align="center" sec:authorize="hasRole('ROLE_STUDENT')">
 							<a th:href="${'/subject/details/' + subject.id}"
-								class="btn btn-info" role="button"><span
+								class="btn btn-info" role="button" aria-label="Center Align"><span
 								class="material-icons-round"> school </span> <span
 								th:text="#{subject.details}"></span></a> <a
 								th:href="${'/homework/exercise/list/' + subject.id}"
-								class="btn btn-info" role="button"><span
+								class="btn btn-info" role="button" aria-label="Center Align"><span
 								class="material-icons-round"> edit </span> <span
 								th:text="#{subject.exercise}"></span> </a> <a
 								th:href="${'/feedback/list/' + subject.id}" class="btn btn-info"
-								role="button"><span class="material-icons-round">
+								role="button" aria-label="Center Align"><span class="material-icons-round">
 									thumb_up_off_alt </span> <span th:text="#{nav.showFeedback}"></span> </a>
 						</div>
 						<div align="center" sec:authorize="hasRole('ROLE_PROFESSOR')">
 							<a th:href="${'/subject/details/' + subject.id}"
-								class="btn btn-info" role="button"><span
+								class="btn btn-info" role="button" aria-label="Center Align"><span
 								class="material-icons-round"> school </span> <span
 								th:text="#{subject.details}"></span></a> <a
 								th:href="${'/subject/delete/' + subject.id}"
-								class="btn btn-info" role="button"><span
+								class="btn btn-info" role="button" aria-label="Center Align"><span
 								class="material-icons-round"> delete </span> <span
 								th:text="#{user.list.table.deleteButton}"></span></a>
 						</div>

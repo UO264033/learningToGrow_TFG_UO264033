@@ -518,30 +518,30 @@ public class SeleniumTests {
 		assertTrue(x==y);
 	}
 
-//	/**
-//	 * pR15.- Eliminar algun ejercicio
-//	 */
-//	@Test
-//	public void pR15deleteExerciseTest() {
-//		pR07brolprofessorTest();
-//
-//		PoNavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
-//				"//a[contains(@href, 'exercise/list')]", "Ejercicios creados");
-//
-//		SeleniumUtils.textoPresentePagina(driver, "E3");
-//		SeleniumUtils.textoPresentePagina(driver, "Responder a las siguientes cuestiones");
-//
-//		By finish = By.xpath("/html/body/div/div[2]/table/tbody/tr[1]/td[4]/a");
-//		driver.findElement(finish).click();
-//
-//		SeleniumUtils.textoNoPresentePagina(driver, "E3");
-//		SeleniumUtils.textoNoPresentePagina(driver, "Responder a las siguientes cuestiones");
-//
-//		// Ahora nos desconectamos
-//		PoPrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
-//		assertTrue(x==y);
-//
-//	}
+	/**
+	 * pR15.- Eliminar algun ejercicio
+	 */
+	@Test
+	public void pR15deleteExerciseTest() {
+		pR07brolprofessorTest();
+
+		PoNavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
+				"//a[contains(@href, 'exercise/list')]", "Ejercicios creados");
+
+		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de respuesta corta 2");
+		SeleniumUtils.textoPresentePagina(driver, "Dos.- Este es un ejemplo de ejercicio de respuesta corta");
+
+		By delete = By.xpath("/html/body/div/div[2]/table/tbody/tr[3]/td[4]/a");
+		driver.findElement(delete).click();
+
+		SeleniumUtils.textoNoPresentePagina(driver, "Ejercicio de respuesta corta 2");
+		SeleniumUtils.textoNoPresentePagina(driver, "Dos.- Este es un ejemplo de ejercicio de respuesta corta");
+
+		// Ahora nos desconectamos
+		PoPrivateView.clickOption(driver, "logout", "text", "¡Hola! Conéctate");
+		assertTrue(x==y);
+
+	}
 
 	/**
 	 * pR16. - Ver students
@@ -1275,11 +1275,10 @@ public class SeleniumTests {
 		// Contamos el número de filas de notas
 		List<WebElement> elementos = SeleniumUtils.esperaCargaPagina(driver, "free", "//tbody/tr",
 				Poview.getTimeout());
-		assertEquals(elementos.size(), 8);
+		assertEquals(elementos.size(), 7);
 		SeleniumUtils.textoPresentePagina(driver, "E1");
 		SeleniumUtils.textoPresentePagina(driver, "E2");
 		SeleniumUtils.textoPresentePagina(driver, "E3");
-		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de respuesta corta");
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de tipo test");
 		SeleniumUtils.textoPresentePagina(driver, "Ejercicio de subida de fichero");
 
@@ -1325,7 +1324,8 @@ public class SeleniumTests {
 		PoNavView.clickOptionMenu(driver, "//li[contains(@id, 'homerworks-menu')]/a",
 				"//a[contains(@href, 'homework/exercise/list')]", "Lista de tareas");
 
-		By rellenar = By.xpath("//*[@id=\"tableexercise\"]/tbody/tr[4]/td[4]/a");
+		By rellenar = By.xpath("//*[@id=\"tableexercise\"]/tbody/tr[3]/td[4]/a");
+		
 		driver.findElement(rellenar).click();
 
 		SeleniumUtils.textoPresentePagina(driver, "E1");
