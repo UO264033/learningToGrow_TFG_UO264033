@@ -71,11 +71,12 @@ public class QuestionController {
 		if (result.hasErrors()) {
 			return "exercise/test/question/add";
 		}
-		Question q = questionService.addNewQuestion(model, statement, texto1, texto2, texto3, correct1, correct2,
+		Question q = questionService.addNewQuestion( statement, texto1, texto2, texto3, correct1, correct2,
 				correct3, exercise);
 		if (q != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");
 		}
+		model.addAttribute("question", q);
 		return "exercise/test/question/add";
 	}
 

@@ -9,7 +9,6 @@
 		<version>2.4.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.uniovi</groupId>
 	<artifactId>learningToGrow</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>learningToGrow</name>
@@ -18,7 +17,7 @@
 		<java.version>13</java.version>
 		<hsqldb.version>2.4.1</hsqldb.version>
 	</properties>
-	<dependencies>
+	<dependencies> 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

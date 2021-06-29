@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.uniovi.entities.Answer;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
@@ -17,6 +16,12 @@ import com.uniovi.entities.TestType;
 import com.uniovi.entities.UploadFile;
 import com.uniovi.entities.User;
 
+/**
+ * Servicio para insertar los datos iniciales de la aplicacion
+ * 
+ * @author UO264033
+ *
+ */
 //Sí quisieramos desactivar el servicio bastaría con eliminar la anotación etiqueta @Service
 @Service
 public class InsertDataService {
@@ -38,6 +43,10 @@ public class InsertDataService {
 	@Autowired
 	private SubjectService sService;
 
+	/**
+	 * Metodo que se invoca al iniciar, y añade a la base de datos la informacion
+	 * inciial
+	 */
 	@PostConstruct
 	public void init() {
 		User user1 = new User("alumno", "Pedro", "Díaz", "gonzalezgancedomaria@gmail.com");
@@ -53,7 +62,7 @@ public class InsertDataService {
 		user7.setPassword("123456");
 		user7.setRole(rolesService.getRoles()[0]);
 		User user8 = new User("raquelsan", "Raquel", "Sánchez", "raquel@gmail.com");
-		user8.setPassword("123456"); 
+		user8.setPassword("123456");
 		user8.setRole(rolesService.getRoles()[0]);
 		User user4 = new User("profesor", "Marta", "Almonte", "marta@gmail.com");
 		user4.setPassword("123456");
@@ -75,7 +84,7 @@ public class InsertDataService {
 		s1.addStudent(user2);
 		Subject s2 = new Subject("Inglés", user5);
 		s2.addStudent(user3);
-		
+
 		user1.addSubject(s1);
 		user1.addSubject(s2);
 		user2.addSubject(s1);
@@ -83,7 +92,7 @@ public class InsertDataService {
 		user1.addSubject(s2);
 		user6.addSubject(s2);
 		user8.addSubject(s2);
-		
+
 		sService.addSubject(s1);
 		sService.addSubject(s2);
 

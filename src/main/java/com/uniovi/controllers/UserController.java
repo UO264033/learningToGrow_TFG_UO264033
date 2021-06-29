@@ -64,7 +64,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user/perfil")
 	public String perfil(Model model) {
-		model.addAttribute("user", usersService.perfil());
+		model.addAttribute("user", usersService.activeUser());
 		return "user/perfil";
 	}
 

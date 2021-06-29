@@ -15,11 +15,9 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
 import com.uniovi.entities.EmailConfig;
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Homework;
@@ -27,6 +25,12 @@ import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.util.MessageParser;
 
+/**
+ * Servicio encargado de la configuración del sistema email
+ * 
+ * @author UO264033
+ *
+ */
 @Service
 public class EmailService {
 
@@ -38,14 +42,17 @@ public class EmailService {
 
 	@Autowired
 	private SubjectService subjectService;
-	
+
 	@Autowired
 	private HomeworkService homeworkService;
 
 	private Folder emailFolder;
-//	Store store;
 	private Properties properties = new Properties();
 
+	/**
+	 * Método para gestionar la conexión con el correo electronico especificado en
+	 * applicationproperties
+	 */
 	@PostConstruct
 	protected void setup() {
 		String server = emailConfig.getHost();
@@ -63,6 +70,16 @@ public class EmailService {
 		}
 	}
 
+	/**
+	 * Método que lee los mensajes entrantes al correo especifico y comprueba que el
+	 * remitente es un user valido en la aplicacion el asunto deberia ser el codifo
+	 * de una asignatura asignada a ese usuario el cuerpo del body la tarea asignada
+	 * al alumno de esa asignatura Hay un fichero adjunto que se corresponde con la
+	 * respuesta
+	 * 
+	 * @throws MessagingException
+	 * @throws IOException
+	 */
 	@Scheduled(fixedRate = 5000)
 	protected synchronized void read() throws MessagingException, IOException {
 		emailFolder.open(Folder.READ_ONLY);
@@ -104,8 +121,8 @@ public class EmailService {
 											part.saveFile(directorioEjercicio + "//" + user.getFullName() + "_"
 													+ part.getFileName());
 											System.out.println("Fichero " + part.getFileName() + " almacenado.");
-											
-											//Creamos el homework en la app
+
+											// Creamos el homework en la app
 											Homework homework = new Homework("", true, e);
 											homework.setUser(user);
 											homework.setFile(user.getFullName() + "_" + part.getFileName());

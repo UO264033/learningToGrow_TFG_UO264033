@@ -94,6 +94,7 @@ public class ExerciseShortAnswerController {
 		model.addAttribute("idExercise", idExercise);
 
 		exerciseService.setQuestion(model, statement, text, exercise);
+		model.addAttribute("exercise", exercise);
 		exercise = exerciseService.addExercise(exercise);
 		if (exercise != null) {
 			model.addAttribute("mensaje", "La pregunta se ha añadido correctamente");
