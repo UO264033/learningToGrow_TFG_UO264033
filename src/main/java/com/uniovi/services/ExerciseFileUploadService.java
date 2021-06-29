@@ -16,12 +16,21 @@ import com.uniovi.repositories.ExerciseFileUploadRepository;
 @Service
 public class ExerciseFileUploadService {
 
+	/**
+	 * Repositorio de ejercicio de subida de fichero
+	 */
 	@Autowired
 	private ExerciseFileUploadRepository exerciseRepository;
 
+	/**
+	 * Servicio de usuarios
+	 */
 	@Autowired
 	private UserService usersService;
 
+	/**
+	 * Servicio de ejercicios
+	 */
 	@Autowired
 	private ExerciseService exerciseService;
 
