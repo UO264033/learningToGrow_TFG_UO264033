@@ -91,7 +91,6 @@ public class EmailService {
 			String email = ((InternetAddress) message.getFrom()[0]).getAddress();
 			User user = userService.getByEmail(email);
 			if (user != null && user.getRole().equals("ROLE_STUDENT")) {
-				System.out.println(user);
 				List<Subject> subjects = subjectService.getSubjectsByRole(user);
 
 				if (!subjects.isEmpty()) {
@@ -120,7 +119,6 @@ public class EmailService {
 											directorioEjercicio.mkdir();
 											part.saveFile(directorioEjercicio + "//" + user.getFullName() + "_"
 													+ part.getFileName());
-											System.out.println("Fichero " + part.getFileName() + " almacenado.");
 
 											// Creamos el homework en la app
 											Homework homework = new Homework("", true, e);
