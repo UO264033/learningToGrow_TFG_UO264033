@@ -1,5 +1,6 @@
 FROM openjdk:8-jdk-slim AS build
 COPY . /app
+USER root
 WORKDIR /app
 RUN ./mvnw install
 
