@@ -18,8 +18,6 @@ services:
       - database:/var/lib/mysql
     environment:
       MYSQL_DATABASE: ltg
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ltgtfg
       MYSQL_ROOT_PASSWORD: ltgtfg
 volumes:
   database:
