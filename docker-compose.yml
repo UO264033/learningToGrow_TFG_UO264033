@@ -1,0 +1,25 @@
+version: "3"
+services:
+  learningtogrow:
+    restart: always
+    image: uo264033/learningtogrow
+    container_name: learningtogrow
+    depends_on:
+      - mysql
+    ports:
+      - "80:8090"
+  mysql:
+    restart: always
+    image: mysql:latest
+    container_name: mysql-database
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ltg
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ltgtfg
+      MYSQL_ROOT_PASSWORD: ltgtfg
+volumes:
+  database:
