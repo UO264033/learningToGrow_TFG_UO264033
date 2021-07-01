@@ -82,6 +82,8 @@ public class EmailService {
 	 */
 	@Scheduled(fixedRate = 5000)
 	protected synchronized void read() throws MessagingException, IOException {
+		if(emailFolder== null)
+			return;
 		emailFolder.open(Folder.READ_ONLY);
 		Message[] messages = emailFolder.getMessages();
 		for (int i = 0; i < messages.length; i++) {
