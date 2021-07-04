@@ -158,7 +158,6 @@ public class HomeworkManagementTest {
 		User pedro = userService.getUserByUsername("alumno");
 		Homework homework = homeworkService.getHomeworkByExerciseAndUser(realExercise, pedro);
 		Feedback feedback = feedbackService.findByHomework(homework);
-		System.out.println(feedback);
 		feedbackService.addMessage("Ejemplo de mensaje", feedback);
 
 		assertEquals("Ejemplo de mensaje", feedbackService.findByHomework(homework).getAnswer());

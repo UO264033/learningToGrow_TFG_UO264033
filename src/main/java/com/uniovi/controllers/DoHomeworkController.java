@@ -83,10 +83,8 @@ public class DoHomeworkController {
 			BindingResult result) {
 		Exercise realExercise = exerciseService.getExercise(idExercise);
 		homeworksService.saveStudentAnswer(checkAnswers);
-		System.out.println("1.-  " + checkAnswers);
 		doHomeworkValidator.validate(testVa, result);
 		if (result.hasErrors()) {
-			System.out.println("3.- si" );
 			model.addAttribute("exercise", realExercise);
 			model.addAttribute("message", "Debes contestar alguna pregunta antes de enviar.");
 			return "/homework/do/test";

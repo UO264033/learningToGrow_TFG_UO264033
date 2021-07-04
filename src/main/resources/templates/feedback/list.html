@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<div th:replace="fragments/head"/>
-<title th:text="#{feedback.h2}"/>
+<div th:replace="fragments/head" />
+<title th:text="#{feedback.h2}" />
 </head>
 <body>
 	<!-- Barra de Navegación superior -->
@@ -18,7 +18,7 @@
 		</div>
 		<div th:if="${!feedbackList.isEmpty()}">
 			<div class="panel panel-default" th:each="feedback : ${feedbackList}">
-				<div class="panel-heading">
+				<div class="panel-heading" th:unless="${feedback.homework == null}">
 					<h3>
 						<div align="left">
 							<span th:text="#{homework.exercise}" />: <span
@@ -32,23 +32,27 @@
 				</div>
 				<div class="panel-body">
 					<h4>
-						<span th:text ="#{tocorrect.mark}"></span><span th:text="${feedback.score}" />
+						<span th:text="#{tocorrect.mark}"></span><span
+							th:text="${feedback.score}" />
 					</h4>
-					<div class="centerCard" th:if="${feedback.comment != null || feedback.comment.isBlanks()}">
+					<div class="centerCard"
+						th:if="${feedback.comment != null || feedback.comment.isBlanks()}">
 						<h5 th:text="#{todo.comment}" />
 						<h5 align="center">
-							<span th:if="${feedback.comment != null || feedback.comment.isBlank()}" th:text="${feedback.comment}" />
-							<span th:unless="${feedback.comment != null || feedback.comment.isBlank()}" text="Sin comentario" />
+							<span
+								th:if="${feedback.comment != null || feedback.comment.isBlank()}"
+								th:text="${feedback.comment}" /> <span
+								th:unless="${feedback.comment != null || feedback.comment.isBlank()}"
+								text="Sin comentario" />
 						</h5>
 					</div>
 					<br>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-8" align="center">
-							<button class="btn btn-info" th:if="${!feedback.send}" aria-label="Center Align"
-								th:data-id="${feedback.id}" data-target="#miModal"
-								data-toggle="tooltip" data-placement="left"
-								th:text="#{feedback.send}">
-							</button>
+							<button class="btn btn-info" th:if="${!feedback.send}"
+								aria-label="Center Align" th:data-id="${feedback.id}"
+								data-target="#miModal" data-toggle="tooltip"
+								data-placement="left" th:text="#{feedback.send}"></button>
 						</div>
 						<div th:replace="feedback/modalFeedback" /></div>
 						<div class="col-sm-offset-2 col-sm-8" align="center"
@@ -59,8 +63,6 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>

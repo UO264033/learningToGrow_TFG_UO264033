@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Question;
 import com.uniovi.entities.User;
@@ -26,7 +27,7 @@ public class ExerciseService {
 
 	@Autowired
 	private ExerciseRepository exerciseRepository;
-
+	
 	@Autowired
 	private SubjectRepository subjectRepository;
 
@@ -80,10 +81,11 @@ public class ExerciseService {
 			homeworkService.deleteByExerciseId(exercise);
 			exercise.setProfessor(null);
 			exercise.setSubject(null);
-			exerciseRepository.deleteById(id);
+			exercise.setName(null);
+			exerciseRepository.delete(exercise);
 		}
 	}
-
+	
 	/**
 	 * Devuelve un ejercicio por su nombre
 	 * 

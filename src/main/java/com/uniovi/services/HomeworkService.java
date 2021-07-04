@@ -150,7 +150,7 @@ public class HomeworkService {
 		String[] s = { "Ejercicio sin nota", "Sin hacer",
 				"Necesitas esforzarte un poco más pero, seguro que lo consigues ¡A por ello!",
 				"Estás trabajando muy bien pero aún hay que fijarse un poco más", "Vas por el buen camino, ¡sigue así!",
-				"Muy bien trabajo, ¡enhorabuena!" };
+				"Muy buen trabajo, ¡enhorabuena!" };
 		return s;
 	}
 
