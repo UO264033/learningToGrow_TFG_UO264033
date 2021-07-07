@@ -14,52 +14,58 @@
 		</div>
 
 		<div th:if="${feedbackList.isEmpty()}">
-			<h5 th:text="#{feedback.empty}" />
+			<h4 th:text="#{feedback.empty}" />
 		</div>
 		<div th:if="${!feedbackList.isEmpty()}">
-			<div class="panel panel-default" th:each="feedback : ${feedbackList}">
-				<div class="panel-heading" th:unless="${feedback.homework == null}">
-					<h3>
-						<div align="left">
-							<span th:text="#{homework.exercise}" />: <span
-								th:text="${feedback.homework.exercise.name}" />
-							<div align="right">
-								<span th:text="${feedback.homework.exercise.subject.name}" /> -
-								<span th:text="${feedback.professor.name}" />
-							</div>
-						</div>
-					</h3>
+			<div th:each="feedback, iter : ${feedbackList}">
+				<div th:if="${feedback == null}">
+				<br>
+						<h4><span th:text="${iter.index+1}"/>: <span th:text="#{feedback.empty}"/></h4> 
 				</div>
-				<div class="panel-body">
-					<h4>
-						<span th:text="#{tocorrect.mark}"></span><span
-							th:text="${feedback.score}" />
-					</h4>
-					<div class="centerCard"
-						th:if="${feedback.comment != null || feedback.comment.isBlanks()}">
-						<h5 th:text="#{todo.comment}" />
-						<h5 align="center">
-							<span
-								th:if="${feedback.comment != null || feedback.comment.isBlank()}"
-								th:text="${feedback.comment}" /> <span
-								th:unless="${feedback.comment != null || feedback.comment.isBlank()}"
-								text="Sin comentario" />
-						</h5>
+				<div th:unless="${feedback == null}" class="panel panel-default">
+					<div class="panel-heading">
+						<h3>
+							<div align="left">
+								<span th:text="#{homework.exercise}" />: <span
+									th:text="${feedback.homework.exercise.name}" />
+								<div align="right">
+									<span th:text="${feedback.homework.exercise.subject.name}" />
+									- <span th:text="${feedback.professor.name}" />
+								</div>
+							</div>
+						</h3>
 					</div>
-					<br>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-8" align="center">
-							<button class="btn btn-info" th:if="${!feedback.send}"
-								aria-label="Center Align" th:data-id="${feedback.id}"
-								data-target="#miModal" data-toggle="tooltip"
-								data-placement="left" th:text="#{feedback.send}"></button>
+					<div class="panel-body">
+						<h4>
+							<span th:text="#{tocorrect.mark}"></span><span
+								th:text="${feedback.score}" />
+						</h4>
+						<div class="centerCard"
+							th:if="${feedback.comment != null || feedback.comment.isBlanks()}">
+							<h5 th:text="#{todo.comment}" />
+							<h5 align="center">
+								<span
+									th:if="${feedback.comment != null || feedback.comment.isBlank()}"
+									th:text="${feedback.comment}" /> <span
+									th:unless="${feedback.comment != null || feedback.comment.isBlank()}"
+									text="Sin comentario" />
+							</h5>
 						</div>
-						<div th:replace="feedback/modalFeedback" /></div>
-						<div class="col-sm-offset-2 col-sm-8" align="center"
-							th:if="${feedback.send}">
-							<div class="alert alert-info" role="alert">
-								<span class="material-icons-round"> done </span> <span
-									th:text="#{feedback.sent}" />
+						<br>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-8" align="center">
+								<button class="btn btn-info" th:if="${!feedback.send}"
+									aria-label="Center Align" th:data-id="${feedback.id}"
+									data-target="#miModal" data-toggle="tooltip"
+									data-placement="left" th:text="#{feedback.send}"></button>
+							</div>
+							<div th:replace="feedback/modalFeedback" /></div>
+							<div class="col-sm-offset-2 col-sm-8" align="center"
+								th:if="${feedback.send}">
+								<div class="alert alert-info" role="alert">
+									<span class="material-icons-round"> done </span> <span
+										th:text="#{feedback.sent}" />
+								</div>
 							</div>
 						</div>
 					</div>

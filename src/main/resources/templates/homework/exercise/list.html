@@ -12,7 +12,7 @@
 			<img src="/img/homework.png" /><br>
 		</div>
 		<div th:if="${exerciseList.isEmpty()}">
-			<h5 th:text="#{homework.exercise.empty}" />
+			<h4 th:text="#{homework.exercise.empty}" />
 		</div>
 		<div class="table-responsive" th:unless="${exerciseList.isEmpty()}">
 			<table class="table table-hover" th:fragment="tableexercise"

@@ -128,5 +128,9 @@ public class Subject extends BaseEntity {
 	public void removeStudents() {
 		students = new HashSet<User>();
 	}
+	
+	public void removeExercises() {
+		exercises = new HashSet<Exercise>();
+	}
 
 }

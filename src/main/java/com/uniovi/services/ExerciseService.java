@@ -82,6 +82,7 @@ public class ExerciseService {
 			exercise.setProfessor(null);
 			exercise.setSubject(null);
 			exercise.setName(null);
+			exerciseRepository.save(exercise);
 			exerciseRepository.delete(exercise);
 		}
 	}

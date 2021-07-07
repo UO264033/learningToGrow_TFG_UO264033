@@ -34,8 +34,11 @@
 			<img src="/img/subjectList.png" /><br>
 		</div>
 
-		<div th:if="${subjectList.isEmpty()}">
+		<div th:if="${subjectList.isEmpty()}" sec:authorize="hasRole('ROLE_STUDENT')">
 			<h4 th:text="#{home.nosubject} + '. ' + #{home.wait}">
+		</div>
+		<div th:if="${subjectList.isEmpty()}" sec:authorize="hasRole('ROLE_PROFESSOR')">
+			<h4 th:text="#{home.nosubjects}">
 		</div>
 		<div th:unless="${subjectList.isEmpty()}">
 			<div th:each="subject : ${subjectList}">

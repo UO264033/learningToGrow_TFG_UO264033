@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<div th:replace="fragments/head"/>
-<title th:text="#{exercise.list}"/>
+<div th:replace="fragments/head" />
+<title th:text="#{exercise.list}" />
 </head>
 <body>
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-		<h2 th:text="#{exercise.list}"/>
+		<h2 th:text="#{exercise.list}" />
 		<div class="panel-body" align="center">
 			<img src="/img/exerciseList.png" /></a><br>
 		</div>
+		
+		<div th:if="${exerciseList.isEmpty()}">
+			<h4 th:text="#{exercise.list.empty}" />
+		</div>
+		<div th:unless="${exerciseList.isEmpty()}">
+		
 		<form class="navbar-form" action="/exercise/list">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
@@ -22,31 +28,35 @@
 			</button>
 		</form>
 		<div class="alert alert-success" role="alert"
-				th:if="${mensaje != null}" th:text="${mensaje}"></div>
-		<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{signup.nombre}"></th>
-						<th th:text="#{home.description}"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="exercise : ${exerciseList}">
-						<td th:text="${exercise.name}">Ejercicio 1</td>
-						<td th:text="${exercise.description}">10</td>
-						<td><a th:href="${'/exercise/details/' + exercise.id}"
-							class="btn btn-info" role="button"> <span th:text="#{user.list.table.detailsButton}"/></a> </td>
-						<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
-							th:href="${'/exercise/delete/' + exercise.id}"
-							class="btn btn-info" role="button"><span th:text="#{user.list.table.deleteButton}"/></a></td>
-					</tr>
-				</tbody>
-			</table>
+			th:if="${mensaje != null}" th:text="${mensaje}"></div>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th th:text="#{signup.nombre}"></th>
+							<th th:text="#{home.description}"></th>
+							<th class="col-md-1"></th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="exercise : ${exerciseList}">
+							<td th:text="${exercise.name}">Ejercicio 1</td>
+							<td th:text="${exercise.description}">10</td>
+							<td><a th:href="${'/exercise/details/' + exercise.id}"
+								class="btn btn-info" role="button"> <span
+									th:text="#{user.list.table.detailsButton}" /></a></td>
+							<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+								th:href="${'/exercise/delete/' + exercise.id}"
+								class="btn btn-info" role="button"><span
+									th:text="#{user.list.table.deleteButton}" /></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<footer th:replace="fragments/pagination" />
 		</div>
-		<footer th:replace="fragments/pagination" />
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

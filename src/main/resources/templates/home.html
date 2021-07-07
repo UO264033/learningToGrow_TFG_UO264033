@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<div th:replace="fragments/head"/>
-<title>Learning To Grow</title> 
+<div th:replace="fragments/head" />
+<title>Learning To Grow</title>
 </head>
 <body>
 	<nav th:replace="fragments/nav" />
@@ -13,40 +13,77 @@
 		</h2>
 		<h4>
 			<span sec:authentication="principal.username" th:inline="text" /> </span> <span
-				th:text="#{home.autenticated}" />  <span
+				th:text="#{home.autenticated}" /> <span
 				th:text="${user.getRoleString()}" />
 		</h4>
 	</div>
 	<div class="container" style="text-align: center">
-		<div class="table-responsive"
+		<br> <br>
+		<div class="centerCard" th:if="${exerciseList.isEmpty()}"
 			sec:authorize="hasRole('ROLE_PROFESSOR')">
-			<div class="panel-body" align="center">
-				<img src="/img/exerciseList.png" /></a><br>
-			</div>
-			<h4 th:text="#{exercise.list}"/>
-			<div class="alert alert-success" role="alert"
-				th:if="${mensaje != null}" th:text="${mensaje}"></div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th th:text="#{signup.nombre}">Nombre</th>
-						<th th:text="#{home.description}">Descripción</th>
-						<th class="col-md-1"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="exercise : ${exerciseList}">
-						<td th:text="${exercise.name}">Ejercicio 1</td>
-						<td th:text="${exercise.description}">10</td>
-						<td><a th:href="${'/exercise/details/' + exercise.id}"
-							class="btn btn-info" role="button" aria-label="Center Align"><span th:text="#{user.list.table.detailsButton}"/></a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<footer sec:authorize="hasRole('ROLE_PROFESSOR')"
-			th:replace="fragments/pagination" />
 
+			<div align="center">
+				<img src="/img/create.png" /><br>
+				<h4 th:text="#{exercise.list.empty}" />
+				<div class="collapse navbar-collapse" id="myNavbar" align="center">
+					<ul class="nav navbar-nav">
+						<li id="exercises-menu" class="dropdown"
+							sec:authorize="hasRole('ROLE_PROFESSOR')"><a
+							aria-label="Center Align" class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="material-icons-round"> add_to_photos </span> <span
+								th:text="#{nav.exercise.new}"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/exercise/test/add" aria-label="Center Align"><span
+										class="material-icons-round"> checklist </span> <span
+										th:text="#{nav.exercise.test}"></span></a></li>
+								<li><a href="/exercise/upFile/add"
+									aria-label="Center Align"><span
+										class="material-icons-round"> insert_drive_file </span> <span
+										th:text="#{nav.exercise.file}"></span></a></li>
+								<li><a href="/exercise/shortAnswer/add"
+									aria-label="Center Align"><span
+										class="material-icons-round"> short_text </span> <span
+										th:text="#{nav.exercise.shortAnswer}"
+										aria-label="Center Align"></span></a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div th:unless="${exerciseList.isEmpty()}"
+			sec:authorize="hasRole('ROLE_PROFESSOR')">
+
+			<div class="table-responsive"
+				sec:authorize="hasRole('ROLE_PROFESSOR')">
+				<div class="panel-body" align="center">
+					<img src="/img/exerciseList.png" /></a><br>
+				</div>
+				<h4 th:text="#{exercise.list}" />
+				<div class="alert alert-success" role="alert"
+					th:if="${mensaje != null}" th:text="${mensaje}"></div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th th:text="#{signup.nombre}">Nombre</th>
+							<th th:text="#{home.description}">Descripción</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="exercise : ${exerciseList}">
+							<td th:text="${exercise.name}">Ejercicio 1</td>
+							<td th:text="${exercise.description}">10</td>
+							<td><a th:href="${'/exercise/details/' + exercise.id}"
+								class="btn btn-info" role="button" aria-label="Center Align"><span
+									th:text="#{user.list.table.detailsButton}" /></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<footer sec:authorize="hasRole('ROLE_PROFESSOR')"
+				th:replace="fragments/pagination" />
+		</div>
 		<div class="panel-body" sec:authorize="hasRole('ROLE_ADMIN')"
 			align="center">
 			<img src="/img/admin.png" /></a><br>
@@ -60,7 +97,7 @@
 			<p th:text="#{home.adminView.info}" />
 			<p>
 				<a class="btn btn-info btn-lg" href="/user/list" role="button"
-					th:text="#{home.adminView.button}" aria-label="Center Align"/>
+					th:text="#{home.adminView.button}" aria-label="Center Align" />
 			</p>
 		</div>
 		<div class="centerCard" sec:authorize="hasRole('ROLE_STUDENT')"
@@ -79,10 +116,10 @@
 			th:if="${subjectList.isEmpty()}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2 th:text="#{home.nosubject}"/>
+					<h2 th:text="#{home.nosubject}" />
 				</div>
 				<div class="panel-body">
-					<h4 th:text="#{home.wait}"/>
+					<h4 th:text="#{home.wait}" />
 					<img src="/img/subjects.png" /><br>
 				</div>
 			</div>

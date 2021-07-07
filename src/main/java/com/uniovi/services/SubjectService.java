@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Exercise;
 import com.uniovi.entities.Subject;
 import com.uniovi.entities.User;
 import com.uniovi.repositories.SubjectRepository;
@@ -24,6 +25,9 @@ public class SubjectService {
 
 	@Autowired
 	private UserService usersService;
+	
+	@Autowired
+	private ExerciseService exerciseService;
 
 	private Subject temporal = new Subject();
 	private String[] idsStudent;
@@ -63,6 +67,10 @@ public class SubjectService {
 	public void deleteSubject(Long id) {
 		Subject subject = getSubject(id);
 		subject.removeStudents();
+		subject.removeExercises();
+		for(Exercise e: exerciseService.getExercisesBySubject(id)) {
+			exerciseService.deleteExercise(e.getId());
+		}
 		subjectRepository.save(subject);
 		subjectRepository.deleteById(id);
 	}
