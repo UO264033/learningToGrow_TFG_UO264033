@@ -318,6 +318,10 @@ public class HomeworkService {
 		List<Exercise> homeworks = new ArrayList<>();
 		if (!exerciseService.getExercisesBySubject(id).isEmpty()) {
 			for (Exercise e : exerciseService.getExercisesBySubject(id)) {
+				Homework homework = homeworkRepository.findByExerciseAndUser(e, userService.activeUser());
+				if (homework != null && homework.isSent()) {
+					e.setSend(true);
+				}
 				homeworks.add(e);
 			}
 		}
